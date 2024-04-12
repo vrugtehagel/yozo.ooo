@@ -1,4 +1,6 @@
-# YOZO'S WEBSITE
+# YOZO.OOO
+
+The documentation site for Yozo.
 
 Website: [yozo.ooo](https://yozo.ooo/) \
 Yozo source: [vrugtehagel/yozo](https://github.com/vrugtehagel/yozo)

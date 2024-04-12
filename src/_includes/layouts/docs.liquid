@@ -1,0 +1,19 @@
+---
+layout: layouts/root.liquid
+head:
+-	<link rel=stylesheet href=/-/css/docs.css>
+
+---
+
+<main>
+	<aside>
+		<docs-outline></docs-outline>
+	</aside>
+
+	<article>
+		<h1>{{ title }}</h1>
+		<p>{{ description }}</p>
+
+		{{ content }}
+	</article>
+</main>

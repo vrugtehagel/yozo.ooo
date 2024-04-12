@@ -1,0 +1,57 @@
+---
+head: []
+exclude: []
+---
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset=utf-8>
+	<title>{{ title }} | YOZO</title>
+
+	<meta name=viewport content="width=device-width,initial-scale=1">
+	<meta name=robots content="noindex,nofollow">
+	<meta name=description content="{{ description }}">
+
+	<link rel=preload as=font href=/-/fonts/dm-sans.ttf type=font/ttf crossorigin>
+	<link rel=preload as=font href=/-/fonts/dm-mono.ttf type=font/ttf crossorigin>
+
+	<script src=/archive/lib-{{ versions[0].number }}.js></script>
+	<script>
+		self.yozo.register.auto(name => {
+			const namespace = name.split('-', 1)[0]
+			return `/-/yz/${namespace}/${name}.yz`
+		})
+	</script>
+
+	<style>@layer base, custom-elements, layout;</style>
+	<link rel=stylesheet href=/-/css/fonts.css>
+	<link rel=stylesheet href=/-/css/base.css>
+	<link rel=stylesheet href=/-/css/custom-elements.css>
+
+	{% for item in head %}
+		{{ item }}
+	{% endfor %}
+</head>
+<body>
+	{% unless exclude contains 'site-nav' %}
+		<site-nav></site-nav>
+	{% endunless %}
+
+	{{ content }}
+
+	{% unless exclude contains 'site-footer' %}
+		<site-footer></site-footer>
+	{% endunless %}
+
+	<ui-toast type=warning open actiontext=Dismiss>
+		<strong>Warning:</strong>
+		Yozo is still under development.
+	</ui-toast>
+	<script>
+		const {when, timeout} = window.yozo
+		const uiToast = document.currentScript.previousElementSibling
+		when(uiToast).actions().or(timeout(5000))
+			.then(() => uiToast.open = false)
+	</script>
+</body>
+</html>

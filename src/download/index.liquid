@@ -1,0 +1,86 @@
+---
+layout: layouts/docs.liquid
+
+title: Download
+description: Download Yozo's development or production bundle, new or old, and see how the more recent versions differ from past ones.
+
+head:
+-	<link rel=stylesheet href=./index.css>
+
+---
+
+<h2>Latest</h2>
+<p>Click the buttons below to download the latest Yozo bundles.</p>
+
+<div id=download-latest>
+	<a href=/lib-{{ versions[0].number }}.js download=yozo-lib.js>
+		<ui-icon type=production></ui-icon>
+		Production
+	</a>
+	<a href=/dev-{{ versions[0].number }}.js download=yozo-dev.js>
+		<ui-icon type=development></ui-icon>
+		Development
+	</a>
+</div>
+
+<ui-callout type=info>
+	<p><strong>Note:</strong> development bundles have more thorough checks and error handling built-in than the production bundle. If the development bundle throws an error, it either will not work in production or is extremely fragile. Warnings may be ignored, though keep in mind that the production bundle has all warnings stripped out.</p>
+</ui-callout>
+
+<h2>Compare</h2>
+<p>Compare an older version of Yozo to a newer one to see a summary of what's changed. A straight-forward answer as to what to expect when upgrading.</p>
+
+<download-compare></download-compare>
+
+<h2>Archive</h2>
+<p>Here you'll find all versions Yozo has been through since its release, in reverse-chronological order (i.e. newest first).</p>
+
+{% for version in versions %}
+	<div class=version>
+		<h3>Version {{ version.number }}</h3>
+		<a
+			class=download-lib
+			href=/lib-{{ version.number }}.js
+			download=lib-{{ version.number }}.js
+			aria-label="Download version {{ version.number }}'s production bundle"
+		>
+			<ui-icon type=production></ui-icon>
+		</a>
+		<a
+			class=download-dev
+			href=/dev-{{ version.number }}.js
+			download=dev-{{ version.number }}.js
+			aria-label="Download version {{ version.number }}'s development bundle"
+		>
+			<ui-icon type=development></ui-icon>
+		</a>
+		<span class=timestamp>
+			{{ version.timestamp | divided_by: 1000 | date: '%B %e, %Y' }}
+		</span>
+		<span class=hash>{{ version.hash }}</span>
+		{% if version.changelog.breaking.length > 0 %}
+			<p>Breaking changes</p>
+			<ul>
+				{% for change in version.changelog.breaking %}
+					<li>{{ change | escape  }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		{% if version.changelog.improvements.length > 0 %}
+			<p>Improvements</p>
+			<ul>
+				{% for change in version.changelog.improvements %}
+					<li>{{ change | escape  }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+		{% if version.changelog.bugs.length > 0 %}
+			<p>Bug fixes</p>
+			<ul>
+				{% for change in version.changelog.bugs %}
+					<li>{{ change | escape }}</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	</div>
+{% endfor %}

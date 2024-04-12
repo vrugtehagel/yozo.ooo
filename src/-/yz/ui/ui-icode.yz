@@ -1,0 +1,26 @@
+<title>ui-icode</title>
+<meta attribute=type type=string default="js">
+
+<template mode=closed>
+	<code>{{ $.value }}</code>
+</template>
+
+<script>
+import('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
+
+live.link($.$value, () => {
+	const content = $.content?.trim() ?? ''
+	return $.siteSettings?.format(content, $.language) ?? content
+})
+
+connected(() => {
+	when(this).observes('mutation', {childList: true, characterData: true})
+		.then(() => $.content = this.textContent)
+		.now()
+})
+</script>
+
+<style>
+:host {
+}
+</style>

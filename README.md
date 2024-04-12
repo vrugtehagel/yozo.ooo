@@ -23,11 +23,11 @@ Yozo's source repository is included as submodule to generate output based on ve
 
 Eleventy uses [markdown-it](https://markdown-it.github.io/markdown-it/) for Markdown processing. This codebase adds the following changes on top of that:
 
+- We use the [markdown-it-anchor](https://www.npmjs.com/package/markdown-it-anchor) plugin to generate anchors for headers.
+- We use the [markdown-it-deflist](https://www.npmjs.com/package/markdown-it-deflist) plugin for definition lists from the extended Markdown syntax.
 - Fenced code blocks (i.e. ` ```lang `-style code blocks) output `<ui-code langugage=…>` instead of `<pre class=…>`.
-- A special form of inline code is introduced allowing to specify a type (a hint for how to highlight). It's essentially double-backticks-delimited code with the type between the first two backticks: ``` `lang`code…`` ```). It outputs `<ui-icode type…>`. This is not backwards-compatible (i.e. will majorly break things when removed).
-- We use the `markdown-it-anchor` plugin to generate anchors for headers.
-- We use the `markdown-it-deflist` plugin for definition lists from the extended Markdown syntax.
-- Callouts are written like fenced code blocks except they use colons instead of backticks. Specifically they open with `:::type` (where `type` is the type of the callout, e.g. `info` or `warning`) and they close with `:::`. This is a specifically configured version of the `markdown-it-container` plugin.
+- A special form of inline code is introduced allowing to specify a type (a hint for how to highlight). It's essentially double-backticks-delimited code with the type between the first two backticks: ``` `type`code…`` ```). It outputs `<ui-icode type…>`. This is not backwards-compatible (i.e. will majorly break things when removed).
+- Callouts are written like fenced code blocks except they use colons instead of backticks. Specifically they open with `:::type` (where `type` is the type of the callout, e.g. `info` or `warning`) and they close with `:::`. This is a specifically configured version of the [markdown-it-container](https://www.npmjs.com/package/markdown-it-container) plugin.
 - Preprocessing is currently disabled, meaning you cannot insert things using `{{ curlies }}`. This is done because Yozo itself uses double-curly braces for interpolation and so those would need to be `{{'{'}}{ escaped }}` every time which is not great.
 
 All this customization means documentation can be written with barely any inline HTML (which is enabled regardless).

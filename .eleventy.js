@@ -1,9 +1,10 @@
 import * as fs from 'node:fs/promises'
-
+import { amendMarkdown } from './plugins/amend-markdown.js'
 
 export default function(config){
 	config.setLayoutResolution(false)
 	config.setLiquidOptions({ extname: '' })
+	config.addPlugin(amendMarkdown)
 
 	config.addGlobalData('versions', async () => {
 		const json = await fs.readFile('yozo/versions.json', 'utf8')
@@ -17,6 +18,7 @@ export default function(config){
 		'yozo/tests': '-/tests',
 	})
 
-
-	return { dir: { input: 'src', output: 'dist' } }
+	const dir = { input: 'src', output: 'dist' }
+	const markdownTemplateEngine = false
+	return { dir, markdownTemplateEngine }
 }

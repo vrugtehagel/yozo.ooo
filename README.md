@@ -33,3 +33,9 @@ Eleventy uses [markdown-it](https://markdown-it.github.io/markdown-it/) for Mark
 - Preprocessing is currently disabled, meaning you cannot insert things using `{{ curlies }}`. This is done because Yozo itself uses double-curly braces for interpolation and so those would need to be `{{'{'}}{ escaped }}` every time which is not great.
 
 All this customization means documentation can be written with barely any inline HTML (which is enabled regardless).
+
+### Yozo's tests
+
+Since [Yozo's repository](https://github.com/vrugtehagel/yozo) defines the tests, we have to generate them just from the files specified there. The tests are defined in the `test/` folder (again, this is in Yozo's repository) in the same structure as the `/docs/` pages. For any given page in the documentation, the test page is found by replacing `/docs/` with `/test/`.
+
+To build this part of the site, we clone the `test/` folder from the submodule into `/test/`. Then, we generate the test pages through `src/test/tests.liquid`.

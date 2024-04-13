@@ -2,7 +2,7 @@ import deflist from 'markdown-it-deflist'
 import anchor from 'markdown-it-anchor'
 import container from 'markdown-it-container'
 
-export function amendMarkdown(config){
+export function customMarkdown(config){
 	config.amendLibrary('md', md => amend(md))
 }
 

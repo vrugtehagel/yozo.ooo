@@ -26,7 +26,8 @@ live.link($.$numbers, () => {
 })
 
 connected(() => {
-	when(this).observes('mutation', {childList: true, characterData: true})
+	const options = {childList: true, characterData: true, subtree: true}
+	when(this).observes('mutation', options)
 		.then(() => $.content = this.textContent)
 		.now()
 })

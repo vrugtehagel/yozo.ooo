@@ -19,7 +19,7 @@ interval(duration);
 
 ### Return value
 
-A [`Flow`](/docs/flow/) object that triggers in regular intervals of `js`duration`` milliseconds.
+A [`Flow`](/docs/flow/) object that triggers in regular intervals of `arg`duration`` milliseconds.
 
 ## Details
 

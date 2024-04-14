@@ -49,7 +49,7 @@ Now that Yozo knows about our component, it is ready to be used; and because it 
 
 If everything has been done correctly, the text "Hello world" should show on the page. Congrats! Yozo has been set up successfully, and you've brought your first component to life. To learn more about how components are built, check out the [components](/docs/components/) page.
 
-Note that most of Yozo's functionality is useful both inside as well as outside component files. For example, [`when()`](/docs/when/) is a very ergonomic and readable way to do event listeners, changing `js`.addEventListener`` into something that reads like text:
+Note that most of Yozo's functionality is useful both inside as well as outside component files. For example, [`when()`](/docs/when/) is a very ergonomic and readable way to do event listeners, changing `js`.addEventListener()`` into something that reads like text:
 
 ```js
 const { when } = window.yozo;
@@ -88,4 +88,4 @@ Below is a comprehensive list of Yozo's goodies. Note that some of the functiona
 
 Yozo values a robust and trustworthy environment. Since a big part of Yozo's functionality (i.e. the custom element part) expects a browser environment, a simple custom testing framework was put in place so that tests can be written in a format easily digestable by both [Deno](https://deno.land/) (for the non-browser specific tests) as well as the browser.
 
-Every page in the documentation has associated tests. To avoid unnecessarily running tests in user's browsers, they are extracted to their own page. To view the tests for a specific page, simply add "/test/" to the end of the current URL. For example, to see the tests for `live()`, whose URL is [yozo.ooo/docs/live/](/docs/live/), simply navigate to [yozo.ooo/docs/live/test/](/docs/live/test/). For this page (i.e. the one you're currently on), the test page ([yozo.ooo/docs/test/](/docs/test/)) is an accumulation of all other tests, making it easy to see if any of Yozo's tests are failing.
+Every page in the documentation has associated tests. To avoid unnecessarily running tests in user's browsers, they are extracted into a separate page. To view the tests for a specific page, simply replace the `url`/docs/`` part of the URL with `url`/test/``. For example, to see the tests for `js`live()``, whose URL is [yozo.ooo/docs/live/](/docs/live/), simply navigate to [yozo.ooo/test/live/](/docs/live/test/). The root directory for the tests, [yozo.ooo/test/](/test/), collects all the tests into one page, making it easy to see if any of Yozo's tests are failing.

@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "when()",
-	"description": "The when() helper simplifies the use of event listeners both inside and outside Yozo components."
+	"description": "The `js`when()`` helper simplifies the use of event listeners both inside and outside Yozo components."
 }
 ---
 
@@ -27,7 +27,7 @@ when(...targets)[readableType](options);
 : An options object, which is passed as third argument to `js`.addEventListener()``. The options `js`once`` and `js`signal`` are not recommended, as more appropriate alternatives are available (specifically, [`flow.once()`](/docs/flow/once/) and [`flow.until()`](/docs/flow/until/) or [`flow.stop()`](/docs/flow/stop/) respectively).
 
 `arg`readableType``
-: Similar to `arg`eventType``, but with an extra rule for readability; a single trailing "s" will be stripped off from `arg`readableType`` to find the `js`eventType``. This allows for much more English-sounding expressions such as `js`when(button).clicks()`` or `js`when(image).loads()``.
+: Similar to `arg`eventType``, but with an extra rule for readability; a single trailing "s" will be stripped off from `arg`readableType`` to find the event type. This allows for much more English-sounding expressions such as `js`when(button).clicks()`` or `js`when(image).loads()``.
 
 ### Return value
 
@@ -44,13 +44,13 @@ when(input).inputs().then(event => {
 	console.log(event.key);
 });
 
-// which is similar to...
+// which is (almost) identical to...
 input.addEventListener('input', event => {
 	console.log(event.key);
 });
 ```
 
-There are a variety of advantages to using `js`when()`` over `js`.addEventListener()``, some of which more prominant than others. The main advantage is that the calls (since they create a `js`Flow`` object) are [monitored](/docs/monitor/), which means the listeners are automatically taken down in certain contexts. For example, when writing a listener inside of the [`js`connected()``](/docs/components/connected/) callback of a component, the hook is monitoring the listeners created inside it and takes them down when the component disconnects. Without `js`when()``, we'd need to manually take down the event listeners when the component disconnects. Another example of the monitoring is inside an `js`effect()`` (which re-runs when any of its [live](/docs/live/) dependencies change):
+There are a variety of advantages to using `js`when()`` over `js`.addEventListener()``, some of which more prominant than others. The main advantage is that the calls (since they create a `js`Flow`` object) are [monitored](/docs/monitor/), which means the listeners are automatically taken down in certain contexts. For example, when writing a listener inside of the [`connected()`](/docs/components/connected/) callback of a component, the hook is monitoring the listeners created inside it and takes them down when the component disconnects. Without `js`when()``, we'd need to manually take down the event listeners when the component disconnects. Another example of the monitoring is inside an `js`effect()`` (which re-runs when any of its [live](/docs/live/) dependencies change):
 
 ```js
 effect(() => {
@@ -113,7 +113,7 @@ If the shorthand feels weird, keep in mind that `js`.does()`` is always an optio
 
 To avoid monitoring, use [`monitor.ignore()`](/docs/monitor/ignore/) either around the complete `js`when(…).does(…)`` (or the shorthand equivalent) and optionally also around the `js`.then()`` or other methods. In particular, then `js`when()`` function itself returns a "magic" object (i.e. `js`Proxy``) that allows for the shorthand, and so does not by itself create the flow object, which is the part being monitored.
 
-Also, note that the combination of the shorthand and the existance of `js`.does()`` means that it is not possible to listen to the "doe" event using the shorthand. Similarly, it is not possible to listen to the "observe" event using the shorthand, as [`js`when().observes()``](/docs/when/observes/) is reserved for observers. Luckily, these are not native events, so it is rather rare that they need to be listened to. If needed, use `js`.does('doe')`` or `js`.does('observe')`` respectively.
+Also, note that the combination of the shorthand and the existance of `js`.does()`` means that it is not possible to listen to the `js`'doe'`` event using the shorthand. Similarly, it is not possible to listen to the `js`observe`` event using the shorthand, as [`when().observes()`](/docs/when/observes/) is reserved for observers. Luckily, these are not native events, so it is rather rare that they need to be listened to. If needed, use `js`.does('doe')`` or `js`.does('observe')`` respectively.
 
 ## See also
 

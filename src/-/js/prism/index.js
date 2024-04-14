@@ -13,6 +13,14 @@ for(const jsLike of ['js', 'jsx']){
 	}
 	Prism.languages.insertBefore(jsLike, 'keyword', {meta})
 
+	// JS class names, we assume they start with an uppercase character
+	Prism.languages.insertBefore(jsLike, 'constant', {
+		'class-name': {
+			lookbehind: true,
+			pattern: /\b[A-Z]\w+\b(?!\s*\(|(new\s+)[A-Z]\w+(?=\s*\())/,
+		}
+	})
+
 	// Globals that I'd like to give highlighting
 	Prism.languages[jsLike].native = /\bwindow|console|document\b/
 

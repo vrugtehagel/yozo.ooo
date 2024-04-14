@@ -6,10 +6,10 @@
 		<div id=line-numbers .hidden="!$.siteSettings?.$settings.lineNumbers">
 			<span #for="number of $.numbers">{{ number }}</span>
 		</div>
-		<ui-syntax-highlight
+		<pre><ui-syntax-highlight
 			:language="$.language"
 			:value="$.value"
-		>{{ $.content }}</ui-syntax-highlight>
+		>{{ $.content }}</ui-syntax-highlight></pre>
 	</div>
 </template>
 
@@ -52,9 +52,9 @@ connected(() => {
 	text-align: right;
 	& span { display: block; }
 }
-ui-syntax-highlight {
+pre {
 	flex: 1 0 0;
-	width: auto; height: max-content;
-	&:not(:defined) { white-space: pre; }
+	margin: 0;
 }
+ui-syntax-highlight:not(:defined) { white-space: pre; }
 </style>

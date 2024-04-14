@@ -2,9 +2,7 @@
 <meta attribute=value type=string>
 <meta attribute=language type=string>
 
-<template mode=closed>
-	<pre><code></code></pre>
-</template>
+<template mode=closed><code></code></template>
 
 <script>
 import('/-/js/prism/index.js').then(({Prism}) => $.prism = Prism)
@@ -23,17 +21,14 @@ effect(() => {
 
 <style>
 :host {
-	display: block;
 	width: max-content;
 	font-family: var(--font-monospace);
 }
-pre {
-	width: max-content; margin: 0;
-}
-pre, code {
+code {
+	width: max-content;
+	color: var(--text-color);
 	font-family: inherit;
 }
-code { color: var(--text-color); }
 
 /* html */
 .doctype .name, .entity { color: var(--meta-color); }

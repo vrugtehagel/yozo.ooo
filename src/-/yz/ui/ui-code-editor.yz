@@ -9,7 +9,10 @@
 			<span #for="number of $.numbers">{{ number }}</span>
 		</div>
 		<textarea spellcheck=false></textarea>
-		<ui-syntax-highlight :language="$.language" :value="$.value"></ui-syntax-highlight>
+		<pre><ui-syntax-highlight
+			:language="$.language"
+			:value="$.value"
+		></ui-syntax-highlight></pre>
 	</div>
 </template>
 
@@ -74,7 +77,7 @@ connected(() => effect(() => {
 	text-align: right;
 	& span { display: block; }
 }
-textarea, ui-syntax-highlight {
+textarea, pre {
 	display: block; padding: 0;
 	background: none;
 	font-size: 1rem; line-height: 1.5; font-family: inherit;

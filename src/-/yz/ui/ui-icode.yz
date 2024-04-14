@@ -1,27 +1,54 @@
 <title>ui-icode</title>
 <meta attribute=type type=string default="js">
 
-<template mode=closed>
-	<code>{{ $.value }}</code>
-</template>
+<template mode=closed><code></code></template>
 
 <script>
 import('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
 
-live.link($.$value, () => {
-	const content = $.content?.trim() ?? ''
-	return $.siteSettings?.format(content, $.language) ?? content
+const code = query('code')
+const uiSyntaxHighlight = document.createElement('ui-syntax-highlight')
+
+const custom = {
+	url: text => `<span class=string>${text}</span>`,
+	str: text => `<span class=string>${text}</span>`,
+	arg: text => {
+		const hasSpread = text.startsWith('...')
+		const parameter = hasSpread ? text.slice(3) : text
+		const parameterSpan = `<span class=parameter>${parameter}</span>`
+		if(!hasSpread) return parameterSpan
+		return `<span class=keyword>...</span>${parameterSpan}`
+	},
+	tag: text => `<span class=keyword>${text}</span>`,
+	attr: text => {
+		const [name, value] = text.split('=')
+		const nameSpan = `<span class=primary>${name}</span>`
+		if(!value) return nameSpan
+		return `${nameSpan}=<span class=string>${value}</span>`
+	}
+}
+
+live.link($.$content, {
+	get: () => this.textContent,
+	changes: when(this).observes('mutation', {childList: true, characterData: true, subtree: true})
 })
 
-connected(() => {
-	const options = {childList: true, characterData: true, subtree: true}
-	when(this).observes('mutation', options)
-		.then(() => $.content = this.textContent)
-		.now()
-})
+connected(() => effect(() => {
+	const content = $.content?.trim() ?? ''
+	const highlight = custom[$.type]
+	if(highlight) return code.innerHTML = highlight(content)
+	uiSyntaxHighlight.language = $.type
+	uiSyntaxHighlight.value = content
+	uiSyntaxHighlight.textContent = content
+	code.replaceChildren(uiSyntaxHighlight)
+}))
 </script>
 
 <style>
-:host {
-}
+code { font-family: inherit; }
+
+.string { color: var(--string-color); }
+.parameter { color: var(--parameter-color); }
+.keyword { color: var(--keyword-color); }
+.primary { color: var(--primary-color); }
 </style>

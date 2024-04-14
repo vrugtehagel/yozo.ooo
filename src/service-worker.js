@@ -4,7 +4,7 @@
 
 // Refactor when ES6 modules are supported in service workers.
 
-importScripts('/dev-latest.js')
+importScripts('/archive/lib-0.3.8.js')
 importScripts('/-/js/service-worker/service-worker.js')
 importScripts('/-/js/context-messenger/service-worker.js')
 importScripts('/-/js/web-server/service-worker.js')

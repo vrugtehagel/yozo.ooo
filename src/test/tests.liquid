@@ -65,7 +65,7 @@ const messenger = new ContextMessenger(iframe.contentWindow)
 await messenger.ready()
 
 for(const testCase of testCases){
-	const {filename} = testCase
+	const filename = testCase.getAttribute('filename')
 	testCase.status = 'running'
 	const {ok} = await messenger.send('run', {filename})
 	const status = ok ? 'success' : 'failed'

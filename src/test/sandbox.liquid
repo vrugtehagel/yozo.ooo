@@ -1,0 +1,42 @@
+---
+{
+	"pagination": {
+		"data": "testsuites",
+		"size": 1,
+		"alias": "suite"
+	},
+	"permalink": "{{ suite.path }}/sandbox.html",
+	"eleventyImport": {
+		"collections": ["docs"]
+	}
+}
+---
+
+<!DOCTYPE html>
+<meta charset=utf-8>
+<meta robots=noindex,nofollow>
+<title>{{ suite.path }} | Test sandbox | YOZO</title>
+<script src=/archive/dev-{{ versions[0].number }}.js></script>
+
+
+<h1>{{ suite.path }}</h1>
+<script type=module>
+self.assert = pass => {
+	if(pass) return
+	throw Error('Assertion failed')
+}
+
+const {when} = self.yozo
+const {ContextMessenger} = await import('/-/js/context-messenger/index.js')
+const messenger = new ContextMessenger(window.parent)
+
+when(messenger).runs().then(async event => {
+	const {filename} = event.detail.payload
+	const [result] = await Promise.allSettled([import(`./${filename}`)])
+	const ok = result.status == 'fulfilled'
+	event.detail.respond({ok})
+})
+
+messenger.ready()
+
+</script>

@@ -1,0 +1,75 @@
+---
+{
+	"layout": "layouts/root.liquid",
+	"pagination": {
+		"data": "testsuites",
+		"size": 1,
+		"alias": "suite"
+	},
+	"permalink": "{{ suite.path }}/",
+	"eleventyImport": {
+		"collections": ["docs"]
+	},
+	"eleventyComputed": {
+		"title": "Tests for {{ suite.path }}"
+	},
+	"head": [
+		"<link rel=stylesheet href=/-/css/test.css>"
+	]
+}
+---
+
+{% assign docs_page_url = suite.path | append: "/" | replace_first: "test", "/docs" %}
+{% assign docs_page = collections.docs | where: "url", docs_page_url | first %}
+
+<main>
+	{% if docs_page %}
+		{% assign original_title = docs_page.data.title %}
+		{% assign first_char = original_title | slice: 0 %}
+		{% assign remainder = original_title | remove_first: first_char %}
+		{% assign title = first_char | downcase | append: remainder %}
+		<h1>Test for {{ title }}</h1>
+		<p>{{ docs_page.data.description }} See <a href="../">{{ title }}</a> for details on usage.</p>
+	{% else %}
+		<h1>Tests for {{ docs_page_url }}</h1>
+		<p>These tests describe behavior that was not yet documented in human lanuage.</p>
+	{% endif %}
+
+	<test-summary total="{{ suite.tests.length }}"></test-summary>
+
+	<p>If you find any of the tests failing, I would be super thankful if you could <a href="https://github.com/vrugtehagel/yozo/issues/new">let me know</a> (which one and in which browser).</p>
+
+	<div class="test-suite">
+		{% for test in suite.tests %}
+			<test-case
+				filename="{{ test.filename }}"
+				{% if test.hasComponent %}hascomponent{% endif %}
+			></test-case>
+		{% endfor %}
+	</div>
+
+</main>
+
+<script type=module>
+const testCases = [...document.querySelectorAll('test-case')]
+const summary = document.querySelector('test-summary')
+const iframe = document.createElement('iframe')
+iframe.hidden = true
+iframe.style.setProperty('display', 'none')
+await when(iframe).loads().after(() => {
+	iframe.src = './sandbox.html'
+	document.body.append(iframe)
+})
+const {ContextMessenger} = await import('/-/js/context-messenger/index.js')
+const messenger = new ContextMessenger(iframe.contentWindow)
+await messenger.ready()
+
+for(const testCase of testCases){
+	const {filename} = testCase
+	testCase.status = 'running'
+	const {ok} = await messenger.send('run', {filename})
+	const status = ok ? 'success' : 'failed'
+	testCase.status = status
+	summary[status]++
+}
+</script>

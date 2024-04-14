@@ -12,13 +12,13 @@
 
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="noindex,nofollow">
-<meta name=description content="{{ description }}">
+<meta name=description content="{{ description | remove_icode }}">
 <meta name="generator" content="{{ eleventy.generator }}">
 
 <link rel=preload as=font href=/-/fonts/dm-sans.ttf type=font/ttf crossorigin>
 <link rel=preload as=font href=/-/fonts/dm-mono.ttf type=font/ttf crossorigin>
 
-<script src=/archive/dev-{{ versions[0].number }}.js></script>
+<script src=/archive/lib-{{ versions[0].number }}.js></script>
 <script>
 	self.yozo.register.auto(name => {
 		const namespace = name.split('-', 1)[0]
@@ -51,9 +51,9 @@
 	<strong>Warning:</strong>
 	Yozo is still under development.
 </ui-toast>
-<script>
+<script>(() => {
 	const {when, timeout} = window.yozo
 	const uiToast = document.currentScript.previousElementSibling
 	when(uiToast).actions().or(timeout(5000))
 		.then(() => uiToast.open = false)
-</script>
+})()</script>

@@ -19,7 +19,6 @@ function amend(md){
 }
 
 function blockCodeRule(tokens, index){
-	const t = tokens.find(token => token.content == `\`arg\`...targets\`\``)
 	const token = tokens[index]
 	const { content, info } = token
 	const escaped = htmlEscape(content)

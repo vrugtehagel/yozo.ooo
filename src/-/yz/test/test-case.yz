@@ -1,18 +1,20 @@
 <title>test-case</title>
-<meta attribute=description type=string>
-<meta attribute=value type=string>
-<meta attribute=status type=string>
+<meta attribute=filename type=string>
+<meta attribute=hascomponent type=boolean as=hasComponent>
+<meta attribute=status type=string default="pending">
+<meta event=complete>
 
 <template mode=closed>
 	<div id=details>
 		<div id=summary tabindex=-1 @click="event.preventDefault()">
 			<test-status :status="$.status"></test-status>
-			<p>{{ $.description }}</p>
+			<p>{{ $.filename }}</p>
 			<ui-button icon=pointer :iconstate="$.open ? 'up' : 'down'"
-				@click="$.open = !$.open"></ui-button>
+				.hidden="!$.loaded" @click="$.open = !$.open"></ui-button>
 		</div>
 		<div id=content .hidden="!$.open">
-			<ui-code language=js>{{ $.value }}</ui-code>
+			<ui-code #if="$.hasComponent" language=yz>{{ $.component }}</ui-code>
+			<ui-code language=js>{{ $.code }}</ui-code>
 		</div>
 	</div>
 </template>
@@ -20,10 +22,29 @@
 <script>
 const content = query('#content')
 
-effect(() => {
+live.link($.$loaded, () => {
+	if($.code == null) return false
+	if(!$.hasComponent) return true
+	if($.component == null) return false
+	return true
+})
+
+connected(() => effect(async () => {
+	const response = await until(fetch($.filename))
+	$.code = await until(response.text())
+}))
+
+connected(() => effect(async () => {
+	if(!$.hasComponent) return
+	const filename = $.filename.replace(/\.js$/, '.yz')
+	const response = await until(fetch(filename))
+	$.component = await until(response.text())
+}))
+
+connected(() => effect(() => {
 	if(!$.open) return
 	content.style.setProperty('--height', content.scrollHeight)
-})
+}))
 </script>
 
 <style>
@@ -41,7 +62,7 @@ effect(() => {
 	list-style: none;
 	display: flex;
 	align-items: center; gap: .5rem;
-	& p {
+	p {
 		flex: 1;
 		margin: 0;
 	}
@@ -49,7 +70,7 @@ effect(() => {
 
 #content {
 	display: block;
-	height: calc(var(--height) * 1px);
+	height: calc(var(--height, 0) * 1px);
 	border-radius: 1rem;
 	overflow: hidden;
 	transition: height .3s;

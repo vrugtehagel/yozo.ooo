@@ -9,8 +9,6 @@
 $.iconMap = {
 	pending: 'dot',
 	running: 'spinner',
-	verifying: 'spinner',
-	invalid: 'danger',
 	failed: 'fail',
 	success: 'success'
 }

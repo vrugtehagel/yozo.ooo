@@ -1,9 +1,9 @@
 ---
-layout: layouts/docs.liquid
-
-title: when()
-description: Through when(), write event listeners in a more readable and streamlined way.
-
+{
+	"layout": "layouts/docs.liquid",
+	"title": "when()",
+	"description": "The when() helper simplifies the use of event listeners both inside and outside Yozo components."
+}
 ---
 
 ## Syntax

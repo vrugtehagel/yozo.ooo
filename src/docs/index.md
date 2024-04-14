@@ -1,9 +1,9 @@
 ---
-layout: layouts/docs.liquid
-
-title: Documentation
-description: Here, everything Yozo provides is explained in detail, from simple type signatures to deep examples about its inner workings.
-
+{
+	"layout": "layouts/docs.liquid",
+	"title": "Documentation",
+	"description": "Here, everything Yozo provides is explained in detail, from simple type signatures to deep examples about its inner workings."
+}
 ---
 
 ## Getting started

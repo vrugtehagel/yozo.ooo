@@ -1,3 +1,4 @@
+import { EleventyRenderPlugin } from '@11ty/eleventy'
 import { customMarkdown } from './plugins/custom-markdown.js'
 
 export default function(config){
@@ -5,6 +6,14 @@ export default function(config){
 	config.setLayoutResolution(false)
 	config.setLiquidOptions({extname: ''})
 	config.addPlugin(customMarkdown)
+	config.addPlugin(EleventyRenderPlugin)
+
+	config.addFilter('jsonparse', function(value){
+		return JSON.parse(value)
+	})
+	config.addFilter('remove_icode', function(value){
+		return value?.replaceAll(/`\w+`([^ `\]].*?)``/g, '$1')
+	})
 
 	config.addPassthroughCopy('src/-/**/*.{css,js,yz,svg,ttf,png,ico,txt,json}')
 	config.addPassthroughCopy('src/*.{js,ico,svg}')

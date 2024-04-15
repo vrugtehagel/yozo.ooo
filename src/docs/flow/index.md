@@ -23,7 +23,7 @@ Flows actually represent not only the triggers that may occur in the future, but
 ### Constructor
 
 [`new Flow()`](/docs/flow/constructor/)
-: Creates a new ``Flow`` object.
+: Creates a new `js`Flow`` object.
 
 ### Methods
 
@@ -55,7 +55,7 @@ Flows actually represent not only the triggers that may occur in the future, but
 : A generic method able to handle more complex operations regarding the flow pipeline.
 
 [`flow.after()`](/docs/flow/now/)
-: A method improving code ergonomics in cases where the trigger in question is triggered as a result of another operation (such as listening for a load event after setting its ``src``).
+: A method improving code ergonomics in cases where the trigger in question is triggered as a result of another operation (such as listening for a load event after setting its `js`src``).
 
 [`flow.throttle()`](/docs/flow/throttle/)
 : Throttles incoming triggers with a certain duration, letting triggers go through as much as possible but at most once per duration.

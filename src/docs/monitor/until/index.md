@@ -76,6 +76,6 @@ Without `js`until()``, this example would create a memory leak; specifically, th
 
 ## See also
 
-- [``monitor()``](/docs/monitor/)
-- [``when()``](/docs/when/)
-- [``timeout()``](/docs/when/)
+- [`monitor()`](/docs/monitor/)
+- [`when()`](/docs/when/)
+- [`timeout()`](/docs/when/)

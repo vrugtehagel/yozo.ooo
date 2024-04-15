@@ -76,5 +76,5 @@ To manually stop intervals (without relying on `js`.until()`` or monitored conte
 
 ## See also
 
-- [``Flow``](/docs/flow/)
-- [``timeout()``](/docs/interval/)
+- [`Flow`](/docs/flow/)
+- [`timeout()`](/docs/interval/)

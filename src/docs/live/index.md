@@ -23,7 +23,7 @@ live(value);
 
 ### Return value
 
-A live variable. Live variables are objects that "wrap" an underlying value, and fire certain events whenever properties (or nested properties) are modified. Some contexts, such as inside an [`effect()`](/docs/effect/) or in an [`{{ inlineExpression }}`](/docs/components/template/inline/) in a component's template, react to changes in their live dependencies.
+A live variable. Live variables are objects that "wrap" an underlying value, and fire certain events whenever properties (or nested properties) are modified. Some contexts, such as inside an [`effect()`](/docs/effect/) or in an [`{{ inline }}`](/docs/components/template/inline/) expression in a component's template, react to changes in their live dependencies.
 
 ### Methods
 
@@ -103,7 +103,7 @@ Lastly, while possible, it is not recommended to use symbols as keys on live obj
 
 Some contexts, such as inside the [`effect()`](/docs/effect/) callback, monitor live dependencies. Because of this, it's often not needed to manually attach the event listeners to live variables.
 
-p In fact, in components, there is even no need for using `js`live()`` itself; each component instance gets [`$`](/docs/components/$/), a live variable for internal component state (including instance properties and attributes). To demonstrate the reactivity, here is a simple click counter component:
+In fact, in components, there is even no need for using `js`live()`` itself; each component instance gets [`$`](/docs/components/$/), a live variable for internal component state (including instance properties and attributes). To demonstrate the reactivity, here is a simple click counter component:
 
 ```yz
 <title>click-counter</title>
@@ -115,7 +115,7 @@ p In fact, in components, there is even no need for using `js`live()`` itself; e
 </template>
 ```
 
-The [`{{ inlineExpression }}`](/docs/components/template/inline/) inside the template creates a monitored context, so that it monitors its live dependencies. As it is watching for changes, the template updates whenever `js`$.count`` is altered, with no additional work required. The `js`$.count`` property is linked to the custom element's "count" attribute, so we both reactively update the component state when the user clicks the button (through `js`$.count++``) as well as when the "count" attribute changes.
+The [`{{ inline }}`](/docs/components/template/inline/) expression inside the template creates a monitored context, so that it can monitor its live dependencies. As it is watching for changes, the template updates whenever `js`$.count`` is altered, with no additional code required. The `js`$.count`` property is linked to the custom element's `attr`count`` attribute, so we both reactively update the component state when the user clicks the button (through `js`$.count++``) as well as when the `attr`count`` attribute changes.
 
 ### Optional chaining
 

@@ -6,7 +6,6 @@
 		"serve": "npx @11ty/eleventy --serve --port=8787",
 		"build": "npx @11ty/eleventy"
 	},
-	"browserslist": ">0.5%, not dead",
 	"engines": {
 		"node": ">=21.7.0"
 	},

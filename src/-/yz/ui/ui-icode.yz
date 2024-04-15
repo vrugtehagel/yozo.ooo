@@ -10,22 +10,35 @@ const code = query('code')
 const uiSyntaxHighlight = document.createElement('ui-syntax-highlight')
 
 const custom = {
-	url: text => `<span class=string>${text}</span>`,
-	str: text => `<span class=string>${text}</span>`,
+	url: text => code.innerHTML = `<span class=url>${text}</span>`,
+	str: text => code.innerHTML = `<span class=string>${text}</span>`,
 	arg: text => {
 		const hasSpread = text.startsWith('...')
 		const parameter = hasSpread ? text.slice(3) : text
 		const parameterSpan = `<span class=parameter>${parameter}</span>`
-		if(!hasSpread) return parameterSpan
-		return `<span class=keyword>...</span>${parameterSpan}`
+		if(!hasSpread) return code.innerHTML = parameterSpan
+		code.innerHTML = `<span class=keyword>...</span>${parameterSpan}`
 	},
-	tag: text => `<span class=keyword>${text}</span>`,
+	tag: text => code.innerHTML = `<span class=keyword>${text}</span>`,
 	attr: text => {
-		const [name, value] = text.split('=')
+		const [full, name, value] = text.match(/^([^=]*)(?:=([^]*))?$/)
 		const nameSpan = `<span class=primary>${name}</span>`
-		if(!value) return nameSpan
-		return `${nameSpan}=<span class=string>${value}</span>`
-	}
+		if(!value) return code.innerHTML = nameSpan
+		code.innerHTML = `${nameSpan}=<span class=string>${value}</span>`
+	},
+	sel: text => code.innerHTML = text,
+	yzattr: text => {
+		const [full, name, quote, value] = text
+			.match(/^([^=]*)(?:=(['"]?)([^]*)\2)?$/)
+		const nameSpan = `<span class="primary">${name}</span>`
+		if(!quote && !value) return code.innerHTML = nameSpan
+		const quoteSpan = `<span class="string">${quote}</span>`
+		code.innerHTML = `${nameSpan}=${quoteSpan}${quoteSpan}`
+		uiSyntaxHighlight.language = 'js'
+		uiSyntaxHighlight.value = value
+		uiSyntaxHighlight.textContent = value
+		code.lastElementChild.before(uiSyntaxHighlight)
+	},
 }
 
 live.link($.$content, {
@@ -36,7 +49,7 @@ live.link($.$content, {
 connected(() => effect(() => {
 	const content = $.content?.trim() ?? ''
 	const highlight = custom[$.type]
-	if(highlight) return code.innerHTML = highlight(content)
+	if(highlight) return highlight(content)
 	uiSyntaxHighlight.language = $.type
 	uiSyntaxHighlight.value = content
 	uiSyntaxHighlight.textContent = content
@@ -47,7 +60,7 @@ connected(() => effect(() => {
 <style>
 code { font-family: inherit; }
 
-.string { color: var(--string-color); }
+.string, .url { color: var(--string-color); }
 .parameter { color: var(--parameter-color); }
 .keyword { color: var(--keyword-color); }
 .primary { color: var(--primary-color); }

@@ -11,8 +11,7 @@ You'll need your standard [npm](https://www.npmjs.com/) setup with [node](https:
 
 Now, you've got two basic tasks at your disposal:
 - `npm run build` builds the site and packages it all up nicely for production.
-- `npm run serve` does the whole server + watch thing that you'd want when doing local development.
-
+- `npm run serve` does the whole server + watch thing that you'd want when doing local development. By default, the local server uses [localhost:8787](http://localhost:8787/) but of course you're welcome to change the port (see the `serve` command in `package.json`).
 
 ## About the codebase
 

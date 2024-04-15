@@ -23,8 +23,8 @@ Note that this syntax applies only within the [`<template>`](/docs/components/te
 `js`item``
 : The items in the iterable. This must _not_ include an initializer, meaning there should be no `js`var``, `js`let`` or `js`const``. The `js`item`` variable is then available in the element's subtree as well as the other attributes on the element itself. This means all descendants also have access to the `js`item`` variable, including [`{{ inline }}`](/docs/components/template/inline/) expressions.
 
-`tag`element``
-: Any element. It and its subtree are generated once for every `js`item`` in the iterable. If this element is the `tag`template`` element, then only the children are generated for every `js`item`` (not the `yz`<template>`` itself).
+`yz`<element>``
+: Any element. It and its subtree are generated once for every `js`item`` in the iterable. If this element is the `yz`<template>`` element, then only the children are generated for every `js`item`` (not the `yz`<template>`` itself).
 
 :::info
 **Note:** Only `yzattr`#for="… of …"`` expressions are supported. While the `js`for(initializer; condition; incrementer)`` form of for-loops is not supported, one may achieve the same goal by generating the array of iterated items before looping, and assigning it to a key in the component state object [`$`](/docs/components/$/).
@@ -77,7 +77,7 @@ Just like when accessing deeper properties on live variables, we'll want to keep
 
 ### Combining with #if
 
-Sometimes, we might conditionally render a list of items, or have certain conditions on each item of a list. Unfortunately, attribute order is not guaranteed, and so writing `attr`#for="…"`` and `attr`#if="…"`` on the same element is ambiguous. Instead, split the attributes over two elements; one may be a `yz`<template>`` element, which, when used with a logical (`attr`#``-prefixed) attribute, renders its children. For example, to render list items conditionally:
+Sometimes, we might conditionally render a list of items, or have certain conditions on each item of a list. Unfortunately, attribute order is not guaranteed, and so writing `yzattr`#for="…"`` and `yzattr`#if="…"`` on the same element is ambiguous. Instead, split the attributes over two elements; one may be a `yz`<template>`` element, which, when used with a logical (`attr`#``-prefixed) attribute, renders its children. For example, to render list items conditionally:
 
 ```yz
 <title>healthy-drinks</title>

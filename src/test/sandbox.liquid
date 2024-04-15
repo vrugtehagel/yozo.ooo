@@ -16,6 +16,12 @@
 <meta charset=utf-8>
 <meta robots=noindex,nofollow>
 <title>{{ suite.path }} | Test sandbox | YOZO</title>
+<script>
+if(window.top != window.parent || window.top == window){
+	location.replace('./')
+}
+</script>
+
 <script src=/archive/lib-{{ versions[0].number }}.js></script>
 
 
@@ -26,7 +32,7 @@ self.assert = pass => {
 	throw Error('Assertion failed')
 }
 
-const {when} = self.yozo
+const {when} = window.yozo
 const {ContextMessenger} = await import('/-/js/context-messenger/index.js')
 const messenger = new ContextMessenger(window.parent)
 

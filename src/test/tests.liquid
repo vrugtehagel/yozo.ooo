@@ -11,28 +11,37 @@
 		"collections": ["docs"]
 	},
 	"eleventyComputed": {
-		"title": "Tests for {{ suite.path }}"
+		"title": "Tests for {{ suite.path | replace: 'test/', '' }}"
 	},
 	"head": [
 		"<link rel=stylesheet href=/-/css/test.css>"
 	]
 }
 ---
+{% liquid
+	assign docs_page_url = suite.path | append: "/" | replace_first: "test", "/docs"
+	assign docs_page = collections.docs | where: "url", docs_page_url | first
 
-{% assign docs_page_url = suite.path | append: "/" | replace_first: "test", "/docs" %}
-{% assign docs_page = collections.docs | where: "url", docs_page_url | first %}
+	assign original_title = docs_page.data.title
+	assign first_char = original_title | slice: 0
+	assign remainder = original_title | remove_first: first_char
+	assign title = first_char | downcase | append: remainder
+	assign escaped_title = title | replace: '"', '\\"'
+	assign escaped_description = docs_page.data.description | replace: '"', '\\"'
+
+	assign json = '{"description":"' | append: escaped_description | append: '","title":"' | append: escaped_title | append: '"}'
+	assign data = json | jsonparse
+%}
 
 <main>
 	{% if docs_page %}
-		{% assign original_title = docs_page.data.title %}
-		{% assign first_char = original_title | slice: 0 %}
-		{% assign remainder = original_title | remove_first: first_char %}
-		{% assign title = first_char | downcase | append: remainder %}
 		<h1>Test for {{ title }}</h1>
-		<p>{{ docs_page.data.description }} See <a href="../">{{ title }}</a> for details on usage.</p>
+		{% renderTemplate "liquid, md", data %}
+			{{ description }} See [{{ title }}](../) for details on usage.
+		{% endrenderTemplate %}
 	{% else %}
 		<h1>Tests for {{ docs_page_url }}</h1>
-		<p>These tests describe behavior that was not yet documented in human lanuage.</p>
+		<p>These tests describe things that were not yet documented.</p>
 	{% endif %}
 
 	<test-summary total="{{ suite.tests.length }}"></test-summary>
@@ -51,6 +60,7 @@
 </main>
 
 <script type=module>
+const {when} = window.yozo
 const testCases = [...document.querySelectorAll('test-case')]
 const summary = document.querySelector('test-summary')
 const iframe = document.createElement('iframe')

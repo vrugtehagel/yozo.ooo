@@ -1,5 +1,3 @@
-// test URL:
-// https://6wrlmkp9u2.execute-api.us-east-1.amazonaws.com/?sleep=500
 const {when} = yozo
 
 
@@ -51,13 +49,6 @@ export class IFrameBrowser extends EventTarget {
 
 	reload(){
 		this.go(this.#src)
-	}
-
-	injectHTML(html, selector = 'head'){
-		if(!this.sameOrigin) return
-		const target = this.#iframe.contentDocument?.querySelector(selector)
-		if(!target) return
-		target.insertAdjacentHTML('afterbegin', html)
 	}
 
 	#invalid(){

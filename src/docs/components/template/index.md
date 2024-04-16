@@ -22,15 +22,14 @@ Yozo reuses the native `html`<template>`` element. Its usual attributes are diff
 As a top-level element in a Yozo component file, it describes markup for a component. Without attributes, the markup will be placed inside (i.e. as direct children of) the element upon connecting to the DOM for the first time, removing any children it might have gotten before connecting. When using templates without shadow root, styles defined inside the [`<style>`](/docs/components/style/) element are _not_ scoped.
 
 :::info
-**Note:** When the `attr`mode`` attribute is used, the attributes directly convert to the options passed to the underlying `js`.attachShadow()`` call. For more information about shadow roots, see [`.attachShadow()` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow).
+**Note:** When the `attr`mode`` attribute is used, the attributes directly convert to the options passed to the underlying `js`.attachShadow()`` call. For more information about shadow roots, see [.attachShadow() on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow).
 :::
 
-dl
 `attr`mode`` <mark>optional</mark>
 : If provided, a shadow root is created with this as the `js`mode`` option. Specifically, this is either `str`"open"`` or `str`"closed"``. Using an open shadow root means the shadow root is exposed through the `js`.shadowRoot`` property (this is native behavior). As such, closed shadow roots are recommended for better encapsulation. Note that using shadow roots makes [`<style>`](/docs/components/style/) elements scoped.
 
 `attr`delegates-focus`` <mark>optional</mark>
-: Equivalent to the `js`delegatesFocus`` option in the options provided to `js`.attachShadow()``. The only valid value as attribute is `str`"true"``; leave out the attribute altogether if delegating focus is not desired.
+: Equivalent to the `js`delegatesFocus`` option in the options provided to `js`.attachShadow()``. The only valid value for this attribute is `str`"true"``; leave out the attribute altogether if delegating focus is not desired.
 
 `attr`slot-assignment`` <mark>optional</mark>
 : Equivalent to the `js`slotAssignment`` option in the options provided to `js`.attachShadow()``. Valid values are `str`"named"`` (default) and `str`"manual"``, determining whether slotted elements are automatically placed by their name (for `str`"named"``) or whether slotted elements should manually be placed using `js`HTMLSlotElement.assign()``.

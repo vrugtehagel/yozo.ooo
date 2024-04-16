@@ -1,0 +1,3 @@
+[submodule "yozo"]
+	path = yozo
+	url = git@github.com:vrugtehagel/yozo.git

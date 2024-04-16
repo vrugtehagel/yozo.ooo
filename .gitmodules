@@ -1,3 +1,3 @@
 [submodule "yozo"]
 	path = yozo
-	url = ./yozo
+	url = https://github.com/vrugtehagel/yozo

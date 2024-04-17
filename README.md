@@ -15,7 +15,6 @@ Now, you've got two basic tasks at your disposal:
 
 ## About the codebase
 
-
 This site is built on [Eleventy](https://11ty.dev/), and doesn't have a particularly complicated configuration. There are a few amendments made to the markdown parser; see below for details. Syntax highlighting doesn't happen in the build step; we use [Prism](https://prismjs.com/) (downloaded manually, instead of through `npm`) to highlight them client-side, asynchronously.
 
 Yozo's source repository is included as submodule to generate output based on version data, to include the archive of all versions, and to include tests on the site.

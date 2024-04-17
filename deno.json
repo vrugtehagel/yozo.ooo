@@ -1,0 +1,23 @@
+{
+	"tasks": {
+		"serve": "deno run -A npm:@11ty/eleventy@^3.0.0-alpha.6 --serve --port=8787",
+		"build": "deno run -A npm:@11ty/eleventy@^3.0.0-alpha.6"
+	},
+	"imports": {
+		"esbuild/": "https://deno.land/x/esbuild@v0.17.18/",
+		"std/": "https://deno.land/std@0.204.0/",
+
+		"@11ty/eleventy": "npm:@11ty/eleventy@^3.0.0-alpha.6",
+
+		"markdown-it-anchor": "npm:markdown-it-anchor@^8.6.7",
+		"markdown-it-container": "npm:markdown-it-container@^4.0.0",
+		"markdown-it-deflist": "npm:markdown-it-deflist@^3.0.0"
+	},
+	"fmt": {
+		"useTabs": true,
+		"lineWidth": 80,
+		"singleQuote": true,
+		"include": []
+	},
+	"lock": false
+}

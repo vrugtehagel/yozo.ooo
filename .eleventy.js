@@ -15,6 +15,7 @@ export default function(config){
 		return value?.replaceAll(/`\w+`([^ `\]].*?)``/g, '$1')
 	})
 
+	config.addWatchTarget('yozo/')
 	config.addPassthroughCopy('src/-/**/*.{css,js,yz,svg,ttf,png,ico,txt,json}')
 	config.addPassthroughCopy('src/*.{js,ico,svg}')
 	config.addPassthroughCopy('src/**/index.{css,js}')

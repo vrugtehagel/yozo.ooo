@@ -21,12 +21,12 @@
 : An expression evaluating to a value, usually one with [live](/docs/live/) dependencies. The expression is assigned to the attribute as-is, which implicitly causes it to be converted to a string if it is not already one. There is one exception; when the expression evaluates to `js`null`` or `js`undefined``, the attribute is removed.
 
 :::info
-**Note:** In many cases, the [`.property`](/docs/components/template/properties/) syntax may be more appropriate, since properties don't need to do the string conversion that attributes need to. Specifically, boolean attributes don't work well with the `attr`:attribute`` syntax, needing `attr`:bool="$.condition ? '' : null`` compared to the simpler `attr`.bool="$.condition"``.
+**Note:** In many cases, the [`.property`](/docs/components/template/properties/) syntax may be more appropriate, since properties don't need to do the string conversion that attributes need to. Specifically, boolean attributes don't work well with the `attr`:attribute`` syntax, needing `yzattr`:bool="$.condition ? '' : null"`` compared to the simpler `yzattr`.bool="$.condition"``.
 :::
 
 ## Details
 
-Like the in-template [`.property`](/docs/components/template/properties/) syntax, assigning attributes using this syntax is equivalent to running an effect only when connected. When the custom element is disconnected from the DOM, attributes bound using this in-template syntax are not updated. When inserting the element back into the document, the effects are set up again, causing them to be set to their proper values. If the attributes need to be kept up-to-date even while the component is not connected, set them manually using an [`effect()`](/docs/effect/).
+Like the in-template [`.property`](/docs/components/template/properties/) syntax, assigning attributes using this syntax is equivalent to running an effect only when connected. When the custom element is disconnected from the DOM, attributes bound using this in-template syntax are not updated to avoid unnecessary work. When inserting the element back into the document, the effects are set up again, causing them to be set to their proper values. If the attributes need to be kept up-to-date even while the component is not connected, set them manually using an [`effect()`](/docs/effect/).
 
 ## Examples
 

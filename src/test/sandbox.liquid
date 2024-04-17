@@ -40,6 +40,7 @@ when(messenger).runs().then(async event => {
 	const {filename} = event.detail.payload
 	const [result] = await Promise.allSettled([import(`./${filename}`)])
 	const ok = result.status == 'fulfilled'
+	if(!ok) console.warn(result.reason)
 	event.detail.respond({ok})
 })
 

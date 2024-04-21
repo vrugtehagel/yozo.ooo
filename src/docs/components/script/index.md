@@ -71,13 +71,13 @@ Lastly, we need to define the `js`.setName()`` method. We already declared it in
 
 ### Imports
 
-Sometimes, a third-party or just seperate script needs to be imported into component logic. Even though top-level `js`await`` is allowed in the `yz`<script>`` section, the component logic should generally be synchronous since elements should be available and usable right when they're created. To this extent, static `js`import`` statements are disallowed inside `yz`<script>`` sections. In other words, the `yz`<script>`` in component definitions is not a `attr`type="module"`` script (and adding that attribute does not turn it into one). However, dynamic `js`import()`` statements work as usual and are the recommended way to load a module into a component.
+Sometimes, a third-party or just seperate script needs to be imported into component logic. Both static `js`import`` statements and top-level `js`await`` are not permitted in `yz`<script>`` sections, since the component logic represents a constructor, which should be synchronous. This is because elements should be available and usable right away when they're created. In other words, the `yz`<script>`` in component definitions is not a `attr`type="module"`` script (and adding that attribute does not turn it into one). However, dynamic `js`import()`` statements work as usual and are the recommended way to load a module into a component.
 
 :::warning
 **Warning:** A pitfall of using `js`import()`` statements is when using relative URLs. Since Yozo parses and compiles component definitions client-side, it cannot respect the original URL that your script is located at. In other words, relative URLs are resolved against wherever Yozo's script lives. Similarly, `js`import.meta.url`` always resolves to Yozo's script's location.
 :::
 
-So, how does importing work in module scripts? The recommended way is to asynchronously load the script and assign it to a property on the state variable [`$`](/docs/components/$/) once ready. Then, write logic for both the case where that key is not yet defined and for when it is defined. For example:
+So, how does importing work in module scripts? The recommended way is to use a dynamic `js`import()`` to load the external module or script and assign it to a property on the state variable [`$`](/docs/components/$/) once ready. Then, write logic for both the case where that key is not yet defined and for when it is defined. For example:
 
 ```yz
 <title>db-status</title>
@@ -119,9 +119,9 @@ The dynamic import is called once for every custom element instance, but this is
 
 ## Usage notes
 
-While it is possible to use top-level `js`return`` statements inside the `yz`<script>`` section, this must not be done as it may break in future versions of Yozo. Similarly, top-level `js`await`` is allowed, but not recommended; it may lead to unexpected behavior and/or slow-to-load custom elements.
+While it is possible to use top-level `js`return`` statements inside the `yz`<script>`` section, this must not be done as it may break in future versions of Yozo.
 
-Inside the `yz`<script>``, all top-level goodies Yozo provides are available, with an exception for `js`register()``. This exception exists mainly because it is somewhat vaguely named without the `js`yozo`` namespace, and this behavior is consistent with what happens when assigning all Yozo helpers to the global scope (through `js`Object.assign(window, yozo)``). It is also not generally advised to register components from the constructor of other components; if a certain component is needed in another, load them both at the same time for better performance. All other Yozo helpers are thus available directly inside the `yz`<script>``. They should not (and cannot) be overwritten.
+Inside the `yz`<script>``, all top-level goodies Yozo provides are available by default without the `js`yozo.`` namespace, with an exception for `js`register()``. This exception exists mainly because it is somewhat vaguely named without the `js`yozo`` namespace, and this is also consistent with what happens when assigning all Yozo helpers to the global scope (through `js`Object.assign(window, yozo)``), where `js`register`` is also excluded. Either way, it is not generally advised to register components from the constructor of other components; if a certain component is needed in another, load them both at the same time for better performance. The non-namespaced Yozo helpers available inside the `yz`<script>`` should not (and cannot) be overwritten.
 
 ## See also
 

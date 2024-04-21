@@ -57,19 +57,16 @@
 		{% endfor %}
 	</div>
 
+	<iframe id=sandbox src=about:blank></iframe>
+
 </main>
 
 <script type=module>
 const {when} = window.yozo
 const testCases = [...document.querySelectorAll('test-case')]
 const summary = document.querySelector('test-summary')
-const iframe = document.createElement('iframe')
-iframe.hidden = true
-iframe.style.setProperty('display', 'none')
-await when(iframe).loads().after(() => {
-	iframe.src = './sandbox.html'
-	document.body.append(iframe)
-})
+const iframe = document.querySelector('iframe')
+await when(iframe).loads().after(() => iframe.src = './sandbox.html')
 const {ContextMessenger} = await import('/-/js/context-messenger/index.js')
 const messenger = new ContextMessenger(iframe.contentWindow)
 await messenger.ready()

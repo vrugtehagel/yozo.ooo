@@ -17,9 +17,13 @@ interval(duration);
 `arg`duration``
 : The time (in milliseconds) that the repeated delay should take.
 
+:::info
+**Note:** For animations and other frame-based operations, use [`frame()`](/docs/frame/) instead.
+:::
+
 ### Return value
 
-A [`Flow`](/docs/flow/) object that triggers in regular intervals of `arg`duration`` milliseconds.
+A [`Flow`](/docs/flow/) object that triggers in regular intervals of `arg`duration`` milliseconds. The trigger does not receive arguments.
 
 ## Details
 
@@ -78,3 +82,4 @@ To manually stop intervals (without relying on `js`.until()`` or monitored conte
 
 - [`Flow`](/docs/flow/)
 - [`timeout()`](/docs/interval/)
+- [`frame()`](/docs/frame/)

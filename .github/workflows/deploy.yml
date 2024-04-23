@@ -14,6 +14,8 @@ jobs:
       RSYNC_PASSWORD: ${{ secrets.YOZO_OOO_REMOTE_PASS }}
     steps:
     - uses: actions/checkout@v4
+      with:
+        submodules: recursive
     - uses: actions/setup-node@v4
       with:
         node-version: 21

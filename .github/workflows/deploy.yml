@@ -1,0 +1,23 @@
+name: Build & deploy
+on: []
+#   push:
+#     branches:
+#     - main
+
+jobs:
+  build_and_deploy:
+    name: Build and deploy production
+    runs-on: ubuntu-latest
+    env:
+      TERM: xterm-256color
+      REMOTE: ${{ secrets.YOZO_OOO_REMOTE }}
+      RSYNC_PASSWORD: ${{ secrets.YOZO_OOO_REMOTE_PASS }}
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 21
+        cache: npm
+    - run: npm install
+    - run: npm run build
+    - run: rsync -av dist/ ${{ REMOTE }}:/var/www/yozo.ooo

@@ -23,4 +23,12 @@ jobs:
         cache: npm
     - run: npm install
     - run: npm run build
-    - run: rsync -av dist/ ${{ secrets.YOZO_OOO_REMOTE }}:/var/www/yozo.ooo
+    - name: rsync
+      run: |
+        echo "${{ secrets.YOZO_OOO_SECRET_KEY }}" > deploy_key
+        chmod 600 ./deploy_key
+        rsync \
+          --archive \
+          --verbose \
+          --rsh='ssh -i ./deploy_key -p 22 -o StrictHostKeyChecking=no' \
+          dist/ ${{ secrets.YOZO_OOO_REMOTE }}:/var/www/yozo.ooo

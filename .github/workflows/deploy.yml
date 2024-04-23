@@ -26,5 +26,6 @@ jobs:
         chmod 600 ./deploy_key
         rsync \
           --archive \
+          --quiet \
           --rsh='ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
           dist/ ${{ secrets.YOZO_OOO_REMOTE }}:/var/www/yozo.ooo

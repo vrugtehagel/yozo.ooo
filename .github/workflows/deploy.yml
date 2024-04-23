@@ -27,6 +27,5 @@ jobs:
         rsync \
           --archive \
           --delete \
-          --quiet \
-          --rsh='ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
+          --rsh='ssh -i ./deploy_key -o StrictHostKeyChecking=no -o LogLevel=quiet' \
           dist/ ${{ secrets.YOZO_OOO_REMOTE }}:/var/www/yozo.ooo

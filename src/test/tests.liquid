@@ -37,7 +37,7 @@
 	{% if docs_page %}
 		<h1>Test for {{ title | escape }}</h1>
 		{% renderTemplate "liquid, md", data %}
-			{{ description | escape }} See [{{ title | escape }}](../) for details on usage.
+			{{ description }} See [{{ title | escape }}](../) for details on usage.
 		{% endrenderTemplate %}
 	{% else %}
 		<h1>Tests for {{ docs_page_url }}</h1>

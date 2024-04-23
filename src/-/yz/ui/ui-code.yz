@@ -3,7 +3,7 @@
 
 <template mode=closed>
 	<div id=container .style.tab-size="$.siteSettings?.$settings.tabSize ?? 4">
-		<div id=line-numbers .hidden="!$.siteSettings?.$settings.lineNumbers">
+		<div id=line-numbers #if="$.siteSettings?.$settings.lineNumbers">
 			<span #for="number of $.numbers">{{ number }}</span>
 		</div>
 		<pre><ui-syntax-highlight

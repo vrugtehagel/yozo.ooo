@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TERM: xterm-256color
-      REMOTE: ${{ secrets.YOZO_OOO_REMOTE }}
       RSYNC_PASSWORD: ${{ secrets.YOZO_OOO_REMOTE_PASS }}
     steps:
     - uses: actions/checkout@v4
@@ -21,4 +20,4 @@ jobs:
         cache: npm
     - run: npm install
     - run: npm run build
-    - run: rsync -av dist/ ${{ REMOTE }}:/var/www/yozo.ooo
+    - run: rsync -av dist/ ${{ secrets.YOZO_OOO_REMOTE }}:/var/www/yozo.ooo

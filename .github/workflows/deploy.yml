@@ -22,7 +22,7 @@ jobs:
     - run: npm run build
     - name: rsync
       run: |
-        echo "${{ secrets.YOZO_OOO_PRIVATE_KEY }}" > deploy_key
+        echo "${{ secrets.YOZO_OOO_SSH_PRIVATE_KEY }}" > deploy_key
         chmod 600 ./deploy_key
         rsync \
           --archive \

@@ -20,15 +20,11 @@ jobs:
         cache: npm
     - run: npm install
     - run: npm run build
-    - name: run rsync using ssh
+    - name: rsync
       run: |
-        # run rsync using ssh
-        mkdir -p ~/.ssh/
         echo "${{ secrets.YOZO_OOO_PRIVATE_KEY }}" > deploy_key
         chmod 600 ./deploy_key
-        echo "${{ secrets.YOZO_OOO_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
         rsync \
           --archive \
-          --verbose \
           --rsh='ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
           dist/ ${{ secrets.YOZO_OOO_REMOTE }}:/var/www/yozo.ooo

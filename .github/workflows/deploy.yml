@@ -10,9 +10,6 @@ jobs:
     name: Build and deploy production
     environment: production
     runs-on: ubuntu-latest
-    env:
-      TERM: xterm-256color
-      RSYNC_PASSWORD: ${{ secrets.YOZO_OOO_REMOTE_PASS }}
     steps:
     - uses: actions/checkout@v4
       with:
@@ -23,12 +20,15 @@ jobs:
         cache: npm
     - run: npm install
     - run: npm run build
-    - name: rsync
+    - name: run rsync using ssh
       run: |
+        # run rsync using ssh
+        mkdir -p ~/.ssh/
         echo "${{ secrets.YOZO_OOO_SECRET_KEY }}" > deploy_key
         chmod 600 ./deploy_key
+        echo "${{ secrets.YOZO_OOO_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
         rsync \
           --archive \
           --verbose \
-          --rsh='ssh -i ./deploy_key -p 22 -o StrictHostKeyChecking=no' \
+          --rsh='ssh -i ./deploy_key -o StrictHostKeyChecking=no' \
           dist/ ${{ secrets.YOZO_OOO_REMOTE }}:/var/www/yozo.ooo

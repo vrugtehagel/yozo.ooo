@@ -1,10 +1,10 @@
 name: Build & deploy
 on:
-  push:
-    branches:
-    - never
-    # - main
-
+  workflow_dispatch: {}
+  # push:
+  #   branches:
+  #   - main
+  
 jobs:
   build_and_deploy:
     name: Build and deploy production

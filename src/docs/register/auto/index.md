@@ -29,6 +29,8 @@ None (`js`undefined``).
 
 This function is a much more developer-friendly alternative to component registration. Instead of having to keep track of each component on a page-by-pase basis and registering them using `js`register()``, this allows a single snippet to be used across all pages, and without registering unused components. The main downside of `js`register.auto()`` comes into play when using Yozo in the context of very component-heavy pages; instead of registering all components as soon as the page loads, components used inside other component's templates can only be loaded after the latter has been fetched and parsed. In mostly-static pages, this is usually fine (especially if the parent components behave nicely while not yet defined), but in case there are many (nested) custom elements present and potentially visible on page load, manually listing them and registering using `js`register()`` may be preferred.
 
+It should be noted that `js`register.auto()`` looks for elements in the page exactly once on `str`DOMContentLoaded`` (or immediately when called, if the DOM is already loaded). For component templates, it scans each template once upon component registration (not element creation) meaning any elements registered _before_ calling `js`register.auto()`` are not scanned. Component templates are scanned in their entirety, disregarding any in-template [`#if`](/docs/components/template/if-else/) statements or other inline flow control.
+
 ## Examples
 
 ### This site

@@ -23,6 +23,10 @@ register(url);
 
 A `js`Promise`` that resolves whenever the component is defined, akin to `js`customElements.whenDefined(…)``. When the component file contains syntactical errors, the return value is a rejected promise; otherwise, the registration will succeed. If the URL provided was already provided previously, `js`register()`` immediately resolves (regardless of whether or not the first registration succeeded).
 
+:::info
+**Note:** It is possible to dynamically register components found on the page or in other components through [`register.auto()`](/docs/register/auto/).
+:::
+
 ## Examples
 
 ### Readability
@@ -64,4 +68,5 @@ console.log(customElements.get('uh-oh')); // undefined
 
 ## See also
 
+- [`register.auto()`](/docs/register/auto/)
 - [components](/docs/components/)

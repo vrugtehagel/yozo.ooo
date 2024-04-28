@@ -8,10 +8,10 @@
 
 ## Reference
 
-Before we get started, a quick overview. Below is a comprehensive list of Yozo's goodies. Note that some of the functionality has other, related ("nested") functionality that is not explicitly listed. To learn more about each topic, navigate to their respective pages.
+Before we get started, a quick overview. Below is a comprehensive list of Yozo's goodies. Note that some of the functionality has other, related ("nested") functionality that is not explicitly listed here. To learn more about each topic, navigate to their respective pages.
 
 - Feature-rich component definitions syntax, from [reactive attributes](/docs/components/meta/attribute/) to [scoped styles](/docs/components/style/) (see details on the [components](/docs/components/) page);
-- [`register()`](/docs/register/) for component registration;
+- [`register()`](/docs/register/) and [`register.auto()`](/docs/register/auto/) for component registration;
 - Simple, fine-grained state management with [`live()`](/docs/live/);
 - Simpler listeners and callbacks with [flows](/docs/flow/), specifically:
 	- Event listeners through [`when()`](/docs/when/), and observers through [`when().observes()`](/docs/when/observes/);
@@ -48,7 +48,7 @@ With that out of the way, we're ready to create our first component. First, let'
 
 The [`<title>`](/docs/components/title/) element here defines the name of our component, so that we'll be able to use it as `html`<my-component>`` (the filename does not have to match this). We also render some content through the [`<template>`](/docs/components/template/) element, so that we can see our custom element come to life.
 
-Next, since our page does not yet know that this file exists, we'll need to tell Yozo to process this file. To do that, we'll need to call [`register()`](/docs/register/) like so:
+Next, since our page does not yet know that this file exists, we'll need to tell Yozo to process this file. To do that, we'll need to call [`register()`](/docs/register/). Yozo also offers a way of automatically discovering and processing components using [`register.auto()`](/docs/register/auto/), but for now, let's register `tag`my-component`` explicitly:
 
 ```js
 window.yozo.register('./my-component.yz');

@@ -7,6 +7,14 @@
 		grid-area: content;
 		width: min(90vw, 100%); max-width: 45rem; margin: 0 auto;
 	}
+	#crumbs {
+		display: flex; margin: .5rem 0;
+		flex-wrap: wrap; align-items: center;
+		ui-icon {
+			width: 1.5rem; padding: .5rem;
+			color: var(--comment-color);
+		}
+	}
 	aside {
 		grid-area: aside; place-self: stretch end;
 		min-width: 14rem; margin-right: clamp(3rem, 25vw - 12.5rem, 5rem);
@@ -34,6 +42,9 @@
 			}
 		}
 		&:not(:hover) a::before { opacity: 0; }
+	}
+	h1 {
+		margin-top: 0;
 	}
 	dd {
 		margin: 1rem 0 1rem 2rem;

@@ -11,7 +11,12 @@
 	assign escaped = description | replace: '"', '\\"'
 	assign json = '{"description":"' | append: escaped | append: '"}'
 	assign data = json | jsonparse
+
+	assign crumbs = page.url | split: "/" | shift
+	assign ancestors = crumbs | pop
+	assign current = crumbs | last
 %}
+
 
 <main>
 	<aside>
@@ -19,6 +24,17 @@
 	</aside>
 
 	<article>
+		{% unless ancestors.length == 0 %}
+			<nav id=crumbs>
+				{% for crumb in ancestors %}
+					{% assign href = crumbs | slice: 0, forloop.index | join: "/" %}
+					<a href="/{{ href }}/">{{ crumb }}</a>
+					<ui-icon type=pointer state=right></ui-icon>
+				{% endfor %}
+				<span>{{ current }}</span>
+			</nav>
+		{% endunless %}
+
 		<h1>{{ title | escape }}</h1>
 		<p>
 			{% renderTemplate "liquid, md", data %}

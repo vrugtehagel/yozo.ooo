@@ -41,7 +41,8 @@ when(messenger).runs().then(async event => {
 	const [result] = await Promise.allSettled([import(`./${filename}`)])
 	const ok = result.status == 'fulfilled'
 	if(!ok) console.warn(result.reason)
-	event.detail.respond({ok})
+	const refresh = ok && result.value?.refresh
+	event.detail.respond({ok, refresh})
 })
 
 messenger.ready()

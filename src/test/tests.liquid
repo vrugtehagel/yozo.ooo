@@ -66,17 +66,24 @@ const {when} = window.yozo
 const testCases = [...document.querySelectorAll('test-case')]
 const summary = document.querySelector('test-summary')
 const iframe = document.querySelector('iframe')
-await when(iframe).loads().after(() => iframe.src = './sandbox.html')
 const {ContextMessenger} = await import('/-/js/context-messenger/index.js')
-const messenger = new ContextMessenger(iframe.contentWindow)
+
+await when(iframe).loads().once()
+	.after(() => iframe.src = './sandbox.html')
+let messenger = new ContextMessenger(iframe.contentWindow)
 await messenger.ready()
 
 for(const testCase of testCases){
 	const filename = testCase.getAttribute('filename')
 	testCase.status = 'running'
-	const {ok} = await messenger.send('run', {filename})
+	const {ok, refresh} = await messenger.send('run', {filename})
 	const status = ok ? 'success' : 'failed'
 	testCase.status = status
 	summary[status]++
+	if(!refresh) continue
+	await when(iframe).loads().once()
+		.after(() => iframe.contentWindow.location.reload())
+	messenger = new ContextMessenger(iframe.contentWindow)
+	await messenger.ready()
 }
 </script>

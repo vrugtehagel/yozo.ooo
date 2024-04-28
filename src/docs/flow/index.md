@@ -9,12 +9,12 @@
 The `js`Flow`` class is primarily used to represent things happening at some point in the future. It can be hooked into with methods such as [`flow.then()`](/docs/flow/then/). To cover the most common use cases, there are some handy helper functions available, specifically:
 
 - Event listeners are provided through [`when()`](/docs/when/);
-- Timeouts (`js`setTimeout``) are implemented through [`timeout()`](/docs/timeout/);
-- Intervals (`js`setInterval``) through [`interval()`](/docs/interval/);
+- Timeouts (`js`setTimeout()``) are implemented through [`timeout()`](/docs/timeout/);
+- Intervals (`js`setInterval()``) through [`interval()`](/docs/interval/);
 - [`frame()`](/docs/frame/) triggers every frame, like a nested `js`requestAnimationFrame()``;
 - The [`paint()`](/docs/paint/) function can be used to wait for the browser to paint a frame (mostly useful for manual animations);
 - Observers, such as `js`MutationObserver``, get [`when().observes()`](/docs/when/observes/);
-- Lastly, many hook-like functions, such as [`effect()`](/docs/effect/), [`connected()`](/docs/components/connected/), or [`register.auto()`](/docs/register/auto/), return a flow both to facilitate monitoring, as well as making it easy to terminate or hook into them.
+- Lastly, many hook-like functions, such as [`effect()`](/docs/effect/) or [`connected()`](/docs/components/connected/), return a flow both to facilitate monitoring, as well as making it easy to terminate or hook into them.
 
 Flows actually represent not only the triggers that may occur in the future, but the entire pipeline they run through when those triggers happen. Most commonly, `js`flow.then()`` is used to add a single synchronous callback to the pipeline. However, is is also possible to filter out certain triggers using [`flow.if()`](/docs/flow/if/), or even rate-limit them using [`flow.throttle()`](/docs/flow/throttle/) or [`flow.debouce()`](/docs/flow/debounce/).
 
@@ -51,10 +51,10 @@ Flows actually represent not only the triggers that may occur in the future, but
 [`flow.now()`](/docs/flow/now/)
 : Manually trigger a flow, optionally with arguments.
 
-[`flow.flow()`](/docs/flow/now/)
+[`flow.pipe()`](/docs/flow/pipe/)
 : A generic method able to handle more complex operations regarding the flow pipeline.
 
-[`flow.after()`](/docs/flow/now/)
+[`flow.after()`](/docs/flow/after/)
 : A method improving code ergonomics in cases where the trigger in question is triggered as a result of another operation (such as listening for a load event after setting its `js`src``).
 
 [`flow.throttle()`](/docs/flow/throttle/)

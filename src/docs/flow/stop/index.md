@@ -8,6 +8,10 @@
 
 This method does not interact with the flow pipeline; when called, it stops the flow immediately. After calling it once, doing so again has no effect.
 
+:::info
+**Note:** If a flow is created in a [monitored](/docs/monitor/) context (one monitoring for [type "undo"](/docs/monitor/undo/) then it is not necessary to manually stop a `js`Flow``; when the context is undone, the flow is stopped automatically.
+:::
+
 ## Syntax
 
 ```js
@@ -24,19 +28,25 @@ The same [`Flow`](/docs/flow/) object the method was called on.
 
 ## Examples
 
-### Stop auto-registration
+### Stop a listener
 
-It is possible to automatically discover and register custom elements on the page with [`register.auto()`](/docs/register/auto/). This method returns a `js`Flow``, which can be stopped to avoid further continuous scanning of a document. Although we can use `js`.until()`` for this purpose, we may also store a reference to the flow and use it to manually call `js`.stop()`` on it later, like so:
+For the sake of the example, let's set up and take down a listener without the usual methods, i.e. without monitored contexts or [`.until()`](/docs/flow/until/). To do so, we'll need to keep a reference to the [`Flow`](/docs/flow/) returned by [`when()`](/docs/when/):
 
 ```js
-const autoRegistrationFlow = register.auto(name => {
-	const url = resolveComponentURL(name);
-	return url;
-});
+const button = document.querySelector('button');
 
-// Later…
-autoRegistrationFlow.stop();
+const listener = when(button).clicks().then(() => {
+	// do things…
+});
 ```
+
+Now, with a reference (`js`listener``) to the `js`Flow`` object for the event listener, we can stop it at any point by calling
+
+```js
+listener.stop()
+```
+
+If any additional [`.cleanup()`](/docs/flow/cleanup/) callbacks were added, then these are run once we `js`.stop()`` the flow.
 
 ## Usage notes
 
@@ -47,5 +57,6 @@ A stopped flow is essentially useless, because it can no longer trigger; not eve
 
 ## See also
 
+- [`Flow`](/docs/flow/)
 - [`flow.until()`](/docs/flow/until/)
 - [`flow.once()`](/docs/flow/once/)

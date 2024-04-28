@@ -6,6 +6,21 @@
 }
 ---
 
+## Reference
+
+Before we get started, a quick overview. Below is a comprehensive list of Yozo's goodies. Note that some of the functionality has other, related ("nested") functionality that is not explicitly listed. To learn more about each topic, navigate to their respective pages.
+
+- Feature-rich component definitions syntax, from [reactive attributes](/docs/components/meta/attribute/) to [scoped styles](/docs/components/style/) (see details on the [components](/docs/components/) page);
+- [`register()`](/docs/register/) for component registration;
+- Simple, fine-grained state management with [`live()`](/docs/live/);
+- Simpler listeners and callbacks with [flows](/docs/flow/), specifically:
+	- Event listeners through [`when()`](/docs/when/), and observers through [`when().observes()`](/docs/when/observes/);
+	- Timing-related helpers with [`interval()`](/docs/interval/), [`timeout()`](/docs/timeout/), [`frame()`](/docs/frame/) and [`paint()`](/docs/paint/);
+	- For advanced use cases, manually creating flows with the [`Flow`](/docs/flow/constructor) constructor;
+- State-dependent effects through [`effect()`](/docs/effect/);
+- Purifying functions with side effects through [`purify()`](/docs/purify/);
+- Creating your own monitoring mechanisms with [`monitor()`](/docs/monitor/).
+
 ## Getting started
 
 Yozo is a web component-based framework that tries to maximize what you get while remaining as small as possible. It also tries to be easy-to-use in every environment, by removing the need for a build step completely. To give Yozo a try, [dowload](/download/) the latest development version of Yozo and load it on a page like so:
@@ -33,13 +48,11 @@ With that out of the way, we're ready to create our first component. First, let'
 
 The [`<title>`](/docs/components/title/) element here defines the name of our component, so that we'll be able to use it as `html`<my-component>`` (the filename does not have to match this). We also render some content through the [`<template>`](/docs/components/template/) element, so that we can see our custom element come to life.
 
-Next, since our page does not yet know that this file exists, we'll need to tell Yozo to process this file. To do that, we'll need:
+Next, since our page does not yet know that this file exists, we'll need to tell Yozo to process this file. To do that, we'll need to call [`register()`](/docs/register/) like so:
 
 ```js
 window.yozo.register('./my-component.yz');
 ```
-
-Again, if the file was placed in a different directory than the page itself, edit the URL to match its location. Yozo also offers a way of automatically discovering and processing components using [`register.auto()`](/docs/register/auto/), but for now, let's register `tag`my-component`` explicitly.
 
 Now that Yozo knows about our component, it is ready to be used; and because it is a custom element, we can use it like any regular HTML element:
 
@@ -64,25 +77,6 @@ await when(img).loads().once()
 ```
 
 And it doesn't end there; see below for a complete list of the things Yozo provides.
-
-## Reference
-
-Below is a comprehensive list of Yozo's goodies. Note that some of the functionality has other, related functionality that is not explicitly listed. To learn more about the topics, navigate to their respective pages.
-
-- [`register()`](/docs/register/) and [`register.auto()`](/docs/register/auto/) for component registration;
-- Feature-rich component definitions, from [reactive attributes](/docs/components/meta/attribute/) to [scoped styles](/docs/components/style/) (see details on the [components](/docs/components/) page);
-- Simple, fine-grained state management with [`live()`](/docs/live/);
-- Simpler listeners and callbacks with [flows](/docs/flow/), specifically:
-	- Event listeners through [`when()`](/docs/when/);
-	- Observers of any type through [`when().observes()`](/docs/when/observes/);
-	- Timeouts with [`timeout()`](/docs/timeout/);
-	- Intervals with [`interval()`](/docs/interval/);
-	- Running callbacks every frame with [`frame()`](/docs/frame/);
-	- Waiting for the browser to paint with [`paint()`](/docs/paint/);
-	- For advanced cases, manually creating flows with the [`Flow`](/docs/flow/constructor) constructor;
-- State-dependent effects through [`effect()`](/docs/effect/);
-- Purifying functions with side effects through [`purify()`](/docs/purify/);
-- Creating your own monitoring mechanisms with [`monitor()`](/docs/monitor/).
 
 ## Tests
 

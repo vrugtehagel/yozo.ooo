@@ -64,4 +64,4 @@ console.log(customElements.get('uh-oh')); // undefined
 
 ## See also
 
-- [`register.auto()`](/docs/register/auto/)
+- [components](/docs/components/)

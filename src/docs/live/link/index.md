@@ -35,17 +35,13 @@ live.link($live, options);
 	: A function to run when the live variable is set or otherwise changed, usually to update the data source so that their values stay in sync. After a live variable has been set, the value from the external data source is retrieved using the `get` option and the linked variable is set to that value. This can mean the value of the live variable is different from the one it is set to, if the external data source or the getter does not support said value. If omitted, the live link is effectively read-only. Setting it causes it to forcefully revert to its old value synchronously, which still dispatches [`change`](/docs/live/change/) events, as well as causing effects that depend on it to re-run.
 
 	`js`changes`` <mark>optional</mark>
-	: A [`Flow`](/docs/flow/) that triggers when the external data source is updated, used to update the live variable. Most often, this involves an event listener, which is turned into a flow using [`when()`](/docs/when/). Note that `js`live.link()`` alters the callback pipeline for this flow, and therefore it is strongly recommended that this flow is created specifically to pass to `js`live.link()``. If this property is omitted, then the link is not updated automatically; it may be necessary to trigger a manual synchronization using `js`.now()`` on the returned `js`Flow`` (see [Return value](#return-value)). If both this and the `set` property are omitted, then the live variable is read-only and never changes until the link is broken.
+	: A [`Flow`](/docs/flow/) that triggers when the external data source is updated, used to update the live variable. Most often, this involves an event listener, which is turned into a flow using [`when()`](/docs/when/). If this property is omitted, then the link is not updated automatically, though it may be still be updated manually using `js`.now()`` on the returned `js`Flow`` (see [Return value](#return-value)).
 
 ### Return value
 
-A [`Flow`](/docs/flow/) object. If a flow was passed to the `js`changes`` option, then that flow is returned (with an altered callback pipeline). The returned flow never triggers, but it can be used to stop the live link using e.g. [`.stop()`](/docs/flow/stop/) or [`.until()`](/docs/flow/until/). If the link is set up in a [monitored](/docs/monitored/) context, then the live link is taken down when that context is [undone](/docs/monitor/undo/).
+A [`Flow`](/docs/flow/) object, which triggers every time the live variable is updated. It can also be used to stop the live link using e.g. [`.stop()`](/docs/flow/stop/) or [`.until()`](/docs/flow/until/). If the link is set up in a [monitored](/docs/monitored/) context, then the live link is taken down when that context is [undone](/docs/monitor/undo/).
 
-It is also possible to force the live link to run its getter manually by triggering the returned `js`Flow`` using [`.now()`](/docs/flow/now/). Any arguments passed to `js`.now()`` are ignored.
-
-:::warning
-**Warning:** if a live link is set up in a monitored context using an `arg`options`` object with a `js`changes`` option, then the flow passed to that `js`changes`` object must be created in the same monitored context for it to particiate in said context.
-:::
+It is possible to force the live link to run its getter manually by triggering the returned `js`Flow`` using [`.now()`](/docs/flow/now/). Any arguments passed to `js`.now()`` are ignored.
 
 ## Examples
 

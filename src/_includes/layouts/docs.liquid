@@ -13,12 +13,9 @@
 	assign data = json | jsonparse
 
 	assign parts = page.url | split: "/"
-	assign has_crumbs = parts.length > 2
-	if has_crumbs
-		assign crumbs = parts | shift
-		assign ancestors = crumbs | pop
-		assign current = crumbs | last
-	endif
+	assign crumbs = parts | shift
+	assign ancestors = crumbs | pop
+	assign current = crumbs | last
 %}
 
 
@@ -28,7 +25,7 @@
 	</aside>
 
 	<article>
-		{% if has_crumbs %}
+		{% unless ancestors.length == 0 %}
 			<nav id=crumbs>
 				{% for crumb in ancestors %}
 					{% assign href = crumbs | slice: 0, forloop.index | join: "/" %}
@@ -37,7 +34,7 @@
 				{% endfor %}
 				<span>{{ current }}</span>
 			</nav>
-		{% endif %}
+		{% endunless %}
 
 		<h1>{{ title | escape }}</h1>
 		<p>

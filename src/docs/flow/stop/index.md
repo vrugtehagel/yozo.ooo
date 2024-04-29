@@ -2,14 +2,14 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.stop()",
-	"description": "The `js`flow.stop()`` method stops a flow immediately. Its cleanup callbacks are run, and the flow is prevented from ever triggering again."
+	"description": "The `flow.stop()`{js} method stops a flow immediately. Its cleanup callbacks are run, and the flow is prevented from ever triggering again."
 }
 ---
 
 This method does not interact with the flow pipeline; when called, it stops the flow immediately. After calling it once, doing so again has no effect.
 
 :::info
-**Note:** If a flow is created in a [monitored](/docs/monitor/) context (one monitoring for [type "undo"](/docs/monitor/undo/) then it is not necessary to manually stop a `js`Flow``; when the context is undone, the flow is stopped automatically.
+**Note:** If a flow is created in a [monitored](/docs/monitor/) context (one monitoring for [type "undo"](/docs/monitor/undo/) then it is not necessary to manually stop a `Flow`{js}; when the context is undone, the flow is stopped automatically.
 :::
 
 ## Syntax
@@ -40,13 +40,13 @@ const listener = when(button).clicks().then(() => {
 });
 ```
 
-Now, with a reference (`js`listener``) to the `js`Flow`` object for the event listener, we can stop it at any point by calling
+Now, with a reference (`listener`{js}) to the `Flow`{js} object for the event listener, we can stop it at any point by calling
 
 ```js
 listener.stop()
 ```
 
-If any additional [`.cleanup()`](/docs/flow/cleanup/) callbacks were added, then these are run once we `js`.stop()`` the flow.
+If any additional [`.cleanup()`](/docs/flow/cleanup/) callbacks were added, then these are run once we `.stop()`{js} the flow.
 
 ## Usage notes
 

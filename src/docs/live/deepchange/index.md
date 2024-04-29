@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "deepchange event",
-	"description": "The `str`deepchange`` event fires on live variables when a variable itself or one of its nested properties has changed."
+	"description": "The `deepchange`{str} event fires on live variables when a variable itself or one of its nested properties has changed."
 }
 ---
 
@@ -21,13 +21,13 @@ $live.addEventListener('deepchange', event => {
 
 ## Event details
 
-This event exposes no additional details; it dispatches a generic native `js`CustomEvent`` instance.
+This event exposes no additional details; it dispatches a generic native `CustomEvent`{js} instance.
 
 ## Examples
 
 ### A live object in localStorage
 
-Let's say we have a live object (with nested properties) and we'd like to remember this object across page visits. To do this, we'll place it in `js`localStorage`` and update the respective `js`localStorage`` key every time the object changes.
+Let's say we have a live object (with nested properties) and we'd like to remember this object across page visits. To do this, we'll place it in `localStorage`{js} and update the respective `localStorage`{js} key every time the object changes.
 
 ```js
 const initial = { foo: { bar: 23 }};
@@ -39,13 +39,13 @@ when($object).deepchanges().then(() => {
 });
 ```
 
-Now, when changing a nested property on our object (like `js`$object.$foo.bar = 44``), then the listener triggers and saves the object in localStorage. Had we used the [`change`](/docs/live/change/) event instead, then the listener would have fired only when the value for the object itself changes (e.g. through `js`live.set($object, {})``), rather than for all nested properties in the object.
+Now, when changing a nested property on our object (like `$object.$foo.bar = 44`{js}), then the listener triggers and saves the object in localStorage. Had we used the [`change`](/docs/live/change/) event instead, then the listener would have fired only when the value for the object itself changes (e.g. through `live.set($object, {})`{js}), rather than for all nested properties in the object.
 
 ## Usage notes
 
-The `str`deepchange`` event fires once for every synchronous change. In other words, if there are multiple nested changes (e.g. through assigning an object that changes multiple properties) the `str`deepchange`` event will still only fire once. If a live variable dispatches either the  [`keychange`](/docs/live/keychange/) or the [`change`](/docs/live/change/) event, then the `str`deepchange`` event is guaranteed to fire as well, and will do so after any `str`keychange`` and `str`change`` events. Specifically, if all three fire on a single live variable, then the `str`keychange`` event is first, followed by the `str`change`` event, and lastly the `str`deepchange`` event.
+The `deepchange`{str} event fires once for every synchronous change. In other words, if there are multiple nested changes (e.g. through assigning an object that changes multiple properties) the `deepchange`{str} event will still only fire once. If a live variable dispatches either the  [`keychange`](/docs/live/keychange/) or the [`change`](/docs/live/change/) event, then the `deepchange`{str} event is guaranteed to fire as well, and will do so after any `keychange`{str} and `change`{str} events. Specifically, if all three fire on a single live variable, then the `keychange`{str} event is first, followed by the `change`{str} event, and lastly the `deepchange`{str} event.
 
-While the `str`deepchange`` event seems to bubble (similarly to how events bubble on DOM elements), it is not "real" event bubbling; the dispatched events are different `js`CustomEvent`` instances. As such, you cannot stop the propagation (calling `js`.stopPropagation()`` on a `str`deepchange`` event does nothing).
+While the `deepchange`{str} event seems to bubble (similarly to how events bubble on DOM elements), it is not "real" event bubbling; the dispatched events are different `CustomEvent`{js} instances. As such, you cannot stop the propagation (calling `.stopPropagation()`{js} on a `deepchange`{str} event does nothing).
 
 ## See also
 

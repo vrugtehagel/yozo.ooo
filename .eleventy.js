@@ -12,7 +12,7 @@ export default function(config){
 		return JSON.parse(value)
 	})
 	config.addFilter('remove_icode', function(value){
-		return value?.replaceAll(/`\w+`([^ `\]].*?)``/g, '$1')
+		return value?.replaceAll(/(`+)( ?)((?:(?!\1).)*?)\2\1{(\w+)}/g, '$3')
 	})
 
 	config.addWatchTarget('yozo/')

@@ -6,24 +6,24 @@
 }
 ---
 
-The `js`Flow`` class is primarily used to represent things happening at some point in the future. It can be hooked into with methods such as [`flow.then()`](/docs/flow/then/). To cover the most common use cases, there are some handy helper functions available, specifically:
+The `Flow`{js} class is primarily used to represent things happening at some point in the future. It can be hooked into with methods such as [`flow.then()`](/docs/flow/then/). To cover the most common use cases, there are some handy helper functions available, specifically:
 
 - Event listeners are provided through [`when()`](/docs/when/);
-- Timeouts (`js`setTimeout()``) are implemented through [`timeout()`](/docs/timeout/);
-- Intervals (`js`setInterval()``) through [`interval()`](/docs/interval/);
-- [`frame()`](/docs/frame/) triggers every frame, like a nested `js`requestAnimationFrame()``;
+- Timeouts (`setTimeout()`{js}) are implemented through [`timeout()`](/docs/timeout/);
+- Intervals (`setInterval()`{js}) through [`interval()`](/docs/interval/);
+- [`frame()`](/docs/frame/) triggers every frame, like a nested `requestAnimationFrame()`{js};
 - The [`paint()`](/docs/paint/) function can be used to wait for the browser to paint a frame (mostly useful for manual animations);
-- Observers, such as `js`MutationObserver``, get [`when().observes()`](/docs/when/observes/);
+- Observers, such as `MutationObserver`{js}, get [`when().observes()`](/docs/when/observes/);
 - Lastly, many hook-like functions, such as [`effect()`](/docs/effect/) or [`connected()`](/docs/components/connected/), return a flow both to facilitate monitoring, as well as making it easy to terminate or hook into them.
 
-Flows actually represent not only the triggers that may occur in the future, but the entire pipeline they run through when those triggers happen. Most commonly, `js`flow.then()`` is used to add a single synchronous callback to the pipeline. However, is is also possible to filter out certain triggers using [`flow.if()`](/docs/flow/if/), or even rate-limit them using [`flow.throttle()`](/docs/flow/throttle/) or [`flow.debouce()`](/docs/flow/debounce/).
+Flows actually represent not only the triggers that may occur in the future, but the entire pipeline they run through when those triggers happen. Most commonly, `flow.then()`{js} is used to add a single synchronous callback to the pipeline. However, is is also possible to filter out certain triggers using [`flow.if()`](/docs/flow/if/), or even rate-limit them using [`flow.throttle()`](/docs/flow/throttle/) or [`flow.debouce()`](/docs/flow/debounce/).
 
 ## Interface
 
 ### Constructor
 
 [`new Flow()`](/docs/flow/constructor/)
-: Creates a new `js`Flow`` object.
+: Creates a new `Flow`{js} object.
 
 ### Methods
 
@@ -55,7 +55,7 @@ Flows actually represent not only the triggers that may occur in the future, but
 : A generic method able to handle more complex operations regarding the flow pipeline.
 
 [`flow.after()`](/docs/flow/after/)
-: A method improving code ergonomics in cases where the trigger in question is triggered as a result of another operation (such as listening for a load event after setting its `js`src``).
+: A method improving code ergonomics in cases where the trigger in question is triggered as a result of another operation (such as listening for a load event after setting its `src`{js}).
 
 [`flow.throttle()`](/docs/flow/throttle/)
 : Throttles incoming triggers with a certain duration, letting triggers go through as much as possible but at most once per duration.
@@ -78,11 +78,11 @@ when(input).keydowns()
 	.then(() => console.log('Done!'));
 ```
 
-This pipeline in particular is much more complex than is common, but it is a good example to help understand how flows work. The flow in question is one that triggers whenever a user presses a key into a certain input. Let's now look at the first keypress a user might do (and let's say it's the 'y' key). Then, the first step in the pipeline is the `js`.then()`` call, and so "y pressed" is logged. The trigger moves on to the next step, the `js`.throttle(2000)`` call. Since this is the first trigger to reach this step, there's nothing yet to throttle; the trigger gets let through immediately to reach the `js`.if()``. Here, the trigger fails the condition and this is where its journey ends. Note that since it hasn't yet reached the `js`.once()``, the flow remains active. Let's now say one second elapsed, and we mash 'Enter' 5 times. Each trigger gets sent through the pipeline, logging "Enter pressed" 5 times. Then, they reach the throttle step. Here, they all come to a halt because a trigger was let through one second ago. The throttle therefore patiently waits another second, until the 2 seconds are up, then lets through one of the triggers to the next step, discarding the other 4. This time, the trigger passes the condition in the `js`.if()`` step, and so hits the `js`.once()`` call. This would halt all other triggers in the pipeline, but in this case there are none. The last trigger gets to finish the pipeline though, and so "Done!" gets logged in the last `js`.then()`` call.
+This pipeline in particular is much more complex than is common, but it is a good example to help understand how flows work. The flow in question is one that triggers whenever a user presses a key into a certain input. Let's now look at the first keypress a user might do (and let's say it's the 'y' key). Then, the first step in the pipeline is the `.then()`{js} call, and so "y pressed" is logged. The trigger moves on to the next step, the `.throttle(2000)`{js} call. Since this is the first trigger to reach this step, there's nothing yet to throttle; the trigger gets let through immediately to reach the `.if()`{js}. Here, the trigger fails the condition and this is where its journey ends. Note that since it hasn't yet reached the `.once()`{js}, the flow remains active. Let's now say one second elapsed, and we mash 'Enter' 5 times. Each trigger gets sent through the pipeline, logging "Enter pressed" 5 times. Then, they reach the throttle step. Here, they all come to a halt because a trigger was let through one second ago. The throttle therefore patiently waits another second, until the 2 seconds are up, then lets through one of the triggers to the next step, discarding the other 4. This time, the trigger passes the condition in the `.if()`{js} step, and so hits the `.once()`{js} call. This would halt all other triggers in the pipeline, but in this case there are none. The last trigger gets to finish the pipeline though, and so "Done!" gets logged in the last `.then()`{js} call.
 
 ### Tracking contexts
 
-Flows are monitored in some contexts, such as inside an `js`effect()`` or the `js`connected()`` hook. When the callbacks re-run, they can kill of all the flows that were created in the previous run of the callback, to make sure there are no memory leaks. In practice, this means there's rarely a need to manually remove event listeners, stop timeouts, or other similar operations. Let's have a look at an example; we create some live data, specifically an array and an "active" index. We want to listen to changes to the array element at the active index. To do this, we set up an effect that finds the live variable for the item in question, and sets up the event listener:
+Flows are monitored in some contexts, such as inside an `effect()`{js} or the `connected()`{js} hook. When the callbacks re-run, they can kill of all the flows that were created in the previous run of the callback, to make sure there are no memory leaks. In practice, this means there's rarely a need to manually remove event listeners, stop timeouts, or other similar operations. Let's have a look at an example; we create some live data, specifically an array and an "active" index. We want to listen to changes to the array element at the active index. To do this, we set up an effect that finds the live variable for the item in question, and sets up the event listener:
 
 ```js
 const $data = live({
@@ -100,7 +100,7 @@ effect(() => {
 });
 ```
 
-Now, the effect depends on `js`$data.activeIndex``, meaning it will re-run the callback whenever the active index changes. The active index starts out being 0, and notice how the first item no longer triggers the console log after setting the active index to 1:
+Now, the effect depends on `$data.activeIndex`{js}, meaning it will re-run the callback whenever the active index changes. The active index starts out being 0, and notice how the first item no longer triggers the console log after setting the active index to 1:
 
 ```js
 $data.$array[0] = 'qux'; // "Item number 0 changed!"
@@ -115,7 +115,7 @@ $data.$array[0] = 'foo again'; // * crickets *
 $data.$array[1] = 'bar again'; // "Item number 1 changed!"
 ```
 
-In the example above, the `js`effect()`` saw that there was an event listener set up and knew to take it down when the effect re-runs to avoid aggregating event listeners over time. Generally, contexts try to be smart about this; for example, the `js`connected()`` hook takes down listeners when the component disconnects, and so do [`@event`](/docs/components/template/events/) attributes in component template attributes. To take down event listeners (or other uses of flows) manually, use either [`flow.until()`](/docs/flow/until/) or use [`flow.stop()`](/docs/flow/stop/) directly.
+In the example above, the `effect()`{js} saw that there was an event listener set up and knew to take it down when the effect re-runs to avoid aggregating event listeners over time. Generally, contexts try to be smart about this; for example, the `connected()`{js} hook takes down listeners when the component disconnects, and so do [`@event`](/docs/components/template/events/) attributes in component template attributes. To take down event listeners (or other uses of flows) manually, use either [`flow.until()`](/docs/flow/until/) or use [`flow.stop()`](/docs/flow/stop/) directly.
 
 ## See also
 

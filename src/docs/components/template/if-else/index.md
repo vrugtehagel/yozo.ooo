@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "#if - #else",
-	"description": "Use the `attr`#if``, `attr`#else-if`` and `attr`#else`` attributes to conditionally render elements based on a series of conditions, right from inside the `html`<template>``."
+	"description": "Use the `#if`{attr}, `#else-if`{attr} and `#else`{attr} attributes to conditionally render elements based on a series of conditions, right from inside the `<template>`{html}."
 }
 ---
 
@@ -17,22 +17,22 @@
 
 ### Parameters
 
-`js`condition``
-: A condition for whether or not to render the element in question (including its subtree). Usually, the expression has live dependencies, and the element is added or removed reactively depending on the reactive value of the `js`condition``. The `attr`#else`` attribute does not accept a `js`condition``.
+`condition`{js}
+: A condition for whether or not to render the element in question (including its subtree). Usually, the expression has live dependencies, and the element is added or removed reactively depending on the reactive value of the `condition`{js}. The `#else`{attr} attribute does not accept a `condition`{js}.
 
 ## Details
 
-The chain of `attr`#if``, `attr`#else-if`` and `attr`#else`` must be defined on a series of adjacent sibling elements. Any non-element nodes in between these elements are removed. Additionally, like [`#for`](/docs/components/template/for-of/), when any of the control flow attributes are placed on a `html`<template>`` element, the children are rendered, and the `html`<template>`` element itself is omitted. This allows for conditionally rendering groups of elements or individual non-element nodes instead of a chain of individual elements.
+The chain of `#if`{attr}, `#else-if`{attr} and `#else`{attr} must be defined on a series of adjacent sibling elements. Any non-element nodes in between these elements are removed. Additionally, like [`#for`](/docs/components/template/for-of/), when any of the control flow attributes are placed on a `<template>`{html} element, the children are rendered, and the `<template>`{html} element itself is omitted. This allows for conditionally rendering groups of elements or individual non-element nodes instead of a chain of individual elements.
 
-Like in JavaScript, the conditions inside `attr`#if`` and `attr`#else-if`` may not include statements. They must be expressions. In other words; semicolons are not permitted in the conditions.
+Like in JavaScript, the conditions inside `#if`{attr} and `#else-if`{attr} may not include statements. They must be expressions. In other words; semicolons are not permitted in the conditions.
 
-Lastly, elements are created and removed in an [`effect()`](/docs/effect/) under the hood. None of the elements in the chain are available at the time of construction, making it impossible to top-level `js`query()`` any of them. Additionally, elements are recreated, not reused; if the element with the `attr`#if`` attribute renders first, then gets removed, and re-rendered again, then the latter is a different DOM node than the originally rendered one. Holding references to these elements is therefore not a good idea; they change over time. If a reference is needed, re-query the necessary elements with [`query()`](/docs/components/query/). This also means that in cases where your reactive if-else chain changes its conditions quickly or frequently, it may be more performant to render them conditionally using dynamic `attr`hidden`` attributes on each of the elements (using the [`.property`](/docs/components/template/properties/) syntax).
+Lastly, elements are created and removed in an [`effect()`](/docs/effect/) under the hood. None of the elements in the chain are available at the time of construction, making it impossible to top-level `query()`{js} any of them. Additionally, elements are recreated, not reused; if the element with the `#if`{attr} attribute renders first, then gets removed, and re-rendered again, then the latter is a different DOM node than the originally rendered one. Holding references to these elements is therefore not a good idea; they change over time. If a reference is needed, re-query the necessary elements with [`query()`](/docs/components/query/). This also means that in cases where your reactive if-else chain changes its conditions quickly or frequently, it may be more performant to render them conditionally using dynamic `hidden`{attr} attributes on each of the elements (using the [`.property`](/docs/components/template/properties/) syntax).
 
 ## Examples
 
 ### Loading
 
-When using external resources in the rendering of a component, we often have a moment where the resource is not yet ready, but the component must render something. In cases like these, a simple `attr`#if``-`attr`#else`` is perfect:
+When using external resources in the rendering of a component, we often have a moment where the resource is not yet ready, but the component must render something. In cases like these, a simple `#if`{attr}-`#else`{attr} is perfect:
 
 ```yz
 <title>current-balance</title>
@@ -56,11 +56,11 @@ connected(async () => {
 </script>
 ```
 
-Note that we can swap out the `yz`<div>`` elements for `yz`<template>`` elements if we wanted to render text only.
+Note that we can swap out the `<div>`{yz} elements for `<template>`{yz} elements if we wanted to render text only.
 
 ### Link-button
 
-The button element and link (anchor) element overlap visually in many design systems. From a developer's perspective this is somewhat awkward, because it means we cannot style buttons and links based on what they are; at least, not without additional classes. One possible solution to this problem is to have a `tag`ui-button`` component that can render either, depending on whether or not there is an `attr`href`` attribute present:
+The button element and link (anchor) element overlap visually in many design systems. From a developer's perspective this is somewhat awkward, because it means we cannot style buttons and links based on what they are; at least, not without additional classes. One possible solution to this problem is to have a `ui-button`{tag} component that can render either, depending on whether or not there is an `href`{attr} attribute present:
 
 ```yz
 <title>ui-button</title>
@@ -97,11 +97,11 @@ button, a {
 </style>
 ```
 
-Now, we can treat use the `html`<ui-button>`` custom element in cases where the design requires a button-like component, regardless of whether or not it is a link. This keeps our markup semantic and easy to deal with.
+Now, we can treat use the `<ui-button>`{html} custom element in cases where the design requires a button-like component, regardless of whether or not it is a link. This keeps our markup semantic and easy to deal with.
 
 ### #if versus hidden
 
-When an element has to pop in and out of the DOM often, or must be animated, it can sometimes be more performant to use the `attr`hidden`` attribute instead of an `attr`#if``. For example, we might implement a custom version of the native `html`<detail>`` element like so:
+When an element has to pop in and out of the DOM often, or must be animated, it can sometimes be more performant to use the `hidden`{attr} attribute instead of an `#if`{attr}. For example, we might implement a custom version of the native `<detail>`{html} element like so:
 
 ```yz
 <title>custom-detail</title>
@@ -126,9 +126,9 @@ $.toggle = force => {
 </script>
 ```
 
-In this example, not only can the `attr`.hidden`` attribute be exchanged for an `attr`#if``, but the ternary determining the arrow in the template as well. The former however doesn't gain anything from using `attr`#if`` over `attr`.hidden``, and would just be heavier choice overall; it is toggling a boolean property on an element versus removing and recreating multiple DOM nodes. The latter, the arrow, would only become more verbose with the use of `attr`#if``, since it would require two `yz`<template>`` elements (one around each arrow).
+In this example, not only can the `.hidden`{attr} attribute be exchanged for an `#if`{attr}, but the ternary determining the arrow in the template as well. The former however doesn't gain anything from using `#if`{attr} over `.hidden`{attr}, and would just be heavier choice overall; it is toggling a boolean property on an element versus removing and recreating multiple DOM nodes. The latter, the arrow, would only become more verbose with the use of `#if`{attr}, since it would require two `<template>`{yz} elements (one around each arrow).
 
-As a rule of thumb; use `attr`#if`` - `attr`#else`` only if either the condition is expected to rarely change, or if the absence or presence of an element is necessary. Otherwise, the `attr`.hidden`` attribute (or equivalent, such as classes or inline styles) will most likely be a simpler and more performant choice.
+As a rule of thumb; use `#if`{attr} - `#else`{attr} only if either the condition is expected to rarely change, or if the absence or presence of an element is necessary. Otherwise, the `.hidden`{attr} attribute (or equivalent, such as classes or inline styles) will most likely be a simpler and more performant choice.
 
 ## See also
 

@@ -2,12 +2,12 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "live()",
-	"description": "The `js`live()`` function creates a reactive wrapper around a value, to be used in effects, component templates or elsewhere."
+	"description": "The `live()`{js} function creates a reactive wrapper around a value, to be used in effects, component templates or elsewhere."
 }
 ---
 
 :::info
-**Note:** Each custom element already receives [`$`](/docs/components/$/), a live variable for state management in the component instance. As such, using `js`live()`` inside component definitions is often not necessary; simply create keys under `js`$`` instead. Use `js`live()`` for creating external live data, such as a global state object.
+**Note:** Each custom element already receives [`$`](/docs/components/$/), a live variable for state management in the component instance. As such, using `live()`{js} inside component definitions is often not necessary; simply create keys under `$`{js} instead. Use `live()`{js} for creating external live data, such as a global state object.
 :::
 
 ## Syntax
@@ -18,7 +18,7 @@ live(value);
 
 ### Parameters
 
-`arg`value``
+`value`{arg}
 : Any primitive value, array or object to create a live (reactive) variable for.
 
 ### Return value
@@ -26,6 +26,8 @@ live(value);
 A live variable. Live variables are objects that "wrap" an underlying value, and fire certain events whenever properties (or nested properties) are modified. Some contexts, such as inside an [`effect()`](/docs/effect/) or in an [`{{ inline }}`](/docs/components/template/inline/) expression in a component's template, react to changes in their live dependencies.
 
 ### Methods
+
+Note; these are static methods on the `live`{js} object, not on live variables themselves.
 
 [`live.get()`](/docs/live/get/)
 : Unwrap a live variable to retrieve its underlying value, or retrieve a value from a property on a live variable.
@@ -37,7 +39,7 @@ A live variable. Live variables are objects that "wrap" an underlying value, and
 : Delete the underlying value of a live variable directly.
 
 [`live.link()`](/docs/live/link/)
-: Link a live variable to other live variables, or a non-live source of dynamic data such as an `html`<input>`` element.
+: Link a live variable to other live variables, or a non-live source of dynamic data such as an `<input>`{html} element.
 
 ### Events
 
@@ -95,15 +97,15 @@ $data.$foo.$bar.$baz = 'quux'; // sets the "$baz" key
 $data.foo.bar.baz = 'quux'; // loses reactivity
 ```
 
-The first is correct since each intermediate live variable is created, and the last `js`.baz`` can be seen by any contexts watching. The second simply sets the `js`$baz`` key instead of the `js`baz`` key (probably a mistake). The last one is a bit more subtle. It first retrieves `js`$data.foo`` (and that becomes a dependency if it is in a monitored context) but after that they are simple property accesses on plain objects, which monitored contexts cannot see. It then also has no idea the `js`baz`` property was set, so it cannot trigger a change event. On the other hand, the first (correct) version to set the `js`baz`` property does fire the change even and does __not__ add a dependency to monitored contexts, because it is setting a value, rather than using one.
+The first is correct since each intermediate live variable is created, and the last `.baz`{js} can be seen by any contexts watching. The second simply sets the `$baz`{js} key instead of the `baz`{js} key (probably a mistake). The last one is a bit more subtle. It first retrieves `$data.foo`{js} (and that becomes a dependency if it is in a monitored context) but after that they are simple property accesses on plain objects, which monitored contexts cannot see. It then also has no idea the `baz`{js} property was set, so it cannot trigger a change event. On the other hand, the first (correct) version to set the `baz`{js} property does fire the change even and does __not__ add a dependency to monitored contexts, because it is setting a value, rather than using one.
 
-Lastly, while possible, it is not recommended to use symbols as keys on live objects. Symbol keys themselves remain reactive, but it is not possible to retrieve the live variable around a value at symbol, since symbols cannot be prefixed with a `js`$``.
+Lastly, while possible, it is not recommended to use symbols as keys on live objects. Symbol keys themselves remain reactive, but it is not possible to retrieve the live variable around a value at symbol, since symbols cannot be prefixed with a `$`{js}.
 
 ### Tracking contexts
 
 Some contexts, such as inside the [`effect()`](/docs/effect/) callback, monitor live dependencies. Because of this, it's often not needed to manually attach the event listeners to live variables.
 
-In fact, in components, there is even no need for using `js`live()`` itself; each component instance gets [`$`](/docs/components/$/), a live variable for internal component state (including instance properties and attributes). To demonstrate the reactivity, here is a simple click counter component:
+In fact, in components, there is even no need for using `live()`{js} itself; each component instance gets [`$`](/docs/components/$/), a live variable for internal component state (including instance properties and attributes). To demonstrate the reactivity, here is a simple click counter component:
 
 ```yz
 <title>click-counter</title>
@@ -115,11 +117,11 @@ In fact, in components, there is even no need for using `js`live()`` itself; eac
 </template>
 ```
 
-The [`{{ inline }}`](/docs/components/template/inline/) expression inside the template creates a monitored context, so that it can monitor its live dependencies. As it is watching for changes, the template updates whenever `js`$.count`` is altered, with no additional code required. The `js`$.count`` property is linked to the custom element's `attr`count`` attribute, so we both reactively update the component state when the user clicks the button (through `js`$.count++``) as well as when the `attr`count`` attribute changes.
+The [`{{ inline }}`](/docs/components/template/inline/) expression inside the template creates a monitored context, so that it can monitor its live dependencies. As it is watching for changes, the template updates whenever `$.count`{js} is altered, with no additional code required. The `$.count`{js} property is linked to the custom element's `count`{attr} attribute, so we both reactively update the component state when the user clicks the button (through `$.count++`{js}) as well as when the `count`{attr} attribute changes.
 
 ### Optional chaining
 
-Live variables come with optional chaining built-in. In other words, accessing a property on a live variable will never throw an error, and simply return `js`undefined`` if the live variable's value that the property was accessed on didn't exist. Live variables will still fire events as you'd expect. Here's an example:
+Live variables come with optional chaining built-in. In other words, accessing a property on a live variable will never throw an error, and simply return `undefined`{js} if the live variable's value that the property was accessed on didn't exist. Live variables will still fire events as you'd expect. Here's an example:
 
 ```js
 const $data = live({ foo: 23 });
@@ -147,7 +149,7 @@ for (const $item of $items){
 }
 ```
 
-When using static object methods such as `js`Object.keys()`` or `js`Object.entries()``, the behavior is in-line with that for arrays. Specifically, for `js`Object.keys()``, the dollar-prefixed keys are returned. This excludes symbols as well as `js`'addEventListener'`` and other event target-related properties. `js`Object.entries()`` therefore retrieves the prefixed keys paired with their respective live values. In code,
+When using static object methods such as `Object.keys()`{js} or `Object.entries()`{js}, the behavior is in-line with that for arrays. Specifically, for `Object.keys()`{js}, the dollar-prefixed keys are returned. This excludes symbols as well as `'addEventListener'`{js} and other event target-related properties. `Object.entries()`{js} therefore retrieves the prefixed keys paired with their respective live values. In code,
 
 ```js
 const $data = live({ foo: 23, bar: 'baz' });
@@ -158,15 +160,15 @@ for (const [prefixedKey, $value] of Object.entries($data)){
 }
 ```
 
-To find the non-prefixed key, we would need `js`prefixedKey.slice(1)``. To retrieve the unwrapped value in each iteration, use [`live.get()`](/docs/live/get/).
+To find the non-prefixed key, we would need `prefixedKey.slice(1)`{js}. To retrieve the unwrapped value in each iteration, use [`live.get()`](/docs/live/get/).
 
 When it comes to monitoring, there is a non-trivial difference between iterating a live object first and then unwrapping the values individually versus unwrapping the object first and then iterating the plain values. The former monitors only for changes in the values of the iterated object, whereas the latter monitors for any change (or deepchange) in the iterated object itself.
 
 ## Usage notes
 
-A few notes about the bavior of live variables. Live variables generally automatically avoid being double-live, meaning that if a live variable is being assigned to another live variable, it is unwrapped and the assignee is set to the non-live value directly. Passing a live variable to `js`live()`` itself does the same; it is unwrapped first, and then a new live variable is created for that value.
+A few notes about the bavior of live variables. Live variables generally automatically avoid being double-live, meaning that if a live variable is being assigned to another live variable, it is unwrapped and the assignee is set to the non-live value directly. Passing a live variable to `live()`{js} itself does the same; it is unwrapped first, and then a new live variable is created for that value.
 
-When passing the same object reference to `js`live()`` multiple times, new live variables are created for each call. This can lead to confusion, as multiple different live variables are then looking at the same object. When changing a value on one, the other live data structure does not see the change. It is therefore not recommended to do this; re-use a single live variable or data structure instead.
+When passing the same object reference to `live()`{js} multiple times, new live variables are created for each call. This can lead to confusion, as multiple different live variables are then looking at the same object. When changing a value on one, the other live data structure does not see the change. It is therefore not recommended to do this; re-use a single live variable or data structure instead.
 
 ## See also
 

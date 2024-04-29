@@ -1,0 +1,7 @@
+- `type`code`` -> `code`{type} (compare outputted `ui-icode` with regex matches)
+- Fix semicolon setting for CSS-in-JS template strings
+- Test the compare examples on homepage
+- Add CORS headers to all site assets (but mainly the archive/)
+- /play/ doesn't work in Safari (it can't top-level await some stuff)
+- Check browsers in general
+- Check site for occurances of certain words to improve inclusivity

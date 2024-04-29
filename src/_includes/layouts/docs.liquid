@@ -7,15 +7,19 @@
 	]
 }
 ---
+{% liquid
+	assign escaped = description | replace: '"', '\\"'
+	assign json = '{"description":"' | append: escaped | append: '"}'
+	assign data = json | jsonparse
 
-	{% assign escaped = description | replace: '"', '\\"' %}
-	{% assign json = '{"description":"' | append: escaped | append: '"}' %}
-	{% assign data = json | jsonparse %}
+	assign x = page.url | log
 
-	{% assign parts = page.url | split: "/" %}
-	{% assign crumbs = parts | slice: 1, parts.length %}
-	{% assign ancestors = crumbs | pop %}
-	{% assign current = crumbs | last %}
+	comment
+	assign crumbs = page.url | split: "/" | shift
+	assign ancestors = crumbs | pop
+	assign current = crumbs | last
+	endcomment
+%}
 
 
 <main>
@@ -24,7 +28,7 @@
 	</aside>
 
 	<article>
-		{% unless ancestors.length == 0 %}
+		{% unless true %}
 			<nav id=crumbs>
 				{% for crumb in ancestors %}
 					{% assign href = crumbs | slice: 0, forloop.index | join: "/" %}

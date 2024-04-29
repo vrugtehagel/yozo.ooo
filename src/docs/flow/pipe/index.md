@@ -2,12 +2,12 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.pipe()",
-	"description": "The `js`flow.pipe()`` method is a low-level API to introduce custom transformation to `js`Flow`` callback pipelines."
+	"description": "The `flow.pipe()`{js} method is a low-level API to introduce custom transformation to `Flow`{js} callback pipelines."
 }
 ---
 
 :::warning
-**Warning:** This is a low-level API. For general use, see [`.then()`](/docs/flow/then/), [`.if()`](/docs/flow/if/), [`.await()`](/docs/flow/await/), [`.debounce()`](/docs/flow/debounce/) and [`.throttle()`](/docs/flow/throttle/). Overuse of `js`flow.pipe()`` is not recommended to keep code accessible, understandable and maintainable.
+**Warning:** This is a low-level API. For general use, see [`.then()`](/docs/flow/then/), [`.if()`](/docs/flow/if/), [`.await()`](/docs/flow/await/), [`.debounce()`](/docs/flow/debounce/) and [`.throttle()`](/docs/flow/throttle/). Overuse of `flow.pipe()`{js} is not recommended to keep code accessible, understandable and maintainable.
 :::
 
 ## Syntax
@@ -18,8 +18,8 @@ flow.pipe(callback);
 
 ### Parameters
 
-`arg`callback``
-: A callback function to add to the callback pipeline. This `arg`callback`` fires anytime it receives a trigger. The first argument to the callback is a `arg`next`` function, which may be called to let the trigger through to the next item in the callback pipeline. The remaining arguments are the trigger arguments. Calling `js`next()`` is optional; if it is not called, a trigger is stopped from proceeding in the callback pipeline (similar to how [`.if()`](/docs/flow/if/) or [`.debounce()`](/docs/debounce/) might).
+`callback`{arg}
+: A callback function to add to the callback pipeline. This `callback`{arg} fires anytime it receives a trigger. The first argument to the callback is a `next`{arg} function, which may be called to let the trigger through to the next item in the callback pipeline. The remaining arguments are the trigger arguments. Calling `next()`{js} is optional; if it is not called, a trigger is stopped from proceeding in the callback pipeline (similar to how [`.if()`](/docs/flow/if/) or [`.debounce()`](/docs/debounce/) might).
 
 ### Return value
 
@@ -29,7 +29,7 @@ The same [`Flow`](/docs/flow/) object the method was called on, allowing for met
 
 ### Skip the first
 
-Let's start with an example for a custom pipeline transformation that stops the first trigger it receives, but lets everything else through like `js`.then()`` would. For reusability (and because it needs to keep track of some local state), we extract the callback into its own function:
+Let's start with an example for a custom pipeline transformation that stops the first trigger it receives, but lets everything else through like `.then()`{js} would. For reusability (and because it needs to keep track of some local state), we extract the callback into its own function:
 
 ```js
 function skipFirst(){
@@ -47,7 +47,7 @@ when(button).clicks()
 	.then(() => console.log('clicked'))
 ```
 
-In this example, clicking the button for the first time logs nothing, whereas clicking it any time after that logs `js`'clicked'``. If this is behavior we need to use often, then extracting it and using `js`.pipe()`` is a great way to achieve that. If we only need to do this once, however, then perhaps something without `js`.pipe()`` might be more suitable:
+In this example, clicking the button for the first time logs nothing, whereas clicking it any time after that logs `'clicked'`{js}. If this is behavior we need to use often, then extracting it and using `.pipe()`{js} is a great way to achieve that. If we only need to do this once, however, then perhaps something without `.pipe()`{js} might be more suitable:
 
 ```js
 let skippedFirst = false;
@@ -81,7 +81,7 @@ function swapPairs(){
 }
 ```
 
-To see the effect of our transformation, let's apply it to the `str`keydown`` event (for brevity's sake, on the `js`document``), since the triggers may differ in which key was pressed. This allows us to see what order they end up in.
+To see the effect of our transformation, let's apply it to the `keydown`{str} event (for brevity's sake, on the `document`{js}), since the triggers may differ in which key was pressed. This allows us to see what order they end up in.
 
 ```js
 const output = document.querySelector('#output');

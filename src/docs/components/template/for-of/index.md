@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "#for…of",
-	"description": "The `yzattr`#for=\"… of …\"`` construct allows for generating lists of elements easily within the template itself."
+	"description": "The `#for=\"… of …\"`{yzattr} construct allows for generating lists of elements easily within the template itself."
 }
 ---
 
@@ -17,27 +17,27 @@ Note that this syntax applies only within the [`<template>`](/docs/components/te
 
 ### Parameters
 
-`js`iterable``
+`iterable`{js}
 : An array or otherwise iterable object to iterate over.
 
-`js`item``
-: The items in the iterable. This must _not_ include an initializer, meaning there should be no `js`var``, `js`let`` or `js`const``. The `js`item`` variable is then available in the element's subtree as well as the other attributes on the element itself. This means all descendants also have access to the `js`item`` variable, including [`{{ inline }}`](/docs/components/template/inline/) expressions.
+`item`{js}
+: The items in the iterable. This must _not_ include an initializer, meaning there should be no `var`{js}, `let`{js} or `const`{js}. The `item`{js} variable is then available in the element's subtree as well as the other attributes on the element itself. This means all descendants also have access to the `item`{js} variable, including [`{{ inline }}`](/docs/components/template/inline/) expressions.
 
-`yz`<element>``
-: Any element. It and its subtree are generated once for every `js`item`` in the iterable. If this element is the `yz`<template>`` element, then only the children are generated for every `js`item`` (not the `yz`<template>`` itself).
+`<element>`{yz}
+: Any element. It and its subtree are generated once for every `item`{js} in the iterable. If this element is the `<template>`{yz} element, then only the children are generated for every `item`{js} (not the `<template>`{yz} itself).
 
 :::info
-**Note:** Only `yzattr`#for="… of …"`` expressions are supported. While the `js`for(initializer; condition; incrementer)`` form of for-loops is not supported, one may achieve the same goal by generating the array of iterated items before looping, and assigning it to a key in the component state object [`$`](/docs/components/$/).
+**Note:** Only `#for="… of …"`{yzattr} expressions are supported. While the `for(initializer; condition; incrementer)`{js} form of for-loops is not supported, one may achieve the same goal by generating the array of iterated items before looping, and assigning it to a key in the component state object [`$`](/docs/components/$/).
 :::
 
 ## Details
 
-For simple cases, `yzattr`#for="… of …"`` behaves just like one might expect; it iterates over the iterable, and generates elements for each item. Unlike some other frameworks, Yozo does not need a `attr`key`` attribute to keep track of which item is which. In classic Yozo fashion, this sacrifices some performance for simplicity and ease-of-use. However, Yozo does try to optimize things somewhat; for example, if the iterable triggers a re-render, items that did not change in value are not recomputed.
+For simple cases, `#for="… of …"`{yzattr} behaves just like one might expect; it iterates over the iterable, and generates elements for each item. Unlike some other frameworks, Yozo does not need a `key`{attr} attribute to keep track of which item is which. In classic Yozo fashion, this sacrifices some performance for simplicity and ease-of-use. However, Yozo does try to optimize things somewhat; for example, if the iterable triggers a re-render, items that did not change in value are not recomputed.
 
 ## Examples
 
 ### Generating list items
-First, let's have a look at a basic example. We'll define a list of different drinks in our [`<script>`](/docs/components/script/) section, which we'll then render in a classic unordered list (`yz`<ul>``). Note that the repeating element is the `yz`<li>``, i.e. the list items themselves, so we'll need to put the `attr`#for`` attribute on the list items.
+First, let's have a look at a basic example. We'll define a list of different drinks in our [`<script>`](/docs/components/script/) section, which we'll then render in a classic unordered list (`<ul>`{yz}). Note that the repeating element is the `<li>`{yz}, i.e. the list items themselves, so we'll need to put the `#for`{attr} attribute on the list items.
 
 ```yz
 <title>drinks-list</title>
@@ -53,7 +53,7 @@ $.drinks = ['water', 'tea', 'coffee', 'soda'];
 </script>
 ```
 
-When the `js`$.drinks`` array updates, then so will the list.
+When the `$.drinks`{js} array updates, then so will the list.
 
 ### Objects vs primitives
 
@@ -73,11 +73,11 @@ $.drinks = [{ name: 'water' }, { name: 'tea' } /* , … */];
 </script>
 ```
 
-Just like when accessing deeper properties on live variables, we'll want to keep the entire accessing chain live until the very last property access. In the case of `yzattr`#for="… of …"``, that means iterating over live items whenever the items are objects.
+Just like when accessing deeper properties on live variables, we'll want to keep the entire accessing chain live until the very last property access. In the case of `#for="… of …"`{yzattr}, that means iterating over live items whenever the items are objects.
 
 ### Combining with #if
 
-Sometimes, we might conditionally render a list of items, or have certain conditions on each item of a list. Unfortunately, attribute order is not guaranteed, and so writing `yzattr`#for="…"`` and `yzattr`#if="…"`` on the same element is ambiguous. Instead, split the attributes over two elements; one may be a `yz`<template>`` element, which, when used with a logical (`attr`#``-prefixed) attribute, renders its children. For example, to render list items conditionally:
+Sometimes, we might conditionally render a list of items, or have certain conditions on each item of a list. Unfortunately, attribute order is not guaranteed, and so writing `#for="…"`{yzattr} and `#if="…"`{yzattr} on the same element is ambiguous. Instead, split the attributes over two elements; one may be a `<template>`{yz} element, which, when used with a logical (`#`{attr}-prefixed) attribute, renders its children. For example, to render list items conditionally:
 
 ```yz
 <title>healthy-drinks</title>
@@ -117,7 +117,7 @@ $.fuels = ['petrol', 'hydrogen'];
 </script>
 ```
 
-Note that while it is possible to use `yz`<template>`` wrappers for `attr`#for`` expressions regardless of whether or not they are necessary, it is more performance-friendly to avoid this and use `attr`#for`` on the elements themselves.
+Note that while it is possible to use `<template>`{yz} wrappers for `#for`{attr} expressions regardless of whether or not they are necessary, it is more performance-friendly to avoid this and use `#for`{attr} on the elements themselves.
 
 ## Usage notes
 

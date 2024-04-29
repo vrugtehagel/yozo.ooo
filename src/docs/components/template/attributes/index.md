@@ -14,14 +14,14 @@
 
 ### Parameters
 
-`attr`attribute``
+`attribute`{attr}
 : The attribute name to bind the expression to.
 
-`js`expression``
-: An expression evaluating to a value, usually one with [live](/docs/live/) dependencies. The expression is assigned to the attribute as-is, which implicitly causes it to be converted to a string if it is not already one. There is one exception; when the expression evaluates to `js`null`` or `js`undefined``, the attribute is removed.
+`expression`{js}
+: An expression evaluating to a value, usually one with [live](/docs/live/) dependencies. The expression is assigned to the attribute as-is, which implicitly causes it to be converted to a string if it is not already one. There is one exception; when the expression evaluates to `null`{js} or `undefined`{js}, the attribute is removed.
 
 :::info
-**Note:** In many cases, the [`.property`](/docs/components/template/properties/) syntax may be more appropriate, since properties don't need to do the string conversion that attributes need to. Specifically, boolean attributes don't work well with the `attr`:attribute`` syntax, needing `yzattr`:bool="$.condition ? '' : null"`` compared to the simpler `yzattr`.bool="$.condition"``.
+**Note:** In many cases, the [`.property`](/docs/components/template/properties/) syntax may be more appropriate, since properties don't need to do the string conversion that attributes need to. Specifically, boolean attributes don't work well with the `:attribute`{attr} syntax, needing `:bool="$.condition ? '' : null"`{yzattr} compared to the simpler `.bool="$.condition"`{yzattr}.
 :::
 
 ## Details
@@ -32,7 +32,7 @@ Like the in-template [`.property`](/docs/components/template/properties/) syntax
 
 ### Custom links
 
-Let's build a simple link component, similar to the native `html`<a>`` element. We'll define an attribute `attr`to``, that is optional, and defaults to `url`#``; that way, we can simply write `html`<custom-link>`` without having to worry about `html`<a>`` elements being invalid (since they require an `attr`href`` attribute). We'll also make the links open in a new tab, if the provided URL is not relative.
+Let's build a simple link component, similar to the native `<a>`{html} element. We'll define an attribute `to`{attr}, that is optional, and defaults to `#`{url}; that way, we can simply write `<custom-link>`{html} without having to worry about `<a>`{html} elements being invalid (since they require an `href`{attr} attribute). We'll also make the links open in a new tab, if the provided URL is not relative.
 
 ```yz
 <title>custom-link</title>
@@ -52,11 +52,11 @@ live.link($.$target, () => {
 </script>
 ```
 
-We've set up a [`live.link()`](/docs/live/link/) to bind `js`$.target`` to the value we pass to the `attr`:target`` attribute. When the URL given starts with a `url`.`` or `url`/``, then `js`$.target`` computes to `js`null``, causing the `attr`target`` attribute to be omitted entirely. As an alternative, we can use `js`'_self'`` instead of `js`null``, since that's the default value for the `attr`target`` attribute on `html`<a>`` elements.
+We've set up a [`live.link()`](/docs/live/link/) to bind `$.target`{js} to the value we pass to the `:target`{attr} attribute. When the URL given starts with a `.`{url} or `/`{url}, then `$.target`{js} computes to `null`{js}, causing the `target`{attr} attribute to be omitted entirely. As an alternative, we can use `'_self'`{js} instead of `null`{js}, since that's the default value for the `target`{attr} attribute on `<a>`{html} elements.
 
 ## Usage notes
 
-While it is possible to pass both a non-reactive attribute and a reactive attribute at the same time (like `yz`<element :attribute="$.value" attribute="value">``), the reactive attribute overwrites any static value already when the component connects. In general, this is advised against, since its behavior might not be obvious. Similarly, it is not advised to combine the `attr`:attribute`` syntax with the `attr`.property`` syntax if they are bound to the same thing; in this case, both will be competing to update the value whenever their live dependencies change, in an unspecified (and therefore unreliable) order.
+While it is possible to pass both a non-reactive attribute and a reactive attribute at the same time (like `<element :attribute="$.value" attribute="value">`{yz}), the reactive attribute overwrites any static value already when the component connects. In general, this is advised against, since its behavior might not be obvious. Similarly, it is not advised to combine the `:attribute`{attr} syntax with the `.property`{attr} syntax if they are bound to the same thing; in this case, both will be competing to update the value whenever their live dependencies change, in an unspecified (and therefore unreliable) order.
 
 ## See also
 

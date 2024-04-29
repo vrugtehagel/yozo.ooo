@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.or()",
-	"description": "Using `js`flow.or()``, two or more flow objects can be combined into one. The callback pipeline then receives triggers from all included flows."
+	"description": "Using `flow.or()`{js}, two or more flow objects can be combined into one. The callback pipeline then receives triggers from all included flows."
 }
 ---
 
@@ -14,8 +14,8 @@ flow.or(thenable);
 
 ### Parameters
 
-`arg`thenable``
-: A thenable (such as another [`Flow`](/docs/flow/) or a `js`Promise``) whose trigger is to be included in `js`flow``'s callback pipeline. Upon stopping `js`flow``, the `arg`thenable``'s `js`.stop()`` method is called (if it exists), allowing all relevant flows to be cleaned up properly.
+`thenable`{arg}
+: A thenable (such as another [`Flow`](/docs/flow/) or a `Promise`{js}) whose trigger is to be included in `flow`{js}'s callback pipeline. Upon stopping `flow`{js}, the `thenable`{arg}'s `.stop()`{js} method is called (if it exists), allowing all relevant flows to be cleaned up properly.
 
 ### Return value
 
@@ -25,7 +25,7 @@ The same [`Flow`](/docs/flow/) object the method was called on, allowing for met
 
 ### Timeouts
 
-The `js`.or()`` method can be beautifully combined with [`timeout()`](/docs/timeout/) to create timeouts for certain events. For example, say we have a toast popup that we need to close when either the user clicks it or when it's been shown for 5 seconds. We might do something like
+The `.or()`{js} method can be beautifully combined with [`timeout()`](/docs/timeout/) to create timeouts for certain events. For example, say we have a toast popup that we need to close when either the user clicks it or when it's been shown for 5 seconds. We might do something like
 
 ```yz
 <title>toast-popup</title>
@@ -48,11 +48,11 @@ $.show = purify(() => {
 </script>
 ```
 
-We combine it with [`purify`](/docs/purify/) to allow the `js`.show()`` method from cleaning up the listener and timeout created in a previous call, which allows us to call it multiple times in succession safely. The resulting custom element toggles the `attr`hidden`` attribute off when the `js`.show()`` method is called, and adds the attribute back when either the message is clicked or the specified `js`timeout()`` elapses.
+We combine it with [`purify`](/docs/purify/) to allow the `.show()`{js} method from cleaning up the listener and timeout created in a previous call, which allows us to call it multiple times in succession safely. The resulting custom element toggles the `hidden`{attr} attribute off when the `.show()`{js} method is called, and adds the attribute back when either the message is clicked or the specified `timeout()`{js} elapses.
 
 ## Usage notes
 
-When calling `js`flow.or(other)``, the argument `js`other`` is bundled into `js`flow``, but not the other way around; the `js`other`` flow isn't aware of this. As such, stopping the `js`other`` does _not_ stop `js`flow``, it simply prevents the `js`other`` from sending any more triggers into `js`flow``'s callback pipeline.
+When calling `flow.or(other)`{js}, the argument `other`{js} is bundled into `flow`{js}, but not the other way around; the `other`{js} flow isn't aware of this. As such, stopping the `other`{js} does _not_ stop `flow`{js}, it simply prevents the `other`{js} from sending any more triggers into `flow`{js}'s callback pipeline.
 
 ## See also
 

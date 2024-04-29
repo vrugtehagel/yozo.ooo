@@ -41,14 +41,14 @@ function calloutRule(tokens, index){
 
 }
 
-const inlineCodeRegex = /^`(\w+)`([^ `\]].*?)``/
+const inlineCodeRegex = /^(`+)( ?)((?:(?!\1).)*?)\2\1{(\w+)}/
 function inlineCodeTokenize(state, silent){
 	const start = state.pos
 	if (silent) return false
 	if (state.src[start] != '`') return false
 	const match = state.src.slice(start).match(inlineCodeRegex)
 	if (!match) return false
-	const [full, type, content] = match
+	const [full, ticks, space, content, type] = match
 	const token = state.push('typed_code_inline', 'ui-icode', 0)
 	token.markup = `\`${type}\``
 	token.attrs = [['type', type]]

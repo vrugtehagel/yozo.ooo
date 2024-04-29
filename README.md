@@ -9,13 +9,13 @@ Yozo source: [vrugtehagel/yozo](https://github.com/vrugtehagel/yozo)
 
 You'll need your standard [npm](https://www.npmjs.com/) setup with [node](https://nodejs.org/) `v21.7.0` or higher. The site is using [Eleventy](https://11ty.dev/) as static site generator with most documentation pages written in Markdown.
 
-Now, you've got two basic tasks at your disposal:
+To get started, these are the two basic tasks at your disposal:
 - `npm run build` builds the site and packages it all up nicely for production.
 - `npm run serve` does the whole server + watch thing that you'd want when doing local development. By default, the local server uses [localhost:8787](http://localhost:8787/) but of course you're welcome to change the port (see the `serve` command in `package.json`).
 
 ## About the codebase
 
-This site is built on [Eleventy](https://11ty.dev/), and doesn't have a particularly complicated configuration. There are a few amendments made to the markdown parser; see below for details. Syntax highlighting doesn't happen in the build step; we use [Prism](https://prismjs.com/) (downloaded manually, instead of through `npm`) to highlight them client-side, asynchronously.
+This site is built on [Eleventy](https://11ty.dev/), and doesn't have a particularly complicated configuration. There are a few amendments made to the markdown parser; see below for details. Syntax highlighting doesn't happen in the build step; we use [Prism](https://prismjs.com/) (downloaded manually, instead of through `npm`) to highlight code client-side, asynchronously.
 
 Yozo's source repository is included as submodule to generate output based on version data, to include the archive of all versions, and to include tests on the site.
 
@@ -26,7 +26,7 @@ Eleventy uses [markdown-it](https://markdown-it.github.io/markdown-it/) for Mark
 - We use the [markdown-it-anchor](https://www.npmjs.com/package/markdown-it-anchor) plugin to generate anchors for headers.
 - We use the [markdown-it-deflist](https://www.npmjs.com/package/markdown-it-deflist) plugin for definition lists from the extended Markdown syntax.
 - Fenced code blocks (i.e. ` ```lang `-style code blocks) output `<ui-code langugage=…>` instead of `<pre class=…>`.
-- A special form of inline code is introduced allowing to specify a type (a hint for how to highlight). It's essentially double-backticks-delimited code with the type between the first two backticks: ``` `type`code…`` ```). It outputs `<ui-icode type=…>`. This is not compatible with standard markdown, i.e. it will majorly break things when the modification is removed.
+- A special form of inline code is introduced allowing to specify a type (a hint for how to highlight). It's similar to some already-existing extensions doing this, though not exactly the same; code may be followed by the language enclosed in curly braces, like `` `code…`{type} ``. It outputs `<ui-icode type=…>`.
 - Callouts are written like fenced code blocks except they use colons instead of backticks. Specifically they open with `:::type` (where `type` is the type of the callout, e.g. `info` or `warning`) and they close with `:::`. More specifically, they output `<ui-callout type=…>`. This syntax is a specifically configured version of the [markdown-it-container](https://www.npmjs.com/package/markdown-it-container) plugin.
 - Preprocessing inside Markdown is currently disabled, meaning you cannot insert things using `{{ curlies }}`. This is done because Yozo itself uses double-curly braces for interpolation and so those would need to be `{{'{'}}{ escaped }}` every time which is not great.
 

@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "<meta>",
-	"description": "Define component metadata through `yz`<meta>`` tags, such as attributes, properties, methods, and more."
+	"description": "Define component metadata through `<meta>`{yz} tags, such as attributes, properties, methods, and more."
 }
 ---
 
@@ -18,7 +18,7 @@ Components in Yozo are custom elements. That means that they, like regular HTML 
 
 ### Attributes
 
-In vanilla web components, we need to use lifecycle callbacks and getters and setters to hook into things changing. In Yozo, we use the component's state variabele [`$`](/docs/components/$/) to react to attributes or properties changing. In particular, the `js`.attributeChangedCallback()`` lifecycle callback is unavailable since it is replaced by the individual live variables for the attributes (and the parent bucket for them, `js`$.$attributes``). For example:
+In vanilla web components, we need to use lifecycle callbacks and getters and setters to hook into things changing. In Yozo, we use the component's state variabele [`$`](/docs/components/$/) to react to attributes or properties changing. In particular, the `.attributeChangedCallback()`{js} lifecycle callback is unavailable since it is replaced by the individual live variables for the attributes (and the parent bucket for them, `$.$attributes`{js}). For example:
 
 ```yz
 <title>measuring-beaker</title>
@@ -33,13 +33,13 @@ when($.$attributes.$amount).changes().then(() => {
 </script>
 ```
 
-The former expression listens for changes in `js`$.$amount``, which is the live variable created for the property matching the "amount" attribute. This property is created because we provided `attr`type="number"``, which indicates we want a matching property that converts the attribute's value (which is always a string or `js`null``) to a number. If we leave the `attr`type`` option off completely, no property is created and we'll need to listen to changes in `js`$.$attributes.$amount``, which represents the attribute itself.
+The former expression listens for changes in `$.$amount`{js}, which is the live variable created for the property matching the "amount" attribute. This property is created because we provided `type="number"`{attr}, which indicates we want a matching property that converts the attribute's value (which is always a string or `null`{js}) to a number. If we leave the `type`{attr} option off completely, no property is created and we'll need to listen to changes in `$.$attributes.$amount`{js}, which represents the attribute itself.
 
 Note that generally we don't even need to explicitly listen for changes to the attributes or properties, but we can use them in [`effect()`](/docs/effect/) expressions. That way, we can describe the behavior of the component in a readable manner instead of jumping through hoops to make it happen.
 
 ### Custom checkbox
 
-As a more complete example, let's create a custom form-associated checkbox element. We'll have a boolean `attr`checked`` attribute, and a `attr`name`` attribute. Both of them will have associated properties as well. We'll then create a `js`.value`` property, as an alias of the `js`.checked`` property, and a `js`toggle()`` method to toggle the checkbox programatically.
+As a more complete example, let's create a custom form-associated checkbox element. We'll have a boolean `checked`{attr} attribute, and a `name`{attr} attribute. Both of them will have associated properties as well. We'll then create a `.value`{js} property, as an alias of the `.checked`{js} property, and a `toggle()`{js} method to toggle the checkbox programatically.
 
 ```yz
 <title>check-box</title>
@@ -84,11 +84,11 @@ div {
 </style>
 ```
 
-We first defined the component name using the [`<title>`](/docs/components/title/) element, and then proceed to specify the attributes, extra property, and the `js`.toggle()`` method. Then we go into more detail, defining the template, the logic for the `js`.toggle()`` method, and we handle setting the internal form value to be submitted alongside forms using the native `js`.attachInternals()``. Lastly, we define the `js`.value`` property as an alias of the `js`.checked`` property using [`live.link()`](/docs/live/link/). We also define some very basic styles, to make the element usable.
+We first defined the component name using the [`<title>`](/docs/components/title/) element, and then proceed to specify the attributes, extra property, and the `.toggle()`{js} method. Then we go into more detail, defining the template, the logic for the `.toggle()`{js} method, and we handle setting the internal form value to be submitted alongside forms using the native `.attachInternals()`{js}. Lastly, we define the `.value`{js} property as an alias of the `.checked`{js} property using [`live.link()`](/docs/live/link/). We also define some very basic styles, to make the element usable.
 
 ## Usage notes
 
-Some things could be nice to express in the form of meta tags, such as events a component may dispatch. While Yozo could potentially introduce new types of meta tags in the future, it is entirely possible to add meta tags that Yozo does not understand, such as e.g. `yz`<meta event="input">``. You are encouraged to document these, though for those worried about forward compatibility, note that using any other dash-including tag name is future-proof. In other words, instead of documenting additional interface properties using `yz`<meta>``, using e.g. `yz`<x-meta>`` will never clash with future versions of Yozo.
+Some things could be nice to express in the form of meta tags, such as events a component may dispatch. While Yozo could potentially introduce new types of meta tags in the future, it is entirely possible to add meta tags that Yozo does not understand, such as e.g. `<meta event="input">`{yz}. You are encouraged to document these, though for those worried about forward compatibility, note that using any other dash-including tag name is future-proof. In other words, instead of documenting additional interface properties using `<meta>`{yz}, using e.g. `<x-meta>`{yz} will never clash with future versions of Yozo.
 
 ## See also
 

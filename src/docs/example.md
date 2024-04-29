@@ -14,7 +14,7 @@
 
 ### Parameters
 
-`arg`value``
+`value`{arg}
 : Description
 
 ### Return value

@@ -12,7 +12,9 @@
 	assign json = '{"description":"' | append: escaped | append: '"}'
 	assign data = json | jsonparse
 
+	echo page.url | log
 	assign parts = page.url | split: "/"
+	echo parts | log
 	assign crumbs = parts | shift
 	assign ancestors = crumbs | pop
 	assign current = crumbs | last

@@ -61,12 +61,6 @@ main > section {
 		margin: 0;
 		text-align: center;
 	}
-	code {
-		color: var(--keyword-color);
-		&::before { content: "<"; }
-		&::after { content: ">"; }
-		&::before, &::after { color: var(--text-color); }
-	}
 	.teaser {
 		width: 100%; margin: 0;
 		span {

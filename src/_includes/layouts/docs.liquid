@@ -12,10 +12,9 @@
 	assign json = '{"description":"' | append: escaped | append: '"}'
 	assign data = json | jsonparse
 
-	assign x = page.url | log
+	assign crumbs = page.url | split: "/" | log | shift
 
 	comment
-	assign crumbs = page.url | split: "/" | shift
 	assign ancestors = crumbs | pop
 	assign current = crumbs | last
 	endcomment

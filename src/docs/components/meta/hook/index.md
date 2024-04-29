@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "<meta hook>",
-	"description": "The \"hook\" meta tag allows for the exposure of advanced lifecycle callbacks such as `adopted()`{js} or `formReset()`{js}."
+	"description": "The `hook`{attr} meta tag allows for the exposure of advanced lifecycle callbacks such as `adopted()`{js} or `formReset()`{js}."
 }
 ---
 

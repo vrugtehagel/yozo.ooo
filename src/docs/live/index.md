@@ -27,6 +27,8 @@ A live variable. Live variables are objects that "wrap" an underlying value, and
 
 ### Methods
 
+Note; these are static methods on the `live`{js} object, not on live variables themselves.
+
 [`live.get()`](/docs/live/get/)
 : Unwrap a live variable to retrieve its underlying value, or retrieve a value from a property on a live variable.
 

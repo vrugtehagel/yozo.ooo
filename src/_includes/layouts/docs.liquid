@@ -7,16 +7,15 @@
 	]
 }
 ---
-{% liquid
-	assign escaped = description | replace: '"', '\\"'
-	assign json = '{"description":"' | append: escaped | append: '"}'
-	assign data = json | jsonparse
 
-	assign parts = page.url | split: "/"
-	assign crumbs = parts | slice: 1, parts.length
-	assign ancestors = crumbs | pop
-	assign current = crumbs | last
-%}
+	{% assign escaped = description | replace: '"', '\\"' %}
+	{% assign json = '{"description":"' | append: escaped | append: '"}' %}
+	{% assign data = json | jsonparse %}
+
+	{% assign parts = page.url | split: "/" %}
+	{% assign crumbs = parts | slice: 1, parts.length %}
+	{% assign ancestors = crumbs | pop %}
+	{% assign current = crumbs | last %}
 
 
 <main>

@@ -2,6 +2,7 @@
 <meta attribute=suitepath type=string>
 <template mode=closed>
 	<div id=sandbox></div>
+	<ui-icon type=pulse></ui-icon>
 	<ul id=short-results .hidden="!$.suite">
 		<li #for="status of $.statuses" :class="status"></li>
 	</ul>
@@ -61,6 +62,9 @@ effect(() => {
 	border: none;
 	opacity: .1;
 	overflow: clip;
+}
+ui-icon {
+	color: var(--comment-color);
 }
 ui-button:hover { background-color: var(--background-color); }
 #short-results {

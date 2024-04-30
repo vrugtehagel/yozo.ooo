@@ -2,7 +2,6 @@
 <meta attribute=suitepath type=string>
 <template mode=closed>
 	<div id=sandbox></div>
-	<span id=label>Tests</span>
 	<ul id=short-results .hidden="!$.suite">
 		<li #for="status of $.statuses" :class="status"></li>
 	</ul>
@@ -53,10 +52,8 @@ effect(() => {
 </script>
 <style>
 :host {
-	display: inline-flex; padding: .5rem;
+	display: inline-flex;
 	align-items: center;
-	background-color: var(--background-color);
-	border-radius: 1rem;
 }
 #sandbox {
 	width: 1px; height: 1px;
@@ -65,9 +62,7 @@ effect(() => {
 	opacity: .1;
 	overflow: clip;
 }
-#label {
-	padding: 0 .75rem 0 1rem;
-}
+ui-button:hover { background-color: var(--background-color); }
 #short-results {
 	list-style: none;
 	display: flex; height: 1.5rem; padding: .75rem; margin: 0;
@@ -79,8 +74,8 @@ effect(() => {
 		overflow: clip;
 		border-radius: 1rem;
 	}
-	.pending { background-color: var(--comment-color); }
-	.running { background-color: var(--text-color); }
+	.pending { background-color: var(--highlight-color); }
+	.running { background-color: var(--comment-color); }
 	.failed { background-color: var(--error-color); }
 	.success { background-color: var(--primary-color); }
 }
@@ -93,11 +88,12 @@ effect(() => {
 		&::part(dropdown){
 			width: min(100vw - 6rem, 720px - 3rem); max-height: min(30rem, 60vh);
 			padding: .25rem 0; box-sizing: border-box;
-			inset: 4rem -0.5rem auto auto; z-index: 1;
+			inset: 3.75rem -0.5rem auto auto; z-index: 1;
 			overflow: auto;
 			background-color: var(--sub-background-color);
 			border: .75rem solid var(--background-color); border-radius: 2rem;
 		}
+		&::part(button):hover { background-color: var(--background-color); }
 		&[icon=success]::part(button){ color: var(--primary-color); }
 		&[icon=failed]::part(button){ color: var(--failed-color); }
 	}

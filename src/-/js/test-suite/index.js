@@ -32,7 +32,7 @@ export class TestSuite {
 		this.#loadedOnce = true
 		await when(this.#sandbox).loads().once().after(() => {
 			if(setSrc) this.#sandbox.src = `${this.#path}/sandbox.html`
-			else this.#window.reload()
+			else this.#window.location.reload()
 		})
 		this.#messenger = new ContextMessenger(this.#window)
 		await this.#messenger.ready()
@@ -45,7 +45,6 @@ export class TestSuite {
 
 	async #test(index){
 		this.$state.$statuses[index] = 'running'
-		// await yozo.timeout(10000);
 		const filename = this.#filenames[index]
 		if(this.#needsReload) await this.#reloadSandbox()
 		const response = await this.#messenger.send('run', {filename})

@@ -7,11 +7,18 @@
 		grid-area: content;
 		width: min(90vw, 100%); max-width: 45rem; margin: 0 auto;
 	}
+	#prelude {
+		display: flex; padding-bottom: 1rem;
+		flex-wrap: wrap; justify-content: space-between; gap: .5rem;
+	}
+	docs-tests {
+		margin-left: auto;
+	}
 	#crumbs {
 		display: flex; margin: .5rem 0;
 		flex-wrap: wrap; align-items: center;
 		ui-icon {
-			width: 1.5rem; padding: .5rem;
+			width: 1rem; height: 1rem;
 			color: var(--comment-color);
 		}
 	}

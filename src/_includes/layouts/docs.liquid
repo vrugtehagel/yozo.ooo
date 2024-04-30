@@ -15,6 +15,9 @@
 	assign crumbs = page.url | split: "/" | shift
 	assign ancestors = crumbs | pop
 	assign current = crumbs | last
+
+	assign suite_url = page.url | replace: "/docs/", "test/" | slice: 0, -1
+	assign suite = testsuites | where: "path", suite_url | first
 %}
 
 
@@ -24,16 +27,29 @@
 	</aside>
 
 	<article>
-		{% unless ancestors.length == 0 %}
-			<nav id=crumbs>
-				{% for crumb in ancestors %}
-					{% assign href = crumbs | slice: 0, forloop.index | join: "/" %}
-					<a href="/{{ href }}/">{{ crumb }}</a>
-					<ui-icon type=pointer state=right></ui-icon>
-				{% endfor %}
-				<span>{{ current }}</span>
-			</nav>
-		{% endunless %}
+		<div id=prelude>
+			{% unless ancestors.length == 0 %}
+				<nav id=crumbs>
+					{% for crumb in ancestors %}
+						{% assign href = crumbs | slice: 0, forloop.index | join: "/" %}
+						<a href="/{{ href }}/">{{ crumb }}</a>
+						<ui-icon type=pointer-small state=right></ui-icon>
+					{% endfor %}
+					<span>{{ current }}</span>
+				</nav>
+			{% endunless %}
+
+			{% if suite and suite.tests.length > 0 %}
+				<docs-tests suitepath="/{{ suite.path }}/">
+					{% for test in suite.tests %}
+						<docs-test
+							filename="{{ test.filename }}"
+							{% if test.hasComponent %}hascomponent{% endif %}
+						></docs-test>
+					{% endfor %}
+				</docs-tests>
+			{% endif %}
+		</div>
 
 		<h1>{{ title | escape }}</h1>
 		<p>

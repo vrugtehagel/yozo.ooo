@@ -29,7 +29,7 @@
 		<ui-button icon=layout iconstate=quartiles aria-label="Four quartiles"
 			@click="$.playManager.current().layout = 'quartiles'"></ui-button>
 	</ui-dropdown>
-	<site-settings exclude=visual></site-settings>
+	<site-settings exclude="visual, documentation"></site-settings>
 	<ui-button id=nav-toggle icon=pointer :iconstate="$.navigationMenuHidden ? 'down' : 'up'"
 		@click="$.navigationMenuHidden = !$.navigationMenuHidden"></ui-button>
 </template>

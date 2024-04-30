@@ -31,6 +31,11 @@
 			<ui-switch .on="$.siteSettings?.$settings.lineNumbers"
 				@change="$.siteSettings.$settings.lineNumbers = this.value"></ui-switch>
 		</label>
+		<label #if="$.show('documentation')">
+			Run tests automatically
+			<ui-switch .on="$.siteSettings?.$settings.runTests"
+				@change="$.siteSettings.$settings.runTests = this.value"></ui-switch>
+		</label>
 	</ui-dropdown>
 </template>
 

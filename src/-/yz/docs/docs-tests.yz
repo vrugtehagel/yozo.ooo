@@ -1,5 +1,6 @@
 <title>docs-tests</title>
 <meta attribute=suitepath type=string>
+
 <template mode=closed>
 	<div id=sandbox></div>
 	<ui-icon type=pulse></ui-icon>
@@ -11,12 +12,13 @@
 		<ui-button icon=play aria-label="Run tests" #else-if="$.step == 'pending'"
 			@click="$.suite.run()"></ui-button>
 		<ui-icon type=spinner #else-if="$.step == 'running'"></ui-icon>
-		<ui-dropdown :icon="$.step == 'failed' ? 'failed' : 'success'"
+		<ui-dropdown :icon="$.step == 'failed' ? 'fail' : 'success'"
 			.hidden="$.step.endsWith('ing')">
 			<slot></slot>
 		</ui-dropdown>
 	</div>
 </template>
+
 <script>
 import('/-/js/test-suite/index.js').then(mod => $.TestSuite = mod.TestSuite)
 const slot = query('slot')
@@ -51,6 +53,7 @@ effect(() => {
 	sandbox.replaceChildren($.suite.iframe)
 })
 </script>
+
 <style>
 :host {
 	display: inline-flex;
@@ -63,14 +66,13 @@ effect(() => {
 	opacity: .1;
 	overflow: clip;
 }
-ui-icon {
-	color: var(--comment-color);
-}
+ui-icon[type=pulse]{ color: var(--comment-color); }
 ui-button:hover { background-color: var(--background-color); }
 #short-results {
 	list-style: none;
-	display: flex; height: 1.5rem; padding: .75rem; margin: 0;
-	gap: .5rem;
+	display: flex; height: 1.5rem;
+	padding: .75rem .5rem .75rem .25rem; margin: 0;
+	gap: .375rem;
 	&[hidden]{ display: none; }
 	li {
 		width: .375rem;
@@ -99,7 +101,7 @@ ui-button:hover { background-color: var(--background-color); }
 		}
 		&::part(button):hover { background-color: var(--background-color); }
 		&[icon=success]::part(button){ color: var(--primary-color); }
-		&[icon=failed]::part(button){ color: var(--failed-color); }
+		&[icon=fail]::part(button){ color: var(--failed-color); }
 	}
 }
 </style>

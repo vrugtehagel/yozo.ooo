@@ -50,7 +50,7 @@ export class TestSuite {
 		if(this.#needsReload) await this.#reloadSandbox()
 		const response = await this.#messenger.send('run', {filename})
 		const {ok, refresh} = response
-		if(refresh) this.#needsReload = true
+		if(refresh || !ok) this.#needsReload = true
 		this.$state.$statuses[index] = ok ? 'success' : 'failed'
 	}
 }

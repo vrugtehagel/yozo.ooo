@@ -17,7 +17,7 @@ flow.then(callback);
 ### Parameters
 
 `callback`{arg}
-: The callback to add onto the callback pipeline.
+: The callback to add onto the callback pipeline. It receives the trigger arguments as arguments. In case of event listeners, a single `event`{arg} argument; see [`when()`](/docs/when/).
 
 ### Return value
 

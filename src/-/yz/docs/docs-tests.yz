@@ -101,7 +101,7 @@ ui-button:hover { background-color: var(--background-color); }
 		}
 		&::part(button):hover { background-color: var(--background-color); }
 		&[icon=success]::part(button){ color: var(--primary-color); }
-		&[icon=fail]::part(button){ color: var(--failed-color); }
+		&[icon=fail]::part(button){ color: var(--error-color); }
 	}
 }
 </style>

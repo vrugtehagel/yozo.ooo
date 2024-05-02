@@ -99,8 +99,8 @@ As mentioned already, this API is not to be used lightly. It exists for flexibil
 ## See also
 
 - [`Flow`](/docs/flow/)
-- [`.then()`](/docs/flow/then/)
-- [`.if()`](/docs/flow/if/)
-- [`.await()`](/docs/flow/await/)
-- [`.debounce()`](/docs/flow/debounce/)
-- [`.throttle()`](/docs/flow/throttle/)
+- [`flow.then()`](/docs/flow/then/)
+- [`flow.if()`](/docs/flow/if/)
+- [`flow.await()`](/docs/flow/await/)
+- [`flow.debounce()`](/docs/flow/debounce/)
+- [`flow.throttle()`](/docs/flow/throttle/)

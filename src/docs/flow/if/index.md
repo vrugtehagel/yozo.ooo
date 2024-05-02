@@ -66,6 +66,6 @@ If the callback pipline is linear apart from the `.if()`{js} call, then the `.if
 
 ## See also
 
-- [`.then()`](/docs/flow/then/)
+- [`flow.then()`](/docs/flow/then/)
 - [`Flow`](/docs/flow/)
 - [`live.link()`](/docs/live/link/)

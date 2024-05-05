@@ -3,7 +3,7 @@
 <template mode=closed>
 	<footer>
 		<nav>
-			<site-settings label="Settings"></site-settings>
+			<site-settings context=footer label="Settings"></site-settings>
 			<ui-button icon=github href=https://github.com/vrugtehagel/yozo>
 				Source code
 			</ui-button>

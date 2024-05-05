@@ -48,6 +48,8 @@ live.link($.$content, {
 
 connected(() => effect(() => {
 	const content = $.content?.trim() ?? ''
+	if(!$.siteSettings?.$settings.highlightInline)
+		return code.textContent = content
 	const highlight = custom[$.type]
 	if(highlight) return highlight(content)
 	uiSyntaxHighlight.language = $.type

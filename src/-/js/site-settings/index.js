@@ -15,6 +15,7 @@ fromStorage($settings.$semicolons, 'settings:semicolons', true, parseBoolean)
 fromStorage($settings.$useTabs, 'settings:use-tabs', true, parseBoolean)
 fromStorage($settings.$tabSize, 'settings:tab-size', 4, Number)
 fromStorage($settings.$lineNumbers, 'settings:line-numbers', true, parseBoolean)
+fromStorage($settings.$highlightInline, 'settings:highlight-inline', true, parseBoolean)
 fromStorage($settings.$runTests, 'settings:run-tests', false, parseBoolean)
 
 live.link($settings.$indent, () => {

@@ -1,4 +1,5 @@
 import * as webServer from '/-/js/web-server/index.js'
+import * as serviceWorker from '/-/js/service-worker/index.js'
 import { htmlInclude } from '/-/js/html-include/index.js'
 
 import { creations as defaultCreations } from './default-creations.js'
@@ -25,6 +26,7 @@ $play.creations ??= $play.storage
 
 live.link($play.$connected, () => webServer.claimed('/file/'))
 live.link($play.$mode, () => {
+	if(serviceWorker.disabled) return 'disabled'
 	if(!$play.connected) return 'disconnected'
 	if(!$play.$creations[$play.uuid]) return 'picking'
 	return 'editing'

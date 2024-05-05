@@ -1,6 +1,6 @@
 <title>site-settings</title>
 <meta attribute=label type=string>
-<meta attribute=exclude type=string>
+<meta attribute=context type=string>
 <meta attribute=open type=boolean>
 
 <template mode=closed>
@@ -8,17 +8,17 @@
 		:label="$.label || null" :aria-label="$.label ? null : 'Site settings'"
 		exportparts="button, dropdown" .disabled="!$.siteSettings"
 		@open="$.open = true" @close="$.open = false">
-		<label #if="$.show('visual')">
+		<label #if="['footer'].includes($.context)">
 			Semicolons
 			<ui-switch .on="$.siteSettings?.$settings.semicolons"
 				@change="$.siteSettings.$settings.semicolons = this.value"></ui-switch>
 		</label>
-		<label #if="$.show('functional')">
+		<label #if="['footer', 'play'].includes($.context)">
 			Use tabs
 			<ui-switch .on="$.siteSettings?.$settings.useTabs"
 				@change="$.siteSettings.$settings.useTabs = this.value"></ui-switch>
 		</label>
-		<label #if="$.show('visual', 'functional')">
+		<label #if="['footer', 'play'].includes($.context)">
 			Tab size
 			<ui-dropdown id=tab-size-select
 				:label="$.siteSettings?.$settings.tabSize" autoclose>
@@ -26,12 +26,17 @@
 					@click="$.siteSettings.$settings.tabSize = size">{{ size }}</ui-button>
 			</ui-dropdown>
 		</label>
-		<label #if="$.show('visual', 'functional')">
+		<label #if="['footer', 'play'].includes($.context)">
 			Line numbers
 			<ui-switch .on="$.siteSettings?.$settings.lineNumbers"
 				@change="$.siteSettings.$settings.lineNumbers = this.value"></ui-switch>
 		</label>
-		<label #if="$.show('documentation')">
+		<label #if="['footer'].includes($.context)">
+			Inline highlighting
+			<ui-switch .on="$.siteSettings?.$settings.highlightInline"
+				@change="$.siteSettings.$settings.highlightInline = this.value"></ui-switch>
+		</label>
+		<label #if="['footer'].includes($.context)">
 			Run tests automatically
 			<ui-switch .on="$.siteSettings?.$settings.runTests"
 				@change="$.siteSettings.$settings.runTests = this.value"></ui-switch>
@@ -41,9 +46,6 @@
 
 <script>
 import('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
-
-$.show = (...purposes) =>
-	!purposes.every(purpose => $.exclude.split(/, */).includes(purpose))
 </script>
 
 <style>

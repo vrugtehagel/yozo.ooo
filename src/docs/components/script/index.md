@@ -31,7 +31,7 @@ The availability of all the above makes it easy to write component logic code wi
 
 ## Examples
 
-### A custom-greeting component
+### Component logic
 
 Let's create a simple `custom-greeting`{tag} component that displays a greeting given by the `greeting`{attr} attribute and a name from an input element inside the component. In addition, we'll define a `.setName()`{js} method that overwrites the current input value with the given value.
 
@@ -54,7 +54,7 @@ $.name = 'Max';
 
 connected(() => {
 	input.value = $.name;
--velink($.$name, input);
+	live.link($.$name, input);
 });
 
 $.setName = (name) => {
@@ -74,7 +74,7 @@ Lastly, we need to define the `.setName()`{js} method. We already declared it in
 Sometimes, a third-party or just seperate script needs to be imported into component logic. Both static `import`{js} statements and top-level `await`{js} are not permitted in `<script>`{yz} sections, since the component logic represents a constructor, which should be synchronous. This is because elements should be available and usable right away when they're created. In other words, the `<script>`{yz} in component definitions is not a `type="module"`{attr} script (and adding that attribute does not turn it into one). However, dynamic `import()`{js} statements work as usual and are the recommended way to load a module into a component.
 
 :::warning
-**Warning:** A pitfall of using `import()`{js} statements is when using relative URLs. Since Yozo parses and compiles component definitions client-side, it cannot respect the original URL that your script is located at. In other words, relative URLs are resolved against wherever Yozo's script lives. Similarly, `import.meta.url`{js} always resolves to Yozo's script's location.
+**Warning:** A pitfall of using `import()`{js} statements is when using relative URLs. Since Yozo parses and compiles component definitions client-side, it cannot respect the original URL that your script is located at with regards to relative URLs. In other words, relative URLs are resolved against wherever Yozo's script lives. Similarly, `import.meta.url`{js} always resolves to Yozo's script's location.
 :::
 
 So, how does importing work in module scripts? The recommended way is to use a dynamic `import()`{js} to load the external module or script and assign it to a property on the state variable [`$`](/docs/components/$/) once ready. Then, write logic for both the case where that key is not yet defined and for when it is defined. For example:

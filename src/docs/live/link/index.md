@@ -19,13 +19,13 @@ live.link($live, options);
 `$live`{arg}
 : A [live](/docs/live/) variable to bind to. It must be settable.
 
-`callback`{arg} <mark>optional</mark>
+`callback`{arg}
 : A callback function calculating a value. The callback is re-run synchronously whenever any of its live dependencies change. The function should not be `async`{js}. Live variables linked in this way are read-only in the same way as when using an `options`{arg} object without `set` key.
 
-`element`{arg} <mark>optional</mark>
+`element`{arg}
 : An `HTMLElement`{js}. Generally, either an `<input>`{html} or `<textarea>`{html}, but any element that has a `.value`{js} property and dispatches an `input`{str} event whenever said property changes is accepted.
 
-`options`{arg} <mark>optional</mark>
+`options`{arg}
 : An object describing a link to any other type of data source. The options are as follows:
 
 	`get`

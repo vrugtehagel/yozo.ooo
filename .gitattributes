@@ -1,2 +1,3 @@
 *.yz linguist-language=html
 src/**/*.md linguist-detectable
+src/-/js/prism/prism.js linguist-vendored

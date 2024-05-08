@@ -1,1 +1,2 @@
 *.yz linguist-language=html
+src/**/*.md linguist-detectable

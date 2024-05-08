@@ -23,6 +23,7 @@ export class TestSuite {
 			if(statuses.every(status => status == 'pending'))
 				return 'pending'
 			if(statuses.includes('pending')) return 'running'
+			if(statuses.includes('running')) return 'running'
 			if(statuses.includes('failed')) return 'failed'
 			return 'success'
 		})

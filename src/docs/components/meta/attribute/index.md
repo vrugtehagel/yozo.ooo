@@ -17,7 +17,7 @@
 
 ### Attributes
 
-Note that the presence of the "attribute" attribute on the [`<meta>`](/docs/components/meta/) tag is required for the following attributes to function.
+Note that the presence of the `attribute`{attr} attribute on the [`<meta>`](/docs/components/meta/) tag is required for the following attributes to function.
 
 `attribute`{attr}
 : Determines the name of the attribute. It is recommended to only use alphanumeric characters and dashes. For those that value consistency with native HTML elements, note that almost all existing attributes solely consists of alphabetical characters.

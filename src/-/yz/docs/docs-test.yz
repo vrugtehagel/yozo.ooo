@@ -7,7 +7,7 @@
 <template mode=closed>
 	<div id=details>
 		<div id=summary tabindex=-1 @click="event.preventDefault()">
-			<test-status :status="$.status"></test-status>
+			<ui-icon :type="$.icon"></ui-icon>
 			<p>{{ $.filename }}</p>
 			<ui-button icon=pointer :iconstate="$.open ? 'up' : 'down'"
 				.hidden="!$.loaded" @click="$.open = !$.open"></ui-button>
@@ -27,6 +27,12 @@ live.link($.$loaded, () => {
 	if(!$.hasComponent) return true
 	if($.component == null) return false
 	return true
+})
+live.link($.$icon, () => {
+	if($.status == 'pending') return 'dot'
+	if($.status == 'running') return 'spinner'
+	if($.status == 'success') return 'success'
+	return 'fail'
 })
 
 connected(() => effect(async () => {
@@ -65,6 +71,8 @@ connected(() => effect(() => {
 		margin: 0;
 	}
 }
+ui-icon[type=success]{ color: var(--primary-color); }
+ui-icon[type=fail]{ color: var(--error-color); }
 ui-button:hover { background-color: var(--background-color); }
 #content {
 	display: block;
@@ -76,7 +84,6 @@ ui-button:hover { background-color: var(--background-color); }
 }
 ui-code {
 	margin: 1rem 0 0;
-/* 	background-color: var(--background-color); */
 	&:not(:defined){ display: none; }
 }
 </style>

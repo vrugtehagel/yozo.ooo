@@ -34,6 +34,6 @@ All this customization means documentation can be written with barely any inline
 
 ### Yozo's tests
 
-Since [Yozo's repository](https://github.com/vrugtehagel/yozo) defines the tests, we have to generate them just from the files specified there. The tests are defined in the `test/` folder (again, this is in Yozo's repository) in the same structure as the `/docs/` pages. For any given page in the documentation, the test page is found by replacing `/docs/` with `/test/`.
+Since [Yozo's repository](https://github.com/vrugtehagel/yozo) defines the tests, we have to generate them just from the files specified there. The tests are defined in the `test/` folder (again, this is in Yozo's repository) in the same structure as the `/docs/` pages. The tests are included in their respective page in the documentation. They do not run by default, but may be run manually by the user on a page-by-page basis, or automatically run on page visit (users can opt-in to that behavior in the site settings in the footer).
 
-To build this part of the site, we clone the `test/` folder from the submodule into `/test/`. Then, we generate the test pages through `src/test/tests.liquid` (for the actual user-facing pages) and `src/test/sandbox.liquid` for the per-page (i.e. per-suite) sandboxed page to run the tests in.
+To build this part of the site, we clone the `test/` folder from the submodule into `/test/`. Then, we generate sandbox pages for each page in the documentation from `src/docs/sandboxes.liquid`. The generated `sandbox.html` files are not to be visited by users, but are loaded in a hidden iframe when tests are triggered.

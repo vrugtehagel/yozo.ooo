@@ -11,12 +11,8 @@ This is a relatively low-level way of interacting with [live](/docs/live/) varia
 ## Syntax
 
 ```js
-when($live).deepchanges().then(event => {
-	/* … */
-});
-$live.addEventListener('deepchange', event => {
-	/* … */
-});
+when($live).deepchanges().then(event => {/* … */});
+$live.addEventListener('deepchange', event => {/* … */});
 ```
 
 ## Event details

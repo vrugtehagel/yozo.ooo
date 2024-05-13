@@ -6,11 +6,14 @@
 
 <script>
 import('/-/js/prism/index.js').then(({Prism}) => $.prism = Prism)
+import('/-/js/site-settings/index.js').then(mod => $.settings = mod)
 
 const code = query('code')
 
 effect(() => {
 	if(!$.prism) return code.textContent = $.value
+	if($.settings?.$settings.maxCharHighlight < $.value.length)
+		return code.textContent = $.value
 	const grammar = $.prism.languages[$.language]
 	const language = grammar ? $.language : 'txt'
 	code.className = `language-${language}`

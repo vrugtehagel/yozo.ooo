@@ -41,4 +41,4 @@ This way, we are guaranteed to receive the `load`{str} event after the flow crea
 ## See also
 
 - [`Flow`](/docs/flow/)
-- [`.then()`](/docs/flow/then/)
+- [`flow.then()`](/docs/flow/then/)

@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "interval()",
-	"description": "The `interval()`{js} function creates a flow object that repeatedly triggers, with a fixed delay between each call, similar to `setInterval()`{js}."
+	"description": "The `interval()`{js} function creates a `Flow`{js} object that repeatedly triggers, with a fixed delay between each call, similar to `setInterval()`{js}."
 }
 ---
 

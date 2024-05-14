@@ -18,7 +18,7 @@ until(thing).then(() => { /* … */ });
 ### Parameters
 
 `thing`{arg}
-: Usually, a `Promise`{js} to await, but any value is accepted.
+: Usually, a `Promise`{js} or [`Flow`](/docs/flow/) to await, but any value is accepted.
 
 ### Return value
 

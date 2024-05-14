@@ -9,6 +9,7 @@
 ## Syntax
 
 ```js
+connected();
 connected(callback);
 ```
 

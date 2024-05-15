@@ -55,10 +55,7 @@ connected(() => {
 }
 pre {
 	flex: 1 0 0;
-	padding-bottom: inherit; margin: 0;
+	margin: 0;
 }
-ui-syntax-highlight {
-	display: block; padding-bottom: inherit;
-	&:not(:defined) { white-space: pre; }
-}
+ui-syntax-highlight:not(:defined) { white-space: pre; }
 </style>

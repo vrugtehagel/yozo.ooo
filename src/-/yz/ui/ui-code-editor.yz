@@ -78,7 +78,7 @@ connected(() => effect(() => {
 	& span { display: block; }
 }
 textarea, pre {
-	display: block; padding: 0;
+	display: block; padding: 0; margin: 0;
 	background: none;
 	font-size: 1rem; line-height: 1.5; font-family: inherit;
 	letter-spacing: 0;

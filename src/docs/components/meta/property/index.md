@@ -54,7 +54,7 @@ Since the `.amount`{js} property is looked up on the component's state variable 
 
 If the property in question is a function, and if it is readonly, then potentially [`<meta method>`](/docs/components/meta/method/) might be a better fit.
 
-The generated property getter exposed on the custom element never returns a live variable. This is by design; even though Yozo is (by definition) loaded in contexts where a Yozo component is defined, the outside environment should not assume other authors are using it. This allows components to be more drop-in, as well as being easier to understand.
+The generated property getter exposed on the custom element never returns a live variable, nor does usage contribute to monitored contexts such as [`effect()`](/docs/effect/). This is by design; even though Yozo is (by definition) loaded in contexts where a Yozo component is defined, the outside environment should not assume other authors are using it. This allows components to be more drop-in, as well as being easier to understand.
 
 It is advised to keep settable properties simple in terms of data type. For optimal ease-of-use, properties should be a primitive value, such as a number, string, or boolean. If the value is an object, then the live variable for the property does not trigger change events for nested changes, because the properties never return a live variable.
 

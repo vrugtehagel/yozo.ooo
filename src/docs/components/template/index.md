@@ -17,7 +17,7 @@
 
 ### Attributes
 
-Yozo reuses the native `<template>`{html} element. Its usual attributes are different from its attributes in (the top level of) a Yozo component file.
+Yozo reuses the native `<template>`{html} element to define a component template. However, its attributes in (the top level of) a Yozo component file are different from its native attributes.
 
 As a top-level element in a Yozo component file, it describes markup for a component. Without attributes, the markup will be placed inside (i.e. as direct children of) the element upon connecting to the DOM for the first time, removing any children it might have gotten before connecting. When using templates without shadow root, styles defined inside the [`<style>`](/docs/components/style/) element are _not_ scoped.
 

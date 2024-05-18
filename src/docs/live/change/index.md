@@ -11,13 +11,18 @@ It is primarily useful for [live](/docs/live/) variables wrapping primitives or 
 ## Syntax
 
 ```js
-when($live).changes().then(event => {/* … */});
-$live.addEventListener('change', event => {/* … */});
+when($live).changes().then(event => {
+	// …
+});
+
+$live.addEventListener('change', event => {
+	// …
+});
 ```
 
 ## Event details
 
-The `change`{str} event does not fire if the live variable did not change, even if it was set. The event exposes the old and new value of the live variable under the `event.detail` property.
+The `change`{str} event does not fire if the live variable did not change, even when explicitly setting it to the value it already has. The event exposes the old and new value of the live variable under the `event.detail` property.
 
 `event.detail.oldValue`{js}
 : The value of the live variable before it changed.

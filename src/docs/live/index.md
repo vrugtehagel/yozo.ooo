@@ -49,7 +49,7 @@ Note; these are static methods on the `live`{js} object, not on live variables t
 [`deepchange`](/docs/live/deepchange/)
 : An event that is dispatched whenever any nested property of a live variable changes, including the variable itself.
 
-[`keychange`](/docs/live/deepchange/)
+[`keychange`](/docs/live/keychange/)
 : An event that fires any time a property gets added or deleted on the underlying value of a live variable.
 
 ## Examples

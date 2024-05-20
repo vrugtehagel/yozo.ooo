@@ -41,8 +41,8 @@ The template is almost always one of the most important aspects of a component. 
 - [`#if`](/docs/components/template/if-else) statements (with `#else-if`{attr} and `#else`{attr}), as attributes, for conditional elements.
 - [`#for…of`](/docs/components/template/for-of/) loops, as an attribute, for generating a list of elements from an array (or other type of iterable).
 - [`{{ inline }}`](/docs/components/template/inline/) expressions, for texual interpolation (only in text nodes).
-- [`:attribute`](/docs/components/template/attributes/) expressions that reactively evaluate their value as JavaScript.
-- [`.property`](/docs/components/template/properties/) expressions that reactively set properties of elements. Also supports nested properties (e.g. `.style.font-size=…`{attr}) and has special syntax for `DOMTokenList`{js} properties (most notably `.classList`{js}) through, for example, `.class-list.classname=…`{attr}.
+- [`:attribute`](/docs/components/template/attributes/) expressions that reactively evaluate their value as JavaScript. Additionally, there is special syntax available for toggling individual classes through `:class+name`{attr}.
+- [`.property`](/docs/components/template/properties/) expressions that reactively set properties of elements. Also supports nested properties (e.g. `.style.font-size=…`{attr}).
 - [`@event`](/docs/components/template/events/) expressions, to attach event listeners inline. The listeners connect and disconnect together with the component.
 
 ## Examples

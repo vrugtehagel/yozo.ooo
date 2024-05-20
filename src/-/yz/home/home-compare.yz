@@ -3,7 +3,7 @@
 <template mode=closed>
 	<menu>
 		<li #for="id of ['yozo', 'lit', 'stencil', 'vanilla']">
-			<ui-button @click="$.select(id)" .class-list.selected="$.selected == id"
+			<ui-button @click="$.select(id)" :class+selected="$.selected == id"
 			>{{ $.frameworks[id].name }}</ui-button>
 		</li>
 	</menu>

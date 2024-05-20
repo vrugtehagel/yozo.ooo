@@ -74,7 +74,7 @@ In some components, it is desirable to bind a live variable to a CSS variable. W
 <meta attribute="color" type="string">
 <meta attribute="invert" type="boolean">
 <template mode="closed">
-	<div .class-list.invert="$.invert">
+	<div :class+invert="$.invert">
 		I am {{ $.color }}
 	</div>
 </template>

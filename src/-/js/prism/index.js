@@ -48,4 +48,4 @@ Prism.languages.yz = Prism.languages.extend('markup', {
 // Adding the JS-based attributes to YZ highlighting (bit hacky but eh)
 const addAttributeSource = Prism.languages.markup.tag.addAttribute.toString()
 	.replace('Prism.languages.markup', 'Prism.languages.yz')
-eval(`(${addAttributeSource})('(?:on\\\\w+|[@:.#][-\\\\w.]+)', 'javascript')`)
+eval(`(${addAttributeSource})('(?:on\\\\w+|[@:.#][-\\\\w.+]+)', 'javascript')`)

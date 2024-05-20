@@ -6,7 +6,7 @@
 	<div id=titlebar>
 		<ui-button :icon="$.loading ? 'close' : 'repeat'" aria-label="Reload"
 			@click="$.loading ? $.cancel() : $.go()"></ui-button>
-		<ui-input .class-list.invalid="$.invalid" @enter="$.go()"></ui-input>
+		<ui-input :class+invalid="$.invalid" @enter="$.go()"></ui-input>
 		<ui-button icon=close aria-label="Close" @click="$.close()"></ui-button>
 	</div>
 	<div id=view>

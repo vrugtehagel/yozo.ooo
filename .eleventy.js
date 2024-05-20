@@ -23,6 +23,7 @@ export default function(config){
 		'yozo/versions.json': 'versions.json',
 		'yozo/archive': 'archive',
 		'yozo/test': 'test',
+		'yozo/dist': '.',
 	})
 
 	const dir = {input: 'src', output: 'dist'}

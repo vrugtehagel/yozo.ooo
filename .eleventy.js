@@ -19,7 +19,7 @@ export default function(config){
 	config.addPassthroughCopy('src/*.{js,ico,svg}')
 	config.addPassthroughCopy('src/**/index.{css,js}')
 
-	config.addWatchTarget('yozo/')
+	config.addWatchTarget('yozo/latest/')
 	config.addPassthroughCopy({
 		'yozo/versions.json': 'versions.json',
 		'yozo/archive': 'archive',

@@ -6,7 +6,7 @@
 }
 ---
 
-Debouncing limits triggers by ignoring all triggers until a certain amount of time passes that no triggers were received. More intuitively, it waits for a certain duration of inactivity before letting a triggered through.
+Debouncing limits triggers by ignoring all triggers until a certain amount of time passes that no triggers were received. More intuitively, it waits for a certain duration of inactivity before letting a trigger through.
 
 :::info
 **Note:** Throttling lets through a trigger as often as possible, but no more than once every `duration`{arg}. A debounce may not let any triggers through for as long as it is receiving triggers more often than once every`duration`{arg}. For throttling, see [`.throttle()`](/docs/flow/throttle/).
@@ -29,7 +29,7 @@ The same [`Flow`](/docs/flow/) object the method was called on, allowing for met
 
 ## Details
 
-While the `.debounce()`{js} method only receives a number, it does internally add a callback to the flow pipeline, and a non-linear one at that. Some triggers it receives are swallowed, if another trigger reaches the callback before the `duration`{arg} runs out.
+While the `.debounce()`{js} method only receives a number, it does internally add a callback to the flow's pipeline, and a non-linear one at that. Some triggers it receives are swallowed, if another trigger reaches the callback before the `duration`{arg} runs out.
 
 Specifically, the triggers that make it through are those which were not followed by another for the entirety of the `duration`{arg}. This may be relevant for pipelines that wish to use the trigger arguments.
 

@@ -15,14 +15,17 @@ export default function(config){
 		return value?.replaceAll(/(`+)( ?)((?:(?!\1).)*?)\2\1{(\w+)}/g, '$3')
 	})
 
-	config.addWatchTarget('yozo/')
 	config.addPassthroughCopy('src/-/**/*.{css,js,yz,svg,ttf,png,ico,txt,json}')
 	config.addPassthroughCopy('src/*.{js,ico,svg}')
 	config.addPassthroughCopy('src/**/index.{css,js}')
+
+	config.addWatchTarget('yozo/')
 	config.addPassthroughCopy({
 		'yozo/versions.json': 'versions.json',
 		'yozo/archive': 'archive',
 		'yozo/test': 'test',
+		'yozo/latest/lib.js': 'lib-latest.js',
+		'yozo/latest/dev.js': 'dev-latest.js',
 	})
 
 	const dir = {input: 'src', output: 'dist'}

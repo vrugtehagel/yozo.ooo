@@ -19,7 +19,7 @@
 
 Yozo reuses the native `<template>`{html} element to define a component template. However, its attributes in (the top level of) a Yozo component file are different from its native attributes.
 
-As a top-level element in a Yozo component file, it describes markup for a component. Without attributes, the markup will be placed inside (i.e. as direct children of) the element upon connecting to the DOM for the first time, removing any children it might have gotten before connecting. When using templates without shadow root, styles defined inside the [`<style>`](/docs/components/style/) element are _not_ scoped.
+As a top-level element in a Yozo component file, it describes markup for a component. Without attributes, the markup will be placed inside (i.e. as direct children of) the element upon connecting to the DOM for the first time, removing any children it might have gotten before connecting. In fact, it cannot have slots, either; the native `<slot>`{yz} element is not allowed in templates without shadow root. This is because slots take an element's direct child nodes, whereas shadowless components render their template as children, making it impossible to retroactively assign elements to slots. Lastly, when using templates without shadow root, styles defined inside the [`<style>`](/docs/components/style/) element are _not_ scoped.
 
 :::info
 **Note:** When the `mode`{attr} attribute is used, the attributes directly convert to the options passed to the underlying `.attachShadow()`{js} call. For more information about shadow roots, see [.attachShadow() on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/attachShadow).

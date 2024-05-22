@@ -16,9 +16,10 @@ The `<script>`{yz} section is executed when a custom element is constructed. In 
 
 ### Attributes
 
-The script tag, when used inside of a component definition file, does not take any attributes. If any are defined, they are ignored; even if they are normally valid on script tags. For example, `type="text/plain"`{attr}, or `defer`{attr}, do nothing, and the `<script>`{yz} is treated as if it does not have any attributes.
+The `<script>`{yz} tag, when used inside of a component definition file, does not take any attributes. If any are defined, they are ignored; even if they are normally valid on script tags. For example, `type="text/plain"`{attr}, or `defer`{attr}, do nothing, and the `<script>`{yz} is treated as if it does not have any attributes.
 
 ### In the script
+
 Inside the component logic, a handful of variables are exposed;
 
 - Most importantly, the component's state variable [`$`](/docs/components/$/). This includes `$.$attributes`{js}, which reflects attributes defined through [`<meta attribute>`](/docs/components/meta/attribute/);

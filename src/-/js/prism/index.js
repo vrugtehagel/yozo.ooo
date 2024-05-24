@@ -45,6 +45,12 @@ Prism.languages.yz = Prism.languages.extend('markup', {
 	}
 })
 
+// Highlighting just CSS selectors, for inline code
+Prism.languages.sel = {
+	...Prism.languages.css.selector.inside,
+	...Prism.languages.css.atrule.inside,
+}
+
 // Adding the JS-based attributes to YZ highlighting (bit hacky but eh)
 const addAttributeSource = Prism.languages.markup.tag.addAttribute.toString()
 	.replace('Prism.languages.markup', 'Prism.languages.yz')

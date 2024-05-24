@@ -26,7 +26,6 @@ const custom = {
 		if(!value) return code.innerHTML = nameSpan
 		code.innerHTML = `${nameSpan}=<span class=string>${value}</span>`
 	},
-	sel: text => code.innerHTML = text,
 	yzattr: text => {
 		const [full, name, quote, value] = text
 			.match(/^([^=]*)(?:=(['"]?)([^]*)\2)?$/)

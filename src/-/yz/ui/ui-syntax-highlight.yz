@@ -49,10 +49,10 @@ code {
 .language-css { color: var(--name-color); }
 .rule { color: var(--keyword-color); }
 .property, .variable { color: var(--name-color); }
-.selector, .unit { color: var(--keyword-color); }
+.language-sel, .selector, .unit { color: var(--keyword-color); }
 .pseudo-class { color: var(--text-color); }
 .id, .class { color: var(--primary-color); }
-.hexcode { color: var(--meta-color); }
+.hexcode, .pseudo-element { color: var(--meta-color); }
 
 /* js */
 .keyword, .operator { color: var(--keyword-color); }

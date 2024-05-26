@@ -7,15 +7,15 @@ Yozo source: [vrugtehagel/yozo](https://github.com/vrugtehagel/yozo)
 
 ## Getting started
 
-You'll need your standard [npm](https://www.npmjs.com/) setup with [node](https://nodejs.org/) `v21.7.0` or higher. The site is using [Eleventy](https://11ty.dev/) as static site generator with most documentation pages written in Markdown.
+To start developing, you'll need an up-to-date installation of [Deno](https://deno.com/) installed. The site is using [Eleventy](https://11ty.dev/) as static site generator with most documentation pages written in Markdown.
 
 To get started, these are the two basic tasks at your disposal:
-- `npm run build` builds the site and packages it all up nicely for production.
-- `npm run serve` does the whole server + watch thing that you'd want when doing local development. By default, the local server uses [localhost:8787](http://localhost:8787/) but of course you're welcome to change the port (see the `serve` command in `package.json`). Note that this does _not_ build Yozo's source, so if you want to also make changes to the `yozo/` submodule, you'll need to run both this and Yozo's watcher at the same time.
+- `deno task build` builds the site and packages it all up nicely for production.
+- `deno task serve` does the whole server + watch thing that you'd want when doing local development. By default, the local server uses [localhost:8787](http://localhost:8787/) but of course you're welcome to change the port (see the `serve` task in `deno.json`). Note that this does _not_ build Yozo's source, so if you want to also make changes to the `yozo/` submodule, you'll need to run both this and Yozo's watcher at the same time.
 
 ## About the codebase
 
-This site is built on [Eleventy](https://11ty.dev/), and doesn't have a particularly complicated configuration. There are a few amendments made to the markdown parser; see below for details. Syntax highlighting doesn't happen in the build step; we use [Prism](https://prismjs.com/) (downloaded manually, instead of through `npm`) to highlight code client-side, asynchronously.
+This site is built on [Eleventy](https://11ty.dev/), and doesn't have a particularly complicated configuration. There are a few amendments made to the markdown parser; see below for details. Syntax highlighting doesn't happen in the build step; we use [Prism](https://prismjs.com/) (downloaded manually, instead of through a package manager) to highlight code client-side, asynchronously.
 
 Yozo's source repository is included as submodule to generate output based on version data, to include the archive of all versions, and to include tests on the site.
 

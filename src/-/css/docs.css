@@ -53,7 +53,7 @@
 	h1 {
 		margin-top: 0;
 	}
-	p { margin: 1.5rem 0; }
+	article > p { margin: 1.5rem 0; }
 	dd {
 		margin: 1rem 0 1rem 2rem;
 	}

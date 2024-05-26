@@ -6,13 +6,15 @@
 }
 ---
 
-:::warning
-**Warning:** Monitoring live variables exists mostly for internal purposes. The [`effect()`](/docs/effect/) helper function covers the use case of monitoring live variables almost entirely. Monitoring live variables manually should only be done as a last resort.
-:::
-
 ## Details
 
-In general, it is not advised to manually add live variables to the monitored context using [`monitor.add()`](/docs/monitor/add/). Instead, access the live variable using a simple property access or [`live.get()`](/docs/live/get/). For adding it as a `'keychange'`{js} variable, used for iteration and reading keys as opposed to value, call `Object.keys()`{js} on the variable, iterate it, or use `in`{js} on it.
+Monitored live contexts "see" live variables being used. The most common monitored expression is simply reading the value of a live variable (e.g. `$.foo`{js} or `live.get($.$foo)`{js}). These accesses delegate a change in the read variable to the value exposed by [`monitor()`](/docs/monitor/). There are also operations that do not read the value of a certain variable, but rely on the existance of one or more keys. Examples of this are `Object.keys()`{js}, the `in`{js} operator, or iteration such as `for…of`{js} loops. These types of operations are also monitored, but instead delegate `keychange`{str} events on the live variable in question to the exposed value on the return value from `monitor()`{js}. This mechanism allows for granular reactive responses to changes in live variables and is what powers Yozo's reactivity system.
+
+:::warning
+**Warning:** The live monitoring mechanism exists almost entirely for internal purposes. The [`effect()`](/docs/effect/) helper function covers the vast majority of use cases for monitoring live variables. Monitoring live variables manually should only be done as a last resort.
+:::
+
+While possible, it is not advised to manually add live variables to the monitored context using [`monitor.add()`](/docs/monitor/add/). Instead, access the live variable using a simple property access or [`live.get()`](/docs/live/get/). For adding it as a `'keychange'`{js} variable, used for iteration and reading keys as opposed to value, call `Object.keys()`{js} on the variable, iterate it, or use `in`{js} on it.
 
 When adding a live variable to the monitored context, `monitor.add()`{js} expects two additional arguments beyond the first argument `'live'`{js}. The second argument must be the live variable to add to the context. The third argument must be an event type (as a string) emitted by live variables, e.g. `'keychange'`{js} or `'deepchange'`{js}.
 

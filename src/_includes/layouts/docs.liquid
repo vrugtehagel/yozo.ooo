@@ -52,11 +52,10 @@
 		</div>
 
 		<h1>{{ title | escape }}</h1>
-		<p>
-			{% renderTemplate "liquid, md", data %}
-				{{ description }}
-			{% endrenderTemplate %}
-		</p>
+
+		{% renderTemplate "liquid, md", data %}
+			{{ description }}
+		{% endrenderTemplate %}
 
 		{{ content }}
 	</article>

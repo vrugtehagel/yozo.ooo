@@ -44,6 +44,7 @@ a {
 }
 site-settings::part(dropdown){
 	--appear-from: 0 .5rem;
+	max-width: calc(100vw - 6rem);
 	inset: auto auto calc(100% + 1rem) 0;
 }
 ui-button:hover, site-settings:hover, site-settings[open] {

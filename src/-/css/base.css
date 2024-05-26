@@ -33,15 +33,15 @@
 	}
 	h1 {
 		margin: 1.5em 0 1em;
-		font-size: 3rem;
+		font-size: clamp(2rem, 4vw + 1rem, 3rem);
 	}
 	h2 {
 		margin: 2em 0 1em;
-		font-size: 2rem;
+		font-size: clamp(1.5rem, 2vw + 1rem, 2rem);
 	}
 	h3 {
 		margin: 1em 0 .5em;
-		font-size: 1.75rem;
+		font-size: clamp(1.25rem, 2vw + .75rem, 1.75rem);
 	}
 	code {
 		padding: .125em .5em;

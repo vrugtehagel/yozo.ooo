@@ -11,11 +11,11 @@
 		border-top: .5rem solid var(--background-color);
 	}
 	ui-code:not(:defined){
-		display: block;
+		display: block; padding: 1rem 2rem;
 		background: var(--background-color);
 		font-family: var(--font-monospace); line-height: 1.5;
+		overflow-x: auto;
 		border-radius: 1rem;
-		white-space: pre;
 	}
 	ui-icode {
 		padding: .125em .5em;

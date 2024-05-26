@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.throttle()",
+	"terms": "flow throttle duration limit triggers callback pipeline debounce",
 	"description": "Throttle triggers in a flow's callback pipeline, using a fixed rate limit."
 }
 ---

@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "#for…of",
+	"terms": "reactive inline for loop while iterate component template dynamic list item",
 	"description": "The `#for=\"… of …\"`{yzattr} construct allows for generating lists of elements easily within the template itself."
 }
 ---

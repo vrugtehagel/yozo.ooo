@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.then()",
+	"terms": "flow then callback pipeline fire basic listen attach hook into trigger event",
 	"description": "The `flow.then()`{js} method chains a callback onto a flow's pipeline. The callback fires once a trigger reaches it and continues immediately after."
 }
 ---

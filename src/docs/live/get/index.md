@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "live.get()",
+	"terms": "live get unwrap variable retrieve propert underlying value",
 	"description": "Unwrap a live variable to find the underlying value, or retrieve the value at any key of a live object."
 }
 ---

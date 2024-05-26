@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.cleanup()",
+	"terms": "flow cleanup handler stop remove cancel leak garbage collect",
 	"description": "Add cleanup handlers using `.cleanup()`{js}, to be run when a flow is stopped. It is mostly intended for when manually creating `Flow`{js} objects."
 }
 ---

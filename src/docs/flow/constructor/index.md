@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "Flow constructor",
+	"terms": "flow constructor manual cleanup",
 	"description": "The flow constructor is a low-level feature, allowing flows to be used beyond the helpers Yozo offers."
 }
 ---

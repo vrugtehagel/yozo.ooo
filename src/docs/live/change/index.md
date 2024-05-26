@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "change event",
+	"terms": "change event live variable state old value fire dispatch attach listener",
 	"description": "The `change`{str} event fires on a live variable when its value changes."
 }
 ---

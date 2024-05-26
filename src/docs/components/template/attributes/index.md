@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": ":attribute",
+	"terms": "dynamic attribute class name shorthand inline component template bind reactive expression colon",
 	"description": "Inside component templates, bind attributes to reactive expressions by prefixing the attribute name with a colon."
 }
 ---

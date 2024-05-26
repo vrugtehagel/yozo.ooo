@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "<script>",
+	"terms": "script section logic component code constructor setup javascript defin top level",
 	"description": "A single place to write component logic. Here, define things either for use inside the component template or to be exposed on the custom element."
 }
 ---

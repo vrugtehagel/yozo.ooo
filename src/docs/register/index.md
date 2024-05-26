@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "register()",
+	"terms": "register component definit url string location load link",
 	"description": "The `register()`{js} function is used to explicitly load Yozo component files by their URL."
 }
 ---

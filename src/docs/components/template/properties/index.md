@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": ".property",
+	"terms": "dynamic property shorthand inline component template bind reactive expression period nest chain",
 	"description": "Bind reactive computations to elements inside the component's `<template>`{yz} by using property-like syntax as attributes."
 }
 ---

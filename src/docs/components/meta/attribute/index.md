@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "<meta attribute>",
+	"terms": "meta attribute tag propert type as default boolean number string state",
 	"description": "The \"attribute\" meta tag describes an attribute, exposing it on the custom element and optionally creating a corresponding property for it."
 }
 ---

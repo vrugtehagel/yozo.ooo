@@ -2,7 +2,8 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "query()",
-	"description": "Like `.querySelector()`{js}, the `query()`{js} function selects elements in your component's template."
+	"terms": "query all selector template shadow root element search",
+	"description": "Like `.querySelector()`{js}, the `query()`{js} function finds elements in your component's template."
 }
 ---
 

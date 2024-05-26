@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.debounce()",
+	"terms": "flow debounce duration delay triggers callback pipeline limit throttle",
 	"description": "Introduce a debounce on the flow's callback pipeline, limiting the amount of triggers coming through."
 }
 ---
@@ -9,7 +10,7 @@
 Debouncing limits triggers by ignoring all triggers until a certain amount of time passes that no triggers were received. More intuitively, it waits for a certain duration of inactivity before letting a trigger through.
 
 :::info
-**Note:** Throttling lets through a trigger as often as possible, but no more than once every `duration`{arg}. A debounce may not let any triggers through for as long as it is receiving triggers more often than once every`duration`{arg}. For throttling, see [`.throttle()`](/docs/flow/throttle/).
+**Note:** Throttling lets through a trigger as often as possible, but no more than once every `duration`{arg}. A debounce may not let any triggers through for as long as it is receiving triggers more often than once every `duration`{arg}. For throttling, see [`.throttle()`](/docs/flow/throttle/).
 :::
 
 ## Syntax

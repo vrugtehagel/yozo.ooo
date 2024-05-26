@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "live()",
+	"terms": "live variable create manual function react wrapper state effect monitor method event fine grain",
 	"description": "The `live()`{js} function creates a reactive wrapper around a value, to be used in effects, component templates or elsewhere."
 }
 ---

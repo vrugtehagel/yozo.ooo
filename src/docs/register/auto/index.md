@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "register.auto()",
+	"terms": "register auto discover find automatic element name url found document component template",
 	"description": "Register components dynamically using `register.auto()`{js}, depending on whether or not it is found in the document or in other component templates."
 }
 ---

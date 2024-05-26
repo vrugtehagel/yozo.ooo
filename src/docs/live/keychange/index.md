@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "keychange event",
+	"terms": "keychange event keys live variable iterat fire dispatch attach listener",
 	"description": "The `keychange`{str} event is dispatched on live variables wrapping an object, when keys are created or deleted."
 }
 ---

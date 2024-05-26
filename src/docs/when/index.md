@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "when()",
+	"terms": "when event listener does attach add targets type options flow readable trail monitor observe",
 	"description": "The `when()`{js} helper simplifies the use of event listeners both inside and outside Yozo components."
 }
 ---

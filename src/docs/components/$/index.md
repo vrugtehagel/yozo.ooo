@@ -2,7 +2,8 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "Component state: $",
-	"description": "Each component gets a live state variable named `$`{js}. This variable allows for fine-grained reactivity in a consice manner."
+	"terms": "component state live variable data react",
+	"description": "Each component gets a live state variable named `$`{js}. This variable allows for fine-grained reactivity in a concise manner."
 }
 ---
 

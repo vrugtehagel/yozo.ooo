@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "deepchange event",
+	"terms": "deepchange event nested fire live variable state fire dispatch attach listener",
 	"description": "The `deepchange`{str} event fires on live variables when a variable itself or one of its nested properties has changed."
 }
 ---

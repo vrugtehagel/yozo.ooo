@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.after()",
+	"terms": "flow after schedule callback trigger flow itself sequential once",
 	"description": "The `flow.after()`{js} method is used to schedule a callback, usually one that triggers the flow itself, allowing for more sequentially-written code."
 }
 ---

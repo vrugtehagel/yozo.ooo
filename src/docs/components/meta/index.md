@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "<meta>",
+	"terms": "meta attribute property method form associated hook declar defin interface document",
 	"description": "Define component metadata through `<meta>`{yz} tags, such as attributes, properties, methods, and more."
 }
 ---

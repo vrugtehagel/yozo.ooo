@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "Monitoring \"undo\"",
+	"terms": "monitoring undo type callback cleanup flow when",
 	"description": "Under the hood, things that benefit from cleanup callbacks (such as `Flow`{js} objects) use this type to specify how to be undone."
 }
 ---

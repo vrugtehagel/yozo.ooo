@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "monitor.add()",
+	"terms": "monitor add context include item manual",
 	"description": "Using `monitor.add()`{js}, specific items of any type may manually be added to the monitored context."
 }
 ---

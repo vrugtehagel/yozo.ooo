@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "Documentation",
+	"terms": "documentation docs yozo explain tutorial example home start first begin",
 	"description": "Here, everything Yozo provides is explained in detail, from simple type signatures to deep examples about its inner workings."
 }
 ---

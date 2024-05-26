@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "live.set()",
+	"terms": "live set variable helper assign value",
 	"description": "`live.set()`{js} is a somewhat low-level way to set the underlying value of a live variable."
 }
 ---

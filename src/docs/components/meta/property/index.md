@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "<meta property>",
+	"terms": "meta propert expose readonly state",
 	"description": "The \"property\" meta tag defines a single property to be exposed on the custom element. It may optionally be marked read-only."
 }
 ---

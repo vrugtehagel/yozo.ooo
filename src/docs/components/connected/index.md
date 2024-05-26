@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "connected()",
+	"terms": "connected callback lifecycle hook component connects setup created",
 	"description": "The main lifecycle callback for components is `connected()`{js}. It fires when the component connects to the DOM, and undoes itself when it disconnects."
 }
 ---

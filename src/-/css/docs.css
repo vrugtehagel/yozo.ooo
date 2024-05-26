@@ -7,19 +7,17 @@
 	aside {
 		place-self: start end;
 		width: 16rem;
+		position: sticky; top: 6.5rem;
 	}
 	article {
 		width: min(100vw - 23rem, 45rem);
 		margin-left: clamp(3rem, 25vw - 14.5rem, 5rem);
 	}
 
-
 	#prelude {
 		display: flex; padding-bottom: 1rem;
 		flex-wrap: wrap; justify-content: space-between; gap: .5rem;
-	}
-	docs-tests {
-		margin-left: auto;
+		docs-tests { margin-left: auto; }
 	}
 	#crumbs {
 		display: flex; height: 3rem; margin: .5rem 0;

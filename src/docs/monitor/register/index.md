@@ -108,10 +108,6 @@ const call = monitor(['alsoUndo'], () => {
 
 Then, since the type is called `'alsoUndo'`{js} we can later call `call.alsoUndo()`{js} to run the cleanup callbacks. The `call.alsoUndo()`{js} function is the same one we've defined under the `result`{js} key in our `AlsoUndo`{js} implementation.
 
-## Usage notes
-
-Registering after creating a context
-
 ## See also
 
 - [`until()`](/docs/monitor/until/)

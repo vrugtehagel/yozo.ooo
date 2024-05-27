@@ -1,0 +1,140 @@
+<title>site-search</title>
+<meta attribute=value type=string>
+
+<template mode=closed delegates-focus=true>
+	<form @submit="$.onsubmit(event)">
+		<label for=input>Search the site</label>
+		<input id=input type=search autocomplete=off autocapitalize=none
+			autocorrect=off spellcheck=false enterkeyhint=go
+			placeholder="live variables"
+			@keydown="$.onkeydown(event)"
+			@focus="$.focused = true"
+			@blur="$.focused = false">
+		<ul .hidden="!$.focused || $.value == ''" :class+empty="$.amount == 0">
+			<li #for="[index, result] of $.results.entries()"
+				:class+selected="$.selected == index"
+				@mouseenter="$.selected = index">
+				<a :href="result.url">
+					<span class=title>{{ result.title }}</span>
+					<span class=url>
+						{{ result.url.split('/').slice(1, -1).join(' › ') }}
+					</span>
+				</a>
+			</li>
+		</ul>
+		<ui-icon type=search></ui-icon>
+	</form>
+</template>
+
+<script>
+$.results = []
+$.focused = false
+$.selected = 0
+live.link($.$value, query('input'))
+live.link($.$amount, () => $.results.length)
+
+effect(async () => {
+	if($.value == '') return []
+	// query...
+	await timeout(1000)
+	$.results = [{title: 'Found page for ' + $.value,url: '/docs/found/'}, {title: 'when().observes()',url: '/docs/when/observes/'}, ...(Math.random() < .5 ? [] : [{title: 'track.define()',url: '/docs/track/define/'}])]
+	$.selected = 0
+})
+
+const shortcuts = {
+	ArrowDown: () => $.selected = ($.selected + 1) % $.amount,
+	ArrowUp: () => $.selected = ($.selected + $.amount - 1) % $.amount,
+	Home: () => $.selected = 0,
+	End: () => $.selected = $.amount - 1,
+}
+$.onkeydown = event => {
+	if(!shortcuts[event.key]) return
+	event.preventDefault()
+	shortcuts[event.key]()
+}
+
+$.onsubmit = event => {
+	event.preventDefault()
+	const li = query.all('li')[$.selected]
+	li?.querySelector('a').click()
+}
+</script>
+
+<style>
+:host {
+	display: inline-block;
+}
+form {
+	display: grid; width: 100%; height: 100%;
+	grid-template: auto / 1fr 3rem; place-items: center start;
+	position: relative;
+}
+label {
+	grid-area: 1 / 1 / -1 / -1;
+	padding: 0 1.25rem;
+	z-index: 1;
+	opacity: 0;
+	white-space: nowrap;
+}
+ui-icon {
+	grid-area: 1 / 2 / -1 / -1;
+	opacity: .5;
+}
+label:has(+ input:placeholder-shown){ opacity: .5; }
+::placeholder { opacity: 0; }
+input {
+	grid-area: 1 / 1 / -1 / -1;
+	width: 100%; min-width: 0; height: 3rem;
+	color: inherit; background-color: var(--highlight-color);
+	border: none; border-radius: .75rem;
+	font-size: inherit; font-family: var(--font-monospace);
+	padding: 1rem 1.25rem;
+	outline: none;
+	transition: border-radius .08s;
+}
+input:has(+ ul:not([hidden])){ border-radius: .75rem .75rem 0 0; }
+ul {
+	display: flex; max-height: calc(60vh); padding: .25rem .5rem .5rem; margin: 0;
+	flex-direction: column; gap: .5rem;
+	list-style: none;
+	position: absolute; inset: 100% 0 auto 0;
+	background-color: var(--highlight-color);
+	border-radius: 0 0 .75rem .75rem;
+	overflow: auto;
+	transition: opacity .2s, translate .2s, visibility 0s 0s;
+	z-index: -1;
+}
+ul[hidden]{
+	translate: 0 -1rem;
+	opacity: 0; visibility: hidden;
+	transition: opacity .2s, translate .2s, visibility .2s 0s;
+}
+li {
+	background-color: var(--background-color);
+	border-radius: .5rem;
+	box-shadow: 2rem 0 0 -2rem inset var(--name-color);
+	transition: .2s;
+}
+li.selected {
+	background-color: var(--sub-background-color);
+	border-radius: 3px .5rem .5rem 3px;
+	box-shadow: calc(2rem + 3px) 0 0 -2rem inset var(--name-color);
+}
+li a {
+	display: flex; padding: .5rem 1rem;
+	flex-direction: column;
+	color: var(--text-color);
+	text-decoration: none;
+}
+li a .url {
+	font-size: .8rem;
+	color: var(--comment-color);
+}
+ul.empty::after {
+	content: "No results found.";
+	display: block; padding: .5rem 1rem;
+	color: var(--comment-color);
+	background-color: var(--background-color);
+	border-radius: .5rem;
+}
+</style>

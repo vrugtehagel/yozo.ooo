@@ -8,7 +8,7 @@
 		</ui-button>
 		<ui-button href=/docs/>Docs</ui-button>
 		<ui-button href=/play/>Play</ui-button>
-		<!-- search -->
+		<site-search></site-search>
 		<ui-button icon=download href=/download/></ui-button>
 	</nav>
 </template>
@@ -30,9 +30,9 @@ ui-icon[type=wordmark]{
 }
 ui-button {
 	font-size: clamp(1rem, 4vw + .25rem, 1.25rem); line-height: 1.5rem;
-	&[icon=download]{
-		margin-left: auto;
-	}
+}
+site-search {
+	width: 20rem; margin-left: auto;
 }
 @media (width < 800px){
 	ui-button[icon=download]{ display: none; }

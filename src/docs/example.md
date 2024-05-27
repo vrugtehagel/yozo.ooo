@@ -2,6 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "",
+	"terms": "",
 	"description": ""
 }
 ---

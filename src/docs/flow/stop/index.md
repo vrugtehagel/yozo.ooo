@@ -55,7 +55,6 @@ Once a flow has been stopped, all references to pipeline callbacks are removed, 
 
 A stopped flow is essentially useless, because it can no longer trigger; not even by manually calling [`flow.now()`](/docs/flow/now/). As such, it is not advised to retain references to flows after they have been stopped.
 
-
 ## See also
 
 - [`Flow`](/docs/flow/)

@@ -13,6 +13,16 @@ site-nav {
 
 	body:not(.scrolled) & {
 		background-color: var(--sub-background-color);
+		&::part(searchinput){ transition: background-color .5s; }
+		&::part(searchinput):focus-within {
+			transition: background-color .2s;
+		}
+		&::part(searchinput):not(:focus-within){
+			background-color: var(--background-color);
+		}
+		&::part(button):hover {
+			background-color: var(--background-color);
+		}
 	}
 }
 

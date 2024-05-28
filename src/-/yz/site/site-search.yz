@@ -4,7 +4,7 @@
 <template mode=closed delegates-focus=true>
 	<form @submit="$.onsubmit(event)">
 		<label for=input>Search the site</label>
-		<input id=input type=search autocomplete=off autocapitalize=none
+		<input id=input type=search autocomplete=off autocapitalize=none part=searchinput
 			autocorrect=off spellcheck=false enterkeyhint=go
 			placeholder="live variables"
 			@keydown="$.onkeydown(event)"

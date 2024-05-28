@@ -1,6 +1,11 @@
 import { EleventyRenderPlugin } from '@11ty/eleventy'
 import { customMarkdown } from './plugins/custom-markdown.js'
 
+export const config = {
+	dir: {input: 'src', output: 'dist'},
+	markdownTemplateEngine: false
+}
+
 export default function(config){
 	config.setFrontMatterParsingOptions({language: 'json'});
 	config.setLayoutResolution(false)
@@ -27,8 +32,4 @@ export default function(config){
 		'yozo/latest/lib.js': 'lib-latest.js',
 		'yozo/latest/dev.js': 'dev-latest.js',
 	})
-
-	const dir = {input: 'src', output: 'dist'}
-	const markdownTemplateEngine = false
-	return {dir, markdownTemplateEngine}
 }

@@ -1,17 +1,31 @@
 <title>site-nav</title>
 
 <template mode=closed>
-	<nav>
+	<nav :class+searching="$.searching">
 		<ui-button href=/ aria-label="Home">
 			<ui-icon type=logo width=12 height=12></ui-icon>
 			<ui-icon type=wordmark width=36 height=12></ui-icon>
 		</ui-button>
 		<ui-button href=/docs/>Docs</ui-button>
 		<ui-button href=/play/>Play</ui-button>
-		<site-search></site-search>
+		<div id=search>
+			<site-search></site-search>
+			<ui-button :icon="$.searching ? 'close' : 'search'"
+				@click="$.toggleSearch()"></ui-button>
+			<ui-icon type=search></ui-icon>
+		</div>
 		<ui-button icon=download href=/download/></ui-button>
 	</nav>
 </template>
+
+<script>
+$.toggleSearch = async () => {
+	$.searching = !$.searching
+	if(!$.searching) return
+	await paint()
+	query('site-search').focus()
+}
+</script>
 
 <style>
 nav {
@@ -31,10 +45,26 @@ ui-icon[type=wordmark]{
 ui-button {
 	font-size: clamp(1rem, 4vw + .25rem, 1.25rem); line-height: 1.5rem;
 }
-site-search {
-	width: 20rem; margin-left: auto;
+#search {
+	display: flex; width: 20rem; height: 3rem; margin-left: auto;
+	position: relative;
+	site-search { flex: 1 1 0; }
+	ui-button, ui-icon {
+		position: absolute; inset: 0 0 0 auto;
+	}
+	ui-button { display: none; }
+	ui-icon { opacity: .5; }
 }
 @media (width < 800px){
 	ui-button[icon=download]{ display: none; }
+	#search {
+		width: 3rem;
+		position: absolute; inset: 50% 1rem auto auto;
+		translate: 0 -50%;
+		ui-icon { display: none; }
+		ui-button { display: inline-block; }
+	}
+	nav.searching #search { width: calc(100vw - 2rem); }
+	nav:not(.searching) site-search { opacity: 0; }
 }
 </style>

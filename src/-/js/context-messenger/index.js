@@ -36,7 +36,9 @@ export class ContextMessenger extends EventTarget {
 	}
 
 	#respond(event){
-		const sender = this.#isBroadcastChannel ? this.#sender : event.source
+		const sender = this.#isBroadcastChannel
+			? this.#sender
+			: (event.source ?? this.#sender)
 		if(this.#sender != sender) return
 		const {type, uuid, payload} = event.data
 		if(type == 'respond') return

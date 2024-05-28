@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.stop()",
-	"terms": "flow stop cancel kill end callback trigger",
+	"terms": "stop flow cancel kill end callback trigger",
 	"description": "The `flow.stop()`{js} method stops a flow immediately. Its cleanup callbacks are run, and the flow is prevented from ever triggering again."
 }
 ---

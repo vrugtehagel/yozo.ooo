@@ -10,8 +10,9 @@
 			@keydown="$.onkeydown(event)"
 			@focus="$.focused = true"
 			@blur="$.focused = false">
-		<ul .hidden="!$.focused || $.value == ''" :class+empty="$.amount == 0">
-			<li #for="[index, result] of $.results.entries()"
+		<ul .hidden="!$.focused || $.value == ''"
+			:class+empty="$.amount == 0" :class+loading="$.loading">
+			<li #for="[index, result] of $.siteSearch?.$results.entries() ?? []"
 				:class+selected="$.selected == index"
 				@mouseenter="$.selected = index">
 				<a :href="result.url">
@@ -22,22 +23,21 @@
 				</a>
 			</li>
 		</ul>
-		<ui-icon type=search></ui-icon>
 	</form>
 </template>
 
 <script>
-$.results = []
+import('/-/js/site-search/index.js').then(mod => $.siteSearch = mod)
 $.focused = false
 $.selected = 0
 live.link($.$value, query('input'))
-live.link($.$amount, () => $.results.length)
+live.link($.$amount, () => $.siteSearch?.$results.length ?? 0)
 
 effect(async () => {
 	if($.value == '') return []
-	// query...
-	await timeout(1000)
-	$.results = [{title: 'Found page for ' + $.value,url: '/docs/found/'}, {title: 'when().observes()',url: '/docs/when/observes/'}, ...(Math.random() < .5 ? [] : [{title: 'track.define()',url: '/docs/track/define/'}])]
+	$.loading = true
+	await until($.siteSearch?.search($.value))
+	$.loading = false
 	$.selected = 0
 })
 
@@ -68,6 +68,7 @@ form {
 	display: grid; width: 100%; height: 100%;
 	grid-template: auto / 1fr 3rem; place-items: center start;
 	position: relative;
+	overflow-x: clip;
 }
 label {
 	grid-area: 1 / 1 / -1 / -1;
@@ -103,38 +104,49 @@ ul {
 	overflow: auto;
 	transition: opacity .2s, translate .2s, visibility 0s 0s;
 	z-index: -1;
-}
-ul[hidden]{
-	translate: 0 -1rem;
-	opacity: 0; visibility: hidden;
-	transition: opacity .2s, translate .2s, visibility .2s 0s;
+	&[hidden]{
+		translate: 0 -1rem;
+		opacity: 0; visibility: hidden;
+		transition: opacity .2s, translate .2s, visibility .2s 0s;
+	}
+	&.empty::after {
+		content: "No results found.";
+		display: block; padding: .5rem 1rem;
+		color: var(--comment-color);
+		background-color: var(--background-color);
+		border-radius: .5rem;
+	}
+	&::before {
+		content: "";
+		display: block;
+		position: absolute; inset: 0;
+		background-color: var(--highlight-color);
+		visibility: hidden; opacity: .5;
+	}
+	&.loading::before {
+		visibility: visible;
+		transition: visibility 0s .1s;
+	}
 }
 li {
 	background-color: var(--background-color);
 	border-radius: .5rem;
 	box-shadow: 2rem 0 0 -2rem inset var(--name-color);
 	transition: .2s;
-}
-li.selected {
-	background-color: var(--sub-background-color);
-	border-radius: 3px .5rem .5rem 3px;
-	box-shadow: calc(2rem + 3px) 0 0 -2rem inset var(--name-color);
-}
-li a {
-	display: flex; padding: .5rem 1rem;
-	flex-direction: column;
-	color: var(--text-color);
-	text-decoration: none;
-}
-li a .url {
-	font-size: .8rem;
-	color: var(--comment-color);
-}
-ul.empty::after {
-	content: "No results found.";
-	display: block; padding: .5rem 1rem;
-	color: var(--comment-color);
-	background-color: var(--background-color);
-	border-radius: .5rem;
+	&.selected {
+		background-color: var(--sub-background-color);
+		border-radius: 3px .5rem .5rem 3px;
+		box-shadow: calc(2rem + 3px) 0 0 -2rem inset var(--name-color);
+	}
+	a {
+		display: flex; padding: .5rem 1rem;
+		flex-direction: column;
+		color: var(--text-color);
+		text-decoration: none;
+		.url {
+			font-size: .8rem;
+			color: var(--comment-color);
+		}
+	}
 }
 </style>

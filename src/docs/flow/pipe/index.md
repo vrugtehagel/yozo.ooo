@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.pipe()",
-	"terms": "flow pipe custom transformation callback pipeline",
+	"terms": "pipe flow custom transformation callback pipeline",
 	"description": "The `flow.pipe()`{js} method is a low-level API to introduce custom transformation to `Flow`{js} callback pipelines."
 }
 ---

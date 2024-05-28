@@ -1,8 +1,8 @@
 ---
 {
 	"layout": "layouts/docs.liquid",
-	"title": "",
-	"terms": "",
+	"title": "Example",
+	"terms": "example",
 	"description": ""
 }
 ---

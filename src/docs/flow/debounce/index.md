@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.debounce()",
-	"terms": "flow debounce duration delay triggers callback pipeline limit throttle",
+	"terms": "debounce flow duration delay triggers callback pipeline limit throttle",
 	"description": "Introduce a debounce on the flow's callback pipeline, limiting the amount of triggers coming through."
 }
 ---

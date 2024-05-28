@@ -2,7 +2,7 @@
 {
 	"layout": "layouts/docs.liquid",
 	"title": "flow.now()",
-	"terms": "flow now trigger manual arguments pipeline",
+	"terms": "now flow trigger manual arguments pipeline",
 	"description": "The `flow.now()`{js} method triggers a flow, optionally with arguments to pass to the callbacks in the flow pipeline."
 }
 ---

@@ -1,0 +1,23 @@
+---
+{
+	"permalink": "/-/data/search.json",
+	"eleventyImport": {
+		"collections": ["docs"]
+	}
+}
+---
+
+{% capture items %}
+	{% for item in collections.all %}
+		{% unless item.data.terms %}{% continue %}{% endunless %}
+		{
+			"title": "{{ item.data.title | replace: '"', '\\"' }}",
+			"terms": "{{ item.data.terms }}",
+			"url": "{{ item.data.page.url }}"
+		},
+	{% endfor %}
+{% endcapture %}
+
+{% assign json = items | remove_last: "," | prepend: "[" | append: "]" %}
+
+{{ json | jsonparse | json }}

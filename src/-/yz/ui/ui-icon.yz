@@ -15,21 +15,31 @@ const container = query('#container')
 this.constructor.cache ??= new Map
 const {cache} = this.constructor
 
-connected(() => effect(async () => {
-	container.replaceChildren()
-	if(!$.type) return
-	const url = new URL(`${$.type}.svg`, `${window.location.origin}/-/icons/`)
+const getCached = name => {
+	const url = new URL(`${name}.svg`, `${window.location.origin}/-/icons/`)
 	const {pathname} = url
 	const cached = cache.get(pathname)
-	if(cached) return container.append(cached.cloneNode(true))
-	if(!pathname.startsWith('/-/icons/')) return
-	const response = await until(fetch(url).catch(() => null))
-	if(!response?.ok) return
-	const text = await until(response.text())
+	if(cached) return cached
+	const promise = fetchIcon(url)
+	cache.set(pathname, promise)
+	return promise
+}
+
+const fetchIcon = async url => {
+	const response = await fetch(url).catch(() => null)
+	if(!response?.ok) return false
+	const text = await response.text()
 	const template = document.createElement('template')
 	template.innerHTML = text
 	const fragment = template.content
-	cache.set(pathname, fragment)
+	return fragment
+}
+
+connected(() => effect(async () => {
+	container.replaceChildren()
+	if(!$.type) return
+	const fragment = await until(getCached($.type))
+	if(!fragment) return
 	container.append(fragment.cloneNode(true))
 }))
 </script>

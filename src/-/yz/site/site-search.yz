@@ -131,13 +131,8 @@ ul {
 li {
 	background-color: var(--background-color);
 	border-radius: .5rem;
-	box-shadow: 2rem 0 0 -2rem inset var(--name-color);
 	transition: .2s;
-	&.selected {
-		background-color: var(--sub-background-color);
-		border-radius: 3px .5rem .5rem 3px;
-		box-shadow: calc(2rem + 3px) 0 0 -2rem inset var(--name-color);
-	}
+	&.selected { background-color: var(--sub-background-color); }
 	a {
 		display: flex; padding: .5rem 1rem;
 		flex-direction: column;

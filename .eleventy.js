@@ -20,7 +20,7 @@ export default function(config){
 		return value?.replaceAll(/(`+)( ?)((?:(?!\1).)*?)\2\1{(\w+)}/g, '$3')
 	})
 
-	config.addPassthroughCopy('src/-/**/*.{css,js,yz,svg,ttf,png,ico,txt,json}')
+	config.addPassthroughCopy('src/-/**/*.{css,js,yz,svg,woff2,png,ico,txt,json}')
 	config.addPassthroughCopy('src/*.{js,ico,svg}')
 	config.addPassthroughCopy('src/**/index.{css,js}')
 

@@ -33,17 +33,23 @@ nav {
 	align-items: center; gap: clamp(0rem, 4vw - 1.2rem, 2rem);
 	position: relative;
 }
-ui-icon[type=logo]{
+ui-button ui-icon {
+	display: inline-block; height: 100%;
 	color: var(--name-color);
-	@media (width >= 670px){ display: none; }
-}
-ui-icon[type=wordmark]{
-	aspect-ratio: 36 / 12;
-	color: var(--name-color);
-	@media (width < 670px){ display: none; }
+	&[type=logo]{
+		aspect-ratio: 12 / 12;
+		@media (width >= 670px){ display: none; }
+	}
+	&[type=wordmark]{
+		aspect-ratio: 36 / 12;
+		@media (width < 670px){ display: none; }
+	}
 }
 ui-button {
 	font-size: clamp(1rem, 4vw + .25rem, 1.25rem); line-height: 1.5rem;
+	&:not(:defined){
+		display: inline-block; height: 1.5rem; padding: .75rem 1rem;
+	}
 }
 #search {
 	display: flex; width: 20rem; height: 3rem; margin-left: auto;

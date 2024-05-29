@@ -33,9 +33,11 @@ The `disconnected()`{js} lifecycle callback is available anywhere inside the [`<
 
 It can also be utilized purely for its return value, so that it may be passed to [`.until()`](/docs/flow/until/) or used in conjunction with `await`{js}. As such, the `callback`{js} parameter is optional.
 
+Unlike [`connected()`](/docs/components/connected/), it does not retroactively fire if the component has already previously disconnected. It only only triggers for future disconnects.
+
 ## Examples
 
-### whenless listeners
+### When-less listeners
 
 Let's try to write a component with an event listener, without using `when()`{js} (or the inline [`@event`](/docs/components/template/events/) syntax). To do this, we'll use the `connected()`{js} handler, the traditional `.addEventListerner()`{js} call to attach the listener, and then their counterparts `disconnected()`{js} and `.removeEventListener()`{js} to take them back down. This might look something like:
 

@@ -106,6 +106,8 @@ The `connected()`{js} and `disconnected()`{js} hooks cannot be overwritten with 
 
 While it is possible to include the `attributeChanged()`{js} lifecycle callback through `<meta hook="attributeChanged">`{yz}, this is not generally necessary since it is equivalent to `when($.$attributes).change()`{js}, and the latter provides additional granularity for each attribute through e.g. `when($.$attributes.$foo).changes()`{js}. See [`<meta attribute>`](/docs/components/meta/attribute/) for more information.
 
+Hooks defined with an unhook retroactively call their callback if the `hook`{js} itself was called but the `unhook`{attr} was not yet. In the case of `connected()`{js}, when calling `connected()`{js} while the element is already connected to the DOM, the callback runs immediately. On the other hand, when defining a hook without an unhook, this does not happen; the hook only fires for future calls of the hook in question, regardless of whether or not it has fired before.
+
 ## See also
 
 - [`connected()`](/docs/components/connected/)

@@ -11,8 +11,8 @@
 				href=https://github.com/vrugtehagel/yozo/issues/new>
 				File an issue
 			</ui-button>
-			<ui-button icon=vrugtehagel href=https://vrugtehagel.nl/>
-				vrugtehagel
+			<ui-button icon=discord href=https://discord.gg/VGec4nKxR9>
+				Discord
 			</ui-button>
 			<ui-button #if="document.documentElement.scrollHeight > 3000"
 				id=back-to-top @click="window.scroll({top: 0, behavior: 'smooth'})">

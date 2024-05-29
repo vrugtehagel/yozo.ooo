@@ -46,14 +46,3 @@
 {% unless exclude contains 'site-footer' %}
 	<site-footer></site-footer>
 {% endunless %}
-
-<ui-toast type=warning open actiontext=Dismiss>
-	<strong>Warning:</strong>
-	Yozo is still under development.
-</ui-toast>
-<script>(() => {
-	const {when, timeout} = window.yozo
-	const uiToast = document.currentScript.previousElementSibling
-	when(uiToast).actions().or(timeout(5000))
-		.then(() => uiToast.open = false)
-})()</script>

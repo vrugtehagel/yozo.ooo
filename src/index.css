@@ -6,6 +6,8 @@ html, body {
 
 main {
 	width: 100%; margin: 0 auto; box-sizing: border-box;
+	& > pre { display: none; }
+	& > section { padding: 4rem max((100% - 72rem) / 2 + 2rem, 2rem); }
 }
 
 site-nav {
@@ -29,12 +31,6 @@ site-nav {
 h2 {
 	margin: 0 0 .5em;
 	font-size: 2.5rem;
-}
-
-main > pre { display: none; }
-
-main > section {
-	padding: 4rem max((100% - 72rem) / 2 + 2rem, 2rem);
 }
 
 #hero {
@@ -84,15 +80,11 @@ main > section {
 }
 
 #selling-points {
-	margin: 6rem 0;
-	columns: 3; column-gap: 5rem;
+	display: flex; margin: 6rem 0;
+	gap: 5rem;
 	background-color: var(--background-color);
-	.selling-point {
-		break-inside: avoid;
-		display: flow-root;
-	}
 	h3 {
-		margin: 0 0 1.5em;
+		margin: 0 0 1em;
 		font-size: 1.5rem
 	}
 	.selling-point:nth-child(2) h3 { color: var(--primary-color); }
@@ -109,7 +101,7 @@ main > section {
 		color: var(--primary-color);
 	}
 	@media (width < 900px){
-		columns: 1;
+		flex-direction: column; gap: 3rem;
 	}
 }
 

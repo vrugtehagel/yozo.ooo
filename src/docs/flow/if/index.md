@@ -45,7 +45,7 @@ The flow passed to `live.link()`{js} now triggers only when the storage type is 
 
 ### Await enter key
 
-Let's write a simple async version of the native `window.prompt()`{js}. We'll add an `<input>`{html} element to the document (ignoring styling for the sake of the example). Our `asyncPrompt()`{js} function is to return a value after the user presses the `'Enter'`{js} key. To write our code nice and sequential, we'll use [`when()`](/docs/when/) to listen for `keydown`{str} events, and use [`.once()`](/docs/flow/once/) to avoid memory leaks. We'll need to use an `.if()`{js} before the `.once()`{js} call to make sure our `await`{js} expression only resolves when we press the `'Enter'`{js} key, instead of just any key.
+Let's write a simple async version of the native `window.prompt()`{js}. We'll add an `<input>`{html} element to the document (ignoring styling for the sake of the example). Our `asyncPrompt()`{js} function is to return a value after the user presses the `'Enter'`{js} key. To write our code nice and sequentially, we'll use [`when()`](/docs/when/) to listen for `keydown`{str} events, and use [`.once()`](/docs/flow/once/) to stop the listener after it has fired. We'll need to use an `.if()`{js} before the `.once()`{js} call to make sure our `await`{js} expression only resolves when we press the `'Enter'`{js} key, instead of just any key.
 
 ```js
 async function asyncPrompt(){

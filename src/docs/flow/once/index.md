@@ -38,7 +38,7 @@ As a result, there is more flexibility in where you put `.once()`{js}, but its p
 
 ### Loading an image
 
-Some events are expected to fire only once, such as the `load`{str} event. For events like these, `.once()`{js} is perfect; it takes down the flow whenever the event fires, meaning there are no concerns about memory leaks. As an example, let's use [`when()`](/docs/when/) in conjunction with `.once()`{js} to load an image and append it to the DOM.
+Some events are expected to fire only once, such as the `load`{str} event. For events like these, `.once()`{js} is perfect; it takes down the flow whenever the event fires, so that there are no concerns about memory leaks. As an example, let's use [`when()`](/docs/when/) in conjunction with `.once()`{js} to load an image and append it to the DOM.
 
 ```js
 const img = document.createElement('img');

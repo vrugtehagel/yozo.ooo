@@ -22,7 +22,7 @@
 				</span>
 			</ui-button>
 		</nav>
-		<small>&copy; {{ (new Date).getFullYear() }} vrugtehagel,
+		<small>&copy; {{ (new Date).getFullYear() }} <a href=https://vrugtehagel.nl/>vrugtehagel</a>,
 			released under the MIT license</small>
 	</footer>
 </template>
@@ -34,13 +34,6 @@ footer {
 nav {
 	display: flex; max-width: 1200px; margin: 1rem auto;
 	flex-flow: row wrap; gap: 1rem; justify-content: center;
-}
-a {
-	display: flex; padding: 0 1rem 0 0;
-	align-items: center;
-	color: var(--text-color);
-	border-radius: .5rem;
-	text-decoration: none;
 }
 site-settings::part(dropdown){
 	--appear-from: 0 .5rem;
@@ -56,11 +49,11 @@ ui-icon:not(:defined){
 }
 #back-to-top {
 	margin-left: auto;
-	& span {
+	span {
 		display: flex;
 		align-items: center;
 	}
-	& ui-icon {
+	ui-icon {
 		padding: 0; margin: 0 -.5rem 0 .5rem;
 	}
 }
@@ -69,5 +62,10 @@ small {
 	color: var(--comment-color);
 	font-size: 1rem;
 	text-align: center;
+	a {
+		display: inline;
+		color: inherit;
+		&:not(:hover){ text-decoration: none; }
+	}
 }
 </style>

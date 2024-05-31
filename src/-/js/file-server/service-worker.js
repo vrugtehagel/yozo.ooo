@@ -1,8 +1,7 @@
 (() => {
 	const {when, timeout} = self.yozo
-	const {ContextMessenger} = self
 
-	const messenger = new ContextMessenger('file-server')
+	const channel = new BroadcastChannel('file-server')
 	const contentTypes = {
 		html: 'text/html',
 		css: 'text/css',
@@ -13,7 +12,12 @@
 	}
 
 	async function request(src){
-		const body = await messenger.send('filerequest', {src})
+		const uuid = crypto.randomUUID()
+		channel.postMessage({type: 'filerequest', src, uuid})
+		const event = await when(channel).messages()
+			.if(({data}) => data.uuid == uuid)
+			.once()
+		const {body} = event.data
 		if(body == null) return new Response('Not Found', {status: 404})
 		const extension = src.includes('.') ? src.split('.').at(-1) : ''
 		const contentType = contentTypes[extension] ?? contentTypes.txt

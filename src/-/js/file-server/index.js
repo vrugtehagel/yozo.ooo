@@ -1,22 +1,22 @@
 import '/-/js/service-worker/index.js'
-import { ContextMessenger } from '/-/js/context-messenger/index.js'
 
 const {live, when} = self.yozo
 
-const messenger = new ContextMessenger('file-server')
+const channel = new BroadcastChannel('file-server')
 const files = new Map
 
-when(messenger).listens().then(() => $state.listening = false)
-when(messenger).filerequests().then(event => {
-	const {src} = event.detail.payload
-	const body = files.get(src)
-	event.detail.respond(body ?? null)
+when(channel).messages().then(event => {
+	if(event.data.type == 'listen') return $state.listening = false
+	if(event.data.type != 'filerequest') return
+	const {src, uuid} = event.data
+	const body = files.get(src) ?? null
+	channel.postMessage({body, uuid})
 })
 
 export const $state = live({listening: false})
 
 export function listen(){
-	messenger.send('listen')
+	channel.postMessage({type: 'listen'})
 	$state.listening = true
 }
 

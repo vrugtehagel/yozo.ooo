@@ -2,16 +2,12 @@
 // in "clean" contexts such as in the playground
 
 export class ContextMessenger extends EventTarget {
-	#isBroadcastChannel
 	#receiver
 	#sender
 	#ready
 
 	constructor(sender, receiver = self){
 		super()
-		this.#isBroadcastChannel = typeof sender == 'string'
-		if(this.#isBroadcastChannel)
-			sender = receiver = new BroadcastChannel(sender)
 		this.#sender = sender
 		this.#receiver = receiver
 		this.#receiver
@@ -36,9 +32,7 @@ export class ContextMessenger extends EventTarget {
 	}
 
 	#respond(event){
-		const sender = this.#isBroadcastChannel
-			? this.#sender
-			: (event.source ?? this.#sender)
+		const sender = event.source ?? this.#sender
 		if(this.#sender != sender) return
 		const {type, uuid, payload} = event.data
 		if(type == 'respond') return

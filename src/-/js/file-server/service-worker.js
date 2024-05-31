@@ -2,8 +2,7 @@
 	const {when, timeout} = self.yozo
 	const {ContextMessenger} = self
 
-	const messenger = new ContextMessenger('web-server')
-	const servable = ['/file/']
+	const messenger = new ContextMessenger('file-server')
 	const contentTypes = {
 		html: 'text/html',
 		css: 'text/css',
@@ -31,7 +30,7 @@
 		const url = new URL(event.request.url)
 		if(url.host != self.location.host) return
 		const {pathname} = url
-		if(!servable.some(scope => pathname.startsWith(scope))) return
+		if(!pathname.startsWith('/file/')) return
 		const src = pathname.endsWith('/') ? `${pathname}index.html` : pathname
 		const response = Promise.any([request(src), gatewayTimeout()])
 		event.respondWith(response)

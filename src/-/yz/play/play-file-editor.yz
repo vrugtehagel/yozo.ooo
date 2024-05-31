@@ -11,13 +11,13 @@
 			@rename="$.playManager.file($.uuid).src = event.detail.fullValue"></ui-display-name>
 		<ui-button icon=close @click="$.close()"></ui-button>
 	</div>
-	<ui-code-editor :language="$.webServer?.extension($.playManager?.file($.uuid).src)"
+	<ui-code-editor :language="$.server?.extension($.playManager?.file($.uuid).src)"
 		.show-line-numbers="$.siteSettings?.$settings.lineNumbers"></ui-code-editor>
 </template>
 
 <script>
 import('/-/js/play-manager/index.js').then(mod => $.playManager = mod)
-import('/-/js/web-server/index.js').then(mod => $.webServer = mod)
+import('/-/js/file-server/index.js').then(mod => $.server = mod)
 import('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
 
 const uiCodeEditor = query('ui-code-editor')

@@ -7,4 +7,4 @@
 importScripts('/archive/lib-0.3.8.js')
 importScripts('/-/js/service-worker/service-worker.js')
 importScripts('/-/js/context-messenger/service-worker.js')
-importScripts('/-/js/web-server/service-worker.js')
+importScripts('/-/js/file-server/service-worker.js')

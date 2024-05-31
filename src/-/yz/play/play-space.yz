@@ -7,7 +7,7 @@
 		<div id=file-list>
 			<ui-button icon=plus @click="$.adding = true">Add new file</ui-button>
 			<ui-button #for="[uuid, src] of $.playManager?.filelist() ?? []"
-				icon=filetype :iconstate="$.webServer?.extension(src)"
+				icon=filetype :iconstate="$.server?.extension(src)"
 				@click="$.occupant = `file:${uuid}`"
 			>{{ src }}</ui-button>
 			<div id=new-file .hidden="!$.adding"
@@ -25,7 +25,7 @@
 
 <script>
 Promise.all([
-	import('/-/js/web-server/index.js').then(mod => $.webServer = mod),
+	import('/-/js/file-server/index.js').then(mod => $.server = mod),
 	import('/-/js/play-manager/index.js').then(mod => $.playManager = mod),
 	customElements.whenDefined('play-file-editor'),
 	customElements.whenDefined('play-preview')

@@ -3,31 +3,21 @@ import { ContextMessenger } from '/-/js/context-messenger/index.js'
 
 const {live, when} = self.yozo
 
-const messenger = new ContextMessenger('web-server')
-const $scopes = live([])
+const messenger = new ContextMessenger('file-server')
 const files = new Map
 
+when(messenger).listens().then(() => $state.listening = false)
 when(messenger).filerequests().then(event => {
 	const {src} = event.detail.payload
-	if(!$scopes.some(scope => src.startsWith(scope))) return
 	const body = files.get(src)
 	event.detail.respond(body ?? null)
 })
-when(messenger).scopeclaims().then(event => {
-	const {scope} = event.detail.payload
-	const index = $scopes.indexOf(scope)
-	if(index == -1) return
-	$scopes.splice(index, 1)
-})
 
+export const $state = live({listening: false})
 
-export function claim(scope){
-	messenger.send('scopeclaim', {scope})
-	$scopes.push(scope)
-}
-
-export function claimed(scope){
-	return $scopes.includes(scope)
+export function listen(){
+	messenger.send('listen')
+	$state.listening = true
 }
 
 export function extension(src = ''){

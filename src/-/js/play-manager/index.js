@@ -1,4 +1,4 @@
-import * as webServer from '/-/js/web-server/index.js'
+import * as server from '/-/js/file-server/index.js'
 import * as serviceWorker from '/-/js/service-worker/index.js'
 import { htmlInclude } from '/-/js/html-include/index.js'
 
@@ -8,7 +8,7 @@ self.yozo.register('/-/yz/ui/ui-toast.yz')
 const {live, when, effect} = self.yozo
 
 export const $play = live({})
-if(!location.pathname.startsWith('/file/')) webServer.claim('/file/')
+if(!location.pathname.startsWith('/file/')) server.listen()
 
 $play.storage = JSON.parse(localStorage.getItem('play-manager:storage'))
 when($play.$storage).deepchanges().then(() => {
@@ -24,7 +24,7 @@ when($play.$creations).deepchanges().throttle(500).then(() => {
 })
 $play.creations ??= $play.storage
 
-live.link($play.$connected, () => webServer.claimed('/file/'))
+live.link($play.$connected, () => server.$state.listening)
 live.link($play.$mode, () => {
 	if(serviceWorker.disabled) return 'disabled'
 	if(!$play.connected) return 'disconnected'
@@ -50,10 +50,10 @@ if(window.playManagerRequest){
 effect(() => {
 	when(current().$files).deepchange().then(() => $play.saved = false)
 	when(current().$files).deepchange().throttle(500).then(() => {
-		webServer.clear('/file/')
+		server.clear('/file/')
 		const files = {...current().files}
-		webServer.upload(...Object.values(files).map(({src, body}) => {
-			if(webServer.extension(src) != 'html') return {src, body}
+		server.upload(...Object.values(files).map(({src, body}) => {
+			if(server.extension(src) != 'html') return {src, body}
 			const modified = htmlInclude(body, `
 				<script src="/-/js/play-console/index.js"></script>
 			`)
@@ -93,7 +93,7 @@ export function current(){
 }
 
 export function reconnect(){
-	webServer.claim('/file/')
+	server.listen()
 }
 
 export function list(){

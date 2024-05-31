@@ -1,6 +1,5 @@
 import * as server from '/-/js/file-server/index.js'
 import * as serviceWorker from '/-/js/service-worker/index.js'
-import { htmlInclude } from '/-/js/html-include/index.js'
 
 import { creations as defaultCreations } from './default-creations.js'
 
@@ -51,14 +50,12 @@ effect(() => {
 	when(current().$files).deepchange().then(() => $play.saved = false)
 	when(current().$files).deepchange().throttle(500).then(() => {
 		server.clear('/file/')
-		const files = {...current().files}
-		server.upload(...Object.values(files).map(({src, body}) => {
-			if(server.extension(src) != 'html') return {src, body}
-			const modified = htmlInclude(body, `
-				<script src="/-/js/play-console/index.js"></script>
-			`)
-			return {src, body: modified}
-		}))
+		const entries = Object.values({...current().files})
+		const inject = `<script src="/-/js/play-console/index.js"></script>`
+		for(const entry of entries){
+			if(server.extension(src) != 'html') server.upload(entry)
+			else server.upload(entry, {inject})
+		}
 	}).now()
 })
 

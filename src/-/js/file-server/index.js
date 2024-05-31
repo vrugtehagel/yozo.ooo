@@ -1,4 +1,5 @@
 import '/-/js/service-worker/index.js'
+import { injectHtml } from './inject-html.js'
 
 const {live, when} = self.yozo
 
@@ -27,8 +28,9 @@ export function extension(src = ''){
 	return extension
 }
 
-export function upload(...entries){
-	for(const {src, body} of entries) files.set(src, body)
+export function upload({ src, body }, { inject }){
+	if(inject) body = injectHtml(body, inject)
+	files.set(src, body)
 }
 
 export function clear(scope){

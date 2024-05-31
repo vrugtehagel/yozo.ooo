@@ -3,14 +3,13 @@
 // because the latter escapes characters even in style and script tags
 // So, regexes it is :/
 
-const doctypes = /^<!DOCTYPE +html [^>]*>/i
+const doctype = /^<!DOCTYPE +html[^>]*>/i
 const comment = /^<!--[^]*?-->/
 const openTag = /^<([a-z]+)\s*(?:[^>]*(["'])[^]*?\2)*[^"']*?>/i
 
 export function injectHtml(html, injection){
-	let remainder
-	try { remainder = consumeUntilHead(html) }
-	catch { return html }
+	const remainder = consumeUntilHead(html)
+	if(remainder == null) return html
 	const index = html.length - remainder.length
 	return html.slice(0, index) + injection + html.slice(index)
 }
@@ -26,7 +25,7 @@ function consumeUntilHead(string){
 	if(string == '') return ''
 	if(string != original) return string
 	if(openTag.test(string)) return string
-	throw Error(`Malformed HTML "${string.slice(0, 20)}…"`)
+	return null
 }
 
 function consumeDoctype(string){

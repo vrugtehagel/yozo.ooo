@@ -28,7 +28,7 @@ export function extension(src = ''){
 	return extension
 }
 
-export function upload({ src, body }, { inject }){
+export function upload({ src, body }, { inject } = {}){
 	if(inject) body = injectHtml(body, inject)
 	files.set(src, body)
 }

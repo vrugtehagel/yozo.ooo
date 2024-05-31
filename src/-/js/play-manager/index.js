@@ -53,7 +53,7 @@ effect(() => {
 		const entries = Object.values({...current().files})
 		const inject = `<script src="/-/js/play-console/index.js"></script>`
 		for(const entry of entries){
-			if(server.extension(src) != 'html') server.upload(entry)
+			if(server.extension(entry.src) != 'html') server.upload(entry)
 			else server.upload(entry, {inject})
 		}
 	}).now()

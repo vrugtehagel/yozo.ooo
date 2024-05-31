@@ -1,3 +1,4 @@
+if(!URL.canParse) await import('/-/js/polyfills/index.js')
 const {when} = yozo
 
 
@@ -9,11 +10,9 @@ export class IFrameBrowser extends EventTarget {
 	get iframe(){ return this.#iframe }
 	get valid(){ return this.#valid }
 	get sameOrigin(){
-		try {
-			return new URL(this.#src).origin == window.location.origin
-		} catch {
-			return false
-		}
+		if(!URL.canParse(this.#src)) return false
+		const url = new URL(this.#src)
+		return url.origin == window.location.origin
 	}
 
 	constructor(iframe){
@@ -23,21 +22,10 @@ export class IFrameBrowser extends EventTarget {
 
 	async go(src){
 		this.#valid = true
-		src = src.trim()
-		if(!src) return this.#invalid()
-		const isBlank = src == 'about:blank'
-		if(src.startsWith('/')) src = `${window.location.origin}${src}`
-		if(!src.match(/^https?:\/\//)) src = `https://${src}`
-		try { src = new URL(src).href }
-		catch { src = 'about:blank' }
+		const isBlank = originalSrc == 'about:blank'
+		const src = this.#normalize(originalSrc)
 		if(!isBlank && src == 'about:blank') return this.#invalid()
-		const iframe = this.#iframe
-		const detail = {src}
-		await when(iframe).loads().once().after(() => {
-			iframe.src = src
-			this.#src = src
-			this.dispatchEvent(new CustomEvent('navigate', {detail}))
-		})
+		await when(this.#iframe).loads().once().after(() => this.#setSrc(src))
 		this.dispatchEvent(new CustomEvent('complete'))
 	}
 
@@ -49,6 +37,22 @@ export class IFrameBrowser extends EventTarget {
 
 	reload(){
 		this.go(this.#src)
+	}
+
+	#normalize(src){
+		src = src.trim()
+		if(!src) return 'about:blank'
+		if(src.startsWith('/')) src = `${window.location.origin}${src}`
+		if(!src.match(/^https?:\/\//)) src = `https://${src}`
+		try { src = new URL(src).href }
+		catch { src = 'about:blank' }
+		return src
+	}
+
+	#setSrc(src){
+		this.#iframe.src = src
+		this.#src = src
+		this.dispatchEvent(new CustomEvent('navigate', {detail: {src}}))
 	}
 
 	#invalid(){

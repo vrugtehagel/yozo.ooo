@@ -3,10 +3,6 @@ const {live, when} = self.yozo
 const $state = live({})
 self.$storage = $state
 
-// export function temporary(namespace, defaults = {}){
-// 	const $namespace = $storage[`$${namespace}`]
-
-// }
 
 export function linkLocal(namespace, defaults){
 	return link(localStorage, namespace, defaults)

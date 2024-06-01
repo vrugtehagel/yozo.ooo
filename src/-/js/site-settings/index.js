@@ -1,24 +1,17 @@
+import * as storage from '/-/js/storage/index.js'
+
 const {live, when} = self.yozo
 
-export const $settings = live({})
+export const $settings = storage.linkLocal('settings', {
+	semicolons: true,
+	useTabs: true,
+	tabSize: 4,
+	lineNumbers: true,
+	highlightInline: true,
+	runTests: false,
+	maxCharHighlight: 10_000
+})
 self.$settings = $settings
-
-const parseBoolean = value => value == 'true'
-const fromStorage = ($live, name, fallback, parse) => {
-	parse ??= value => value
-	if(localStorage.getItem(name) == null) localStorage.setItem(name, fallback)
-	const get = () => parse(localStorage.getItem(name))
-	const set = value => localStorage.setItem(name, value)
-	const changes = when(window).storages().if(({key}) => key == name)
-	live.link($live, {get, set, changes})
-}
-fromStorage($settings.$semicolons, 'settings:semicolons', true, parseBoolean)
-fromStorage($settings.$useTabs, 'settings:use-tabs', true, parseBoolean)
-fromStorage($settings.$tabSize, 'settings:tab-size', 4, Number)
-fromStorage($settings.$lineNumbers, 'settings:line-numbers', true, parseBoolean)
-fromStorage($settings.$highlightInline, 'settings:highlight-inline', true, parseBoolean)
-fromStorage($settings.$runTests, 'settings:run-tests', false, parseBoolean)
-fromStorage($settings.$maxCharHighlight, 'settings:max-char-highlight', 10_000, Number)
 
 live.link($settings.$indent, () => {
 	if($settings.useTabs) return '\t'

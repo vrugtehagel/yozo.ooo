@@ -1,40 +1,20 @@
 import * as server from '/-/js/file-server/index.js'
 import * as serviceWorker from '/-/js/service-worker/index.js'
-
+import * as storage from '/-/js/storage/index.js'
 import { creations as defaultCreations } from './default-creations.js'
 
 self.yozo.register('/-/yz/ui/ui-toast.yz')
 const {live, when, effect} = self.yozo
-
-export const $play = live({})
 if(!location.pathname.startsWith('/file/')) server.listen()
 
-$play.storage = JSON.parse(localStorage.getItem('play-manager:storage'))
-when($play.$storage).deepchanges().then(() => {
-	const json = JSON.stringify($play.storage)
-	localStorage.setItem('play-manager:storage', json)
-})
-$play.storage ??= defaultCreations
+export const $play = storage.linkLocal('play', {storage: defaultCreations})
+storage.linkSession('play', {creations: $play.storage, uuid: ''})
 
-$play.creations = JSON.parse(sessionStorage.getItem('play-manager:creations'))
-when($play.$creations).deepchanges().throttle(500).then(() => {
-	const json = JSON.stringify($play.creations)
-	sessionStorage.setItem('play-manager:creations', json)
-})
-$play.creations ??= $play.storage
-
-live.link($play.$connected, () => server.$state.listening)
 live.link($play.$mode, () => {
 	if(serviceWorker.disabled) return 'disabled'
-	if(!$play.connected) return 'disconnected'
+	if(!server.$state.listening) return 'disconnected'
 	if(!$play.$creations[$play.uuid]) return 'picking'
 	return 'editing'
-})
-live.link($play.$uuid, {
-	get: () => sessionStorage.getItem('play-manager:current-uuid'),
-	set: value => sessionStorage.setItem('play-manager:current-uuid', value),
-	changes: when(window).storages()
-		.if(({key}) => key == 'play-manager:current-uuid')
 })
 
 if(window.playManagerRequest){

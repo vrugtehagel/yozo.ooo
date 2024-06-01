@@ -1,18 +1,1 @@
-{
-	"license": "UNLICENSED",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"serve": "npx @11ty/eleventy --serve --port=8787",
-		"build": "npx @11ty/eleventy"
-	},
-	"engines": {
-		"node": ">=21.7.0"
-	},
-	"dependencies": {
-		"@11ty/eleventy": "^3.0.0-alpha.10",
-		"markdown-it-anchor": "^8.6.7",
-		"markdown-it-container": "^4.0.0",
-		"markdown-it-deflist": "^3.0.0"
-	}
-}
+{ "type": "module" }

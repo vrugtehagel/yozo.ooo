@@ -1,22 +1,24 @@
-name: Build & deploy
+name: Deploy
+
 on:
   workflow_dispatch: {}
 
+permissions:
+  contents: read
+
 jobs:
-  build_and_deploy:
-    name: Build and deploy production
+  deploy:
+    name: Build and deploy to production
     environment: production
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
       with:
         submodules: recursive
-    - uses: actions/setup-node@v4
+    - uses: denoland/setup-deno@v1
       with:
-        node-version: 21
-        cache: npm
-    - run: npm install
-    - run: npm run build
+        deno-version: v1.x
+    - run: deno task build
     - name: rsync
       run: |
         echo "${{ secrets.YOZO_OOO_SSH_PRIVATE_KEY }}" > deploy_key

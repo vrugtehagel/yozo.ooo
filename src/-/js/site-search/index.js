@@ -13,5 +13,4 @@ export const $results = live([])
 export async function search(query){
 	const results = await messenger.send('search', {query})
 	live.set($results, results)
-	console.log(results)
 }

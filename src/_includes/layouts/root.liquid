@@ -25,11 +25,10 @@
 		return `/-/yz/${namespace}/${name}.yz`
 	})
 	// For a safari bug. Imports should work this way already.
-	window.safeImport = async (url, base = location.href) => {
+	window.safeImport = async url => {
 		const {cache} = safeImport
-		const absolute = new URL(url, base).href
-		if(!cache.has(absolute)) cache.set(absolute, import(absolute))
-		return await cache.get(absolute)
+		if(!cache.has(url)) cache.set(url, import(url))
+		return await cache.get(url)
 	}
 	window.safeImport.cache = new Map
 </script>

@@ -1,5 +1,5 @@
 window.Prism = {manual: true}
-await safeImport('./prism.js', import.meta.url)
+await safeImport('/-/js/prism/prism.js')
 export const Prism = window.Prism
 
 

@@ -2,7 +2,8 @@ import {
 	Component,
 	Prop,
 	Method,
-	Fragment
+	Fragment,
+	h,
 } from '@stencil/core';
 
 @Component({
@@ -22,7 +23,10 @@ import {
 	`,
 })
 export class ClickCounter {
-	@Prop({ reflect: true }) amount: number;
+	@Prop({
+		reflect: true,
+		mutable: true
+	}) amount: number = 0;
 
 	increment = () => {
 		this.amount += 1;
@@ -36,7 +40,7 @@ export class ClickCounter {
 	render() {
 		return (<Fragment>
 			<button onClick={this.increment}>
-				clicks: { $.amount }
+				clicks: { this.amount }
 			</button>
 		</Fragment>);
 	}

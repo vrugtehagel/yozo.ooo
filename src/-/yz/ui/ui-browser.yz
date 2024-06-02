@@ -83,7 +83,7 @@ $.navigate = purify(async src => {
 		.once())
 	const sameOrigin = url.origin == window.location.origin
 	const isSandbox = sameOrigin && url.pathname.startsWith('/file/')
-	const {ContextMessenger} = await until(import('/-/js/context-messenger/index.js'))
+	const {ContextMessenger} = await until(safeImport('/-/js/context-messenger/index.js'))
 	if(!success) $.unreachable = await until(isUnreachable(url))
 	else if(isSandbox) $.messenger = new ContextMessenger(iframe.contentWindow)
 	$.loading = false

@@ -1,5 +1,5 @@
 let messenger
-const loading = import('/-/js/context-messenger/index.js')
+const loading = safeImport('/-/js/context-messenger/index.js')
 	.then(({ContextMessenger}) => messenger = new ContextMessenger(window.parent))
 	.then(() => messenger.ready())
 

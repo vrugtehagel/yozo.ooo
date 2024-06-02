@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
+safeImport('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
 </script>
 
 <style>

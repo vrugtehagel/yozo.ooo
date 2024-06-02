@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import('/-/js/test-suite/index.js').then(mod => $.TestSuite = mod.TestSuite)
+safeImport('/-/js/test-suite/index.js').then(mod => $.TestSuite = mod.TestSuite)
 const slot = query('slot')
 
 live.link($.$slotted, {
@@ -37,7 +37,7 @@ live.link($.$statuses, () => Array.from($.suite?.$state.statuses ?? []))
 live.link($.$step, () => $.suite?.$state.result ?? 'loading')
 
 effect(async () => {
-	const { $settings } = await until(import('/-/js/site-settings/index.js'))
+	const { $settings } = await until(safeImport('/-/js/site-settings/index.js'))
 	if($settings.runTests) $.suite?.run()
 })
 

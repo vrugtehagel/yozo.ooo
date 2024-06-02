@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import('/-/js/site-search/index.js').then(mod => $.siteSearch = mod)
+safeImport('/-/js/site-search/index.js').then(mod => $.siteSearch = mod)
 $.focused = false
 $.selected = 0
 live.link($.$value, query('input'))

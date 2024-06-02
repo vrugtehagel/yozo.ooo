@@ -16,9 +16,9 @@
 </template>
 
 <script>
-import('/-/js/play-manager/index.js').then(mod => $.playManager = mod)
-import('/-/js/file-server/index.js').then(mod => $.server = mod)
-import('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
+safeImport('/-/js/play-manager/index.js').then(mod => $.playManager = mod)
+safeImport('/-/js/file-server/index.js').then(mod => $.server = mod)
+safeImport('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
 
 const uiCodeEditor = query('ui-code-editor')
 const uiDisplayName = query('ui-display-name')

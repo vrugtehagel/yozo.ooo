@@ -33,7 +33,8 @@ function formatJS(code){
 function formatHTML(code){
 	const parts = code.split(/(<script>[^]*?<\/script>)/g)
 	for(let index = 1; index < parts.length; index += 2){
-		parts[index] = formatJS(parts[index].slice(8, -9))
+		const withoutTags = parts[index].slice(8, -9)
+		parts[index] = `<script>${formatJS(withoutTags)}</script>`
 	}
 	return parts.join('')
 }

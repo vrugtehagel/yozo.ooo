@@ -24,7 +24,7 @@ connected(() => {
 		this.dispatchEvent(new CustomEvent('input'))
 		this.dispatchEvent(new CustomEvent('change'))
 		isFaultyTrigger = true
-		await frame()
+		await frame().once()
 		isFaultyTrigger = false
 	})
 })

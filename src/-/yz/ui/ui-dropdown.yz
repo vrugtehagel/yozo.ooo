@@ -8,8 +8,7 @@
 <meta event=close>
 
 <template mode=closed>
-	<ui-button part=button :icon="$.icon || null" :iconstate="$.iconstate || null"
-		@click="$.open = !$.open"
+	<ui-button part=button :icon="$.icon || null" :iconstate="$.iconstate || null" @click="$.toggle()"
 	>{{ $.label }}</ui-button>
 	<div id=menu .hidden="!$.open" part=dropdown tabindex=-1>
 		<slot></slot>
@@ -27,7 +26,15 @@ connected(() => {
 	})
 })
 
+$.toggle = () => {
+	$.open = !$.open
+	if(this.matches(':focus')) return
+	// Safari bug, doesn't apply :focus properly
+	$.noAutoclose = true
+}
+
 effect(() => {
+	if($.noAutoclose) return
 	if(!$.autoclose) return
 	when(this).clicks()
 		.if(() => !this.matches(':focus'))

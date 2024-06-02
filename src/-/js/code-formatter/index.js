@@ -22,7 +22,7 @@ function formatIndentation(code){
 
 function formatJS(code){
 	if($settings.semicolons) return code
-	const parts = code.split(/(css`(?:[^`]|\\`)*`)/g)
+	const parts = code.split(/(`(?:(?!\${)[^`]|\\`)*`)/g)
 	const semicolons = /;(?=\s*?(?:\/\/.*)?$)/gm
 	for(let index = 0; index < parts.length; index += 2){
 		parts[index] = parts[index].replaceAll(semicolons, '')

@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
+safeImport('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
 
 const container = query('#container')
 const textarea = query('textarea')
@@ -32,7 +32,7 @@ live.link($.$numbers, () => {
 })
 
 connected(async () => {
-	const {attach} = await until(import('/-/js/input-keybinds/index.js'))
+	const {attach} = await until(safeImport('/-/js/input-keybinds/index.js'))
 	effect(() => attach(textarea, $.language))
 })
 

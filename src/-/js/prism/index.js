@@ -1,7 +1,6 @@
 window.Prism = {manual: true}
-await import('./prism.js')
+await safeImport('./prism.js', import.meta.url)
 export const Prism = window.Prism
-// delete window.Prism
 
 
 for(const jsLike of ['js', 'jsx']){

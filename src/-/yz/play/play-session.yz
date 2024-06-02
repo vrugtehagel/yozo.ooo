@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import('/-/js/play-manager/index.js').then(mod => $.playManager = mod)
+safeImport('/-/js/play-manager/index.js').then(mod => $.playManager = mod)
 </script>
 
 <style>

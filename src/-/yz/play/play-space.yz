@@ -25,8 +25,8 @@
 
 <script>
 Promise.all([
-	import('/-/js/file-server/index.js').then(mod => $.server = mod),
-	import('/-/js/play-manager/index.js').then(mod => $.playManager = mod),
+	safeImport('/-/js/file-server/index.js').then(mod => $.server = mod),
+	safeImport('/-/js/play-manager/index.js').then(mod => $.playManager = mod),
 	customElements.whenDefined('play-file-editor'),
 	customElements.whenDefined('play-preview')
 ]).then(() => $.loaded = true)

@@ -30,12 +30,12 @@ self.assert = pass => {
 }
 
 const {when} = window.yozo
-const {ContextMessenger} = await import('/-/js/context-messenger/index.js')
+const {ContextMessenger} = await safeImport('/-/js/context-messenger/index.js')
 const messenger = new ContextMessenger(window.parent)
 
 when(messenger).runs().then(async event => {
 	const {filename} = event.detail.payload
-	const [result] = await Promise.allSettled([import(`./${filename}`)])
+	const [result] = await Promise.allSettled([safeImport(`./${filename}`)])
 	const ok = result.status == 'fulfilled'
 	if(!ok) console.warn(result.reason)
 	const refresh = ok && result.value?.refresh

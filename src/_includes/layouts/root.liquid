@@ -18,12 +18,20 @@
 <link rel=preload as=font href=/-/fonts/dm-sans.woff2 type=font/woff2 crossorigin>
 <link rel=preload as=font href=/-/fonts/dm-mono.woff2 type=font/woff2 crossorigin>
 
-<script src=/lib-latest.js></script>
+<script src=/dev-latest.js></script>
 <script>
 	self.yozo.register.auto(name => {
 		const namespace = name.split('-', 1)[0]
 		return `/-/yz/${namespace}/${name}.yz`
 	})
+	// For a safari bug. Imports should work this way already.
+	window.safeImport = async (url, base = location.href) => {
+		const {cache} = safeImport
+		const absolute = new URL(url, base).href
+		if(!cache.has(absolute)) cache.set(absolute, import(absolute))
+		return await cache.get(absolute)
+	}
+	window.safeImport.cache = new Map
 </script>
 
 <style>@layer base, custom-elements, layout;</style>

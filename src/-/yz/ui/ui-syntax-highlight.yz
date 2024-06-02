@@ -5,8 +5,8 @@
 <template mode=closed><code></code></template>
 
 <script>
-import('/-/js/prism/index.js').then(({Prism}) => $.prism = Prism)
-import('/-/js/site-settings/index.js').then(mod => $.settings = mod)
+safeImport('/-/js/prism/index.js').then(mod => $.prism = mod)
+safeImport('/-/js/site-settings/index.js').then(mod => $.settings = mod)
 
 const code = query('code')
 
@@ -14,11 +14,12 @@ effect(() => {
 	if(!$.prism) return code.textContent = $.value
 	if($.settings?.$settings.maxCharHighlight < $.value.length)
 		return code.textContent = $.value
-	const grammar = $.prism.languages[$.language]
+	const {Prism} = $.prism
+	const grammar = Prism.languages[$.language]
 	const language = grammar ? $.language : 'txt'
 	code.className = `language-${language}`
 	if(language == 'txt') return code.textContent = $.value
-	code.innerHTML = $.prism.highlight($.value, grammar, language)
+	code.innerHTML = Prism.highlight($.value, grammar, language)
 })
 </script>
 

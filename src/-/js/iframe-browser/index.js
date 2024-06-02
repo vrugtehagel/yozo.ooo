@@ -1,4 +1,4 @@
-if(!URL.canParse) await import('/-/js/polyfills/index.js')
+if(!URL.canParse) await safeImport('/-/js/polyfills/index.js')
 const {when} = yozo
 
 

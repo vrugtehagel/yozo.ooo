@@ -15,10 +15,11 @@
 
 <script>
 safeImport('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
+safeImport('/-/js/code-formatter/index.js').then(mod => $.codeFormatter = mod)
 
 live.link($.$value, () => {
 	const content = $.content?.trim() ?? ''
-	return $.siteSettings?.format(content, $.language) ?? content
+	return $.codeFormatter?.format(content, $.language) ?? content
 })
 live.link($.$numbers, () => {
 	if(!$.siteSettings?.$settings.lineNumbers) return []

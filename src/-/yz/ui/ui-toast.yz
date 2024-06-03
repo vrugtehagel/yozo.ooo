@@ -34,7 +34,7 @@ $.show = purify(async (duration = 5000) => {
 	$.open = false
 	await until(paint())
 	$.open = true
-	await until(when(this).actions().or(timeout(duration)))
+	await until(when(this).actions().or(timeout(duration)).once())
 	if(!closeQueue.has(this)) return
 	removeQueue.delete(this)
 	closeQueue.delete(this)

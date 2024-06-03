@@ -33,15 +33,12 @@ const {when} = window.yozo
 const {ContextMessenger} = await import('/-/js/context-messenger/index.js')
 const messenger = new ContextMessenger(window.parent)
 
-when(messenger).runs().then(async event => {
-	const {filename} = event.detail.payload
+messenger.respondTo('run', async ({filename}) => {
 	const [result] = await Promise.allSettled([import(`./${filename}`)])
 	const ok = result.status == 'fulfilled'
 	if(!ok) console.warn(`${filename}: ${result.reason}`)
 	const refresh = ok && result.value?.refresh
-	event.detail.respond({ok, refresh})
+	return {ok, refresh}
 })
-
-messenger.ready()
 
 </script>

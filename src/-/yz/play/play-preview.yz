@@ -77,13 +77,16 @@ $.go = purify(async () => {
 	if(uiBrowser.status != 'complete') $.src = uiBrowser.src
 	else $.src = uiBrowser.src.replace(/^https:\/\/(?:www\.)?/, '')
 	this.dispatchEvent(new CustomEvent('srcchange'))
-	if(!uiBrowser.messenger) return
-	when(uiBrowser).messengerloads().then(() => $.consoleDisabled = false)
 	const {messenger} = uiBrowser
-	when(messenger).pings().then(() => $.blink(ping))
-	when(messenger).pongs().then(() => $.blink(pong))
-	when(messenger).errors().or(when(messenger).logs())
-		.then(({type, detail}) => $.message(type, detail.payload))
+	if(!messenger) return
+	$.consoleDisabled = false
+	const controller = new AbortController
+	const {signal} = controller
+	monitor.add('undo', () => controller.abort())
+	messenger.respondTo('ping', () => $.blink(ping), {signal})
+	messenger.respondTo('pong', () => $.blink(pong), {signal})
+	messenger.respondTo('log', payload => $.message('log', payload), {signal})
+	messenger.respondTo('error', payload => $.message('error', payload), {signal})
 })
 
 connected(() => {

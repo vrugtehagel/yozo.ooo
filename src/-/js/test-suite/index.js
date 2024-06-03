@@ -37,7 +37,6 @@ export class TestSuite {
 			else this.#window.location.reload()
 		})
 		this.#messenger = new ContextMessenger(this.#window)
-		await this.#messenger.ready()
 		this.#needsReload = false
 	}
 

@@ -1,44 +1,65 @@
 // When refactoring to module, delete this file and just use index.js
 (() => {
-	const {when} = self.yozo
+	self.ContextMessenger = class ContextMessenger {
+		#outgoing
+		#incoming
+		#connecting
 
-	self.ContextMessenger = class ContextMessenger extends EventTarget {
-		#isBroadcastChannel
-		#receiver
-		#sender
-
-		constructor(sender, receiver = self){
-			super()
-			this.#isBroadcastChannel = typeof sender == 'string'
-			if(this.#isBroadcastChannel)
-				sender = receiver = new BroadcastChannel(sender)
-			this.#sender = sender
-			this.#receiver = receiver
-			when(this.#receiver).messages().then(event => this.#respond(event))
+		constructor(outgoing, incoming = self) {
+			this.#outgoing = outgoing
+			this.#incoming = incoming
+			this.#connecting = this.#connect()
 		}
 
-		async send(type, payload = null){
-			const sender = this.#sender
+		async send(type, payload) {
+			if(type) await this.#connecting
+			const controller = new AbortController()
+			const { signal } = controller
 			const uuid = crypto.randomUUID()
-			const origin = location
-			const event = await when(this.#receiver).messages()
-				.if(event => event.data.uuid == uuid)
-				.once()
-				.after(() => sender.postMessage({type, uuid, payload}, origin))
-			return event.data.payload
+			const { origin } = window.location
+			const { promise, resolve } = Promise.withResolvers()
+			this.#incoming.addEventListener(`message`, (event) => {
+				if (event.data.uuid == uuid) resolve()
+			})
+			this.#outgoing.postMessage({ type, uuid, payload }, origin)
+			return promise.then(() => controller.abort())
 		}
 
-		#respond(event){
-			const sender = this.#isBroadcastChannel ? this.#sender : event.source
-			if(this.#sender != sender) return
-			const {type, uuid, payload} = event.data
-			if(type == 'respond') return
-			const respond = payload =>
-				sender.postMessage({type: 'respond', uuid, payload})
-			const detail = {payload, respond}
-			this.dispatchEvent(new CustomEvent(type, {detail}))
+		respondTo(type, handler, options) {
+			this.#incoming.addEventListener(`message`, (event) => {
+				this.#handleIncoming(event, type, handler)
+			}, options)
+		}
+
+		#verifySource(source) {
+			if (!source) return true
+			if (this.#outgoing == source) return true
+			if (this.#outgoing instanceof BroadcastChannel) return true
+			return false
+		}
+
+		async #handleIncoming(event, type, handler) {
+			if (event.data.type != type) return
+			const verified = this.#verifySource(event.source)
+			if (!verified) return
+			const response = await handler(event.data.payload)
+			const { uuid } = event.data
+			const payload = response
+			outgoing.postMessage({ type: null, uuid, payload })
+		}
+
+		async #connect() {
+			if (!Promise.withResolvers) await import(`/-/js/polyfills/index.js`)
+			if (this.#outgoing instanceof BroadcastChannel) return
+			await `microtask`
+			const { promise, resolve } = Promise.withResolvers()
+			const controller = new AbortController()
+			const { signal } = controller
+			this.respondTo(``, resolve, { signal })
+			const response = this.send(``)
+			await Promise.all([promise, response])
+			controller.abort()
 		}
 	}
 
 })()
-

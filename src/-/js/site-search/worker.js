@@ -35,8 +35,7 @@ function scorePage(page, targets){
 	return score
 }
 
-when(messenger).does('search').then(async event => {
-	const {query} = event.detail.payload
+messenger.respondTo('search', ({query}) => {
 	const targets = query
 		.toLowerCase()
 		.split(/[^\w$]+/g)
@@ -46,8 +45,6 @@ when(messenger).does('search').then(async event => {
 		.sort(([scoreA], [scoreB]) => scoreB - scoreA)
 		.filter(([score]) => score > 0)
 		.slice(0, 5)
-		.map(([score, { title, url }]) => ({ title, url, score }))
-	event.detail.respond(results)
+		.map(([score, {title, url}]) => ({title, url, score}))
+	return results
 })
-
-await messenger.ready()

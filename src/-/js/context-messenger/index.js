@@ -1,61 +1,65 @@
-// Cannot use when() here because this script needs to be able to exist
-// in "clean" contexts such as in the playground
+export class ContextMessenger {
+	#outgoing
+	#incoming
+	#connecting
 
-export class ContextMessenger extends EventTarget {
-	#receiver
-	#sender
-	#ready
-
-	constructor(sender, receiver = self){
-		super()
-		this.#sender = sender
-		this.#receiver = receiver
-		this.#receiver
-			.addEventListener('message', event => this.#respond(event))
+	constructor(outgoing, incoming = self){
+		this.#outgoing = outgoing
+		this.#incoming = incoming
+		this.#connecting = this.#connect()
 	}
 
-	async send(type, payload = null){
-		const sender = this.#sender
+	async send(type, payload){
+		if(type) await this.#connecting
+		const controller = new AbortController()
+		const {signal} = controller
+		const context = self == self.top ? 'top' : 'iframe'
 		const uuid = crypto.randomUUID()
-		const origin = location
-		const controller = new AbortController
-		const {signal} = controller
-		let done
-		const promise = new Promise(resolve => done = resolve)
-		this.#receiver.addEventListener('message', event => {
-			if(event.data.uuid != uuid) return
-			done(event.data.payload)
-			controller.abort()
-		}, {signal})
-		sender.postMessage({type, uuid, payload}, origin)
-		return await promise
+		const {origin} = self.location
+		const {promise, resolve} = Promise.withResolvers()
+		this.#incoming.addEventListener('message', event => {
+			if(event.data.uuid == uuid) resolve(event.data.payload)
+		})
+		this.#outgoing.postMessage({type, uuid, payload})
+		promise.then(() => controller.abort())
+		return promise
 	}
 
-	#respond(event){
-		const sender = event.source ?? this.#sender
-		if(this.#sender != sender) return
-		const {type, uuid, payload} = event.data
-		if(type == 'respond') return
-		const respond = payload =>
-			sender.postMessage({type: 'respond', uuid, payload})
-		const detail = {payload, respond}
-		this.dispatchEvent(new CustomEvent(type, {detail}))
+	respondTo(type, handler, options){
+		this.#incoming.addEventListener('message', event => {
+			this.#handleIncoming(event, type, handler)
+		}, options)
 	}
 
-	async ready(){
-		if(this.#ready) return
-		let resolve
-		const ready = new Promise(resolver => resolve = resolver)
-		const controller = new AbortController
+	#verifySource(source){
+		if(!source) return true
+		if(this.#outgoing == source) return true
+		if(this.#outgoing instanceof BroadcastChannel) return true
+		return false
+	}
+
+	async #handleIncoming(event, type, handler){
+		if(type == null) return
+		if(event.data.type != type) return
+		const verified = this.#verifySource(event.source)
+		if(!verified) return
+		const response = await handler(event.data.payload)
+		const {uuid} = event.data
+		const payload = response
+		this.#outgoing.postMessage({type: null, uuid, payload})
+	}
+
+	async #connect(){
+		const context = self == self.top ? 'top' : 'iframe'
+		if(!Promise.withResolvers) await import('/-/js/polyfills/index.js')
+		if(this.#outgoing instanceof BroadcastChannel) return
+		await 'microtask'
+		const {promise, resolve} = Promise.withResolvers()
+		const controller = new AbortController()
 		const {signal} = controller
-		this.addEventListener('ready', event => {
-			event.detail.respond()
-			resolve()
-		}, {signal})
-		const answer = this.send('ready')
-		await Promise.any([answer, ready])
+		this.respondTo('', resolve, {signal})
+		const response = this.send('')
+		await Promise.any([promise, response])
 		controller.abort()
-		this.#ready = true
 	}
-
 }

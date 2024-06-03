@@ -6,7 +6,6 @@
 <meta property=status readonly>
 <meta property=messenger readonly>
 <meta event=statuschange>
-<meta event=messengerload>
 
 <template mode=closed delegates-focus=true>
 	<div id=container tabindex=0>
@@ -96,12 +95,6 @@ $.cancel = () => {
 }
 
 $.reload = async () => $.navigate($.src)
-
-effect(async () => {
-	if(!$.messenger) return
-	await until($.messenger.ready())
-	this.dispatchEvent(new CustomEvent('messengerload'))
-})
 </script>
 
 <style>

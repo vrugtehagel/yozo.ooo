@@ -1,0 +1,134 @@
+<title>test-suite</title>
+<meta attribute=testdata>
+
+<template mode=closed>
+	<ui-icon type=pulse></ui-icon>
+	<test-runner :suite="$.suite" :filenames="$.filenames?.join(' ')"></test-runner>
+	<ui-button #if="$.step == 'pending'" icon=play aria-label="Run tests" @click="$.run()"></ui-button>
+	<ui-icon #else-if="$.step == 'running'" type=spinner></ui-icon>
+	<ui-dropdown #else :icon="$.step" @open="$.view($.filenames[0])">
+		<div id=overview>
+			<div id=titlebar>
+				<span>{{ $.message }}</span>
+				<ui-button icon="github-issue" href="https://github.com/vrugtehagel/yozo/issues/new" #if="!$.results.ok">File an issue</ui-button>
+				<ui-button icon=close @click="this.closest('ui-dropdown').open = false"></ui-button>
+			</div>
+			<div id=picker>
+				<ui-button #for="filename of $.filenames" :icon="$.results.statuses[filename] == 'fail' ? 'fail' : null" :class+selected="$.selected == filename" @click="$.selected == filename || $.view(filename)">
+					{{ filename }}
+				</ui-button>
+			</div>
+			<div id=files>
+				<ui-loader></ui-loader>
+				<ui-code language=js hidden></ui-code>
+				<ui-code language=yz hidden></ui-code>
+			</div>
+		</div>
+	</ui-dropdown>
+</template>
+
+<script>
+const testRunner = query('test-runner')
+
+$.step = 'pending'
+
+live.link($.$data, () => JSON.parse($.$attributes.testdata))
+live.link($.$suite, () => $.data?.path)
+live.link($.$filenames, () => $.data?.tests.map(test => test.filename))
+live.link($.$message, () => {
+	if(!$.results) return 'Running…'
+	const {success, fail, total} = $.results.amounts
+	if(total == 0) return 'No tests were run.'
+	if(success == total) return 'All tests passed.'
+	if(fail == 1) return 'A test failed! Please report the failing test.'
+	return `${fail} tests failed! Please report the failing tests.`
+})
+
+$.run = purify(async () => {
+	$.step = 'running'
+	await until(customElements.whenDefined('test-runner'))
+	$.results = await until(testRunner.run())
+	$.step = $.results.status
+	await until('microtask')
+	const dropdown = query('ui-dropdown')
+})
+
+$.view = purify(async filename => {
+	$.selected = filename
+	const loader = query('#overview ui-loader')
+	const jsCode = query('#overview ui-code[language=js]')
+	const yzCode = query('#overview ui-code[language=yz]')
+	loader.hidden = false
+	const test = $.data.tests.find(test => test.filename == filename)
+	const {hasComponent} = test
+	const jsURL = `/${$.suite}/${filename}`
+	const yzURL = jsURL.replace(/\.js$/g, '.yz')
+	const controller = new AbortController
+	const {signal} = controller
+	monitor.add('undo', () => controller.abort())
+	const promises = [fetch(jsURL, {signal}).then(response => response.text())]
+	if(hasComponent)
+		promises.push(fetch(yzURL, {signal}).then(response => response.text()))
+	const [jsSource, yzSource] = await until(Promise.all(promises))
+	jsCode.textContent = jsSource ?? ''
+	yzCode.textContent = yzSource ?? ''
+	jsCode.hidden = false
+	yzCode.hidden = !yzSource
+	loader.hidden = true
+})
+
+effect(async () => {
+	const { $settings } = await until(safeImport('/-/js/site-settings/index.js'))
+	if($settings.runTests) $.run()
+})
+</script>
+
+<style>
+:host {
+	display: inline-flex;
+	align-items: center;
+}
+ui-icon[type=pulse]{ color: var(--comment-color); }
+ui-button[icon=play]:hover { background-color: var(--background-color); }
+ui-dropdown {
+	&[icon=success]::part(button){ color: var(--primary-color); }
+	&[icon=fail]::part(button){ color: var(--error-color); }
+	&::part(button):hover { background-color: var(--background-color); }
+	&::part(dropdown){
+		min-height: 10rem; max-height: min(100vh - 9.5rem); width: min(100vw - 4rem, 44rem);
+		padding: 1rem;
+		inset: -.5rem -.5rem auto auto;
+	}
+}
+#overview {
+	flex: 1;
+	display: grid; width: 100%; height: 0;
+	grid: auto auto minmax(0, 1fr) / 1fr; gap: .5rem;
+}
+#titlebar {
+	display: flex; padding: 0 0 0 1rem; margin: -.5rem -.5rem 0;
+	align-items: center; gap: .5rem;
+	span { margin-right: auto; }
+}
+#picker {
+	display: flex;
+	flex-flow: row wrap; gap: .5rem;
+	ui-button.selected { background-color: var(--highlight-color); }
+	ui-button[icon=fail]{ color: var(--error-color); }
+}
+#files {
+	display: flex;
+	flex-direction: column; gap: 1rem;
+	position: relative;
+	ui-loader {
+		position: absolute; inset: 0; z-index: 1;
+		background-color: var(--sub-background-color);
+		border-radius: 1rem;
+	}
+	ui-code {
+		width: 44rem;
+		background-color: var(--sub-background-color);
+	}
+	:is(ui-loader, ui-code)[hidden]{ display: none; }
+}
+</style>

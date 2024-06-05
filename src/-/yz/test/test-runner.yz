@@ -1,0 +1,55 @@
+<title>test-runner</title>
+<meta attribute=suite type=string>
+<meta attribute=filenames type=string>
+<meta method=run>
+
+<template mode=closed>
+	<ul id=results>
+		<li #for="filename of $.filenames.split(/\s+/g)" :class="$.getStatus(filename)">
+			{{ $.getStatus(filename) }}
+		</li>
+	</ul>
+</template>
+
+<script>
+$.run = purify(async () => {
+	if(!$.filenames || !$.suite) return
+	const filenames = $.filenames.split(/\s+/g)
+	const {TestRunner} = await until(safeImport('/-/js/test-runner/index.js'))
+	$.runner = new TestRunner($.suite, filenames)
+	const ok = await until($.runner.run())
+	const status = ok ? 'success' : 'fail'
+	const statuses = live.get($.runner.$statuses)
+	const success = Object.values(statuses)
+		.filter(status => status == 'success').length
+	const fail = Object.values(statuses).filter(status => status == 'fail').length
+	const total = filenames.length
+	const amounts = {success, fail, total}
+	return {status, statuses, ok, amounts}
+})
+
+$.getStatus = filename => {
+	if(!$.runner) return 'pending'
+	return live.get($.runner.$statuses, filename)
+}
+</script>
+
+<style>
+ul {
+	list-style: none;
+	display: flex; height: 1.5rem;
+	padding: .75rem .5rem .75rem .25rem; margin: 0;
+	gap: .375rem;
+	li {
+		width: .375rem;
+		color: transparent;
+		overflow: clip;
+		text-indent: 1rem;
+		border-radius: 1rem;
+	}
+	.pending { background-color: var(--highlight-color); }
+	.running { background-color: var(--comment-color); }
+	.fail { background-color: var(--error-color); }
+	.success { background-color: var(--primary-color); }
+}
+</style>

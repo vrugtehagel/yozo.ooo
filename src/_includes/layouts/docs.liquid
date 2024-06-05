@@ -40,14 +40,7 @@
 			{% endunless %}
 
 			{% if suite and suite.tests.length > 0 %}
-				<docs-tests suitepath="/{{ suite.path }}/">
-					{% for test in suite.tests %}
-						<docs-test
-							filename="{{ test.filename }}"
-							{% if test.hasComponent %}hascomponent{% endif %}
-						></docs-test>
-					{% endfor %}
-				</docs-tests>
+				<test-suite testdata="{{ suite | json | escape }}"></test-suite>
 			{% endif %}
 		</div>
 

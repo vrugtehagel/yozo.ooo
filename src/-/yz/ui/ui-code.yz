@@ -44,7 +44,7 @@ connected(() => {
 	overflow: auto;
 }
 #container {
-	display: flex; padding: 1rem 2rem;
+	display: flex; padding: 1rem 2rem; min-height: 100%; box-sizing: border-box;
 	overflow: auto;
 }
 #line-numbers {

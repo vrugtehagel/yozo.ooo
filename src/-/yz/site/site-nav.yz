@@ -19,12 +19,21 @@
 </template>
 
 <script>
-$.toggleSearch = async () => {
-	$.searching = !$.searching
+$.toggleSearch = async state => {
+	$.searching = state ?? !$.searching
 	if(!$.searching) return
 	await paint()
 	query('site-search').focus()
 }
+
+connected(() => {
+	when(document).keydowns().then(event => {
+		if(event.key != 'k') return
+		if(!event.ctrlKey && !event.metaKey) return
+		event.preventDefault()
+		$.toggleSearch(true)
+	})
+})
 </script>
 
 <style>

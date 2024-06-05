@@ -17,7 +17,7 @@ live.get($live, key);
 ### Parameters
 
 `$live`{arg}
-: Either a [live](/docs/live/) variable to unwrap, or to read a key off of. This value may also be any other non-live value, in which case the function returns the value itself (or, in case a key is provided, acts like a property access).
+: A [live](/docs/live/) variable to either unwrap or to read a key off of. This value may also be any other non-live value, in which case the function returns the value itself (or, in case a key is provided, acts like a property access).
 
 `key`{arg} <mark>optional</mark>
 : A string (or symbol) representing a key on the `$live`{arg} object to access.
@@ -27,10 +27,12 @@ live.get($live, key);
 When omitting the `key`{arg} argument, the return value is the non-live version of the `$live`{arg} argument. If it is not live to begin with, then `$live`{arg} itself is returned; otherwise, the live `$live`{arg} is unwrapped and its underlying value is returned.
 
 :::info
-**Note:** Accessing a live variable adds it to the monitored context (if [type "live"](/docs/monitor/live/) is monitored). This includes calls to `live.get()`{js}.
+**Note:** Reading a live variable's value adds it to the monitored context of [type "live"](/docs/monitor/live/), if there is one. This includes calls to `live.get()`{js}.
 :::
 
 If a non-nullish key is provided, the unwrapped value at the `key`{arg} property is returned. This is regardless of whether or not the first argument is live. In most cases, this is equivalent to a regular property access, `$live[key]`{js}, but not always. Specifically, it is not the same if key is a string starting with a dollar symbol. For example, `$live.$foo`{js} retrieves the live variable around the value at the `'foo'`{js} key (note the lack of a dollar symbol) whereas `live.get($live, '$foo')`{js} retrieves the unwrapped value at the `'$foo'`{js} key. In other words, if the key does not start with a dollar symbol, then property accessing is safe; in other cases, such as dynamic keys or in low-level functions, use `live.get()`{js}.
+
+Lastly, `live.get()`{js} bypasses a live variable's `EventTarget`{js} properties. For example, `live.get($live, 'addEventListener')`{js} attempts to read the literal `'addEventListener'`{js} key on the underlying value as opposed to the method on the live wrapper itself.
 
 ## Examples
 

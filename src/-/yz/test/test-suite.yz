@@ -9,6 +9,7 @@
 	<ui-dropdown #else :icon="$.step" @open="$.view($.filenames[0])">
 		<div id=overview>
 			<div id=titlebar>
+				<ui-icon type=pulse></ui-icon>
 				<span>{{ $.message }}</span>
 				<ui-button icon="github-issue" href="https://github.com/vrugtehagel/yozo/issues/new" #if="!$.results.ok">File an issue</ui-button>
 				<ui-button icon=close @click="this.closest('ui-dropdown').open = false"></ui-button>
@@ -106,7 +107,7 @@ ui-dropdown {
 	grid: auto auto minmax(0, 1fr) / 1fr; gap: .5rem;
 }
 #titlebar {
-	display: flex; padding: 0 0 0 1rem; margin: -.5rem -.5rem 0;
+	display: flex; padding: 0; margin: -.5rem -.5rem 0;
 	align-items: center; gap: .5rem;
 	span { margin-right: auto; }
 }

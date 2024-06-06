@@ -28,7 +28,7 @@ export default function(config){
 	config.addPassthroughCopy({
 		'yozo/versions.json': 'versions.json',
 		'yozo/archive': 'archive',
-		'yozo/test': 'test',
+		'yozo/test': 'docs',
 		'yozo/latest/lib.js': 'lib-latest.js',
 		'yozo/latest/dev.js': 'dev-latest.js',
 	})

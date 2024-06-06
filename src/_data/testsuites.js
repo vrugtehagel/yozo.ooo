@@ -7,7 +7,7 @@ export default async function(){
 	const dirents = await Array.fromAsync(walk('yozo/test'))
 	const paths = dirents
 		.filter(({isFile}) => isFile)
-		.map(file => file.path)
+		.map(file => file.path.replace('test/', '/docs/'))
 	const jsPaths = paths.filter(path => path.endsWith('.js'))
 	const yzPaths = paths.filter(path => path.endsWith('.yz'))
 
@@ -18,9 +18,9 @@ export default async function(){
 		const yzPath = jsPath.replace(/\.js$/, '.yz')
 		const hasComponent = yzPaths.includes(yzPath)
 		const tests = suites.get(suite) ?? []
-		tests.push({ filename, hasComponent })
+		tests.push(hasComponent ? {filename, hasComponent} : {filename})
 		suites.set(suite, tests)
 	}
 
-	return [...suites].map(([path, tests]) => ({ path, tests }))
+	return [...suites].map(([path, tests]) => ({path, tests}))
 }

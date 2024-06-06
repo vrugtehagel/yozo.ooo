@@ -16,7 +16,7 @@
 	assign ancestors = crumbs | pop
 	assign current = crumbs | last
 
-	assign suite_url = page.url | replace: "/docs/", "test/" | slice: 0, -1
+	assign suite_url = page.url | slice: 0, -1
 	assign suite = testsuites | where: "path", suite_url | first
 %}
 

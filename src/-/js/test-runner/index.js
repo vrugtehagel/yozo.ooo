@@ -18,7 +18,7 @@ export class TestRunner {
 		iframe.classList.add('sr-only')
 		document.body.append(iframe)
 		await when(iframe).loads().once()
-			.after(() => iframe.src = `/${this.#suite}/sandbox.html`)
+			.after(() => iframe.src = `${this.#suite}/sandbox.html`)
 		let messenger = new ContextMessenger(iframe.contentWindow)
 		let success = true
 		for(const filename of this.#filenames){

@@ -1,0 +1,25 @@
+<title>ui-copy</title>
+<meta attribute=value type=string>
+<meta attribute=label type=string>
+
+<template mode=closed>
+	<ui-button icon=copy @click="$.copy()" aria-label="Copy">{{ $.label }}</ui-button>
+</template>
+
+<script>
+const uiButton = query('ui-button')
+
+$.copy = purify(async () => {
+	const [{status}] = await until(Promise.allSettled([
+		navigator.clipboard.writeText($.value)
+	]))
+	uiButton.icon = status == 'fulfilled' ? 'checkmark' : 'fail'
+	await timeout(3000)
+	uiButton.icon = 'copy'
+})
+</script>
+
+<style>
+ui-button { color: var(--comment-color); }
+ui-button[icon=checkmark]{ color: var(--primary-color); }
+</style>

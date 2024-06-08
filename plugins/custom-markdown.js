@@ -22,7 +22,7 @@ function blockCodeRule(tokens, index){
 	const token = tokens[index]
 	const { content, info } = token
 	const escaped = htmlEscape(content)
-	return `<ui-code language="${info}">${escaped}</ui-code>`
+	return `<ui-code language="${info}" cancopy>${escaped}</ui-code>`
 }
 
 function inlineCodeRule(tokens, index){

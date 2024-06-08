@@ -83,4 +83,4 @@ And it doesn't end there; see below for a complete list of the things Yozo provi
 
 Yozo values a robust and trustworthy environment. Since a big part of Yozo's functionality (i.e. the custom element part) expects a browser environment, a simple custom testing framework was put in place so that tests can be written in a format easily digestable by both [Deno](https://deno.land/) (for the non-browser specific tests) as well as the browser.
 
-Every page in the documentation has associated tests. They are shown at the top right of each page. To avoid unnecessarily running tests in user's browsers, they don't run automatically by default, but it is possible enable that in the site settings (see footer). To run all tests at once, see the [tests page](/tests/).
+Every page in the documentation has associated tests. They are shown at the top right of each page. To avoid unnecessarily running tests in user's browsers, they don't run automatically by default, but it is possible enable that in the site settings (see footer). To run all tests at once, see the [tests page](/test/).

@@ -8,10 +8,10 @@
 	<ui-icon #else-if="$.step == 'running'" type=spinner></ui-icon>
 	<ui-dropdown #else :icon="$.step" @open="$.view($.filenames[0])">
 		<div id=overview>
-			<div id=titlebar>
+			<div id=titlebar :class+fail="!$.results.ok">
 				<ui-icon type=pulse></ui-icon>
 				<span>{{ $.message }}</span>
-				<ui-button icon="github-issue" href="https://github.com/vrugtehagel/yozo/issues/new" #if="!$.results.ok">File an issue</ui-button>
+				<ui-button icon=github-issue href="https://github.com/vrugtehagel/yozo/issues/new">File an issue</ui-button>
 				<ui-button icon=close @click="this.closest('ui-dropdown').open = false"></ui-button>
 			</div>
 			<div id=picker>
@@ -62,7 +62,7 @@ $.view = purify(async filename => {
 	loader.hidden = false
 	const test = $.data.tests.find(test => test.filename == filename)
 	const {hasComponent} = test
-	const jsURL = `/${$.suite}/${filename}`
+	const jsURL = `${$.suite}/${filename}`
 	const yzURL = jsURL.replace(/\.js$/g, '.yz')
 	const controller = new AbortController
 	const {signal} = controller
@@ -109,7 +109,11 @@ ui-dropdown {
 #titlebar {
 	display: flex; padding: 0; margin: -.5rem -.5rem 0;
 	align-items: center; gap: .5rem;
-	span { margin-right: auto; }
+	span {
+		margin-right: auto;
+		color: var(--comment-color);
+	}
+	&:not(.fail) ui-button[icon=github-issue]{ display: none; }
 }
 #picker {
 	display: flex;

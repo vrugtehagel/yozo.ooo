@@ -77,7 +77,7 @@ await when(img).loads().once()
 	.after(() => img.src = '/cat.png');
 ```
 
-And it doesn't end there; see below for a complete list of the things Yozo provides.
+And it doesn't end there; see the [reference](#reference) above for a complete list of the things Yozo provides.
 
 ## Tests
 

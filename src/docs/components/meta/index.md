@@ -89,7 +89,7 @@ We first defined the component name using the [`<title>`](/docs/components/title
 
 ## Usage notes
 
-Some things could be nice to express in the form of meta tags, such as events a component may dispatch. While Yozo could potentially introduce new types of meta tags in the future, it is entirely possible to add meta tags that Yozo does not understand, such as e.g. `<meta event="input">`{yz}. You are encouraged to document these, though for those worried about forward compatibility, note that using any other dash-including tag name is future-proof. In other words, instead of documenting additional interface properties using `<meta>`{yz}, using e.g. `<x-meta>`{yz} will never clash with future versions of Yozo.
+Some things could be nice to express in the form of meta tags, such as events a component may dispatch. While Yozo could potentially introduce new types of meta tags in the future, it is entirely possible to add meta tags that Yozo does not understand, such as e.g. `<meta event="input">`{yz}. Authors are encouraged to document these, though for those worried about forward compatibility, note that using any other dash-including tag name is future-proof. In other words, instead of documenting additional interface properties using `<meta>`{yz}, using e.g. `<x-meta>`{yz} will never clash with future versions of Yozo.
 
 ## See also
 

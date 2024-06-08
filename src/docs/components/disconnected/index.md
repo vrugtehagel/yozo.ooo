@@ -64,7 +64,7 @@ disconnected(() => {
 </script>
 ```
 
-This is, of course, an overly verbose way to do this. [`when()`](/docs/when/) is flow-based, and flows participate in [type "undo"](/docs/monitor/undo/) monitored contexts. In other words; when using `when()`{js} inside a lifecycle callback, then the callback can "see" the listener and take it down when appropriate. Using `.addEventListener()`{js} sidesteps this system, which then means we need to specify the `disconnected()`{js} callback to avoid the listener leaking.
+This is, however, an overly verbose way to do this. [`when()`](/docs/when/) is flow-based, and flows participate in [type "undo"](/docs/monitor/undo/) monitored contexts. In other words; when using `when()`{js} inside a lifecycle callback, then the callback can "see" the listener and take it down when appropriate. Using `.addEventListener()`{js} sidesteps this system, which then means we need to specify the `disconnected()`{js} callback to avoid the listener leaking.
 
 ## See also
 

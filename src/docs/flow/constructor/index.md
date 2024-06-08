@@ -42,7 +42,7 @@ function interval(duration){
 }
 ```
 
-However, this by itself has a big lurking issue; the interval never stops. You can call [`flow.stop()`](/docs/flow/stop/) on the flow, but the `setInterval()`{js} will keep going.
+However, this by itself has a big lurking issue; the interval never stops. We can call [`flow.stop()`](/docs/flow/stop/) on the flow, but the `setInterval()`{js} will keep going.
 
 :::info
 **Note:** When using the development bundle for Yozo, there is a warning to prevent this kind of issue. Specifically, it will throw a warning whenever a flow was stopped, but the `trigger`{js} function given in the constructor is being called.

@@ -27,6 +27,8 @@ effect(() => {
 :host {
 	width: max-content;
 	font-family: var(--font-monospace);
+	/* Fixes alignment issue in Safari */
+	vertical-align: bottom;
 }
 code {
 	width: max-content;

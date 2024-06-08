@@ -10,6 +10,7 @@ const output = document.querySelector('#output')
 
 when(runAll).clicks().then(async () => {
 	runAll.remove()
+	progress.textContent = `0%`
 	summary.hidden = false
 	await customElements.whenDefined('ui-icon')
 	let done = 0

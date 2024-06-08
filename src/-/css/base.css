@@ -27,9 +27,8 @@
 	}
 	.sr-only {
 		width: 1px; height: 1px; padding: 0; margin: -1px;
-		position: absolute;
+		position: fixed; inset: 4rem 0 auto auto;
 		overflow: hidden;
-		clip-path: inset(50%);
 	}
 	h1 {
 		margin: 1.5em 0 1em;

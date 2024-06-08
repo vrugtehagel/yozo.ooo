@@ -1,6 +1,6 @@
 import { ContextMessenger } from '/-/js/context-messenger/index.js'
 
-const {when, live} = window.yozo
+const {when, live, paint} = window.yozo
 
 export class TestRunner {
 	$statuses = live({})
@@ -33,6 +33,9 @@ export class TestRunner {
 			messenger = new ContextMessenger(iframe.contentWindow)
 		}
 		iframe.src = 'about:blank'
+		// Safari bug:
+		// Freezes completely if the iframe is removed too quickly
+		await paint()
 		iframe.remove()
 		return success
 	}

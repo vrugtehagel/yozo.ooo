@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+	<defs>
+		<mask id="text">
+			<rect x="0" y="0" width="24" height="24" fill="white"/>
+			<path d="M5 16Q7.2 15.6 8.8 14.8M5.2 12.4Q7.2 12 8.8 11.2M5.2 8.8Q7.2 8.4 8.8 7.6M15.2 7.6Q16.8 8.4 18.8 8.8M15.2 11.2Q16.8 12 18.8 12.4M15.2 14.8Q16.8 15.6 18.8 16" stroke="black" fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5"/>
+		</mask>
+	</defs>
+	<path d="M2 6C8 6 9.5 2 12 6V20C10 16 8 20 2 20ZM12 6C14.5 2 16 6 22 6V20C16 20 14 16 12 20Z" stroke="currentColor" fill="currentColor" stroke-linejoin="round" stroke-linecap="round" fill-rule="evenodd" mask="url(#text)"/>
+</svg>

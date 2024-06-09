@@ -3,12 +3,12 @@
 <template mode=closed>
 	<ui-loader #if="!$.playManager"></ui-loader>
 	<div id=disconnected #if="$.playManager?.$play.mode == 'disconnected'">
-		<img src=/-/img/play-disconnected.svg alt="" width="128" height="128">
+		<img src=/play/disconnected.svg alt="" width="128" height="128">
 		Session disconnected.
 		<ui-button @click="$.playManager?.reconnect()">Reconnect</ui-button>
 	</div>
 	<div id=disabled #else-if="$.playManager?.$play.mode == 'disabled'">
-		<img src=/-/img/play-disabled.svg alt="" width="128" height="128">
+		<img src=/play/disabled.svg alt="" width="128" height="128">
 		Uh oh, your browser doesn't support service workers!
 	</div>
 	<div id=creation-picker .hidden="$.playManager?.$play.mode != 'picking'">

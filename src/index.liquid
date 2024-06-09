@@ -29,21 +29,21 @@
 		<header class=sr-only>
 			<h2>Selling points</h2>
 		</header>
-		<section class=selling-point>
+		<section class=selling-point style="--theme-color: var(--primary-color)">
 			<h3>
 				<ui-icon type=tiny></ui-icon>
 				Really really small
 			</h3>
-			<p>Yozo's latest releast comes in at {{ versions[0].size.gzip }} bytes gzipped, and it will always remain less than 5kB to keep sites snappy and responsive. For reference, that's smaller than this image of a car: <img src=/-/img/tiny-van.png alt="Very small image of a red van" width=64 height=24 loading=lazy></p>
+			<p>Yozo's latest releast comes in at {{ versions[0].size.gzip }} bytes gzipped, and it will always remain less than 5kB to keep sites snappy and responsive. For reference, that's smaller than this image of a car: <img src=./tiny-van.png alt="Very small image of a red van" width=64 height=24 loading=lazy></p>
 		</section>
-		<section class=selling-point>
+		<section class=selling-point style="--theme-color: var(--keyword-color)">
 			<h3>
 				<ui-icon type=web-components></ui-icon>
 				Web components
 			</h3>
 			<p>Built on top of native web components, Yozo works everywhere and plays nice with other tools. Write your components once, and use them in any project.</p>
 		</section>
-		<section class=selling-point>
+		<section class=selling-point style="--theme-color: var(--parameter-color)">
 			<h3>
 				<ui-icon type=forward></ui-icon>
 				Skip the hassle
@@ -60,11 +60,26 @@
 		</div>
 		<home-compare></home-compare>
 	</section>
-	<section>
-		<h2>From the author</h2>
-		<p>I've always been unsatisfied with the complexity of modern frameworks, particularly having to adapt to a virtual DOM, as well as the vast amount of utility functions there were, and helper libraries on top of that. And then, after getting through it all, I've added tens, if not hundreds of kilobytes to the end result. I wanted something else.</p>
-		<p>There are lots of libraries that solve some of these issues, and even some that solve them all, but they come at the cost of developer experience. But now, I've gotten used to using Node, NPM, setting up and configuring projects, but I don't believe this is the way it should be. So, I created Yozo, so I can create components that work the way I used to write code when I started programming; just with a text editor and a browser.</p>
-		<p>Of course, I could've stopped when the framework was done. Slapped some comments on the source code and call it a day. Job done, right? Well, that just seems like a waste to me. I've dedicated years of my spare time to this library. I really, <em>really</em> want it to be good, and I'm thinking other people might enjoy Yozo as well. So, here's a website for it, hoping it helps people understand Yozo a bit better.</p>
-		<p>I hope you love Yozo as much as I do.</p>
+	<section id=explore>
+		<h2>Explore</h2>
+		<p>From here, discover the resources Yozo has to offer.</p>
+		<nav>
+			<a href=/docs/ style="--theme-color: var(--name-color);">
+				<ui-icon type=book></ui-icon>
+				Documentation
+			</a>
+			<span class=soon style="--theme-color: var(--primary-color);">
+				<ui-icon type=learn></ui-icon>
+				Take a tour
+			</span>
+			<a href=/play/ style="--theme-color: var(--keyword-color);">
+				<ui-icon type=controller></ui-icon>
+				Playground
+			</a>
+			<span href=/blog/ class=soon style="--theme-color: var(--string-color);">
+				<ui-icon type=chat></ui-icon>
+				Blog
+			</span>
+		</nav>
 	</section>
 </main>

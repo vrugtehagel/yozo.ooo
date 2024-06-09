@@ -55,7 +55,7 @@ h2 {
 			content: "";
 			display: block; width: 100vw; height: 100%;
 			position: absolute; inset: 0 100% 0 auto;
-			background: center right / auto 100% repeat-x url("/-/img/home-logo-blocks.svg");
+			background: center right / auto 100% repeat-x url("./logo-blocks.svg");
 		}
 		&::after {
 			inset: 0 auto 0 100%;
@@ -85,20 +85,14 @@ h2 {
 	background-color: var(--background-color);
 	h3 {
 		margin: 0 0 1em;
+		color: var(--theme-color);
 		font-size: 1.5rem
 	}
-	.selling-point:nth-child(2) h3 { color: var(--primary-color); }
-	.selling-point:nth-child(3) h3 { color: var(--keyword-color); }
-	.selling-point:nth-child(4) h3 { color: var(--parameter-color); }
 	img { vertical-align: middle; }
 	ui-icon {
 		vertical-align: -.25rem;
 		padding: 0;
 		margin: 0 .5ch 0 0;
-	}
-	b {
-		font-weight: normal;
-		color: var(--primary-color);
 	}
 	@media (width < 900px){
 		flex-direction: column; gap: 3rem;
@@ -118,6 +112,44 @@ h2 {
 	}
 }
 
-#getting-started {
-	header { text-align: center; }
+#explore {
+	h2, h2 + p { text-align: center; }
+	nav {
+		display: grid; margin: 3rem auto;
+		grid: auto / repeat(4, 1fr); gap: 2rem;
+		a, .soon {
+			display: flex; min-width: 8rem; padding: 1rem;
+			flex-direction: column; align-items: center; gap: .5rem;
+			color: var(--text-color); background-color: var(--background-color);
+			border-radius: 1rem;
+			text-decoration: none;
+			transition: background-color .2s;
+		}
+		a:hover { background-color: var(--highlight-color); }
+		.soon {
+			color: var(--comment-color);
+			position: relative;
+			&::after {
+				content: "Coming soon-ish";
+				display: inline-block; padding: 0 1rem;
+				position: absolute; inset: -.75rem -.75rem auto auto; z-index: 1;
+				color: var(--sub-background-color); background-color: var(--comment-color);
+				border-radius: .5rem;
+				font-variant: small-caps; font-weight: bold;
+				text-transform: lowercase;
+			}
+			ui-icon { color: var(--comment-color); }
+		}
+		ui-icon {
+			display: block; width: 3rem; height: 3rem; padding: 0; margin: .5rem;
+			color: var(--theme-color);
+		}
+		@media(width < 800px){
+			grid: auto auto / 1fr 1fr;
+			ui-icon { width: 2.5rem; height: 2.5rem; }
+		}
+		@media(width < 400px){
+			grid: repeat(4, auto) / 1fr;
+		}
+	}
 }

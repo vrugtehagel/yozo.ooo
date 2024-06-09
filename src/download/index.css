@@ -1,7 +1,7 @@
 #download-latest {
 	display: flex; margin: 3rem auto;
 	justify-content: center; gap: 2rem;
-	& a {
+	a {
 		display: flex; min-width: 10rem; padding: 1rem;
 		flex-direction: column; align-items: center; gap: .5rem;
 		color: var(--text-color); background-color: var(--background-color);
@@ -10,12 +10,7 @@
 		transition: background-color .2s;
 		&:hover { background-color: var(--highlight-color); }
 	}
-	& ui-button {
-		height: auto;
-		line-height: 2rem;
-		text-align: center;
-	}
-	& ui-icon {
+	ui-icon {
 		display: block; width: 2.5rem; height: 2.5rem; padding: 0; margin: .5rem;
 	}
 }

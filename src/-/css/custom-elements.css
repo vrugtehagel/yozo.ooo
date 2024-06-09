@@ -29,5 +29,6 @@
 		background-color: var(--background-color);
 		& > :first-child { margin-top: 0; }
 		& > :last-child { margin-bottom: 0; }
+		&:not(:defined){ padding-left: 4.75rem; }
 	}
 }

@@ -10,7 +10,7 @@ safeImport('/-/js/site-settings/index.js').then(mod => $.settings = mod)
 
 const code = query('code')
 
-effect(() => {
+effect(async () => {
 	if(!$.prism) return code.textContent = $.value
 	if($.settings?.$settings.maxCharHighlight < $.value.length)
 		return code.textContent = $.value
@@ -19,6 +19,8 @@ effect(() => {
 	const language = grammar ? $.language : 'txt'
 	code.className = `language-${language}`
 	if(language == 'txt') return code.textContent = $.value
+	await until(when(this).observes('intersection')
+		.if(([{isIntersecting}]) => isIntersecting).once())
 	code.innerHTML = Prism.highlight($.value, grammar, language)
 })
 </script>

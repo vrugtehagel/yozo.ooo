@@ -24,7 +24,7 @@ Before we get started, a quick overview. Below is a comprehensive list of Yozo's
 
 ## Getting started
 
-Yozo is a web component-based framework that tries to maximize what you get while remaining as small as possible. It also tries to be easy-to-use in every environment, by removing the need for a build step completely. To give Yozo a try, [dowload](/download/) the latest development version of Yozo and load it on a page like so:
+Yozo is a web component-based library that tries to maximize what you get while remaining as small as possible. It also tries to be easy-to-use in every environment, by removing the need for a build step completely. To give Yozo a try, [dowload](/download/) the latest development version of Yozo and load it on a page like so:
 
 ```html
 <script src="./yozo-dev.js"></script>
@@ -81,6 +81,6 @@ And it doesn't end there; see the [reference](#reference) above for a complete l
 
 ## Tests
 
-Yozo values a robust and trustworthy environment. Since a big part of Yozo's functionality (i.e. the custom element part) expects a browser environment, a simple custom testing framework was put in place so that tests can be written in a format easily digestable by both [Deno](https://deno.land/) (for the non-browser specific tests) as well as the browser.
+Yozo values a robust and trustworthy environment. Since a big part of Yozo's functionality (i.e. the custom element part) expects a browser environment, a simple custom testing system was put in place so that tests can be written in a format easily digestable by both [Deno](https://deno.land/) (for the non-browser specific tests) as well as browsers.
 
 Every page in the documentation has associated tests. They are shown at the top right of each page. To avoid unnecessarily running tests in user's browsers, they don't run automatically by default, but it is possible enable that in the site settings (see footer). To run all tests at once, see the [tests page](/test/).

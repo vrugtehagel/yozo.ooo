@@ -37,7 +37,7 @@ As a top-level element in a Yozo component file, it describes markup for a compo
 
 ### Inside the template
 
-The template is almost always one of the most important aspects of a component. As such, a handful of useful features exist inside the template. For those familiar with other frameworks, these probably come as no surprise:
+The template is almost always one of the most important aspects of a component. As such, a handful of useful features exist inside the template. For those familiar with popular frameworks or component-based libraries, these probably come as no surprise:
 
 - [`#if`](/docs/components/template/if-else) statements (with `#else-if`{attr} and `#else`{attr}), as attributes, for conditional elements.
 - [`#for…of`](/docs/components/template/for-of/) loops, as an attribute, for generating a list of elements from an array (or other type of iterable).

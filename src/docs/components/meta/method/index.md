@@ -50,7 +50,7 @@ While methods defined through `<meta method>`{yz} should always be functions, te
 
 There is no distinction between synchronous and asynchronous methods; the definition on `$`{js} is essentially forwarded as-is. If desired methods may be marked asynchronous in their declaration using `<meta async method=…>`{yz} in order to provide better first-glance documentation, however this does not have any functional effect. The `async`{attr} attribute is merely cosmetic, so synchronous functions do not get turned into asynchronous ones regardless of the attribute.
 
-Methods are implicitly ignored with [`monitor.ignore()`](/docs/monitor/ignore/), so calling a component method cannot contribute to monitored contexts such as [`effect()`](/docs/effect/) or [`connected()`](/docs/components/connected/). This is because Yozo is designed to be a drop-in yet understandable framework; authors using components should not have to know anything about live variables or monitored contexts if they are not directly using Yozo themselves.
+Methods are implicitly ignored with [`monitor.ignore()`](/docs/monitor/ignore/), so calling a component method cannot contribute to monitored contexts such as [`effect()`](/docs/effect/) or [`connected()`](/docs/components/connected/). This is because Yozo is designed to be drop-in, while remaining understandable to use; authors using components should not have to know anything about live variables or monitored contexts if they are not directly using Yozo themselves.
 
 ## See also
 

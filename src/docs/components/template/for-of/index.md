@@ -33,7 +33,7 @@ Note that this syntax applies only within the [`<template>`](/docs/components/te
 
 ## Details
 
-For simple cases, `#for="… of …"`{yzattr} behaves just like one might expect; it iterates over the iterable, and generates elements for each item. Unlike some other frameworks, Yozo does not need a `key`{attr} attribute to keep track of which item is which. In classic Yozo fashion, this sacrifices some performance for simplicity and ease-of-use. However, Yozo does try to optimize things somewhat; for example, if the iterable triggers a re-render, items that did not change in value are not recomputed.
+For simple cases, `#for="… of …"`{yzattr} behaves just like one might expect; it iterates over the iterable, and generates elements for each item. Unlike some other frameworks or libraries, Yozo does not need a `key`{attr} attribute to keep track of which item is which. In classic Yozo fashion, this sacrifices some performance for simplicity and ease-of-use. However, Yozo does try to optimize things somewhat; for example, if the iterable triggers a re-render, items that did not change in value are not recomputed.
 
 ## Examples
 

@@ -77,11 +77,10 @@ label {
 	opacity: 0;
 	white-space: nowrap;
 }
-ui-icon {
-	grid-area: 1 / 2 / -1 / -1;
-	opacity: .5;
+label:has(+ input:placeholder-shown){
+	opacity: 1;
+	color: var(--comment-color);
 }
-label:has(+ input:placeholder-shown){ opacity: .5; }
 ::placeholder { opacity: 0; }
 input {
 	grid-area: 1 / 1 / -1 / -1;

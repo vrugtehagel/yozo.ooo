@@ -68,7 +68,7 @@ ui-button {
 		position: absolute; inset: 0 0 0 auto;
 	}
 	ui-button { display: none; }
-	ui-icon { opacity: .5; }
+	ui-icon { color: var(--comment-color); }
 }
 @media (width < 800px){
 	ui-button[icon=download]{ display: none; }

@@ -7,7 +7,7 @@
 		},
 		"e52d767f-4489-4983-82a3-743a87a81eca": {
 			"src": "/file/styles.css",
-			"body": "body {\n\tmargin: 2rem;\n\tcolor: white;\n\tbackground-color: #181823;\n\tfont-size: 1rem;\n\tline-height: 1.5;\n\tfont-family: arial, sans-serif;\n}\n\nbutton {\n\tpadding: .75rem 1rem;\n\tborder: none;\n\tfont: 1rem / 1.5 monospace;\n\tborder-radius: .75rem;\n\tcursor: pointer;\n\tcolor: #6272A4;\n\tbackground-color: #181823;\n\ttransition: background-color .2s;\n\t&:hover {\n\t\tbackground-color: #292437;\n\t}\n}\n"
+			"body": "body {\n\tmargin: 2rem;\n\tcolor: white;\n\tbackground-color: #181823;\n\tfont-size: 1rem;\n\tline-height: 1.5;\n\tfont-family: arial, sans-serif;\n}\n\nbutton {\n\tpadding: .75rem 1rem;\n\tborder: none;\n\tfont: 1rem / 1.5 monospace;\n\tborder-radius: .75rem;\n\tcursor: pointer;\n\tcolor: #6f7fb1;\n\tbackground-color: #181823;\n\ttransition: background-color .2s;\n\t&:hover {\n\t\tbackground-color: #292437;\n\t}\n}\n"
 		},
 		"2eba766f-231c-4ab8-a6b9-8db1ce031f3e": {
 			"src": "/file/click-counter.yz",

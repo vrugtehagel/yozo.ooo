@@ -120,20 +120,23 @@ h2 {
 		a, .soon {
 			display: flex; min-width: 8rem; padding: 1rem;
 			flex-direction: column; align-items: center; gap: .5rem;
-			color: var(--text-color); background-color: var(--background-color);
 			border-radius: 1rem;
 			text-decoration: none;
 			transition: background-color .2s;
 		}
-		a:hover { background-color: var(--highlight-color); }
+		a {
+			color: var(--text-color); background-color: var(--background-color);
+			&:hover { background-color: var(--highlight-color); }
+		}
 		.soon {
 			color: var(--comment-color);
 			position: relative;
+			box-shadow: 0 0 0 .25rem inset var(--background-color);
 			&::after {
 				content: "Coming soon-ish";
 				display: inline-block; padding: 0 1rem;
 				position: absolute; inset: -.75rem -.75rem auto auto; z-index: 1;
-				color: var(--sub-background-color); background-color: var(--comment-color);
+				color: var(--theme-color); background-color: var(--background-color);
 				border-radius: .5rem;
 				font-variant: small-caps; font-weight: bold;
 				text-transform: lowercase;

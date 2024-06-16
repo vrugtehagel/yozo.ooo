@@ -19,8 +19,6 @@ jobs:
       with:
         submodules: recursive
     - uses: denoland/setup-deno@v1
-      with:
-        deno-version: v1.x
     - run: deno task build
     - name: rsync
       run: |

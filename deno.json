@@ -1,10 +1,10 @@
 {
 	"tasks": {
-		"serve": "deno run -A npm:@11ty/eleventy@3.0.0-alpha.10 --serve --port=8787",
-		"build": "deno run -A npm:@11ty/eleventy@3.0.0-alpha.10"
+		"serve": "deno run -A npm:@11ty/eleventy@3.0.0-alpha.13 --serve --port=8787",
+		"build": "deno run -A npm:@11ty/eleventy@3.0.0-alpha.13"
 	},
 	"imports": {
-		"@11ty/eleventy": "npm:@11ty/eleventy@3.0.0-alpha.10",
+		"@11ty/eleventy": "npm:@11ty/eleventy@3.0.0-alpha.13",
 		"markdown-it-anchor": "npm:markdown-it-anchor@9.0.1",
 		"markdown-it-container": "npm:markdown-it-container@4.0.0",
 		"markdown-it-deflist": "npm:markdown-it-deflist@3.0.0",

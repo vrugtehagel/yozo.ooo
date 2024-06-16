@@ -44,7 +44,7 @@
 			{% endif %}
 		</div>
 
-		<h1>{{ title | escape }}</h1>
+		<h1 id="{{ title | slugify }}">{{ title | escape }}</h1>
 
 		{% renderTemplate "liquid, md", data %}
 			{{ description }}

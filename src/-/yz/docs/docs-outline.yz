@@ -13,9 +13,6 @@ const inView = new Set
 for(const header of headers){
 	const level = Number(header.localName[1])
 	const text = header.textContent.trim()
-	header.id ||= text.toLowerCase()
-		.replaceAll(/[^$\w]+/g, '-')
-		.replaceAll(/^-|-$/g, '')
 	const a = document.createElement('a')
 	a.href = `#${header.id}`
 	header.append(a.cloneNode(false))

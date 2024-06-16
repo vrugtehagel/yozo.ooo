@@ -11,7 +11,7 @@
 }
 ---
 
-<h2>Latest</h2>
+<h2 id=latest>Latest</h2>
 <p>Click the buttons below to download the latest Yozo bundles.</p>
 
 <div id=download-latest>
@@ -29,12 +29,12 @@
 	<p><strong>Note:</strong> development bundles have more thorough checks and error handling built-in than the production bundle. If the development bundle throws an error, it either will not work in production or is extremely fragile. Warnings may be ignored, though keep in mind that the production bundle has all warnings stripped out.</p>
 </ui-callout>
 
-<h2>Compare</h2>
+<h2 id=compare>Compare</h2>
 <p>Compare an older version of Yozo to a newer one to see a summary of what's changed. A straight-forward answer as to what to expect when upgrading.</p>
 
 <download-compare></download-compare>
 
-<h2>Archive</h2>
+<h2 id=archive>Archive</h2>
 <p>Here you'll find all versions Yozo has been through since its release, in reverse-chronological order (i.e. newest first).</p>
 
 {% for version in versions %}

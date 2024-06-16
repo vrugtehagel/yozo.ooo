@@ -16,7 +16,7 @@ for(const jsLike of ['js', 'jsx']){
 	Prism.languages.insertBefore(jsLike, 'constant', {
 		'class-name': {
 			lookbehind: true,
-			pattern: /\b[A-Z]\w+\b(?!\s*\(|(new\s+)[A-Z]\w+(?=\s*\())/,
+			pattern: /\b(?!NaN\b)[A-Z]\w+\b(?!\s*\(|(new\s+)[A-Z]\w+(?=\s*\())/,
 		}
 	})
 

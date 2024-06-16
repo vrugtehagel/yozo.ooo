@@ -8,6 +8,22 @@
 		place-self: start end;
 		width: 16rem;
 		position: sticky; top: 6.5rem;
+		a {
+			display: block; padding: .375rem 1.5rem; margin: .25rem 0;
+			color: white;
+			box-shadow: 5rem 0 0 calc(3px - 5rem) inset transparent;
+			border-radius: .5rem;
+			text-decoration: none;
+			transition: background-color .2s, border-radius .2s, box-shadow .2s;
+			&:hover { background-color: var(--background-color); }
+			&.link-h1 { font-size: 1.5rem; }
+			&.link-h3 { padding-left: 2.5rem; }
+			&.current:not(.link-h1) {
+				background-color: var(--background-color);
+				border-radius: 3px .5rem .5rem .3px;
+				box-shadow: 5rem 0 0 calc(3px - 5rem) inset var(--name-color);
+			}
+		}
 	}
 	article {
 		width: min(100vw - 23rem, 45rem);

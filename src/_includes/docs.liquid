@@ -3,7 +3,8 @@
 	"layout": "root.liquid",
 	"tags": "docs",
 	"head": [
-		"<link rel=stylesheet href=/-/css/docs.css>"
+		"<link rel=stylesheet href=/-/css/docs.css>",
+		"<script type=module src=/-/js/outline-tracker/index.js></script>"
 	]
 }
 ---
@@ -23,7 +24,9 @@
 
 <main>
 	<aside>
-		<docs-outline></docs-outline>
+		<nav id=outline>
+			{% outline %}
+		</nav>
 	</aside>
 
 	<article>

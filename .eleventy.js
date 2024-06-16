@@ -1,5 +1,6 @@
 import { EleventyRenderPlugin } from '@11ty/eleventy'
 import { customMarkdown } from './plugins/custom-markdown.js'
+import EleventyDocumentOutline from '@vrugtehagel/eleventy-document-outline'
 
 export const config = {
 	dir: {input: 'src', output: 'dist'},
@@ -12,6 +13,7 @@ export default function(config){
 	config.setLiquidOptions({extname: ''})
 	config.addPlugin(customMarkdown)
 	config.addPlugin(EleventyRenderPlugin)
+	config.addPlugin(EleventyDocumentOutline)
 
 	config.addFilter('jsonparse', function(value){
 		return JSON.parse(value)

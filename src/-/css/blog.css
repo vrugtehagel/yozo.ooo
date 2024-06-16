@@ -23,4 +23,24 @@
 	}
 
 	ui-code { margin: 2rem 1rem; }
+
+	h1, h2, h3, h4, h5, h6 {
+		position: relative;
+		& a {
+			padding: 0 .25em 0 0;
+			position: absolute; inset: 0 100% 0 auto;
+			color: var(--comment-color);
+			text-decoration: none;
+			@media(width <= 1000px){
+				display: none;
+			}
+			&::before {
+				transition: opacity .2s;
+				content: "#";
+				content: "#" / "";
+			}
+		}
+		&:not(:hover) a::before { opacity: 0; }
+	}
+	article > p { margin: 1.5rem 0; }
 }

@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "flow.if()",
 	"terms": "if flow conditional trigger callback pipeline stop filter callback",
 	"description": "Using `flow.if()`{js}, filter out triggers from the callback pipeline."

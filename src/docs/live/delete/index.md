@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "live.delete()",
 	"terms": "live delete parent variable helper operator",
 	"description": "The `live.delete()`{js} helper is a relatively low-level way to delete a live variable from its parent object, similar to the `delete`{js} operator."

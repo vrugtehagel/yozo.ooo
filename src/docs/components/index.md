@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "Components",
 	"terms": "web components custom element defin yozo title meta template script style",
 	"description": "Write reusable web components, in a structured, straight-foward format, with features ranging from inline template logic to fine-grained reactivity."

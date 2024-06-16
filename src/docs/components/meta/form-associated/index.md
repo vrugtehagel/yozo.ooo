@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "<meta form-associated>",
 	"terms": "meta form associated custom input control",
 	"description": "The `form-associated`{attr} meta tag declares that a component is a custom form control. This allows it to participate in `<form>`{html} elements."

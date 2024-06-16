@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "when().observes()",
 	"terms": "when observes mutat resize intersect flow options target type",
 	"description": "Similar to `when()`{js} simplifying event listeners, `when().observes()`{js} helps using native observers both inside and outside Yozo components."

@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "frame()",
 	"terms": "frame request animation nested recursive flow rate animat loop",
 	"description": "The `frame()`{js} function creates a flow object that fires every frame, akin to a recursive `requestAnimationFrame()`{js}."

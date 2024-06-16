@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "Flow",
 	"terms": "flow one single more multiple future triggers events listeners timers observers monitor methods",
 	"description": "Flows represent one or more future events, like listeners or timers. The monitoring and their methods make common patterns a walk in the park."

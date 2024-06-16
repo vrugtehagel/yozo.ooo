@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "Monitoring \"live\"",
 	"terms": "monitoring live type variable depend",
 	"description": "Live variables can be monitored, allowing authors to react to changes in dependencies of a certain callback."

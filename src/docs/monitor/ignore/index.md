@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "monitor.ignore()",
 	"terms": "monitor ignore context avoid turn off live variable flow effect",
 	"description": "Avoid live variables or flows from being seen by monitored contexts such as inside effects with `monitor.ignore()`{js}."

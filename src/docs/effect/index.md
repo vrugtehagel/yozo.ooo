@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "effect()",
 	"terms": "effect depend live variable rerun automatic monitor context undo safe flow schedule update declar see watch",
 	"description": "Write logical effects depending on live variables, which automatically re-run whenever any of its dependencies change."

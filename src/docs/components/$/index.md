@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "Component state: $",
 	"terms": "component state $ dollar live variable data react",
 	"description": "Each component gets a live state variable named `$`{js}. This variable allows for fine-grained reactivity in a concise manner."

@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "live.link()",
 	"terms": "live link bind connect compute depend attach sync options input element callback watch get set changes flow",
 	"description": "With `live.link()`{js}, bind any other data source to a live variable, to be used in effects or other live links."

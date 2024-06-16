@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "flow.or()",
 	"terms": "or flow combine objects include other thenable promise",
 	"description": "Using `flow.or()`{js}, two or more flow objects can be combined into one. The callback pipeline then receives triggers from all included flows."

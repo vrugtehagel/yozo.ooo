@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "flow.once()",
 	"terms": "flow once stop await single one trigger pipeline",
 	"description": "The `flow.once()`{js} method allows one trigger through in the pipeline and simultaneously stops the flow it was called on whenever that happens."

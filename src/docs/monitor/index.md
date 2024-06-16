@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "monitor()",
 	"terms": "monitor context manual see watch undo live types register ignore add",
 	"description": "`monitor()`{js} is the low-level (but exposed) API responsible for monitoring the use of flows and reactive variables."

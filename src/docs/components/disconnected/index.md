@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "disconnected()",
 	"terms": "disconnected callback lifecycle hook component disconnects destroy unmount",
 	"description": "To explicitly run a callback when a component disconnects from the DOM, use the `disconnected()`{js} lifecycle callback."

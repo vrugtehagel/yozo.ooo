@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "<template>",
 	"terms": "template section dom node element component markup attach shadow root mode open closed delegates focus slot assigment style script",
 	"description": "Write simple, descriptive markup for components, optionally with a shadow root, using inline logic and straight-forward shorthands."

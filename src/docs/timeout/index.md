@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "timeout()",
 	"terms": "timeout pause settimeout await duration delay flow once",
 	"description": "The `timeout()`{js} function creates a `Flow`{js} object that fires once after the given delay, similar to `setTimeout()`{js}."

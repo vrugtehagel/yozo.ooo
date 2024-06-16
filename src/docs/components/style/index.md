@@ -110,6 +110,7 @@ When using nested shadowless components, the DOM tree is entirely non-scoped, wh
 ## See also
 
 - [`<template>`](/docs/components/template/)
+- [What is shadow DOM?](/blog/what-is-shadow-dom/)
 - [`:host`](https://developer.mozilla.org/en-US/docs/Web/CSS/:host)
 - [`::slotted()`](https://developer.mozilla.org/en-US/docs/Web/CSS/::slotted)
-- [Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
+- [Using shadow DOM on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)

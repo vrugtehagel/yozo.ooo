@@ -16,7 +16,10 @@
 				:class+selected="$.selected == index"
 				@mouseenter="$.selected = index">
 				<a :href="result.url">
-					<span class=title>{{ result.title }}</span>
+					<span class=title>
+						<ui-icon #if="$.getIcon(result.url)" :type="$.getIcon(result.url)"></ui-icon>
+						{{ result.title }}
+					</span>
 					<span class=url>
 						{{ result.url.split('/').slice(1, -1).join(' › ') }}
 					</span>
@@ -57,6 +60,11 @@ $.onsubmit = event => {
 	event.preventDefault()
 	const li = query.all('li')[$.selected]
 	li?.querySelector('a').click()
+}
+$.getIcon = url => {
+	if(url.startsWith('/docs/')) return 'book'
+	if(url.startsWith('/blog/')) return 'chat'
+	if(url.startsWith('/tour/')) return 'tour'
 }
 </script>
 
@@ -137,6 +145,16 @@ li {
 		flex-direction: column;
 		color: var(--text-color);
 		text-decoration: none;
+		ui-icon {
+			padding: 0;
+			&[type=book]{ color: var(--name-color); }
+			&[type=tour]{ color: var(--primary-color); }
+			&[type=chat]{ color: var(--string-color); }
+		}
+		.title {
+			display: flex;
+			align-items: center; gap: .5rem;
+		}
 		.url {
 			font-size: .8rem;
 			color: var(--comment-color);

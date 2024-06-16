@@ -52,6 +52,7 @@ connected(() => {
 }
 ui-copy {
 	position: absolute; inset: .5rem .5rem auto auto;
+	background-color: var(--background-color);
 	transition: opacity .2s;
 }
 #container:not(:hover) ui-copy { opacity: 0; }

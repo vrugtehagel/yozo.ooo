@@ -1,0 +1,26 @@
+@layer layout {
+	main {
+		padding: 2rem;
+	}
+
+	article {
+		width: min(100%, 45rem); margin: 0 auto;
+		footer {
+			margin: 3rem 0;
+			color: var(--comment-color);
+			font-style: italic;
+			p { margin: 0; }
+		}
+	}
+
+	header {
+		img {
+			display: block; width: min(50%, 15rem); height: auto; margin: 2rem auto;
+			border-radius: 1.5rem;
+		}
+		h1 { margin: .5em 0 0; }
+		time { color: var(--comment-color); }
+	}
+
+	ui-code { margin: 2rem 1rem; }
+}

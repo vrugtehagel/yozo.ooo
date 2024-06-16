@@ -1,0 +1,31 @@
+---
+{
+	"layout": "layouts/root.liquid",
+	"title": "Blog",
+	"description": "Read about Yozo, web components, site performance, and everything else website-related.",
+	"head": [
+		"<link rel=stylesheet href=./index.css>",
+		"<script src=./index.js></script>"
+	]
+}
+---
+
+<main>
+	<header>
+		<h1>{{ title }}</h1>
+		<p>{{ description }}</p>
+	</header>
+
+	<ul>
+		{% assign items = collections.blog | reverse %}
+		{% for item in items %}
+			<li>
+				<a href="{{ item.url }}">
+					<img src="{{ item.url }}thumbnail.svg" width=24 height=24 alt="">
+					<span class=title>{{ item.data.title }}</span>
+					<span class=description>{{ item.data.description }}</span>
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+</main>

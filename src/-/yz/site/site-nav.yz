@@ -8,6 +8,7 @@
 		</ui-button>
 		<ui-button href=/docs/ part=button>Docs</ui-button>
 		<ui-button href=/play/ part=button>Play</ui-button>
+		<ui-button href=/blog/ part=button>Blog</ui-button>
 		<div id=search>
 			<site-search exportparts=searchinput></site-search>
 			<ui-button :icon="$.searching ? 'close' : 'search'"

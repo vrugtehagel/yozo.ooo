@@ -1,0 +1,29 @@
+---
+{
+	"layout": "layouts/root.liquid",
+	"tags": "blog",
+	"head": [
+		"<link rel=stylesheet href=/-/css/blog.css>"
+	]
+}
+---
+
+<main>
+	<article>
+		<header>
+			<img src=./thumbnail.svg width=512 height=512 alt="">
+			<h1>{{ title | escape }}</h1>
+			<time datetime="{{ published }}">
+				{{ date | date: '%B %e, %Y' }}
+			</time>
+			<p>{{ description | escape }}</p>
+		</header>
+
+		{{ content }}
+
+		<footer>
+			<p>{{ footnote | default: "Thanks for reading!" }}</p>
+			<p>&mdash; vrugtehagel</p>
+		</footer>
+	</article>
+</main>

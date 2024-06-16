@@ -94,5 +94,6 @@ output {
 
 ## See also
 
-- [Using shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
+- [What is shadow DOM?](/blog/what-is-shadow-dom/)
+- [Using shadow DOM on MDN](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM)
 - [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)

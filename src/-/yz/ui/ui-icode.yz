@@ -5,6 +5,7 @@
 
 <script>
 safeImport('/-/js/site-settings/index.js').then(mod => $.siteSettings = mod)
+window.yozo.register('/-/yz/ui/ui-syntax-highlight.yz')
 
 const code = query('code')
 const uiSyntaxHighlight = document.createElement('ui-syntax-highlight')

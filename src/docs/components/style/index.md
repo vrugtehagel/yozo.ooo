@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "<style>",
 	"terms": "style sheet section scoped shadow component template visual host part slotted",
 	"description": "Use a `<style>`{yz} block to define component styles. They can be scoped or non-scoped, depending on whether or not the component has a shadow root."

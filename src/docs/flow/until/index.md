@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "flow.until()",
 	"terms": "until flow cancel stop end callback pipeline trigger promise thenable",
 	"description": "Stop a flow using the `flow.until()`{js} method using either a condition on the trigger, a promise, or another flow."

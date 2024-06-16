@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "<title>",
 	"terms": "title component name hyphen custom element defin declar",
 	"description": "The only required element in a component definition file is the `<title>`{yz} element; it defines the name for your custom element."

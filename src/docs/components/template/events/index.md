@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "@event",
 	"terms": "event attach listener type add shorthand inline component template bind at",
 	"description": "Attach event listeners right inside the component template with @-prefixed attribute names."

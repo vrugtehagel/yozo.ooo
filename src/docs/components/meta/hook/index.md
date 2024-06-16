@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "<meta hook>",
 	"terms": "meta hook unhook lifecycle callback adopted form reset restore",
 	"description": "The `hook`{attr} meta tag allows for the exposure of advanced lifecycle callbacks such as `adopted()`{js} or `formReset()`{js}."

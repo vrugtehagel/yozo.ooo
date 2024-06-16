@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "paint()",
 	"terms": "paint render browser frame flow layout composit transit animat",
 	"description": "The `paint()`{js} function creates a `Flow`{js} that fires once, after the browser has painted."

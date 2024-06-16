@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/blog.liquid",
 	"title": "What is shadow DOM?",
 	"date": "2023-06-16",
 	"description": "Shadow DOM allows authors to attach DOM trees to elements, providing encapsulation for markup, styles and even JavaScript.",

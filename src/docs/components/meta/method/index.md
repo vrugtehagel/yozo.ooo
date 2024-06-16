@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "<meta method>",
 	"terms": "meta method expose function propert readonly",
 	"description": "The \"method\" meta tag defines a single method, to be exposed on the defined custom element."

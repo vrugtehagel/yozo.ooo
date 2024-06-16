@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "monitor.register()",
 	"terms": "monitor register define custom types result add until",
 	"description": "Define and register custom monitorable types using `monitor.register()`{js}, to be monitored manually using `monitor()`{js}."

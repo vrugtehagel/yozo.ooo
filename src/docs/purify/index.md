@@ -1,6 +1,5 @@
 ---
 {
-	"layout": "layouts/docs.liquid",
 	"title": "purify()",
 	"terms": "purify undo pure side effect context when listener",
 	"description": "Remove side effects of previous calls for a certain function with `purify()`{js}. This, in a way, can make functions with side effects \"pure functions\"."

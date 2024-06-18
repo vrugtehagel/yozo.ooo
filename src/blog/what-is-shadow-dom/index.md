@@ -1,7 +1,7 @@
 ---
 {
 	"title": "What is shadow DOM?",
-	"date": "2023-06-16",
+	"date": "2024-06-16",
 	"description": "Shadow DOM allows authors to attach DOM trees to elements, providing encapsulation for markup, styles and even JavaScript.",
 	"terms": "shadow dom web components encapsulation tutorial help learn blog post"
 }

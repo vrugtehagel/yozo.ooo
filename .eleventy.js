@@ -1,6 +1,7 @@
 import { EleventyRenderPlugin } from '@11ty/eleventy'
 import { customMarkdown } from './plugins/custom-markdown.js'
 import EleventyDocumentOutline from '@vrugtehagel/eleventy-document-outline'
+import EleventyAssetHash from '@vrugtehagel/eleventy-asset-hash'
 
 export const config = {
 	dir: {input: 'src', output: 'dist'},
@@ -14,6 +15,13 @@ export default function(config){
 	config.addPlugin(customMarkdown)
 	config.addPlugin(EleventyRenderPlugin)
 	config.addPlugin(EleventyDocumentOutline)
+	config.addPlugin(EleventyAssetHash, {
+		maxLength: 10,
+		include: ['**/*.{html,css,js,yz}'],
+		exclude: ['/archive/*', '/lib-latest.js', '/dev-latest.js'],
+		includeAssets: ['/**/*.{css,js}'],
+		excludeAssets: ['/archive/*', '/lib-latest.js', '/dev-latest.js'],
+	})
 
 	config.addFilter('jsonparse', function(value){
 		return JSON.parse(value)
@@ -22,7 +30,7 @@ export default function(config){
 		return value?.replaceAll(/(`+)( ?)((?:(?!\1).)*?)\2\1{(\w+)}/g, '$3')
 	})
 
-	config.addPassthroughCopy('src/**/*.{css,js,yz,svg,woff2,png,ico,txt,json}')
+	config.addPassthroughCopy('src/{,!(_)**/}*.{css,js,yz,svg,woff2,png,ico,txt,json}')
 
 	config.addWatchTarget('yozo/latest/')
 	config.addPassthroughCopy({

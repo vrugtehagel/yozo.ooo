@@ -19,7 +19,7 @@ export default function(config){
 		maxLength: 10,
 		include: ['**/*.{html,css,js,yz}'],
 		exclude: ['/archive/*', '/lib-latest.js', '/dev-latest.js'],
-		includeAssets: ['/**/*.{css,js}'],
+		includeAssets: ['**/*.{css,js}'],
 		excludeAssets: ['/archive/*', '/lib-latest.js', '/dev-latest.js'],
 	})
 

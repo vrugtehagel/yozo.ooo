@@ -38,10 +38,6 @@ class ClickCounter extends HTMLElement {
 			.querySelector('button');
 	}
 
-	#increment(){
-		this.amount += 1;
-	}
-
 	reset(){
 		this.amount = 0;
 	}
@@ -52,7 +48,7 @@ class ClickCounter extends HTMLElement {
 		this.#controller = new AbortController();
 		const {signal} = this.#controller;
 		button.addEventListener('click', () => {
-			this.#increment();
+			this.amount++;
 		}, {signal});
 	}
 

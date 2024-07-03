@@ -22,17 +22,13 @@ export class ClickCounter extends LitElement {
 	@property({ reflect: true, type: Number })
 	amount = 0;
 
-	#increment(){
-		this.amount += 1;
-	}
-
 	reset(){
 		this.amount = 0;
 	}
 
 	render() {
 		return html`
-			<button @click=${ this.#increment }>
+			<button @click=${() => this.amount++}>
 				clicks: ${ this.amount }
 			</button>
 		`;

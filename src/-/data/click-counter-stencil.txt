@@ -23,14 +23,8 @@ import {
 	`,
 })
 export class ClickCounter {
-	@Prop({
-		reflect: true,
-		mutable: true
-	}) amount: number = 0;
-
-	increment = () => {
-		this.amount += 1;
-	}
+	@Prop({ reflect: true, mutable: true })
+	amount: number = 0;
 
 	@Method()
 	reset(){
@@ -39,7 +33,7 @@ export class ClickCounter {
 
 	render() {
 		return (<Fragment>
-			<button onClick={this.increment}>
+			<button onClick={() => this.amount++}>
 				clicks: { this.amount }
 			</button>
 		</Fragment>);

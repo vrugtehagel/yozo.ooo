@@ -3,14 +3,11 @@
 <meta method="reset">
 
 <template mode="closed">
-	<button @click="$.increment()">
+	<button @click="$.amount++">
 		clicks: {{ $.amount }}
 	</button>
 </template>
 <script>
-$.increment = () => {
-	$.amount += 1;
-};
 $.reset = () => {
 	$.amount = 0;
 };

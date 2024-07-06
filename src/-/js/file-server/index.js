@@ -9,6 +9,7 @@ const files = new Map
 when(channel).messages().then(event => {
 	if(event.data.type == 'listen') return $state.listening = false
 	if(event.data.type != 'filerequest') return
+	if(!$state.listening) return
 	const {src, uuid} = event.data
 	const body = files.get(src) ?? null
 	channel.postMessage({body, uuid})

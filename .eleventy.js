@@ -9,12 +9,14 @@ export const config = {
 }
 
 export default function(config){
-	config.setFrontMatterParsingOptions({language: 'json'});
+	config.setFrontMatterParsingOptions({language: 'json'})
 	config.setLayoutResolution(false)
 	config.setLiquidOptions({extname: ''})
 	config.addPlugin(customMarkdown)
 	config.addPlugin(EleventyRenderPlugin)
-	config.addPlugin(EleventyDocumentOutline)
+	config.addPlugin(EleventyDocumentOutline, {
+		headers: 'h1, h2, h3'
+	})
 	config.addPlugin(EleventyAssetHash, {
 		maxLength: 10,
 		include: ['**/*.{html,css,js,yz}'],

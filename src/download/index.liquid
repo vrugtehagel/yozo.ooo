@@ -14,12 +14,13 @@
 <h2 id=latest>Latest</h2>
 <p>Click the buttons below to download the latest Yozo bundles.</p>
 
+{% assign latest = version[0].number %}
 <div id=download-latest>
-	<a href=/lib-latest.js download=yozo-lib.js>
+	<a href=/archive/lib-{{ latest }}.js download=yozo-lib-{{ latest }}.js>
 		<ui-icon type=production></ui-icon>
 		Production
 	</a>
-	<a href=/dev-latest.js download=yozo-dev.js>
+	<a href=/archive/dev-{{ latest }}.js download=yozo-dev-{{ latest }}.js>
 		<ui-icon type=development></ui-icon>
 		Development
 	</a>
@@ -42,7 +43,7 @@
 		<h3>Version {{ version.number }}</h3>
 		<a
 			class=download-lib
-			href=/lib-{{ version.number }}.js
+			href=/archive/lib-{{ version.number }}.js
 			download=lib-{{ version.number }}.js
 			aria-label="Download version {{ version.number }}'s production bundle"
 		>
@@ -50,7 +51,7 @@
 		</a>
 		<a
 			class=download-dev
-			href=/dev-{{ version.number }}.js
+			href=/archive/dev-{{ version.number }}.js
 			download=dev-{{ version.number }}.js
 			aria-label="Download version {{ version.number }}'s development bundle"
 		>

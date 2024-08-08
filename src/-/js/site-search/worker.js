@@ -1,7 +1,4 @@
 import { ContextMessenger } from '/-/js/context-messenger/index.js'
-import '/lib-latest.js'
-
-const {when} = self.yozo
 
 const response = await fetch('/-/data/search.json')
 const db = await response.json()

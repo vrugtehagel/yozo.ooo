@@ -1,10 +1,10 @@
 {
 	"tasks": {
-		"serve": "deno run -A npm:@11ty/eleventy@3.0.0-beta.1 --serve --port=8787",
-		"build": "deno run -A npm:@11ty/eleventy@3.0.0-beta.1"
+		"serve": "deno run -A npm:@11ty/eleventy@3.0.0-alpha.19 --serve --port=8787 --loader=esm",
+		"build": "deno run -A npm:@11ty/eleventy@3.0.0-alpha.19"
 	},
 	"imports": {
-		"@11ty/eleventy": "npm:@11ty/eleventy@3.0.0-beta.1",
+		"@11ty/eleventy": "npm:@11ty/eleventy@3.0.0-alpha.19",
 		"@std/fs": "jsr:@std/fs@0.229.3",
 		"@vrugtehagel/eleventy-asset-hash": "jsr:@vrugtehagel/eleventy-asset-hash@0.2.5",
 		"@vrugtehagel/eleventy-document-outline": "jsr:@vrugtehagel/eleventy-document-outline@0.1.7",

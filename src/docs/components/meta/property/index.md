@@ -48,7 +48,7 @@ $.amount = 0;
 </script>
 ```
 
-Since the `.amount`{js} property is looked up on the component's state variable [`$`](/docs/components/$/), we can use it like any other live variable inside the component. This also means the component reacts to changes coming from outside the internal logic. If we wanted to disable that behavior, disallowing authors from setting the `.amount` property, but still allowing them to read it, we add the `readonly`{attr} attribute to the `<meta property=…>`{yz} tag. The component may still update `$.amount`{js} internally, so the click counter button keeps working just fine, but is then protected from any external changes.
+Since the `.amount`{js} property is looked up on the component's state variable [`$`](/docs/components/$/), we can use it like any other live variable inside the component. This also means the component reacts to changes coming from outside the internal logic. If we wanted to disable that behavior, disallowing authors from setting the `.amount`{js} property, but still allowing them to read it, we add the `readonly`{attr} attribute to the `<meta property=…>`{yz} tag. The component may still update `$.amount`{js} internally, so the click counter button keeps working just fine, but is then protected from any external changes.
 
 ## Usage notes
 

@@ -1,7 +1,7 @@
 ---
 {
 	"title": "internals",
-	"terms": "internals element aria form associated shadow root state",
+	"terms": "internals attach element aria form associated shadow root state",
 	"description": "The `internals`{js} variable exposes an element's `ElementInternals`{js} and is available within a component's `<script>`{yz} and `<template>`{yz} sections."
 }
 ---

@@ -66,4 +66,4 @@ Now, our `<number-input>`{html} element may participate in forms, using the glob
 - [`<meta>`](/docs/components/meta/)
 - [`<meta attribute=…>`](/docs/components/meta/attribute/)
 - [`<meta property=…>`](/docs/components/meta/property/)
-
+- [ElementInternals on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals)

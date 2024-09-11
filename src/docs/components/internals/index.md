@@ -6,7 +6,7 @@
 }
 ---
 
-This article does not extensively cover the functionality of `ElementInternals`{js}. For more information, see [`ElementInternals` on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals).
+This article does not extensively cover the functionality of `ElementInternals`{js}. For more information, see [ElementInternals on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals).
 
 ## Syntax
 
@@ -17,6 +17,10 @@ internals
 :::warning
 **Warning:** Older versions of Safari may not support `ElementInternals`. For those browsers, the value of `internals`{js} is `undefined`{js}. If support for those browsers is needed, use a [polyfill](https://unpkg.com/element-internals-polyfill).
 :::
+
+## Details
+
+The `internals`{js} variable is available within a component's [`<script>`](/docs/components/script/) section and within logic inside the [`<template>`](/docs/components/template/). It is primarily used for retrieving a reference to the shadow root, handling internals for form elements, and keeping track of custom element states. It may also be used to manually control aria properties, though this is an advanced use-case; often times it is better not to alter aria behavior at all rather than doing so incorrectly.
 
 ## Examples
 
@@ -77,7 +81,7 @@ effect(() => {
 </script>
 ```
 
-To avoid re-setting the validity unnecessarily, we create an `$.isValid`{js} variable reflecting whether or not the `required-input`{tag} passes validation. Declaring the `name` attribute is not technically necessary
+To avoid re-setting the validity unnecessarily, we create an `$.isValid`{js} variable reflecting whether or not the `required-input`{tag} passes validation. Declaring the `name` attribute is not technically necessary, since forms read the names from the attributes regardless, but it is recommended to mimic the attribute-property pair that native form elements have for consistency.
 
 ### No reactivity
 
@@ -96,10 +100,9 @@ live.link($.$hide, {
 
 Note that this does _not_ automatically synchronize changes done to `.ariaHidden`{js}; instead, we use the live variable, which keeps them in-sync at all times.
 
-## Usage notes
-
-
-
 ## See also
 
-
+- [`<meta form-associated>`](/docs/components/meta/form-associated/)
+- [`<script>`](/docs/components/script/)
+- [`<meta>`](/docs/components/meta/)
+- [ElementInternals on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals)

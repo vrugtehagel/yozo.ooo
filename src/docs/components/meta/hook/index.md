@@ -79,8 +79,6 @@ When creating form-associated custom elements, we may also need form-related lif
 	{{ $.value }}
 </template>
 <script>
-const internals = this.attachInternals();
-
 effect(() => {
 	internals.setFormValue($.value);
 });

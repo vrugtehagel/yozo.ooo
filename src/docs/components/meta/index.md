@@ -57,7 +57,6 @@ $.toggle = () => {
 	$.checked = !$.checked;
 };
 
-const internals = this.attachInternals();
 when($.$checked).changes().then(() => {
 	internals.setFormValue($.checked);
 });
@@ -84,7 +83,7 @@ div {
 </style>
 ```
 
-We first defined the component name using the [`<title>`](/docs/components/title/) element, and then proceed to specify the attributes, extra property, and the `.toggle()`{js} method. Then we go into more detail, defining the template, the logic for the `.toggle()`{js} method, and we handle setting the internal form value to be submitted alongside forms using the native `.attachInternals()`{js}. Lastly, we define the `.value`{js} property as an alias of the `.checked`{js} property using [`live.link()`](/docs/live/link/). We also define some very basic styles, to make the element usable.
+We first defined the component name using the [`<title>`](/docs/components/title/) element, and then proceed to specify the attributes, extra property, and the `.toggle()`{js} method. Then we go into more detail, defining the template, the logic for the `.toggle()`{js} method, and we handle setting the internal form value to be submitted alongside forms using [`internals`](/docs/components/internals/). Lastly, we define the `.value`{js} property as an alias of the `.checked`{js} property using [`live.link()`](/docs/live/link/). We also define some very basic styles, to make the element usable.
 
 ## Usage notes
 

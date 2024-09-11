@@ -21,7 +21,7 @@ This meta tag has no additional attributes beyond it main attribute.
 
 ## Details
 
-The native equivalent of this meta tag is setting the `static formAssociated`{js} property to `true`{js} on the element's definition class. When writing `form-associated`{attr} elements, get a reference to element internals through `.attachInternals()`{js}, which allows for setting the internal form value (through `.setFormValue()`{js}), setting its validity (using `.setValidity()`{js}) and a whole range of other methods and properties. See [ElementInternals on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals).
+The native equivalent of this meta tag is setting the `static formAssociated`{js} property to `true`{js} on the element's definition class. When writing `form-associated`{attr} elements, the provided [`internals`](/docs/components/internals/) variable allows for setting the internal form value (through `.setFormValue()`{js}), setting its validity (using `.setValidity()`{js}) and a whole range of other methods and properties. To learn more about `ElementInternals`{js}, see [ElementInternals on MDN](https://developer.mozilla.org/en-US/docs/Web/API/ElementInternals).
 
 ## Examples
 
@@ -37,7 +37,6 @@ Let's write a custom number input element. We'll use a regular `<input>`{yz} ele
 	<input type="text">
 </template>
 <script>
-const internals = this.attachInternals();
 const input = query('input');
 input.value = $.value;
 live.link($.$text, input);

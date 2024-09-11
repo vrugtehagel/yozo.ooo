@@ -25,6 +25,7 @@ Inside the component logic, a handful of variables are exposed;
 - Most importantly, the component's state variable [`$`](/docs/components/$/). This includes `$.$attributes`{js}, which reflects attributes defined through [`<meta attribute>`](/docs/components/meta/attribute/);
 - Lifecycle callbacks, specifically [`connected()`](/docs/components/connected/) and [`disconnected()`](/docs/components/disconnected/), but also any hooks registered with [`<meta hooks>`](/docs/components/meta/hooks/);
 - [`query()`](/docs/components/query/), a function for getting references to elements in the template;
+- The [`internals`](/docs/components/internals/) variable allows for easy access to the component's `ElementInternals`{js}, useful primarily for grabbing the shadow root and setting internal state for form-associated elements;
 - The `this`{js} value is bound to the component instance;
 - Lastly, the core functions Yozo provides, such as [`live()`](/docs/live/), [`when()`](/docs/when/), [`monitor()`](/docs/monitor/), [`Flow`](/docs/flow), [`effect()`](/docs/effect/), and all others except for [`register()`](/docs/register/).
 
@@ -130,5 +131,6 @@ Inside the `<script>`{yz}, all top-level goodies Yozo provides are available by 
 - [`query()`](/docs/components/query/)
 - [`connected()`](/docs/components/connected/)
 - [`disconnected()`](/docs/components/disconnected/)
+- [`internals`](/docs/components/internals/)
 - [`<meta>`](/docs/components/meta/)
 - [`<template>`](/docs/components/template/)

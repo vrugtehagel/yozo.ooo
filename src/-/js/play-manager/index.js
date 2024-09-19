@@ -190,20 +190,3 @@ export function visibleSpaces(){
 	if(layout == 'quartiles') return 4
 	return 0
 }
-
-export function reveal(src){
-	const match = filelist()
-		.find(([uuid, pathname]) => pathname == src)
-	if(!match){
-		const uiToast = document.createElement('ui-toast')
-		uiToast.type = 'info'
-		uiToast.textContent = 'File does not exist.'
-		uiToast.show()
-		return
-	}
-	const [uuid] = match
-	const index = current().spaces.indexOf(`file:${uuid}`)
-	if(index < 0 || index >= visibleSpaces()) return
-	current().$spaces[0] = `file:${uuid}`
-}
-

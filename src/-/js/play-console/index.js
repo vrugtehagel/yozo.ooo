@@ -16,7 +16,7 @@ window.addEventListener('unhandledrejection', async event => {
 
 async function sendError(source, line, column, error){
 	await loading
-	const {message} = error
+	const message = error.message ?? `${error}`
 	const url = new URL(source, location.origin)
 	const src = url.pathname
 	await messenger.send('error', {src, line, column, message})

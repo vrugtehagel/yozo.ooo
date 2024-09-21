@@ -58,6 +58,9 @@ when(prefix).observes('resize').then(([{borderBoxSize}]) => {
 	font-family: var(--font-monospace);
 	overflow: clip;
 }
+::selection {
+	background-color: color-mix(in hsl, var(--highlight-color), white 20%);
+}
 #container {
 	display: flex; height: 100%;
 	align-items: center;

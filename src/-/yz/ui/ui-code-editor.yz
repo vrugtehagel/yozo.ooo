@@ -1,7 +1,6 @@
 <title>ui-code-editor</title>
 <meta attribute=value type=string>
 <meta attribute=language type=string default="txt">
-<meta attribute=showlinenumbers as=showLineNumbers type=boolean>
 
 <template mode=closed>
 	<div id=container .style.tab-size="$.siteSettings?.$settings.tabSize ?? 4">
@@ -27,7 +26,7 @@ const lineNumbers = query('#line-numbers')
 if($.value) textarea.value = $.value
 live.link($.$value, textarea)
 live.link($.$numbers, () => {
-	if(!$.showLineNumbers) return []
+	if(!$.siteSettings?.$settings.lineNumbers) return []
 	return $.value.split('\n').map((line, index) => index + 1)
 })
 
@@ -45,7 +44,8 @@ connected(() => {
 })
 
 connected(() => effect(() => {
-	if(!$.showLineNumbers) return container.style.setProperty('--left', 0)
+	if(!$.siteSettings?.$settings.lineNumbers)
+		return container.style.setProperty('--left', 0)
 	when(lineNumbers).observes('resize').then(([entry]) => {
 		const {inlineSize} = entry.borderBoxSize[0]
 		container.style.setProperty('--left', Math.floor(inlineSize))

@@ -43,7 +43,7 @@ function consumeTag(tag, string){
 
 function consumeComments(string){
 	string = string.trimStart()
-	for(let length = Infinity; length > string.length; length = string.length)
+	for(let length; length > string.length; length = string.length)
 		string = string.replace(comment, '').trimStart()
 	return string
 }

@@ -36,6 +36,7 @@ code {
 	width: max-content;
 	color: var(--text-color);
 	font-family: inherit;
+	&::after { content: "\200B"; }
 }
 
 /* html */

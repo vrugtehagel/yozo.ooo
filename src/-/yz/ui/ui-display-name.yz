@@ -34,6 +34,7 @@ effect(async () => {
 :host {
 	display: flex;
 	align-items: center; gap: .25rem;
+	white-space: nowrap;
 }
 #rename {
 	display: contents;

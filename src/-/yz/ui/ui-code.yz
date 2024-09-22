@@ -1,6 +1,7 @@
 <title>ui-code</title>
 <meta attribute=language type=string default="js">
 <meta attribute=cancopy type=boolean as=canCopy>
+<meta attribute=linenumberoffset type=number as=lineNumberOffset>
 
 <template mode=closed>
 	<div id=container .style.tab-size="$.siteSettings?.$settings.tabSize ?? 4">
@@ -25,7 +26,8 @@ live.link($.$value, () => {
 })
 live.link($.$numbers, () => {
 	if(!$.siteSettings?.$settings.lineNumbers) return []
-	return $.value.split('\n').map((line, index) => index + 1)
+	const offset = $.lineNumberOffset + 1
+	return $.value.split('\n').map((line, index) => index + offset)
 })
 
 connected(() => {
@@ -54,14 +56,16 @@ ui-copy {
 	position: absolute; inset: .5rem .5rem auto auto;
 	background-color: var(--background-color);
 	transition: opacity .2s;
+	#container:not(:hover) & { opacity: 0; }
 }
-#container:not(:hover) ui-copy { opacity: 0; }
 #line-numbers {
 	padding: 0 1.5rem 0 0;
 	color: var(--comment-color);
 	line-height: 1.5;
 	text-align: right;
-	& span { display: block; }
+	& span {
+		display: block; margin-left: -.5rem;
+	}
 }
 pre {
 	flex: 1 0 0;

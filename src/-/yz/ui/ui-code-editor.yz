@@ -1,9 +1,11 @@
 <title>ui-code-editor</title>
 <meta attribute=value type=string>
 <meta attribute=language type=string default="txt">
+<meta attribute=linenumberoffset type=number as=lineNumberOffset>
+<meta attribute=autosize type=boolean as=autoSize>
 
 <template mode=closed>
-	<div id=container .style.tab-size="$.siteSettings?.$settings.tabSize ?? 4">
+	<div id=container .style.tab-size="$.siteSettings?.$settings.tabSize ?? 4" :class+auto-size="$.autoSize">
 		<div id=line-numbers>
 			<span #for="number of $.numbers">{{ number }}</span>
 		</div>
@@ -27,7 +29,8 @@ if($.value) textarea.value = $.value
 live.link($.$value, textarea)
 live.link($.$numbers, () => {
 	if(!$.siteSettings?.$settings.lineNumbers) return []
-	return $.value.split('\n').map((line, index) => index + 1)
+	const offset = $.lineNumberOffset + 1
+	return $.value.split('\n').map((line, index) => index + offset)
 })
 
 connected(async () => {
@@ -61,13 +64,13 @@ connected(() => effect(() => {
 	font-family: var(--font-monospace);
 	overflow: auto; scroll-padding: 1.5rem 2rem;
 }
-:host([linenumbers]){ padding-left: 1.5rem; }
 ::selection {
 	background-color: color-mix(in hsl, var(--highlight-color), white 20%);
 }
 #container {
 	width: 100%; height: 100%;
 	position: relative;
+	&.auto-size { height: calc(var(--height) * 1px); }
 }
 #line-numbers {
 	padding: 0 1.5rem 0 0;
@@ -75,7 +78,9 @@ connected(() => effect(() => {
 	color: var(--comment-color);
 	line-height: 1.5;
 	text-align: right;
-	& span { display: block; }
+	& span {
+		display: block; margin-left: -.5rem;
+	}
 }
 textarea, pre {
 	display: block; padding: 0; margin: 0;
@@ -85,9 +90,9 @@ textarea, pre {
 }
 textarea {
 	width: max(100% - var(--left, 0) * 1px, var(--width) * 1px + 1rem);
-	height: max(100%, var(--height) * 1px + 2rem); margin: 0;
+	height: max(100%, var(--height) * 1px + 1.5rem); margin: 0;
 	position: absolute; left: calc(var(--left, 0) * 1px);
-	color: white; background: transparent;
+	color: rgb(255 255 255 / 1%); background: transparent;
 	border: none; outline: none;
 	resize: none;
 	caret-color: white;

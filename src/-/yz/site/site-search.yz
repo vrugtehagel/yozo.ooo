@@ -1,5 +1,6 @@
 <title>site-search</title>
 <meta attribute=value type=string>
+<meta attribute=helpfulempty type=boolean as=helpfulEmpty>
 
 <template mode=closed delegates-focus=true>
 	<form @submit="$.onsubmit(event)">
@@ -10,8 +11,10 @@
 			@keydown="$.onkeydown(event)"
 			@focus="$.focused = true"
 			@blur="$.focused = false">
-		<ul .hidden="!$.focused || $.value == ''"
-			:class+empty="$.amount == 0" :class+loading="$.loading">
+		<ul .hidden="!$.helpfulEmpty && $.value == '' || !$.focused"
+			:class+empty="$.amount == 0"
+			:class+loading="$.loading"
+		>
 			<li #for="[index, result] of $.siteSearch?.$results.entries() ?? []"
 				:class+selected="$.selected == index"
 				@mouseenter="$.selected = index">
@@ -37,7 +40,8 @@ live.link($.$value, query('input'))
 live.link($.$amount, () => $.siteSearch?.$results.length ?? 0)
 
 effect(async () => {
-	if($.value == '') return []
+	if($.helpfulEmpty && $.value == '') return $.siteSearch?.showMains()
+	if($.value == '') return
 	$.loading = true
 	await until($.siteSearch?.search($.value))
 	$.loading = false
@@ -64,7 +68,9 @@ $.onsubmit = event => {
 $.getIcon = url => {
 	if(url.startsWith('/docs/')) return 'book'
 	if(url.startsWith('/blog/')) return 'chat'
-	if(url.startsWith('/tour/')) return 'tour'
+	if(url.startsWith('/tour/')) return 'learn'
+	if(url.startsWith('/play/')) return 'controller'
+	if(url.startsWith('/download/')) return 'download'
 }
 </script>
 
@@ -148,8 +154,10 @@ li {
 		ui-icon {
 			padding: 0;
 			&[type=book]{ color: var(--name-color); }
-			&[type=tour]{ color: var(--primary-color); }
+			&[type=learn]{ color: var(--primary-color); }
 			&[type=chat]{ color: var(--string-color); }
+			&[type=controller]{ color: var(--keyword-color); }
+			&[type=download]{ color: var(--meta-color); }
 		}
 		.title {
 			display: flex;

@@ -6,11 +6,12 @@
 			<ui-icon type=logo width=12 height=12></ui-icon>
 			<ui-icon type=wordmark width=36 height=12></ui-icon>
 		</ui-button>
-		<ui-button href=/docs/ part=button>Docs</ui-button>
-		<ui-button href=/play/ part=button>Play</ui-button>
-		<ui-button href=/blog/ part=button>Blog</ui-button>
+		<!--ui-button href=/tour/ class="main" part=button>Tour</ui-button-->
+		<ui-button href=/docs/ class="main" part=button>Docs</ui-button>
+		<ui-button href=/play/ class="main" part=button>Play</ui-button>
+		<ui-button href=/blog/ class="main" part=button>Blog</ui-button>
 		<div id=search>
-			<site-search exportparts=searchinput></site-search>
+			<site-search exportparts=searchinput .helpful-empty="$.isMobile"></site-search>
 			<ui-button :icon="$.searching ? 'close' : 'search'"
 				@click="$.toggleSearch()"></ui-button>
 			<ui-icon type=search></ui-icon>
@@ -26,6 +27,12 @@ $.toggleSearch = async state => {
 	await paint()
 	query('site-search').focus()
 }
+
+const isMobile = window.matchMedia('(width < 500px)')
+live.link($.$isMobile, {
+	get: () => isMobile.matches,
+	changes: when(isMobile).changes()
+})
 
 connected(() => {
 	when(document).keydowns().then(event => {
@@ -82,5 +89,8 @@ ui-button {
 	}
 	nav.searching #search { width: calc(100vw - 2rem); }
 	nav:not(.searching) site-search { opacity: 0; }
+}
+@media (width < 500px){
+	ui-button.main { display: none; }
 }
 </style>

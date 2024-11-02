@@ -23,7 +23,11 @@ live.link($live, options);
 : A callback function calculating a value. The callback is re-run synchronously whenever any of its live dependencies change. The function should not be `async`{js}. Live variables linked in this way are read-only in the same way as when using an `options`{arg} object without `set` key.
 
 `element`{arg}
-: An `HTMLElement`{js}. Generally, either an `<input>`{html} or `<textarea>`{html}, but any element that has a `.value`{js} property and dispatches an `input`{str} event whenever said property changes is accepted.
+: An `HTMLElement`{js}. Generally, either an `<input>`{html} or `<textarea>`{html}, but any element that has a `.value`{js} property and dispatches an `input`{str} event whenever said property changes is accepted (including custom elements themselves).
+
+:::info
+**Note:** When using the shorthand `live.link($live, input)`{js} syntax, note that the resulting variable is always a string, since it reads from `.value`{js}. This includes non-text inputs, such as `<input type="range">`{html} or `<input type="date">`{html}. If a parsed value is needed, a full `options`{js} object is recommended.
+:::
 
 `options`{arg}
 : An object describing a link to any other type of data source. The options are as follows:

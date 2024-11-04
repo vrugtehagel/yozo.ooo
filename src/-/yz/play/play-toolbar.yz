@@ -47,6 +47,14 @@ effect(() => {
 	if(!navigationMenu) return
 	navigationMenu.hidden = hidden
 })
+
+effect(() => {
+	if(!$.playManager) return
+	when(window).resizes()
+		.if(() => window.innerWidth < 600)
+		.then(() => $.playManager.current().layout = 'single')
+		.now()
+})
 </script>
 
 <style>
@@ -102,5 +110,9 @@ ui-dropdown[icon=layout]::part(dropdown){
 			radial-gradient(circle 1.5rem at bottom left,
 				transparent 0 100%, var(--background-color) 100%);
 	}
+}
+@media (width < 600px){
+	#nav-toggle, #saved, ui-dropdown[icon=layout]{ display: none; }
+	site-settings::part(dropdown){ right: 0; }
 }
 </style>

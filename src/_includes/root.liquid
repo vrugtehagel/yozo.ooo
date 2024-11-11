@@ -20,7 +20,7 @@
 <script src="{{ site.yozoPath }}"></script>
 <script>
 	self.yozo.register.auto(name => {
-		const namespace = name.split('-', 1)[0]
+		const [namespace] = name.split('-', 1)
 		return `/-/yz/${namespace}/${name}.yz`
 	})
 	// For a safari bug. Imports should work this way already.

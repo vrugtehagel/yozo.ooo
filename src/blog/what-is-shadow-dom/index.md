@@ -13,7 +13,7 @@
 
 ## Introduction
 
-Most HTML elements are "boxes" for their children. They perhaps have some semantic differences, but ultimately we can make a `<section>`{html} behave like a `<b>`{html} element through CSS if we wanted to; there's no fundamental difference between them. Some HTML elements, however, have special behavior; for example, a `<video>`{html} element, an `<iframe>`{html}, `<input>`{html} or even a `<canvas>`{html}. These elements have behaviors that are not achieveable by styles alone.
+Most HTML elements are "boxes" for their children. They perhaps have some semantic differences, but ultimately we can make a `<section>`{html} behave like a `<b>`{html} element through CSS if we wanted to (at least visually); there's no fundamental difference between them. Some HTML elements, however, have special behavior; for example, a `<video>`{html} element, an `<iframe>`{html}, `<input>`{html} or even a `<canvas>`{html}. These elements have behaviors that are not achieveable by styles alone.
 
 Web components allow authors to create elements like those. Elements that are unaffected by what's happening around them. The key to making this possible is _shadow DOM_.
 
@@ -30,11 +30,11 @@ The difference between this, and just inserting that HTML and CSS into a regular
 To create a shadow, we call the `.attachShadow()`{js} method on an element, or use the declarative syntax. Let's choose the latter for now. Then, let us attach a shadow to a regular `<div>`{html} element:
 
 ```html
-<div id=shadow-host>
+<div id="shadow-host">
 	<template shadowrootmode="closed">
 		<p>I live in the shadow of my ancestor.</p>
 	</template>
-	<p>I am a regular child!</p>
+	<span>I am a regular child!</span>
 </div>
 ```
 
@@ -48,20 +48,36 @@ The <dfn>shadow root</dfn> is the root node of the shadow DOM. It is not an `Ele
 
 <!-- Sometimes, the DOM that is not inside a shadow root is referred to as <dfn>light DOM</dfn>. -->
 
-So, in the example above, the shadow tree is entirely represented by the contents of the `<template>`{html}. The shadow root is automatically created and attached to the `<div>`{html}, which is the shadow host.
+So, in the example above, the shadow tree is entirely represented by the contents of the `<template>`{html}. The shadow root is automatically created and attached to the `<div>`{html}, which is the shadow host. The shadow DOM is then rendered, meaning this example results in the displaying of the `<p>`{html}, not the `<span>`{html}.
 
-Instead, we can programmatically attach a shadow using the `.attachShadow()`{js} method. Keep in mind that not all elements may have a shadow attached; in general, shadows are attached to custom elements. We are only using `<div>`{html} elements as an example. To attach a shadow in JavaScript, first, we obtain a reference to the `div`{tag}; then, we call the method with an options object as first argument.
+Instead of using the declarative syntax, we can programmatically attach a shadow using the `.attachShadow()`{js} method. Keep in mind that not all elements may have a shadow attached; and in general, shadows are attached to custom elements, not regular HTML elements - we are only using `<div>`{html} elements as an example. So, to attach a shadow to the `div`{tag} in JavaScript, first, we obtain a reference it. Then, we call the `attachShadow()`{js} method with an options object as first argument.
 
 ```js
 const div = document.querySelector('#shadow-host');
 div.attachShadow({ mode: 'closed' });
 ```
 
-Here, we see the equivalent of the `shadowrootmode`{attr} attribute we used on the `<template>`{html} earlier, when using declarative shadow DOM. The `mode`{js} essentially determines whether or not the shadow host exposes a reference to the shadow root in its `.shadowRoot`{js} property. When the `mode`{js} is `'open'`{js}, then one may retrieve a reference to the shadow root by accessing `div.shadowRoot`{js}; when the `mode`{js} is `'closed'`{js}, then the `.shadowRoot`{js} property evaluates to `null`{js} instead.
+Here, we see the equivalent of the `shadowrootmode`{attr} attribute we used on the `<template>`{html} earlier, when using declarative shadow DOM.
 
-:::info
-Using open shadow roots on custom elements is generally not needed; closed shadows are recommended for complete encapsulation. Specifically, JavaScript should not need access to the markup structure in the shadow DOM, since that creates a tight coupling between implementation details of either side. Instead, use methods and properties to interface with a custom element, so that the shadow tree's markup structure is not relied upon.
-:::
+### Open and closed shadows
+
+There are two different types of shadows; open ones (`mode: 'open'`{js}) and closed ones (`mode: 'closed'`{js}). There are a few differences, most of which are relatively nuanced. One of the more straight-forward differences is that open shadow roots expose themselves on their shadow host under the `.shadowRoot`{js} property. This makes it easy to access a shadow's markup from outside the component, which can sometimes be useful, but other times break encapsulation. For shadow hosts with a closed shadow, the `.shadowRoot`{js} property evaluates to `null`{js}.
+
+A second and more subtle difference is how custom elements interact with events. For example, let's say we've got a `my-button`{tag} component with a shadow root holding a `<button>`{html} element. Now, we attach a `'click'`{str} event listener to the `document`{js}, and we check what the `event.target`{js} is. Here, the shadow mode doesn't actually make a difference; regardless, clicking the `<button>`{html} causes the `event.target`{js} to resolve to the `<my-button>`{html} element, not the internal `<button>`{html}. Usually this makes some semantic sense, but occasionally we need the deepest element possible that triggered the event. For this, we've got the `event.composedPath()`{js} method. This method returns an array of all the elements that the event bubbled up through, starting with the deepest element, all the way up to the `document`{js} and finally the `window`{js} object. And this is where the shadow root's mode makes a difference:
+
+```js
+document.addEventListener('click', event => {
+	const path = event.composedPath();
+	const deepest = path[0];
+	console.log(deepest);
+	// For closed shadow roots, this logs <my-button>
+	// For open shadows however, it logs <button>
+});
+```
+
+In other words, `'closed'`{str} shadow roots don't allow _any_ peeking into internals for components. This is great for encapsulation of low-level custom elements, but can end up being a bit awkward if you want to use custom elements for large, high-level components such as a `full-page`{tag} or `side-bar`{tag} component.
+
+It's usually a good idea to create components with closed shadows by default, only opening them up if absolutely necessary. This is because the outside access that JavaScript gets to internal markup (and potentially even styles) can create a reliance on implementation details that makes the components hard to change later.
 
 ## Slots
 

@@ -5,6 +5,9 @@ The documentation site for Yozo.
 Website: [yozo.ooo](https://yozo.ooo/) \
 Yozo source: [vrugtehagel/yozo](https://github.com/vrugtehagel/yozo)
 
+> [!IMPORTANT]
+> The [website](https://yozo.ooo/) is where Yozo's documentation can be found. This README instead outlines details about development on the website, for those looking to contribute.
+
 ## Getting started
 
 To start developing, you'll need an up-to-date installation of [Deno](https://deno.com/) installed. The site is using [Eleventy](https://11ty.dev/) as static site generator with most documentation pages written in Markdown.

@@ -15,7 +15,7 @@ export async function search(query){
 }
 
 const mains = [
-	// {title: 'Tour', url: '/tour/'},
+	{title: 'Tour', url: '/tour/'},
 	{title: 'Documentation', url: '/docs/'},
 	{title: 'Playground', url: '/play/'},
 	{title: 'Blog', url: '/blog/'},

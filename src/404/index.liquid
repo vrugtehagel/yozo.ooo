@@ -1,0 +1,28 @@
+---
+{
+	"layout": "root.liquid",
+	"title": "404",
+	"description": "This page does not exist.",
+	"head": [
+		"<link rel=stylesheet href=./index.css>",
+		"<script type=module src=./index.js></script>"
+	]
+}
+---
+
+<main>
+	<section id=hero>
+		<header>
+			<h1>
+				<span class=sr-only>404</span>
+				<ui-icon type=404></ui-icon>
+			</h1>
+			<p>Not found</p>
+		</header>
+	</section>
+
+	<section id=guess hidden>
+		<h2>Perhaps you are looking for:</h2>
+		<ul></ul>
+	</section>
+</main>

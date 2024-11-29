@@ -15,7 +15,7 @@
 			:class+empty="$.amount == 0"
 			:class+loading="$.loading"
 		>
-			<li #for="[index, result] of $.siteSearch?.$results.entries() ?? []"
+			<li #for="[index, result] of $.$results.entries()"
 				:class+selected="$.selected == index"
 				@mouseenter="$.selected = index">
 				<a :href="result.url">
@@ -36,14 +36,16 @@
 safeImport('/-/js/site-search/index.js').then(mod => $.siteSearch = mod)
 $.focused = false
 $.selected = 0
+$.results = []
 live.link($.$value, query('input'))
-live.link($.$amount, () => $.siteSearch?.$results.length ?? 0)
+live.link($.$amount, () => $.$results.length ?? 0)
 
 effect(async () => {
-	if($.helpfulEmpty && $.value == '') return $.siteSearch?.showMains()
+	if($.helpfulEmpty && $.value == '') return $.showMains()
 	if($.value == '') return
+	if(!$.siteSearch) return
 	$.loading = true
-	await until($.siteSearch?.search($.value))
+	$.results = await until($.siteSearch?.search($.value))
 	$.loading = false
 	$.selected = 0
 })
@@ -65,6 +67,16 @@ $.onsubmit = event => {
 	const li = query.all('li')[$.selected]
 	li?.querySelector('a').click()
 }
+
+const mains = [
+	// {title: 'Tour', url: '/tour/'},
+	{title: 'Documentation', url: '/docs/'},
+	{title: 'Playground', url: '/play/'},
+	{title: 'Blog', url: '/blog/'},
+	{title: 'Download', url: '/download/'},
+]
+$.clear = () => $.results = []
+$.showMains = () => $.results = [...mains]
 $.getIcon = url => {
 	if(url.startsWith('/docs/')) return 'book'
 	if(url.startsWith('/blog/')) return 'chat'
@@ -108,7 +120,7 @@ input {
 }
 input:has(+ ul:not([hidden])){ border-radius: .75rem .75rem 0 0; }
 ul {
-	display: flex; max-height: calc(60vh); padding: .25rem .5rem .5rem; margin: 0;
+	display: flex; max-height: 60vh; padding: .25rem .5rem .5rem; margin: 0;
 	flex-direction: column; gap: .5rem;
 	list-style: none;
 	position: absolute; inset: 100% 0 auto 0;

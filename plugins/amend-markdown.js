@@ -2,11 +2,7 @@ import deflist from 'markdown-it-deflist'
 import anchor from 'markdown-it-anchor'
 import container from 'markdown-it-container'
 
-export function customMarkdown(config){
-	config.amendLibrary('md', md => amend(md))
-}
-
-function amend(md){
+export function amendMarkdown(md){
 	md.renderer.rules.fence = blockCodeRule
 	md.renderer.rules.typed_code_inline = inlineCodeRule
 	md.inline.ruler.before('backticks', 'typed_code_inline', inlineCodeTokenize)
@@ -38,7 +34,6 @@ function calloutRule(tokens, index){
 	if (nesting != 1) return '</ui-callout>\n';
 	const [full, type] = match
 	return `<ui-callout type="${type}">`
-
 }
 
 const inlineCodeRegex = /^(`+)( ?)((?:(?!\1).)*?)\2\1{(\w+)}/

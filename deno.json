@@ -1,7 +1,13 @@
 {
 	"tasks": {
-		"serve": "deno run -A npm:@11ty/eleventy@3.0.0 --serve --port=8787 --loader=esm",
-		"build": "deno run -A npm:@11ty/eleventy@3.0.0"
+		"serve": {
+			"command": "deno run -A npm:@11ty/eleventy@3.0.0 --serve --port=8787 --loader=esm",
+			"description": "Start the development server at localhost:8787"
+		},
+		"build": {
+			"command": "deno run -A npm:@11ty/eleventy@3.0.0",
+			"description": "Builds the site and packages it all up nicely for production"
+		}
 	},
 	"imports": {
 		"@11ty/eleventy": "npm:@11ty/eleventy@3.0.0",

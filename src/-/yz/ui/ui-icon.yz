@@ -48,6 +48,10 @@ connected(() => effect(async () => {
 :host {
 	display: inline-block; height: 1.5rem; padding: .75rem;
 }
+::selection {
+	color: #00000001;
+	background-color: var(--highlight-color);
+}
 #container {
 	margin: auto;
 }

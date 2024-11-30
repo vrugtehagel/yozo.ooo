@@ -59,7 +59,7 @@ when(prefix).observes('resize').then(([{borderBoxSize}]) => {
 	overflow: clip;
 }
 ::selection {
-	background-color: color-mix(in hsl, var(--highlight-color), white 20%);
+	background-color: var(--text-selection-color);
 }
 #container {
 	display: flex; height: 100%;

@@ -15,6 +15,10 @@ function getIcon(url){
 	if(url.startsWith('/download/')) return 'download'
 }
 
+// Fix the layout shift
+await yozo.timeout(1000)
+
+const wrapper = document.querySelector('#transition-wrapper')
 const ul = document.querySelector('#guess ul')
 for(const result of results){
 	const urlText = result.url.split('/').slice(1, -1).join(' › ')
@@ -35,6 +39,18 @@ for(const result of results){
 }
 
 if(results.length > 0){
-	const section = document.querySelector('#guess')
-	section.hidden = false
+	const {paint, when} = self.yozo
+	const wrapper = document.querySelector('#transition-wrapper')
+	const guess = document.querySelector('#guess')
+
+	wrapper.style.height = '0px'
+	wrapper.hidden = false
+	await paint()
+	wrapper.style.height = guess.offsetHeight + 'px'
+	await when(wrapper).transitionends()
+		.if(({target}) => target == wrapper)
+		.once()
+	wrapper.replaceWith(guess)
+	await paint()
+	guess.hidden = false
 }

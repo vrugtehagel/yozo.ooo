@@ -8,6 +8,7 @@
 		--highlight-color: #38314b;
 		--comment-color: #7080B0;
 	 	--text-color: #F8F8F2;
+		--text-selection-color: #474a77;
 		--primary-color: #50FA7B;
 		--string-color: #F1FA8C;
 		--keyword-color: #FF79C6;
@@ -65,5 +66,8 @@
 			line-height: .875rem;
 			vertical-align: -.1em;
 		}
+	}
+	::selection {
+		background-color: var(--text-selection-color);
 	}
 }

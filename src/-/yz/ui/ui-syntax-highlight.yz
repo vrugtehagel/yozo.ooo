@@ -39,6 +39,10 @@ code {
 	&::after { content: "\200B"; }
 }
 
+::selection {
+	background-color: var(--text-selection-color);
+}
+
 /* html */
 .doctype .name, .entity { color: var(--meta-color); }
 .doctype .doctype-tag,

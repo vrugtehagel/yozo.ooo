@@ -117,6 +117,7 @@ input {
 	padding: 1rem 1.25rem;
 	outline: none;
 	transition: border-radius .08s;
+	&::selection { background-color: var(--text-selection-color); }
 }
 input:has(+ ul:not([hidden])){ border-radius: .75rem .75rem 0 0; }
 ul {

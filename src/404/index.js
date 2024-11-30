@@ -16,7 +16,7 @@ function getIcon(url){
 }
 
 // Fix the layout shift
-await yozo.timeout(1000)
+await yozo.timeout(300)
 
 const wrapper = document.querySelector('#transition-wrapper')
 const ul = document.querySelector('#guess ul')

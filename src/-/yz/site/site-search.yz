@@ -20,7 +20,7 @@
 				@mouseenter="$.selected = index">
 				<a :href="result.url">
 					<span class=title>
-						<ui-icon #if="$.getIcon(result.url)" :type="$.getIcon(result.url)"></ui-icon>
+						<ui-icon #if="result.icon" :type="result.icon"></ui-icon>
 						{{ result.title }}
 					</span>
 					<span class=url>
@@ -68,22 +68,13 @@ $.onsubmit = event => {
 	li?.querySelector('a').click()
 }
 
-const mains = [
-	// {title: 'Tour', url: '/tour/'},
-	{title: 'Documentation', url: '/docs/'},
-	{title: 'Playground', url: '/play/'},
-	{title: 'Blog', url: '/blog/'},
-	{title: 'Download', url: '/download/'},
+$.showMains = () => $.results = [
+	// {title: 'Tour', url: '/tour/', icon: 'learn'},
+	{title: 'Documentation', url: '/docs/', icon: 'book'},
+	{title: 'Playground', url: '/play/', icon: 'controller'},
+	{title: 'Blog', url: '/blog/', icon: 'chat'},
+	{title: 'Download', url: '/download/', icon: 'download'},
 ]
-$.clear = () => $.results = []
-$.showMains = () => $.results = [...mains]
-$.getIcon = url => {
-	if(url.startsWith('/docs/')) return 'book'
-	if(url.startsWith('/blog/')) return 'chat'
-	if(url.startsWith('/tour/')) return 'learn'
-	if(url.startsWith('/play/')) return 'controller'
-	if(url.startsWith('/download/')) return 'download'
-}
 </script>
 
 <style>
@@ -127,7 +118,7 @@ ul {
 	position: absolute; inset: 100% 0 auto 0;
 	background-color: var(--highlight-color);
 	border-radius: 0 0 .75rem .75rem;
-	overflow: auto;
+	overflow: auto; will-change: opacity;
 	transition: opacity .2s, translate .2s, visibility 0s 0s;
 	z-index: -1;
 	&[hidden]{

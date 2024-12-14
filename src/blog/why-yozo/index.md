@@ -1,7 +1,7 @@
 ---
 {
 	"title": "Why Yozo?",
-	"date": "2024-08-16",
+	"date": "2024-12-14",
 	"description": "Why does Yozo exist, and what problems does it solve? Is it better than writing vanilla components, or using a framework? And - how is it different?",
 	"terms": "why",
 	"footnote": "Keep it simple."

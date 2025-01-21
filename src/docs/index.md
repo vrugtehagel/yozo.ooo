@@ -8,7 +8,7 @@
 
 ## Reference
 
-Before we get started, a quick overview. Below is a comprehensive list of Yozo's goodies. Note that some of the functionality has other, related ("nested") functionality that is not explicitly listed here. To learn more about each topic, navigate to their respective pages.
+Before we get started, a quick overview. First and foremost, the main attraction: [components](/docs/components/). But Yozo doesn't only provide value for web components; the vast majority of the provided functionality works anywhere, both inside and outside of component definitions. Below is an comprehensive list of Yozo's goodies. Note that some of the functionality has other, related functionality that is not explicitly listed here. To learn more about each topic, navigate to their respective pages.
 
 - Feature-rich component definitions syntax, from [reactive attributes](/docs/components/meta/attribute/) to [scoped styles](/docs/components/style/) (see details on the [components](/docs/components/) page);
 - [`register()`](/docs/register/) and [`register.auto()`](/docs/register/auto/) for component registration;

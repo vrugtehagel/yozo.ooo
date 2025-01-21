@@ -17,13 +17,14 @@
 				<ui-button icon=checkmark @click="$.add()"></ui-button>
 			</div>
 		</div>
-		<ui-button icon=browser-window @click="$.occupant = $.defaultPreviewUrl"
+		<ui-button icon=browser-window @click="console.log($.defaultPreviewUrl); $.occupant = $.defaultPreviewUrl"
 		>Open preview</ui-button>
 	</div>
 	<slot></slot>
 </template>
 
 <script>
+$.loaded = false
 Promise.all([
 	safeImport('/-/js/file-server/index.js').then(mod => $.server = mod),
 	safeImport('/-/js/play-manager/index.js').then(mod => $.playManager = mod),

@@ -2,7 +2,7 @@
 {
 	"title": "Inline expressions",
 	"terms": "inline expression text node double curly brace moustache dynamic reactive",
-	"description": "Substitute text or other nodes into component templates using double curly braces, using anything from simple variables to complex expressions."
+	"description": "Substitute text or DOM nodes into component templates using double curly braces, using anything from simple variables to complex expressions."
 }
 ---
 

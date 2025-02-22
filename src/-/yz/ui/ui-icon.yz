@@ -6,7 +6,8 @@
 
 <template mode=closed>
 	<div id=container :class="$.state || null"
-		:style="`aspect-ratio: ${$.width} / ${$.height};`"></div>
+		:style="`aspect-ratio: ${$.width} / ${$.height};`"
+	>{{ $.fragment ?? '' }}</div>
 </template>
 
 <script>
@@ -36,11 +37,10 @@ const fetchIcon = async url => {
 }
 
 connected(() => effect(async () => {
-	container.replaceChildren()
+	$.fragment = null
 	if(!$.type) return
 	const fragment = await until(getCached($.type))
-	if(!fragment) return
-	container.append(fragment.cloneNode(true))
+	$.fragment = fragment?.firstElementChild?.cloneNode(true)
 }))
 </script>
 

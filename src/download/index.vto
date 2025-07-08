@@ -1,6 +1,6 @@
 ---
 {
-	"layout": "docs.liquid",
+	"layout": "docs.vto",
 	"override:tags": [],
 	"title": "Download",
 	"terms": "download archive bundle version latest newest recent update upgrade changelog bugs improvements script lib dev",
@@ -14,7 +14,7 @@
 <h2 id=latest>Latest</h2>
 <p>Click the buttons below to download the latest Yozo bundles.</p>
 
-{% assign latest = versions[0].number %}
+{{ set latest = versions[0].number }}
 <div id=download-latest>
 	<a href=/archive/lib-{{ latest }}.js download=yozo-lib-{{ latest }}.js>
 		<ui-icon type=production></ui-icon>
@@ -38,7 +38,7 @@
 <h2 id=archive>Archive</h2>
 <p>Here you'll find all versions Yozo has been through since its release, in reverse-chronological order (i.e. newest first).</p>
 
-{% for version in versions %}
+{{ for version of versions }}
 	<div class=version>
 		<h3>Version {{ version.number }}</h3>
 		<a
@@ -58,32 +58,32 @@
 			<ui-icon type=development></ui-icon>
 		</a>
 		<span class=timestamp>
-			{{ version.timestamp | divided_by: 1000 | date: '%B %e, %Y' }}
+			{{ new Date(version.timestamp).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) }}
 		</span>
 		<span class=hash>{{ version.hash }}</span>
-		{% if version.changelog.breaking.length > 0 %}
+		{{ if version.changelog.breaking.length > 0 }}
 			<p>Breaking changes</p>
 			<ul>
-				{% for change in version.changelog.breaking %}
-					<li>{{ change | escape  }}</li>
-				{% endfor %}
+				{{ for change of version.changelog.breaking }}
+					<li>{{ change |> escape  }}</li>
+				{{ /for }}
 			</ul>
-		{% endif %}
-		{% if version.changelog.improvements.length > 0 %}
+		{{ /if }}
+		{{ if version.changelog.improvements.length > 0 }}
 			<p>Improvements</p>
 			<ul>
-				{% for change in version.changelog.improvements %}
-					<li>{{ change | escape  }}</li>
-				{% endfor %}
+				{{ for change of version.changelog.improvements }}
+					<li>{{ change |> escape  }}</li>
+				{{ /for }}
 			</ul>
-		{% endif %}
-		{% if version.changelog.bugs.length > 0 %}
+		{{ /if }}
+		{{ if version.changelog.bugs.length > 0 }}
 			<p>Bug fixes</p>
 			<ul>
-				{% for change in version.changelog.bugs %}
-					<li>{{ change | escape }}</li>
-				{% endfor %}
+				{{ for change of version.changelog.bugs }}
+					<li>{{ change |> escape }}</li>
+				{{ /for }}
 			</ul>
-		{% endif %}
+		{{ /if }}
 	</div>
-{% endfor %}
+{{ /for }}

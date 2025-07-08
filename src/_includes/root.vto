@@ -4,6 +4,12 @@
 	"exclude": []
 }
 ---
+
+{{>
+	const ICODE = /(`+)( ?)((?:(?!\1).)*?)\2\1{(\w+)}/g
+	const cleanDescription = value?.replaceAll(ICODE, '$3')
+}}
+
 <!DOCTYPE html>
 <html lang=en>
 <meta charset=utf-8>
@@ -11,7 +17,7 @@
 
 <meta name=viewport content="width=device-width,initial-scale=1">
 <meta name=robots content="index,follow">
-<meta name=description content="{{ description | remove_icode | escape }}">
+<meta name=description content="{{ cleanDescription |> escape }}">
 <meta name="generator" content="{{ eleventy.generator }}">
 
 <link rel=preload as=font href=/-/fonts/dm-sans.woff2 type=font/woff2 crossorigin>
@@ -37,18 +43,16 @@
 <link rel=stylesheet href=/-/css/base.css>
 <link rel=stylesheet href=/-/css/custom-elements.css>
 
-{% for item in head %}
+{{ for item of head }}
 	{{ item }}
-{% endfor %}
+{{ /for }}
 
-
-
-{% unless exclude contains 'site-nav' %}
+{{ if !exclude.includes('site-nav') }}
 	<site-nav></site-nav>
-{% endunless %}
+{{ /if }}
 
 {{ content }}
 
-{% unless exclude contains 'site-footer' %}
+{{ if !exclude.includes('site-footer') }}
 	<site-footer></site-footer>
-{% endunless %}
+{{ /if }}

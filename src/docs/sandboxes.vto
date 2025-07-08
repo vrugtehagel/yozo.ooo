@@ -6,7 +6,7 @@
 		"size": 1,
 		"alias": "suite"
 	},
-	"permalink": "{{ suite.path | replace_first: 'test', 'docs' }}/sandbox.html",
+	"permalink": "{{ suite.path.replace('test', 'docs') }}/sandbox.html",
 	"eleventyExcludeFromCollections": true
 }
 ---

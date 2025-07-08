@@ -1,6 +1,6 @@
 ---
 {
-	"layout": "root.liquid",
+	"layout": "root.vto",
 	"title": "Blog",
 	"terms": "blog articles",
 	"description": "Read about Yozo, web components, site performance, and everything else website-related.",
@@ -18,8 +18,7 @@
 	</header>
 
 	<ul>
-		{% assign items = collections.blog | reverse %}
-		{% for item in items %}
+		{{ for item of collections.blog.toReversed() }}
 			<li>
 				<a href="{{ item.url }}">
 					<img src="{{ item.url }}thumbnail.svg" width=24 height=24 alt="">
@@ -27,6 +26,6 @@
 					<span class=description>{{ item.data.description }}</span>
 				</a>
 			</li>
-		{% endfor %}
+		{{ /for }}
 	</ul>
 </main>

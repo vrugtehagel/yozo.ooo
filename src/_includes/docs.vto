@@ -1,0 +1,52 @@
+---
+{
+	"layout": "root.vto",
+	"tags": ["docs"],
+	"head": [
+		"<link rel=stylesheet href=/-/css/docs.css>",
+		"<script type=module src=/-/js/outline-tracker/index.js></script>"
+	]
+}
+---
+{{>
+	const data = {description: description.replaceAll('"', '\\"')}
+	const crumbs = page.url.split('/').slice(1, -1)
+	const current = crumbs.pop()
+	const suiteUrl = page.url.slice(0, -1)
+	const suite = testsuites.find(suite => suite.path == suiteUrl)
+}}
+
+<main>
+	<aside>
+		<nav id=outline>
+			{{ outline }}
+		</nav>
+	</aside>
+
+	<article>
+		<div id=prelude>
+			{{ if crumbs.length > 0 }}
+				<nav id=crumbs>
+					{{ for index, crumb of crumbs }}
+						{{ set href = crumbs.slice(0, index + 1).join('/') }}
+						<a href="/{{ href }}/">{{ crumb }}</a>
+						<ui-icon type=pointer-small state=right></ui-icon>
+					{{ /for }}
+					<span>{{ current }}</span>
+				</nav>
+			{{ /if }}
+
+			{{ if suite && suite.tests.length > 0 }}
+				<test-suite testdata="{{ JSON.stringify(suite) |> escape }}"></test-suite>
+			{{ /if }}
+		</div>
+
+		<h1 id="{{ title |> slugify }}">{{ title |> escape }}</h1>
+
+		{{ markdown }}
+			{{ description }}
+		{{ /markdown }}
+
+		{{ content }}
+	</article>
+</main>

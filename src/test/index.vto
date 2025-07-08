@@ -1,6 +1,6 @@
 ---
 {
-	"layout": "root.liquid",
+	"layout": "root.vto",
 	"title": "Tests",
 	"description": "Want to make sure Yozo works for your target audience? Run specific tests, or run them all, right in the browser.",
 	"head": [
@@ -10,12 +10,19 @@
 }
 ---
 
-{% liquid
-	assign amount = 0
-	for suite in testsuites
-		assign amount = amount | plus: suite.tests.length
-	endfor
-%}
+{{>
+	const testables = collections.docs.map(({page, data}) => {
+		const {url} = page
+		const {title} = data
+		if(url == '/docs/') return null
+		const suiteUrl = url.slice(0, -1)
+		const suite = testsuites.find(suite => suite.path == suiteUrl)
+		const filenames = suite.tests.map(suite => suite.filename).join(' ')
+		console.log({title, url, filenames})
+		if(filenames.length == 0) return null
+		return {title, url, suite, filenames}
+	}).filter(testable => testable != null)
+}}
 
 <main>
 	<h1>{{ title }}</h1>
@@ -40,20 +47,14 @@
 	</section>
 
 	<ul>
-		{% for docs_page in collections.docs %}
-			{% assign title = docs_page.data.title %}
-			{% assign url = docs_page.page.url %}
-			{% assign suite_url = url | slice: 0, -1 %}
-			{% assign suite = testsuites | where: "path", suite_url | first %}
-			{% assign filenames = suite.tests | map: "filename" | join: " " %}
-			{% if filenames.length == 0 %}{% continue %}{% endif %}
+		{{ for {title, url, suite, filenames} of testables }}
 			<li>
 				<ui-button icon=docs href="{{ url }}"></ui-button>
-				<span class=title>{{ title | escape }}</span>
-				<test-runner suite="{{ suite.path | escape }}" filenames="{{ filenames | escape }}"></test-runner>
+				<span class=title>{{ title |> escape }}</span>
+				<test-runner suite="{{ suite.path |> escape }}" filenames="{{ filenames |> escape }}"></test-runner>
 				<ui-icon type=dot></ui-icon>
 			</li>
-		{% endfor %}
+		{{ /for }}
 	</ul>
 
 </main>

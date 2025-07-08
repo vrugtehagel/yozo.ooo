@@ -14,6 +14,8 @@
 		"@std/fs": "jsr:@std/fs@1.0.5",
 		"@vrugtehagel/eleventy-asset-hash": "jsr:@vrugtehagel/eleventy-asset-hash@0.2.5",
 		"@vrugtehagel/eleventy-document-outline": "jsr:@vrugtehagel/eleventy-document-outline@0.1.7",
+		"eleventy-plugin-vento": "npm:eleventy-plugin-vento@^4.4",
+		"markdown-it": "npm:markdown-it@^14.1",
 		"markdown-it-anchor": "npm:markdown-it-anchor@9.0.1",
 		"markdown-it-container": "npm:markdown-it-container@4.0.0",
 		"markdown-it-deflist": "npm:markdown-it-deflist@3.0.0"

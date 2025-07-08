@@ -1,6 +1,6 @@
 ---
 {
-	"layout": "root.liquid",
+	"layout": "root.vto",
 	"tags": ["blog"],
 	"head": [
 		"<link rel=stylesheet href=/-/css/blog.css>"
@@ -12,17 +12,17 @@
 	<article>
 		<header>
 			<img src=./thumbnail.svg width=512 height=512 alt="">
-			<h1 id="{{ title | slugify }}">{{ title | escape }}</h1>
+			<h1 id="{{ title | slugify }}">{{ title |> escape }}</h1>
 			<time datetime="{{ published }}">
-				{{ date | date: '%B %e, %Y' }}
+				{{ new Date(date).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) }}
 			</time>
-			<p>{{ description | escape }}</p>
+			<p>{{ description |> escape }}</p>
 		</header>
 
 		{{ content }}
 
 		<footer>
-			<p>{{ footnote | default: "Thanks for reading!" }}</p>
+			<p>{{ footnote || "Thanks for reading!" }}</p>
 			<p>&mdash; vrugtehagel</p>
 		</footer>
 	</article>

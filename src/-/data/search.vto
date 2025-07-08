@@ -1,0 +1,20 @@
+---
+{
+	"permalink": "/-/data/search.json",
+	"eleventyImport": {
+		"collections": ["docs"]
+	},
+	"eleventyExcludeFromCollections": true
+}
+---
+
+{{>
+	const indexables = collections.all.filter((item) => item.data.terms)
+	const json = indexables.map(({data}) => ({
+		title: data.title.replaceAll('"', '\\"'),
+		terms: data.terms,
+		url: data.page.url,
+	}))
+}}
+
+{{ JSON.stringify(json) }}

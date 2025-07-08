@@ -18,13 +18,13 @@ To get started, these are the two basic tasks at your disposal:
 
 ## About the codebase
 
-This site is built on [Eleventy](https://11ty.dev/), and doesn't have a particularly complicated configuration. There are a few amendments made to the markdown parser; see below for details. Syntax highlighting doesn't happen in the build step; we use [Prism](https://prismjs.com/) (downloaded manually, instead of through a package manager) to highlight code client-side, asynchronously.
+This site is built on [Eleventy](https://11ty.dev/) with [Vento](https://vento.js.org/) as main templating language (besides Markdown), and doesn't have a particularly complicated configuration. There are a few adjustments made to the markdown parser; see below for details. Syntax highlighting doesn't happen in the build step; we use [Prism](https://prismjs.com/) (downloaded manually, instead of through a package manager) to highlight code client-side, asynchronously.
 
 Yozo's source repository is included as submodule to generate output based on version data, to include the archive of all versions, and to include tests on the site.
 
 ### Custom Markdown
 
-Eleventy uses [markdown-it](https://markdown-it.github.io/markdown-it/) for Markdown processing. This codebase adds the following changes on top of that:
+This codebase (and Eleventy by default) uses [markdown-it](https://markdown-it.github.io/markdown-it/) for Markdown processing. The following changes are added on top of that:
 
 - We use the [markdown-it-anchor](https://www.npmjs.com/package/markdown-it-anchor) plugin to generate anchors for headers.
 - We use the [markdown-it-deflist](https://www.npmjs.com/package/markdown-it-deflist) plugin for definition lists from the extended Markdown syntax.
@@ -39,4 +39,4 @@ All this customization lets us write documentation with barely any inline HTML.
 
 Since [Yozo's repository](https://github.com/vrugtehagel/yozo) defines the tests, we generate them just from the files specified there. The tests are defined in the `test/` folder (again, this is in Yozo's repository) in the same structure as the `/docs/` pages. The tests are included in their respective page in the documentation. They do not run by default, but may be run manually by the user on a page-by-page basis, or automatically run on page visit (site users can opt-in to that behavior in the site settings in the footer).
 
-To build this part of the site, we clone the `test/` folder from the submodule into `/docs/`. Then, we generate sandbox pages for each page in the documentation from `src/docs/sandboxes.liquid`. The generated `sandbox.html` files are not to be visited by users, but are loaded in a hidden iframe when tests are run.
+To build this part of the site, we clone the `test/` folder from the submodule into `/docs/`. Then, we generate sandbox pages for each page in the documentation from `src/docs/sandboxes.vto`. The generated `sandbox.html` files are not to be visited by users, but are loaded in a hidden iframe when tests are run.

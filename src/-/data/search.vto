@@ -11,7 +11,7 @@
 {{>
 	const indexables = collections.all.filter((item) => item.data.terms)
 	const json = indexables.map(({data}) => ({
-		title: data.title.replaceAll('"', '\\"'),
+		title: data.title,
 		terms: data.terms,
 		url: data.page.url,
 	}))

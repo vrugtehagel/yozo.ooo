@@ -18,7 +18,6 @@
 		const suiteUrl = url.slice(0, -1)
 		const suite = testsuites.find(suite => suite.path == suiteUrl)
 		const filenames = suite.tests.map(suite => suite.filename).join(' ')
-		console.log({title, url, filenames})
 		if(filenames.length == 0) return null
 		return {title, url, suite, filenames}
 	}).filter(testable => testable != null)

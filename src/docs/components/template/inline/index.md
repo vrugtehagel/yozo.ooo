@@ -31,7 +31,7 @@ Every inline expression is updated individually when its live dependencies chang
 
 ### Hi earth
 
-Let's create a minimal component that renders a greeting and a receiver of said greeting. We'll pass these as a `greeting`{attr} and `receiver`{attr} attribute respectively (using [`<meta attribute>`](/docs/components/meta/attribute/)). We then render each with an `{{ inline }}` expression.
+Let's create a minimal component that renders a greeting and a receiver of said greeting. We'll pass these as a `greeting`{attr} and `receiver`{attr} attribute respectively (using [`<meta attribute>`](/docs/components/meta/attribute/)). We then render each with an `{{ inline }}`{yz} expression.
 
 ```yz
 <title>greet-me</title>

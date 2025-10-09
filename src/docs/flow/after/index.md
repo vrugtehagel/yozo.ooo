@@ -27,7 +27,7 @@ The `.after()`{js} method is primarily useful in situations where there is a nee
 
 ### Loading an image
 
-When loading an image, we'll need to create the image, then set the source, and wait for the `load`{str} event (for which we'll use [`when()`](/docs/when/)). However, if we set the image's `.src` before our `await`{js} expression, then (if the image is cached) the `load`{str} event potentially fires before the listener has been set up properly, which results in our code getting stuck on the `await`{js}. The solution is using `.after()`{js}, like so:
+When loading an image, we'll need to create the image, then set the source, and wait for the `load`{str} event (for which we'll use [`when()`](/docs/when/)). However, if we set the image's `.src`{js} before our `await`{js} expression, then (if the image is cached) the `load`{str} event potentially fires before the listener has been set up properly, which results in our code getting stuck on the `await`{js}. The solution is using `.after()`{js}, like so:
 
 ```js
 const img = document.createElement('img');
@@ -36,7 +36,7 @@ await when(img).loads().once().after(() => {
 });
 ```
 
-This way, we are guaranteed to receive the `load`{str} event after the flow created by `when()` has been set up. Additionally, our code is in a more intuitive order since the `when()`{js} expression should be run before the `img.src`{js} is set.
+This way, we are guaranteed to receive the `load`{str} event after the flow created by `when()`{js} has been set up. Additionally, our code is in a more intuitive order since the `when()`{js} expression should be run before the `img.src`{js} is set.
 
 ## See also
 

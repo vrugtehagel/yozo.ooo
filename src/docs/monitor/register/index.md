@@ -41,7 +41,7 @@ None (`undefined`{js}).
 
 The `monitor.register()`{js} function exposes the inner workings of monitoring types ["undo"](/docs/monitor/undo/) and ["live"](/docs/monitor/live/), and lets authors build on the monitoring system already in place. While registering new types does not directly interact with monitored contexts Yozo creates, it can be used in conjunction with [`monitor()`](/docs/monitor/) and [`monitor.add()`](/docs/monitor/add/) to create completely custom systems that "see" the use of specific functions or items. It is strongly recommended that references to `monitor()`{js} and related functionality is abstracted away behind wrapper functions or classes for a more streamlined developer experience.
 
-Types may be registered later in the life of a document, but existing monitered contexts do not retroactively use a defined type, since the call's `result` object for each type has already been created.
+Types may be registered later in the life of a document, but existing monitered contexts do not retroactively use a defined type, since the call's `result`{js} object for each type has already been created.
 
 It is not possible to overwrite or update types (other than modifying the definition class); calls to `monitor.register()`{js} with a `type`{arg} argument that was already registered are ignored. Furthermore, while it is technically possible to register the type `'result'`{js}, this must not be done since `monitor()`{js} overwrites the `.result`{js} key on its return value with the return value from the callback function. In other words, `'result'`{js} could be registered as a monitorable type, but cannot practically be monitored.
 

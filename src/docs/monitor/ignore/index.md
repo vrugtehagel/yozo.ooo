@@ -63,7 +63,7 @@ effect(() => {
 
 This component now updates the typed value only while typing. When the user stops typing, the "last updated" timestamp is stagnant. If we, on the other hand, remove the `monitor.ignore()`{js}, then the effect depends on `$.now`{js} and runs every time that's updated (which is every second). Trying that, we can see the timestamp steadily ticks up even if we don't type.
 
-Of course, this component would be better off without `$.$now` and just retrieving the timestamp whenever necessary instead of continuously updating a live variable with the current time.
+Of course, this component would be better off without `$.$now`{js} and just retrieving the timestamp whenever necessary instead of continuously updating a live variable with the current time.
 
 ## See also
 

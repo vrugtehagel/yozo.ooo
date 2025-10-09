@@ -15,7 +15,7 @@ internals
 ```
 
 :::warning
-**Warning:** Older versions of Safari may not support `ElementInternals`. For those browsers, the value of `internals`{js} is `undefined`{js}. If support for those browsers is needed, use a [polyfill](https://unpkg.com/element-internals-polyfill).
+**Warning:** Older versions of Safari may not support `ElementInternals`{js}. For those browsers, the value of `internals`{js} is `undefined`{js}. If support for those browsers is needed, use a [polyfill](https://unpkg.com/element-internals-polyfill).
 :::
 
 ## Details
@@ -38,7 +38,7 @@ $.mode = internals.shadowRoot.mode;
 </script>
 ```
 
-This component, when used, prints "My shadow is closed". It is also possible to directly use `internals` inside the template, like so:
+This component, when used, prints "My shadow is closed". It is also possible to directly use `internals`{js} inside the template, like so:
 
 ```yz
 <title>declare-shadow-mode</title>
@@ -81,7 +81,7 @@ effect(() => {
 </script>
 ```
 
-To avoid re-setting the validity unnecessarily, we create an `$.isValid`{js} variable reflecting whether or not the `required-input`{tag} passes validation. Declaring the `name` attribute is not technically necessary, since forms read the names from the attributes regardless, but it is recommended to mimic the attribute-property pair that native form elements have for consistency.
+To avoid re-setting the validity unnecessarily, we create an `$.isValid`{js} variable reflecting whether or not the `required-input`{tag} passes validation. Declaring `attribute="name"`{attr} is not technically necessary, since forms read the names from the attributes regardless, but it is recommended to mimic the attribute-property pair that native form elements have for consistency.
 
 ### No reactivity
 

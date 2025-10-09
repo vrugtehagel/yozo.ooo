@@ -58,7 +58,7 @@ async function asyncPrompt(){
 }
 ```
 
-Note that [`.until()`](/docs/flow/until/) wouldn't quite work here, because once its callback returns something truthy, it stops the flow immediately, preventing the `await`{js} expression from ever resolving. On the other hand, `.once()`{js} allows a single received trigger to run through the rest of the callback pipeline, making it perfect for this case in conjunction with `.if()`.
+Note that [`.until()`](/docs/flow/until/) wouldn't quite work here, because once its callback returns something truthy, it stops the flow immediately, preventing the `await`{js} expression from ever resolving. On the other hand, `.once()`{js} allows a single received trigger to run through the rest of the callback pipeline, making it perfect for this case in conjunction with `.if()`{js}.
 
 ## Usage notes
 

@@ -52,7 +52,7 @@ Since the `.amount`{js} property is looked up on the component's state variable 
 
 ### Non-live
 
-Occasionally, there is a need to "proxy" a value through a property on a custom element. For example, we might have a form-associated custom element, where we want to expose the `.labels`{js} property on the [`internals`](/docs/components/internals/) object as a property, just like regular form elements. It is not possible to use `$` here, because there is no sensible way of binding a live variable to `internals.labels`{js}; there is no trigger available to update such a live variable whenever `internals.labels`{js} changes value, and so we cannot reliably keep them in-sync. Instead, a manual property should be defined on the component itself, that is, on the `this`{js} value.
+Occasionally, there is a need to "proxy" a value through a property on a custom element. For example, we might have a form-associated custom element, where we want to expose the `.labels`{js} property on the [`internals`](/docs/components/internals/) object as a property, just like regular form elements. It is not possible to use `$`{js} here, because there is no sensible way of binding a live variable to `internals.labels`{js}; there is no trigger available to update such a live variable whenever `internals.labels`{js} changes value, and so we cannot reliably keep them in-sync. Instead, a manual property should be defined on the component itself, that is, on the `this`{js} value.
 
 ```yz
 <title>some-form-element</title>

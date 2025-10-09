@@ -84,7 +84,7 @@ Note that this specific example could be much simplified using an [`@click`](/do
 
 ### The shadow itself
 
-The `query()`{js} function takes the shadow root as base for querying, if it has one. However, in some cases, one might need a reference to the shadow root itself. This is outside of the scope of `query()`{js}, and instead the recommended solution is to use the `.shadowRoot` property under [`internals`](/docs/components/internals/), like so:
+The `query()`{js} function takes the shadow root as base for querying, if it has one. However, in some cases, one might need a reference to the shadow root itself. This is outside of the scope of `query()`{js}, and instead the recommended solution is to use the `.shadowRoot`{js} property under [`internals`](/docs/components/internals/), like so:
 
 ```yz
 <title>get-shadow</title>

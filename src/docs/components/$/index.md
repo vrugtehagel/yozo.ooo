@@ -28,7 +28,7 @@ The [live](/docs/live/) component state variable `$`{js} is crucial in writing c
 - `$.attributes`{js} is an object representing the component's attributes, which are declared with [`<meta attribute>`](/docs/components/meta/attribute/). If none are defined, then this is an empty object. For each attribute, a nested key with matching name (converted to camelCase) is created on said object. For example; declaring an attribute `button-text`{attr} on a component creates the property `$.$attributes.buttonText`{js}.
 - Each property defined with [`<meta property>`](/docs/components/meta/property/) is looked up under the given key in `$`{js} and then exposed on the custom element in question. This opens up a reactive API for properties that are traditionally just getters and setters.
 - If an attribute declared through `<meta attribute>`{yz} has a given `type`{attr}, then an accompanying property is created. Unless overwritten with the `as`{attr} option, the property is a camelCase-transformed version of the attribute name. This property is reflected on `$`{js} as well as on the custom element itself.
-- Each method defined through [`<meta method>`](/docs/components/meta/method/) is looked up under `$`. If declared, the property must be set to a function (usually done in the [`<script>`](/docs/components/script/) section).
+- Each method defined through [`<meta method>`](/docs/components/meta/method/) is looked up under `$`{js}. If declared, the property must be set to a function (usually done in the [`<script>`](/docs/components/script/) section).
 
 Of course, other properties beyond these may be set (including binding data with [`live.link()`](/docs/live/link/) at any point to retain any arbitrary live data and to share it with the `<template>`{yz}, where expressions always include `$`{js} into their scope.
 
@@ -36,7 +36,7 @@ Of course, other properties beyond these may be set (including binding data with
 
 ### Markdown editor
 
-Let's say we have a function `md.render()`{js} that takes a string of Markdown as input, and outputs HTML (as a string). We'll build a component that lets a used enter some Markdown-formatted text into a `<textarea>`{yz}, and it'll display the output below. To do this, we'll first need to import the `md` variable into our component (we'll put it in `$.md`{js}) using a dynamic `import()`{js}, and in the mean time we should show a loader. Next, we link `$.input`{js} to the value in the `textarea`{tag} using [`live.link()`](/docs/live/link/), and lastly set up an [`effect()`](/docs/effect/) to render the output.
+Let's say we have a function `md.render()`{js} that takes a string of Markdown as input, and outputs HTML (as a string). We'll build a component that lets a used enter some Markdown-formatted text into a `<textarea>`{yz}, and it'll display the output below. To do this, we'll first need to import the `md`{js} variable into our component (we'll put it in `$.md`{js}) using a dynamic `import()`{js}, and in the mean time we should show a loader. Next, we link `$.input`{js} to the value in the `textarea`{tag} using [`live.link()`](/docs/live/link/), and lastly set up an [`effect()`](/docs/effect/) to render the output.
 
 ```yz
 <title>markdown-editor</title>
@@ -64,7 +64,7 @@ connected(() => {
 </script>
 ```
 
-At first, `$.md`{js} is `undefined`{js}, causing the loader to be show, and the effect has an early `return`{js} for when the imported module is not yet ready. Once it becomes available, the effect re-runs and uses the value of `$.input`{js}, which has been bound to the `textarea`{tag} to render the Markdown. Since `$.input` is linked, it reactively updates based on changes in the textarea.
+At first, `$.md`{js} is `undefined`{js}, causing the loader to be show, and the effect has an early `return`{js} for when the imported module is not yet ready. Once it becomes available, the effect re-runs and uses the value of `$.input`{js}, which has been bound to the `textarea`{tag} to render the Markdown. Since `$.input`{js} is linked, it reactively updates based on changes in the textarea.
 
 ### Animal sounds
 

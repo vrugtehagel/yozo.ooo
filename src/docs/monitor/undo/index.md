@@ -46,7 +46,7 @@ The `monitor()`{js} call runs its callback and sets up the event lister. The ret
 
 ### Deeper dive
 
-The previous example handled a synchronous function. However, `monitor()`{js} supports `async`{js} functions too (in combination with [`until()`](/docs/monitor/until/)). This complicates how monitor collects items, but luckily this is relatively straight-forward when it comes to `'undo'` (less so for [`'live'`](/docs/monitor/live/). Cleanup callbacks are collected for as long as the context exists, and hasn't been undone yet. When undoing a call, it is assumed that the function should effectively stop running, and therefore, `until()`{js} short-circuits out of calls. Let's repeat the previous example, but introduce a one second delay inside monitored function.
+The previous example handled a synchronous function. However, `monitor()`{js} supports `async`{js} functions too (in combination with [`until()`](/docs/monitor/until/)). This complicates how monitor collects items, but luckily this is relatively straight-forward when it comes to `'undo'`{js} (less so for [`'live'`](/docs/monitor/live/). Cleanup callbacks are collected for as long as the context exists, and hasn't been undone yet. When undoing a call, it is assumed that the function should effectively stop running, and therefore, `until()`{js} short-circuits out of calls. Let's repeat the previous example, but introduce a one second delay inside monitored function.
 
 ```js
 const button = document.querySelector('button');

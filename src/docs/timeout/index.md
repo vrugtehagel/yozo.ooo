@@ -48,7 +48,7 @@ async function showToast(text){
 showToast('Settings saved.');
 ```
 
-Note that usually we'd want a [`.once()`](/docs/flow/once/) when using a flow in conjunction with `await`{js}, but here that's not necessary because `timeout()` can only ever trigger once and cleans up after that automatically. In other words, `timeout()`{js} has `.once()`{js} behavior built-in.
+Note that usually we'd want a [`.once()`](/docs/flow/once/) when using a flow in conjunction with `await`{js}, but here that's not necessary because `timeout()`{js} can only ever trigger once and cleans up after that automatically. In other words, `timeout()`{js} has `.once()`{js} behavior built-in.
 
 ### Timeouts
 
@@ -72,7 +72,7 @@ Here we use `timeout()`{js} in combination with [`.or()`](/docs/flow/or/) and [`
 
 ### In monitored contexts
 
-Since `timeout()`{js} is flow-based, it participates in monitored contexts of [type "undo"](/docs/monitor/undo/). This can make some patterns much simpler to implement. Let's continue building on the toast messages (for simplicity, one without a "close" button) and implement it so that we reuse the same toast message instead of creating a new one every time we call `showToast()`. We'll simply replace the text in the toast message instead:
+Since `timeout()`{js} is flow-based, it participates in monitored contexts of [type "undo"](/docs/monitor/undo/). This can make some patterns much simpler to implement. Let's continue building on the toast messages (for simplicity, one without a "close" button) and implement it so that we reuse the same toast message instead of creating a new one every time we call `showToast()`{js}. We'll simply replace the text in the toast message instead:
 
 ```js
 const toast = createToastElement();
@@ -86,7 +86,7 @@ const showToast = purify(async (text) => {
 });
 ```
 
-We use [`purify()`](/docs/purify/) to make sure previous `timeout()`{js} calls are cleaned up if we call `showToast()`{js} again before the timeout has resolved. With `setTimeout()`, we'd need to be careful to do this manually. If we remove the `purify()`{js}, then the `timeout()`{js} calls are not cleaned up; this means that a previous call to `showToast()`{js} will remove the toast from the DOM after 7 seconds even if the function is called again before then.
+We use [`purify()`](/docs/purify/) to make sure previous `timeout()`{js} calls are cleaned up if we call `showToast()`{js} again before the timeout has resolved. With `setTimeout()`{js}, we'd need to be careful to do this manually. If we remove the `purify()`{js}, then the `timeout()`{js} calls are not cleaned up; this means that a previous call to `showToast()`{js} will remove the toast from the DOM after 7 seconds even if the function is called again before then.
 
 ## See also
 

@@ -56,7 +56,7 @@ For callback pipelines using only [`.then()`](/docs/flow/then/), it doesn't matt
 - In `.once().if(…).then(…)`{js}, the flow is stopped as soon as it triggers, and the `.then()`{js} handler fires only if the trigger passes the condition in `.if()`{js}.
 - In `.if().once(…).then(…)`{js}, the `.then()`{js} handler fires as soon as a trigger passes the condition in `.if()`{js}, at which point the flow is stopped.
 
-Similarly, when using [`.await()`](/docs/flow/await/), [`.debounce()`](/docs/flow/debounce/), or any other asynchronous pipeline callbacks, then the position `.once()` has in the callback pipline is also relevant. To take `.debounce()`{js} as an example:
+Similarly, when using [`.await()`](/docs/flow/await/), [`.debounce()`](/docs/flow/debounce/), or any other asynchronous pipeline callbacks, then the position `.once()`{js} has in the callback pipline is also relevant. To take `.debounce()`{js} as an example:
 
 - In `.once().debounce(1000).then(…)`{js}, the flow is stopped at the first trigger, and then `.then()`{js} handler fires 1000ms after that.
 - In `.debounce(1000).once().then(…)`{js}, then only after 1000ms of inactivity after the first trigger does the `.then()`{js} handler fire and the flow stops.

@@ -20,7 +20,7 @@ live.link($live, options);
 : A [live](/docs/live/) variable to bind to. It must be settable.
 
 `callback`{arg}
-: A callback function calculating a value. The callback is re-run synchronously whenever any of its live dependencies change. The function should not be `async`{js}. Live variables linked in this way are read-only in the same way as when using an `options`{arg} object without `set` key.
+: A callback function calculating a value. The callback is re-run synchronously whenever any of its live dependencies change. The function should not be `async`{js}. Live variables linked in this way are read-only in the same way as when using an `options`{arg} object without `set`{js} key.
 
 `element`{arg}
 : An `HTMLElement`{js}. Generally, either an `<input>`{html} or `<textarea>`{html}, but any element that has a `.value`{js} property and dispatches an `input`{str} event whenever said property changes is accepted (including custom elements themselves).
@@ -36,7 +36,7 @@ live.link($live, options);
 	: A function retrieving the value of the data source in question. It is called right away, overwriting the value the live variable had before linking it. This function does not track its live dependencies, and it should not be `async`{js}.
 
 	`set` <mark>optional</mark>
-	: A function to run when the live variable is set or otherwise changed, usually to update the data source so that their values stay in sync. After a live variable has been set, the value from the external data source is retrieved using the `get` option and the linked variable is set to that value. This can mean the value of the live variable is different from the one it is set to, if the external data source or the getter does not support said value. If omitted, the live link is effectively read-only. Setting it causes it to forcefully revert to its old value synchronously, which still dispatches [`change`](/docs/live/change/) events, as well as causing effects that depend on it to re-run.
+	: A function to run when the live variable is set or otherwise changed, usually to update the data source so that their values stay in sync. After a live variable has been set, the value from the external data source is retrieved using the `get`{js} option and the linked variable is set to that value. This can mean the value of the live variable is different from the one it is set to, if the external data source or the getter does not support said value. If omitted, the live link is effectively read-only. Setting it causes it to forcefully revert to its old value synchronously, which still dispatches [`change`](/docs/live/change/) events, as well as causing effects that depend on it to re-run.
 
 	`changes`{js} <mark>optional</mark>
 	: A [`Flow`](/docs/flow/) that triggers when the external data source is updated, used to update the live variable. Most often, this involves an event listener, which is turned into a flow using [`when()`](/docs/when/). If this property is omitted, then the link is not updated automatically, though it may be still be updated manually using `.now()`{js} on the returned `Flow`{js} (see [Return value](#return-value)).
@@ -118,7 +118,7 @@ Sometimes, a system needs two live variables to depend on each other. They need 
 - How do I set this value on the external source?
 - When does the value in the external source change?
 
-Each of these answers then ends up as our implementation for the three options `get`, `set` and `changes`. In this case:
+Each of these answers then ends up as our implementation for the three options `get`{js}, `set`{js} and `changes`{js}. In this case:
 
 ```js
 live.link($.$double, {

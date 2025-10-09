@@ -27,7 +27,7 @@ The native equivalent of this meta tag is setting the `static formAssociated`{js
 
 ### Number input
 
-Let's write a custom number input element. We'll use a regular `<input>`{yz} element (with `type="text"`{attr}) for the input. Then, we'll expose its value through a `value`{attr} attribute with an accompanying `.value`{js} property. When the text input by the user is not a number (i.e. converts to `NaN`{js}), then we'll say the value is `0`{js} and mark the input as invalid. Of course, to make it all work in `<form>`{html} elements, we'll need to mark it with `<meta form-associated>`.
+Let's write a custom number input element. We'll use a regular `<input>`{yz} element (with `type="text"`{attr}) for the input. Then, we'll expose its value through a `value`{attr} attribute with an accompanying `.value`{js} property. When the text input by the user is not a number (i.e. converts to `NaN`{js}), then we'll say the value is `0`{js} and mark the input as invalid. Of course, to make it all work in `<form>`{html} elements, we'll need to mark it with `<meta form-associated>`{yz}.
 
 ```yz
 <title>number-input</title>

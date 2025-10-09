@@ -111,7 +111,7 @@ If the shorthand feels weird, keep in mind that `.does()`{js} is always an optio
 
 ## Usage notes
 
-To avoid monitoring, use [`monitor.ignore()`](/docs/monitor/ignore/) either around the complete `when(…).does(…)`{js} (or the shorthand equivalent) and optionally also around the `.then()`{js} or other methods. Here it is important to note that the `.does(…)`{js} part is what creates the `Flow`{js}, which is the part being monitored. The `when()`{js} function by itself returns a `Proxy`{js} that allows for the shorthand, and does not (can not) create a `Flow` because, when it is called, it doesn't yet know what to listen for.
+To avoid monitoring, use [`monitor.ignore()`](/docs/monitor/ignore/) either around the complete `when(…).does(…)`{js} (or the shorthand equivalent) and optionally also around the `.then()`{js} or other methods. Here it is important to note that the `.does(…)`{js} part is what creates the `Flow`{js}, which is the part being monitored. The `when()`{js} function by itself returns a `Proxy`{js} that allows for the shorthand, and does not (can not) create a `Flow`{js} because, when it is called, it doesn't yet know what to listen for.
 
 Also, note that the combination of the shorthand and the existance of `.does()`{js} means that it is not possible to listen to the `'doe'`{js} event using the shorthand. Similarly, it is not possible to listen to the `'observe'`{js} event using the shorthand, as [`when().observes()`](/docs/when/observes/) is reserved for observers. Luckily, these are not native events, so it is rather rare that they need to be listened to. If needed, use `.does('doe')`{js} or `.does('observe')`{js} respectively.
 

@@ -22,7 +22,7 @@ $live.addEventListener('change', event => {
 
 ## Event details
 
-The `change`{str} event does not fire if the live variable did not change, even when explicitly setting it to the value it already has. The event exposes the old and new value of the live variable under the `event.detail` property.
+The `change`{str} event does not fire if the live variable did not change, even when explicitly setting it to the value it already has. The event exposes the old and new value of the live variable under the `event.detail`{js} property.
 
 `event.detail.oldValue`{js}
 : The value of the live variable before it changed.
@@ -34,7 +34,7 @@ The `change`{str} event does not fire if the live variable did not change, even 
 
 ### Aliasing
 
-We can use [`live.link()`](/docs/live/link/) to alias one live variable to another, keeping them in sync at all times. To do this, we'll use the `change`{str} event for the `changes` option, like so:
+We can use [`live.link()`](/docs/live/link/) to alias one live variable to another, keeping them in sync at all times. To do this, we'll use the `change`{str} event for the `changes`{js} option, like so:
 
 ```js
 live.link($.$aliased, {
@@ -48,7 +48,7 @@ Note that this only really works when the live variables in question are non-bra
 
 ### Old attribute value
 
-In the native custom elements API, authors can use the `attributeChangedCallback()` to listen to changes in attribute values. The lifecycle callback does not only expose the attribute name and new value, but also its old value. This behavior is often not directly useful, but can be replicated using the `change`{str} event together with the `$.$attributes`{js} object that is exposed on the component's state variable [`$`](/docs/components/$/). Specifically,
+In the native custom elements API, authors can use the `attributeChangedCallback()`{js} to listen to changes in attribute values. The lifecycle callback does not only expose the attribute name and new value, but also its old value. This behavior is often not directly useful, but can be replicated using the `change`{str} event together with the `$.$attributes`{js} object that is exposed on the component's state variable [`$`](/docs/components/$/). Specifically,
 
 ```yz
 <title>log-changes</title>
@@ -61,7 +61,7 @@ when($.$attributes.$foo).changes().then(event => {
 </script>
 ```
 
-Note that we can't just listen to the `change`{str} event on the `$.$attributes`{js} variable itself; this is because it is an object. The reference to the object never changes, and therefore the `change`{str} event never fires. We may use the [`deepchange`](/docs/live/deepchange/) event instead, but this event does not expose the old (or new) values of the deepchanges that happened. In other words; if the `oldValue`{js} is needed, then we need to be specific with our listener and use the `change`{str} event on the live variable we need the `oldValue` of.
+Note that we can't just listen to the `change`{str} event on the `$.$attributes`{js} variable itself; this is because it is an object. The reference to the object never changes, and therefore the `change`{str} event never fires. We may use the [`deepchange`](/docs/live/deepchange/) event instead, but this event does not expose the old (or new) values of the deepchanges that happened. In other words; if the `oldValue`{js} is needed, then we need to be specific with our listener and use the `change`{str} event on the live variable we need the `oldValue`{js} of.
 
 ## See also
 

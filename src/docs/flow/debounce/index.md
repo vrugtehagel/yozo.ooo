@@ -50,7 +50,7 @@ Note that `.throttle()`{js} would probably be less appropriate here because `.th
 
 ## Usage notes
 
-If the debounce queues up a trigger, but the flow is stopped (e.g. through [`.stop()`](/docs/flow/) or through a monitored context's [undo](/docs/monitor/undo/)) then the queued-up trigger is cleaned up as well and does not fire. More generally, stopped `Flow` objects can no longer fire triggers, and this also applies to debounced triggers.
+If the debounce queues up a trigger, but the flow is stopped (e.g. through [`.stop()`](/docs/flow/) or through a monitored context's [undo](/docs/monitor/undo/)) then the queued-up trigger is cleaned up as well and does not fire. More generally, stopped `Flow`{js} objects can no longer fire triggers, and this also applies to debounced triggers.
 
 ## See also
 

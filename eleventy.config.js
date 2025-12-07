@@ -11,9 +11,9 @@ export default function(config){
 	config.setLayoutResolution(false)
 	config.setLiquidOptions({extname: ''})
 	config.setLibrary('md', md)
-	config.addPlugin(VentoPlugin)
 	config.addPlugin(EleventyRenderPlugin)
 	config.addPlugin(EleventyDocumentOutline, {headers: 'h1, h2, h3'})
+	config.addPlugin(VentoPlugin)
 	config.addPlugin(EleventyAssetHash, {
 		maxLength: 10,
 		include: ['**/*.{html,css,js,yz}'],

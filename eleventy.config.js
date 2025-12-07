@@ -23,7 +23,6 @@ export default function(config){
 	})
 
 	config.addPairedShortcode('markdown', md.render.bind(md))
-	config.addFilter('jsonparse', value => JSON.parse(value))
 	config.addPassthroughCopy('src/{,!(_)**/}*.{css,js,json}')
 	config.addPassthroughCopy('src/**/*.{yz,svg,woff2,png,ico,txt}')
 	config.addWatchTarget('yozo/latest/')

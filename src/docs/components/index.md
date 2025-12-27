@@ -52,7 +52,7 @@ Writing component styles in Yozo components is much like writing styles in a reg
 
 To demonstrate the power of Yozo components, we'll have a look at some variations of a basic `click-counter`{tag} component; a component that renders a single button, and counts the amount of times it's being clicked.
 
-### Reccommended
+### Recommended
 
 First, we'll go through the recommended way of approaching this component:
 

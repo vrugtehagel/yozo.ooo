@@ -6,7 +6,7 @@
 			<ui-icon type=logo width=12 height=12></ui-icon>
 			<ui-icon type=wordmark width=36 height=12></ui-icon>
 		</ui-button>
-		<!--ui-button href=/tour/ class="main" part=button>Tour</ui-button-->
+		<ui-button href=/tour/ class="main" part=button>Tour</ui-button>
 		<ui-button href=/docs/ class="main" part=button>Docs</ui-button>
 		<ui-button href=/play/ class="main" part=button>Play</ui-button>
 		<ui-button href=/blog/ class="main" part=button>Blog</ui-button>
@@ -55,11 +55,11 @@ ui-button ui-icon {
 	color: var(--name-color);
 	&[type=logo]{
 		aspect-ratio: 12 / 12;
-		@media (width >= 670px){ display: none; }
+		@media (width >= 670px), (width < 500px){ display: none; }
 	}
 	&[type=wordmark]{
 		aspect-ratio: 36 / 12;
-		@media (width < 670px){ display: none; }
+		@media (width < 670px) and (width >= 500px){ display: none; }
 	}
 }
 ui-button {

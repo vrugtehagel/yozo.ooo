@@ -34,7 +34,7 @@ connected(() => effect(() => {
 	if(!$.playManager) return
 	if(!$.uuid) return
 	const $file = $.playManager.file($.uuid)
-	uiCodeEditor.value = $file.body ?? ''
+	monitor.ignore(() => uiCodeEditor.value = $file.body ?? '')
 	live.link($file.$body, uiCodeEditor)
 }))
 </script>

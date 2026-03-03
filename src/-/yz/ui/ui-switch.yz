@@ -32,7 +32,7 @@ connected(() => {
 live.link($.$value, {
 	get: () => $.on,
 	set: value => $.on = value,
-	changes: when($.$on).changes()
+	changes: when($.$on).changes().or(Promise.resolve())
 })
 </script>
 

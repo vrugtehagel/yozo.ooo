@@ -64,7 +64,7 @@ connected(() => {
 </script>
 ```
 
-At first, `$.md`{js} is `undefined`{js}, causing the loader to be show, and the effect has an early `return`{js} for when the imported module is not yet ready. Once it becomes available, the effect re-runs and uses the value of `$.input`{js}, which has been bound to the `textarea`{tag} to render the Markdown. Since `$.input`{js} is linked, it reactively updates based on changes in the textarea.
+At first, `$.md`{js} is `undefined`{js}, causing the loader to be shown, and the effect has an early `return`{js} for when the imported module is not yet ready. Once it becomes available, the effect re-runs and uses the value of `$.input`{js}, which has been bound to the `textarea`{tag} to render the Markdown. Since `$.input`{js} is linked, it reactively updates based on changes in the textarea.
 
 ### Animal sounds
 

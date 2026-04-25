@@ -6,7 +6,8 @@ const anchors = outline.querySelectorAll('a[href^="#"]')
 const inView = new Set
 for(const anchor of anchors){
 	const href = new URL(anchor.href).hash
-	const header = document.querySelector(href)
+	const selector = href.replaceAll(/[.%]|(?!^#)#/g, '\\$&')
+	const header = document.querySelector(selector)
 	if(!header) continue
 	const rootMargin = '-90px 0px -50%' // scroll-padding is 6rem (96px)
 	const threshold = 1

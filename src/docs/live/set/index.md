@@ -67,7 +67,11 @@ $state.number = 5;
 console.log($state.double); // 10
 ```
 
-Note that it completely removes the need for `live.get()`{js} and `live.set()`{js} calls. Additionally,
+Note that it completely removes the need for `live.get()`{js} and `live.set()`{js} calls.
+
+## Usage notes
+
+Although `live.set()`{js} returns `false`{js} for variables it cannot set, it returns `true`{js} when setting read-only variables made with `live.link()`{js}. This is because there is no outward distinction one can make between a read-only and read-write live variable. In other words, they accept being set, but their value does not change.
 
 ## See also
 

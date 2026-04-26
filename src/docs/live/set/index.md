@@ -6,7 +6,7 @@
 }
 ---
 
-To set a property on a [live](/docs/live/) variable (such as a key on the component state variable [`$`](/docs/components/$/)), traditional property setting like `$.key = value`{js} is a simpler way of setting live variables. `live.set()`{arg}'s primary use case is when only a reference to the live variable itself is available (such as in low-level utility functions).
+To set a property on a [live](/docs/live/) variable (such as a key on the component state variable [`$`](/docs/components/$/)), traditional property setting like `$.key = value`{js} is a simpler way of setting live variables. `live.set()`{js}'s primary use case is when only a reference to the live variable itself is available (such as in low-level utility functions).
 
 :::info
 **Note:** To delete a live variable, that is, remove it from its parent object, use [`live.delete()`](/docs/live/delete/).

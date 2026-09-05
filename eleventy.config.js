@@ -9,7 +9,6 @@ export default function(config){
 	config.setOutputDirectory('dist')
 	config.setFrontMatterParsingOptions({language: 'json'})
 	config.setLayoutResolution(false)
-	config.setLiquidOptions({extname: ''})
 	config.setLibrary('md', md)
 	config.addPlugin(EleventyRenderPlugin)
 	config.addPlugin(EleventyDocumentOutline, {headers: 'h1, h2, h3'})

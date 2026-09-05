@@ -12,8 +12,8 @@
 	<article>
 		<header>
 			<img src=./thumbnail.svg width=512 height=512 alt="">
-			<h1 id="{{ title | slugify }}">{{ title |> escape }}</h1>
-			<time datetime="{{ published }}">
+			<h1 id="{{ title |> slugify }}">{{ title |> escape }}</h1>
+			<time datetime="{{ new Date(date).toISOString() }}">
 				{{ new Date(date).toLocaleString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) }}
 			</time>
 			<p>{{ description |> escape }}</p>
@@ -22,7 +22,8 @@
 		{{ content }}
 
 		<footer>
-			<p>{{ footnote || "Thanks for reading!" }}</p>
+			{{ default footnote = "Thanks for reading!" }}
+			<p>{{ footnote }}</p>
 			<p>&mdash; vrugtehagel</p>
 		</footer>
 	</article>

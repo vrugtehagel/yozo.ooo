@@ -7,7 +7,7 @@
 
 {{>
 	const ICODE = /(`+)( ?)((?:(?!\1).)*?)\2\1{(\w+)}/g
-	const cleanDescription = value?.replaceAll(ICODE, '$3')
+	const cleanDescription = description?.replaceAll(ICODE, '$3')
 }}
 
 <!DOCTYPE html>

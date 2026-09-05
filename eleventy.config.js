@@ -13,7 +13,7 @@ export default function(config){
 	config.setLibrary('md', md)
 	config.addPlugin(EleventyRenderPlugin)
 	config.addPlugin(EleventyDocumentOutline, {headers: 'h1, h2, h3'})
-	config.addPlugin(VentoPlugin)
+	config.addPlugin(VentoPlugin, {ventoOptions: {strict: true}})
 	config.addPlugin(EleventyAssetHash, {
 		maxLength: 10,
 		include: ['**/*.{html,css,js,yz}'],

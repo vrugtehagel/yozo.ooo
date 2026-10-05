@@ -1,7 +1,7 @@
 ---
 {
 	"title": "#for…of",
-	"terms": "reactive inline for loop while iterate component template dynamic list item",
+	"terms": "for loop while iterate component template reactive inline dynamic list item",
 	"description": "The `#for=\"… of …\"`{yzattr} construct allows for generating lists of elements easily within the template itself."
 }
 ---

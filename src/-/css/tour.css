@@ -1,0 +1,46 @@
+@layer layout {
+	main {
+		padding: 2rem;
+	}
+
+	article {
+		width: min(100%, 45rem); margin: 0 auto;
+		footer {
+			margin: 3rem 0;
+			color: var(--comment-color);
+			font-style: italic;
+			p { margin: 0; }
+		}
+	}
+
+	header {
+		img {
+			display: block; width: min(50%, 15rem); height: auto; margin: 2rem auto;
+			border-radius: 1.5rem;
+		}
+		h1 { margin: .5em 0 0; }
+		time { color: var(--comment-color); }
+	}
+
+	ui-code { margin: 2rem 1rem; }
+
+	h1, h2, h3, h4, h5, h6 {
+		position: relative;
+		& a {
+			padding: 0 .25em 0 0;
+			position: absolute; inset: 0 100% 0 auto;
+			color: var(--comment-color);
+			text-decoration: none;
+			@media(width <= 1000px){
+				display: none;
+			}
+			&::before {
+				transition: opacity .2s;
+				content: "#";
+				content: "#" / "";
+			}
+		}
+		&:not(:hover) a::before { opacity: 0; }
+	}
+	article > p { margin: 1.5rem 0; }
+}

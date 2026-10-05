@@ -1,7 +1,7 @@
 ---
 {
 	"title": "#if - #else",
-	"terms": "reactive inline if else condition chain component template dynamic",
+	"terms": "if else condition chain component template reactive inline dynamic",
 	"description": "Use the `#if`{attr}, `#else-if`{attr} and `#else`{attr} attributes to conditionally render elements based on a series of conditions, right from inside the `<template>`{html}."
 }
 ---

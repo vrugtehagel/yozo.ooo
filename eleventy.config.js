@@ -1,7 +1,7 @@
 import {VentoPlugin} from 'eleventy-plugin-vento'
 import {EleventyRenderPlugin} from '@11ty/eleventy'
-import EleventyDocumentOutline from '@vrugtehagel/eleventy-document-outline'
-import EleventyAssetHash from '@vrugtehagel/eleventy-asset-hash'
+import {EleventyDocumentOutline} from '@vrugtehagel/document-outline'
+import {assetHash} from '@vrugtehagel/asset-hash'
 import {md} from './markdown.config.js'
 
 export default function(config){
@@ -11,15 +11,15 @@ export default function(config){
 	config.setLayoutResolution(false)
 	config.setLibrary('md', md)
 	config.addPlugin(EleventyRenderPlugin)
-	config.addPlugin(EleventyDocumentOutline, {headers: 'h1, h2, h3'})
+	config.addPlugin(EleventyDocumentOutline)
 	config.addPlugin(VentoPlugin, {ventoOptions: {strict: true}})
-	config.addPlugin(EleventyAssetHash, {
-		maxLength: 10,
-		include: ['**/*.{html,css,js,yz}'],
-		exclude: ['/archive/*', '/lib-latest.js', '/dev-latest.js'],
-		includeAssets: ['**/*.{css,js,svg,json}'],
-		excludeAssets: ['/archive/*', '/lib-latest.js', '/dev-latest.js'],
-	})
+	config.on('eleventy.after', ({directories}) => assetHash({
+		cwd: directories.output,
+		scan: ['**/*.{html,css,js,yz}'],
+		noscan: ['/archive/*', '/lib-latest.js', '/dev-latest.js'],
+		hash: ['**/*.{css,js,svg,json}'],
+		nohash: ['/archive/*', '/lib-latest.js', '/dev-latest.js'],
+	}))
 
 	config.addPairedShortcode('markdown', md.render.bind(md))
 	config.addPassthroughCopy('src/{,!(_)**/}*.{css,js,json}')

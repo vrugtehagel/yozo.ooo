@@ -64,7 +64,7 @@ Now, we can use the interval function safely, and not only is it cancelable by c
 
 ### Deno's watchFs
 
-Originally, the local development server for this site used an async iterator from [Deno](https://deno.com/) to watch the file system for changes. To make it easier to throttle the amount of times the build script runs, and to end the serving after some amount of inactivity, a flow was used to wrap the file watcher. Specifically, we can write a wrapper for the [`Deno.FsWatcher`](https://deno.land/api?s=Deno.FsWatcher) async iterator. Initially, to create the flow, we can simply do
+Originally, the local development server for this site used an async iterator from [Deno](https://deno.com/) to watch the file system for changes. To make it easier to throttle the amount of times the build script runs, and to end the serving after some amount of inactivity, a flow was used to wrap the file watcher. Specifically, we can write a wrapper for the [`Deno.FsWatcher`](https://deno.land/api?s=Deno.FsWatcher) async iterator. Initially, to create the flow, we can do
 
 ```js
 const watcher = Deno.watchFs(['src']);
@@ -83,7 +83,7 @@ flow.cleanup(() => {
 });
 ```
 
-Now, our flow is safe, and we can easily throttle the changes to acceptable levels. Additionally, we can add a debounce to detect inactivity:
+Now, our flow is safe, and we can throttle the changes to acceptable levels. Additionally, we can add a debounce to detect inactivity:
 
 ```js
 flow.throttle(1000)
@@ -92,7 +92,7 @@ flow.throttle(1000)
 	.once();
 ```
 
-To stop the watcher manually, we can simply call `flow.stop()`{js}; alternatively, due to the `.debounce()`{js} method combined with `.once()`{js}, the watcher automatically stops after `3_600_000`{js} milliseconds (one hour).
+To stop the watcher manually, we can call `flow.stop()`{js}; alternatively, due to the `.debounce()`{js} method combined with `.once()`{js}, the watcher automatically stops after `3_600_000`{js} milliseconds (one hour).
 
 ## Usage notes
 

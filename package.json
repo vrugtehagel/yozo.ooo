@@ -1,6 +1,6 @@
 {
 	"private": true,
-	"license": "UNLICENSED",
+	"license": "GPL-3.0-or-later",
 	"type": "module",
 	"scripts": {
 		"serve": "npx @11ty/eleventy --serve --port=8787",
